@@ -80,6 +80,7 @@ function Units_fetch() {
                             highlightCaseSensitive: true,
                             width: 300,
                         },
+                        focusedRowEnabled:true,
                         filterRow: { visible: true },
                         groupPanel: { visible: true },
                         grouping: {
