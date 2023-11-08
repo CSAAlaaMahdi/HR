@@ -1,0 +1,24 @@
+#AcName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #AcName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Ac_Code-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Ac_Code-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Ac_ParentAccount-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Ac_ParentAccount-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }

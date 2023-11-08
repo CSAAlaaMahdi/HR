@@ -1,0 +1,75 @@
+#StName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #StName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #St_Code-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #St_Code-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #St_ParentStore-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #St_ParentStore-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #St_Address-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #St_Address-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #St_StockKeeper-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #St_StockKeeper-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #St_Account-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #St_Account-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #St_State-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #St_State-container > .dx-field > .dx-field-value {
+    width: 6%;
+    float:right
+  }
+  #St_IsGroup-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+
+  }
+
+  #St_IsGroup-container > .dx-field > .dx-field-value {
+    width: 6%;
+    float:right
+  }
+  #St_Notes-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #St_Notes-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }

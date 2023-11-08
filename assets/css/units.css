@@ -1,0 +1,38 @@
+#UiName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #UiName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #UiGuid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #UiGuid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #UiPiece-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #UiPiece-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #UiPieceType-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #UiPieceType-container > .dx-field > .dx-field-value {
+    width: 75%;
+    float:right
+  }
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }

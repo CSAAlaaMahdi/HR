@@ -1,0 +1,38 @@
+#GsName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #GsName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Gs_Guid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Gs_Guid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #GsRatio-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #GsRatio-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Gs_State-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Gs_State-container > .dx-field > .dx-field-value {
+    width: 6%;
+    float:right
+  }
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }

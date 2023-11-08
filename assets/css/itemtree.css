@@ -1,0 +1,38 @@
+#IT_ID-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #IT_ID-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #IT_Name-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #IT_Name-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #IT_ParentID-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #IT_ParentID-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #IT_Code-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #IT_Code-container > .dx-field > .dx-field-value {
+    width: 75%;
+    font-size: 1.2rem;
+  }
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }

@@ -1,0 +1,32 @@
+#CarsInfo-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #CarsInfo-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+
+  .custom-header {
+    background-color: #283741; /* Set your desired color here */
+    color: white; /* Set text color to make it readable */
+
+  }
+  .custom-header .dx-datagrid-text-content {
+    color: white; /* Override font color for the header text */
+  }
+
+#CarsInfoGrid .dx-datagrid-rowsview .dx-row:nth-child(even) td {
+    background-color: #dfe8f8; /* Set your desired even row color here */
+  }
+  .custom-summary-row {
+    background-color: #283741;
+    color:white /* Set your desired summary row color here */
+  }
+  .custom-summary-row .dx-datagrid-text-content {
+    color:white /* Set your desired summary row color here */
+  }
+
+

@@ -1,0 +1,22 @@
+#BName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #BName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #BGuid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #BGuid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }

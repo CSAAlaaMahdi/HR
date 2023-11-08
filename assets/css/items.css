@@ -1,0 +1,154 @@
+#Item-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+    color: rgb(34, 34, 34);
+    background-color: rgb(248, 233, 221);
+    padding: 17px;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+    border-radius: 8px 0 0 8px;
+  }
+
+  #Item-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Stores-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+    color: rgb(34, 34, 34);
+    background-color: rgb(248, 233, 221);
+    padding: 17px;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+    border-radius: 8px 0 0 8px;
+  }
+
+  #Stores-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #StoresToggle-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+    color: rgb(34, 34, 34);
+    background-color: rgb(248, 233, 221);
+    padding: 17px;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+    border-radius: 8px 0 0 8px;
+  }
+
+  #StoresToggle-container > .dx-field > .dx-field-value {
+    width: 10%;
+    float: right;
+  }
+#ItemToggle-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+    color: rgb(34, 34, 34);
+    background-color: rgb(248, 233, 221);
+    padding: 17px;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+    border-radius: 8px 0 0 8px;
+  }
+
+  #ItemToggle-container > .dx-field > .dx-field-value {
+    width: 10%;
+    float: right;
+  }
+
+
+  #ITDefualtUnits-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #ITPrices-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+    color: rgb(34, 34, 34);
+    background-color: rgb(248, 233, 221);
+    padding: 17px;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+    border-radius: 8px 0 0 8px;
+  }
+
+  #ITPrices-container > .dx-field > .dx-field-value {
+    width: 40%;
+
+  }
+  #ItemRadio-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.1rem;
+    color: rgb(34, 34, 34);
+    /* background-color: aquamarine;
+    height: 50;
+    align-items: center;
+    text-align: justify; */
+  }
+
+  #ItemRadio-container > .dx-field > .dx-field-value {
+    /* display: flex; */
+    width: 60%;
+    font-size: 1.2rem;
+  }
+  .custom-radio-group{
+    width: 60%;
+    font-size: 1.2rem;
+  }
+
+  #Search-container > .dx-field > .dx-field-label {
+    width: 10%;
+    font-size: 1.2rem;
+    color: rgb(252, 252, 252);
+    /* background-color: rgb(248, 214, 186); */
+    /* padding: 17px; */
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    border-radius: 8px 0 0 8px;
+  }
+
+  #Search-container > .dx-field > .dx-field-value {
+    width: 65%;
+    float: right;
+
+  }
+
+  #UnitTitle{
+    background-color: rgb(248, 233, 221);
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 8px;
+
+  }
+
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+
+
+
+  #tabPanel {
+    height: 250px;
+    width: 100%;
+    margin: 20px auto;
+    border: 1px solid;
+}
+
+#form, #radioGroup {
+    padding: 15px;
+}
+
+#textArea {
+    padding: 15px;
+    height: 100%;
+}

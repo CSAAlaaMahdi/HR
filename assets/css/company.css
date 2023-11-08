@@ -1,0 +1,27 @@
+#ComName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #ComName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #ComGuid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #ComGuid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+  .red-notification {
+    background-color: #FF0000; /* Red background color */
+    color: #FFFFFF; /* White text color */
+    /* Add any other styles you need */
+  }

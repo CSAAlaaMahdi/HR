@@ -1,0 +1,24 @@
+#CName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #CName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #CGuid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #CGuid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+ 
+

@@ -1,0 +1,87 @@
+#CsName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #CsName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #CsGuid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #CsGuid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Cs_Address-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_Address-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Cs_Email-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_Email-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Cs_Mobile-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_Mobile-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Cs_Type-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_Type-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Cs_State-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_State-container > .dx-field > .dx-field-value {
+    width: 6%;
+    float:right
+  }
+
+  #Cs_Notes-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_Notes-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Cs_Account-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_Account-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #Cs_GroupSales-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #Cs_GroupSales-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }

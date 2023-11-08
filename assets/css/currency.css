@@ -1,0 +1,31 @@
+#CurName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #CurName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #CurGuid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #CurGuid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #CurCost-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #CurCost-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+
+

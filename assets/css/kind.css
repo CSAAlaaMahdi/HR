@@ -1,0 +1,24 @@
+#KName-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #KName-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+  #KGuid-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  #KGuid-container > .dx-field > .dx-field-value {
+    width: 75%;
+  }
+
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+
+
