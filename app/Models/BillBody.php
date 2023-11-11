@@ -14,7 +14,7 @@ class BillBody extends Model
         'Guid',
         'Header_Guid',
         'Item_Guid',
-        'Item_Qty',
+        'Item_Qty1',
         'Item_Qty2',
         'Item_Qty3',
         'Item_Price',
@@ -36,8 +36,8 @@ class BillBody extends Model
         'Item_Price_Final',
         'SeqGuid',
         'Branch_Guid',
-        'AvgPrice',
-        'CostPrice',
+        'Avg_Price',
+        'Cost_Price',
         'Item_Barcode',
         'RowID'
 

@@ -370,8 +370,17 @@ function BillsSetting_update() {
         url: url + "update",
         data: data,
         success: function (response) {
-            $("#notificationContainer").dxToast("instance").option("message", response.status);
-            $("#notificationContainer").dxToast("instance").show();
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'warning',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
 
         },
     });
@@ -391,7 +400,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account ",
+                        placeholder: "اختر الحساب",
                         inputAttr: { "aria-label": "Account" },
                         displayExpr(item) {
                             return item && `${item.Ac_Name}   -${item.Ac_Code_Mask} `;
@@ -402,7 +411,16 @@ function BillsSetting_filldata() {
                             const value = e.component.option("value");
                             const $dataGrid = $("<div>").dxDataGrid({
                                 dataSource: e.component.getDataSource(),
-                                columns: ["Ac_Name", "Ac_Code_Mask"],
+                                columns: [
+                                    {
+                                        dataField:"Ac_Name",
+                                        caption:"اسم الحساب",
+                                    },
+                                    {
+                                        dataField:"Ac_Code_Mask",
+                                        caption:"كود الحساب",
+                                    }
+                                ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10},
                                 filterRow: { visible: true },
@@ -441,7 +459,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account ",
+                        placeholder: "اختر الحساب",
                         inputAttr: { "aria-label": "Account" },
                         displayExpr(item) {
                             return item && `${item.Ac_Name}   -${item.Ac_Code_Mask} `;
@@ -452,7 +470,16 @@ function BillsSetting_filldata() {
                             const value = e.component.option("value");
                             const $dataGrid = $("<div>").dxDataGrid({
                                 dataSource: e.component.getDataSource(),
-                                columns: ["Ac_Name", "Ac_Code_Mask"],
+                                columns: [
+                                    {
+                                        dataField:"Ac_Name",
+                                        caption:"اسم الحساب"
+                                    },
+                                    {
+                                        dataField:"Ac_Code_Mask",
+                                        caption:"كود الحساب"
+                                    }
+                                ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10},
                                 filterRow: { visible: true },
@@ -490,7 +517,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account ",
+                        placeholder: "اختر الحساب",
                         inputAttr: { "aria-label": "Account" },
                         displayExpr(item) {
                             return item && `${item.Ac_Name}   -${item.Ac_Code_Mask} `;
@@ -501,7 +528,16 @@ function BillsSetting_filldata() {
                             const value = e.component.option("value");
                             const $dataGrid = $("<div>").dxDataGrid({
                                 dataSource: e.component.getDataSource(),
-                                columns: ["Ac_Name", "Ac_Code_Mask"],
+                                columns: [
+                                    {
+                                        dataField:"Ac_Name",
+                                        caption:"اسم الحساب"
+                                    },
+                                    {
+                                        dataField:"Ac_Code_Mask",
+                                        caption:"كود الحساب"
+                                    }
+                                ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10},
                                 filterRow: { visible: true },
@@ -539,7 +575,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account ",
+                        placeholder: "اختر الحساب",
                         inputAttr: { "aria-label": "Account" },
                         displayExpr(item) {
                             return item && `${item.Ac_Name}   -${item.Ac_Code_Mask} `;
@@ -550,7 +586,16 @@ function BillsSetting_filldata() {
                             const value = e.component.option("value");
                             const $dataGrid = $("<div>").dxDataGrid({
                                 dataSource: e.component.getDataSource(),
-                                columns: ["Ac_Name", "Ac_Code_Mask"],
+                                columns: [
+                                    {
+                                        dataField:"Ac_Name",
+                                        caption:"اسم الحساب"
+                                    },
+                                    {
+                                        dataField:"Ac_Code_Mask",
+                                        caption:"كود الحساب"
+                                    }
+                                ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10},
                                 filterRow: { visible: true },
@@ -588,7 +633,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account ",
+                        placeholder: "نوع الفاتورة",
                         inputAttr: { "aria-label": "Account" },
                         displayExpr(item) {
                             return item && `${item.N_BillName} `;
@@ -601,7 +646,7 @@ function BillsSetting_filldata() {
                                 dataSource: e.component.getDataSource(),
                                 columns: [{
                                     dataField:"N_BillName",
-                                    caption:"Bill Type",
+                                    caption:"نوع الفاتورة",
                                 }],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10},
@@ -640,7 +685,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "Cur_Guid",
                         deferRendering: false,
-                        placeholder: "Select Currency",
+                        placeholder: "اختر العملة",
                         inputAttr: { "aria-label": "Currency" },
                         displayExpr(item) {
                             return item && `${item.Cur_Name}`;
@@ -654,11 +699,11 @@ function BillsSetting_filldata() {
                                 columns: [
                                     {
                                         dataField: 'Cur_Name',
-                                        caption: 'Currency',
+                                        caption: 'العملة',
                                     },
                                     {
                                         dataField: 'Cur_Cost',
-                                        caption: 'Cost',
+                                        caption: 'قيمة العملة',
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -704,7 +749,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "St_Guid",
                         deferRendering: false,
-                        placeholder: "Select Store Name",
+                        placeholder: "اختر المخزن",
                         inputAttr: { "aria-label": "Store Name" },
                         displayExpr(item) {
                             return item && `${item.St_Name}   -${item.St_Code} `;
@@ -718,11 +763,11 @@ function BillsSetting_filldata() {
                                 columns: [
                                     {
                                         dataField: 'St_Name',
-                                        caption: 'Store Name',
+                                        caption: 'اسم المخزن',
                                     },
                                     {
                                         dataField: 'St_Code',
-                                        caption: 'Code',
+                                        caption: 'كود المخزن',
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -767,7 +812,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "Ui_Guid",
                         deferRendering: false,
-                        placeholder: "Select Account ",
+                        placeholder: "نوع الوحدة",
                         inputAttr: { "aria-label": "Account" },
                         displayExpr(item) {
                             return item && `${item.Ui_Name} `;
@@ -780,7 +825,7 @@ function BillsSetting_filldata() {
                                 dataSource: e.component.getDataSource(),
                                 columns: [{
                                     dataField:'Ui_Name',
-                                    caption:"Unit Name",
+                                    caption:"اسم الوحدة",
                                 }],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10},
@@ -821,7 +866,7 @@ function BillsSetting_filldata() {
                         value: null,
                         valueExpr: "id",
                         deferRendering: false,
-                        placeholder: "Select Bill Type",
+                        placeholder: "اختر نوع الفاتورة",
                         inputAttr: { "aria-label": "Bill" },
                         displayExpr(item) {
                             return item && `${item.FormText}  `;
@@ -835,7 +880,7 @@ function BillsSetting_filldata() {
                                 columns: [
                                     {
                                         dataField: 'FormText',
-                                        caption: 'Bill Type',
+                                        caption: 'نوع الفاتورة',
                                     },
 
                                 ],
@@ -1048,7 +1093,7 @@ function BillsSettingTree_fetch() {
 $(document).ready(function () {
     $("#danger-contained").dxButton({
         stylingMode: "contained",
-        text: "Close",
+        text: "اغلاق",
         type: "danger",
         width: 120,
         onClick() {
@@ -1069,8 +1114,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#btnSave").dxButton({
         stylingMode: "contained",
-        text: "Save",
-        type: "Default",
+        text: "حفظ",
+        type: "default",
         icon: 'check',
         width: 120,
         onClick() {
@@ -1080,19 +1125,12 @@ $(document).ready(function () {
     });
     $("#btnNewAdd").dxButton({
         stylingMode: "contained",
-        text: "New",
+        text: "جديد",
         type: "success",
         icon: 'plus',
         width: 120,
         onClick() {
-            // let StoreID = $('#St_Guid').dxTextBox("instance").option("value");
-            // if(StoreID == null || StoreID ==""){
-            //     BillsSettingTree_insert();
-            // }else{
-            //     BillsSettingTree_update();
-            // }
-
-            // DevExpress.ui.notify('The Done button was clicked');
+          
         },
     });
 });
@@ -1138,14 +1176,14 @@ $(document).ready(function () {
 
     $(() => {
         $("#Print_Count").dxTextBox({
-            placeholder: "No of Print",
+            placeholder: "عدد الطابعات",
             inputAttr: { "aria-label": "Print Count" },
 
         });
     });
     $(() => {
         $("#FormText").dxTextBox({
-            placeholder: "Enter The Form Text",
+            placeholder: "اسم الفاتورة",
             inputAttr: { "aria-label": "Form Text" },
         });
     });
@@ -1336,7 +1374,7 @@ $(document).ready(function () {
             autoResizeEnabled: true,
             // value: longText,
             maxLength: 500,
-            label: "Notes",
+            label: "البيان",
         });
     });
     $("#Popup").dxPopup({

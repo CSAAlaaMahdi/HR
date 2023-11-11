@@ -37,7 +37,7 @@ class BillsController extends Controller
     {
         $headerGuid = $request->input('Bill_Header_Guid');
         $billType = $request->input('Bill_Type');
-        $getBillSetting = BillSetting::where('FormText','=',$billType)->first();
+        $getBillSetting = BillSetting::where('FormText', '=', $billType)->first();
         $data = [
             'getBillSetting' => BillSetting::where('FormText', '=', $billType)->first(),
             'getItems' => Itemstwo::where('IT_Tree', null)->select('id', 'IT_PartNumber', 'IT_Name')->get(),
@@ -49,8 +49,8 @@ class BillsController extends Controller
             'getUnits' => Unitname::all(),
             'getAccounts' => AccountTree::select('Guid', 'Ac_Name', 'Ac_Code_Mask')->orderBy('Ac_RowID', 'ASC')->get(),
             'getDisCount' => BillDiscount::where('Header_Guid', $headerGuid)->get(),
-            'getCurrencyAll' =>Currency::all(),
-            'getCurrency' =>Currency::find($getBillSetting->Currency_Guid),
+            'getCurrencyAll' => Currency::all(),
+            'getCurrency' => Currency::find($getBillSetting->Currency_Guid),
 
         ];
         return response()->json($data);
@@ -67,9 +67,9 @@ class BillsController extends Controller
             case 'فاتورة مبيعات':
                 $billType = 2;
                 break;
-                case 'فاتورة طلبيات':
-                    $billType = 3;
-                    break;
+            case 'فاتورة طلبيات':
+                $billType = 3;
+                break;
 
             default:
 
@@ -110,7 +110,9 @@ class BillsController extends Controller
                 'Note_Header' => $request->input('H_Note_Header'),
             ]
         );
+        #endregion operation on Bill Header....
 
+        #region Bill Body ...
         $billBody = $request->input('Bill_Body');
         if (empty($billBody)) {
         } else {
@@ -127,13 +129,22 @@ class BillsController extends Controller
                     ],
                     [
                         'Item_Guid' => $billBodyData['Item_Guid'],
+                        'Item_Barcode' => $billBodyData['Item_Barcode'],
                         'Item_Unit' => $billBodyData['Item_Unit'],
                         'Item_Count' => $billBodyData['Item_Count'],
+                        'Item_Qty1' => $billBodyData['Item_Qty1'],
+                        'Item_Qty2' => $billBodyData['Item_Qty2'],
+                        'Item_Qty3' => $billBodyData['Item_Qty3'],
                         'Item_Price' => $billBodyData['Item_Price'],
                         'Item_Price_Total' => $billBodyData['Item_Price_Total'],
                         'Item_Discount' => $billBodyData['Item_Discount'],
                         'Item_Extra' => $billBodyData['Item_Extra'],
                         'Item_Price_Final' => $billBodyData['Item_Price_Final'],
+                        'Cost_Price' => $billBodyData['Cost_Price'],
+                        'ProductionDate' => $billBodyData['ProductionDate'],
+                        'ExpireDate' => $billBodyData['ExpireDate'],
+                        'Store_Guid' => $request()->input('H_Store_Guid'),
+                        'Branch_Guid' => null,
                         'Currency_Guid' => $currencyGuid,
                         'Currency_Equal' => $currencyEqual,
                         'Header_Guid' => $headerGuid,
@@ -163,9 +174,8 @@ class BillsController extends Controller
         }
 
 
-
         #endregion
-        // operation on Bill Header....
+
 
 
         #region Bill Footer...
@@ -343,14 +353,14 @@ class BillsController extends Controller
     public function getBillNumber(Request $request)
     {
         $billType = $request->input('BillType');
-        $getBillNumber = BillHeader::where('Bill_Type','=', $billType)->first();
-        if($getBillNumber === null) {
-            $getBillNumber = 0;}
-            else{
-                $getBillNumber = $getBillNumber->max('Bill_Number');
-            }
-        $data =[
-            'BillNumber'=> $getBillNumber,
+        $getBillNumber = BillHeader::where('Bill_Type', '=', $billType)->first();
+        if ($getBillNumber === null) {
+            $getBillNumber = 0;
+        } else {
+            $getBillNumber = $getBillNumber->max('Bill_Number');
+        }
+        $data = [
+            'BillNumber' => $getBillNumber,
         ];
 
         return response()->json($data);
@@ -384,13 +394,13 @@ class BillsController extends Controller
         $itemTwo->IT_ItemCount = $result;
         $itemTwo->update();
     }
-    public function GetBillSetting(Request $request){
+    public function GetBillSetting(Request $request)
+    {
         $BillSetting = $request->input("billType");
         $BillSettingState = BillSetting::where("FormText", $BillSetting)->first();
-        $Data =[
-            "BillSettingState"=> $BillSettingState,
+        $Data = [
+            "BillSettingState" => $BillSettingState,
         ];
         return response()->json($Data);
-
     }
 }

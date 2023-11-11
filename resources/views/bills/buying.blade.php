@@ -282,7 +282,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 ">
+                    <div class="col-md-12 DisAddGrid">
                         <ul class="nav nav-tabsBillsbills">
                             <li class="nav-item"><a href="#BillDiscount" class="nav-link active" data-bs-toggle="tab">الخصومات والاضافة</a>
                             </li>

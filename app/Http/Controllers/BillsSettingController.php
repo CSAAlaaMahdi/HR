@@ -133,7 +133,7 @@ class BillsSettingController extends Controller
 
         $data->update();
 
-        return response()->json(['status' => ' Updating Successfully...']);
+        return response()->json(['status' => 'تم تحديث اعدادات الفاتورة']);
     }
 
 

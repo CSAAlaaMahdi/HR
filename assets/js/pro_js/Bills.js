@@ -1754,7 +1754,7 @@ function Bills_fetch() {
                                 dataSource: response.getItems,
                                 displayExpr: "IT_PartNumber",
                                 valueExpr: "IT_PartNumber",
-                             
+
                             },
                             visible:
                                 Number(response.getBillSetting.Item_Code) === 1,
@@ -2024,6 +2024,60 @@ function Bills_fetch() {
                                         })
                                         .text(formattedValue)
                                         .appendTo(container);
+                                }
+                        },
+                        {
+                            dataField: "Profits",
+                            caption: "ارباح",
+                            dataType: "number",
+                            alignment: "right",
+                            value: 0,
+                            format:"#0.00",
+                            visible:
+                                Number(response.getBillSetting.Profits) ===
+                                1,
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    if(Number(cellValue) > 0){
+                                        var fontWeight = "bold"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = 'green';
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color": fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    }else{
+                                        var fontWeight = "bold"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = "red";
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color":fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    }
+
                                 }
                         },
                         {
@@ -2448,7 +2502,7 @@ function Bills_fetch() {
                 .dxDataGrid({
                     dataSource: response.getDisCount,
                     showBorders: true,
-
+                    // visible:Number(response.getBillSetting.DisAddGrid_Visible)===1,
                     paging: {
                         enabled: false,
                     },
@@ -3158,6 +3212,11 @@ function Bills_fetch() {
                     },
                 })
                 .dxDataGrid("instance");
+                if(Number(response.getBillSetting.DisAddGrid_Visible) === 0){
+                    $('.DisAddGrid').hide();
+                }else{
+                    $(".DisAddGrid").show();
+                }
         },
     });
 }
