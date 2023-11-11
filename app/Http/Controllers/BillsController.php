@@ -51,7 +51,7 @@ class BillsController extends Controller
             'getDisCount' => BillDiscount::where('Header_Guid', $headerGuid)->get(),
             'getCurrencyAll' =>Currency::all(),
             'getCurrency' =>Currency::find($getBillSetting->Currency_Guid),
-            
+
         ];
         return response()->json($data);
     }
@@ -61,12 +61,15 @@ class BillsController extends Controller
     {
         $billType = BillsType::find($request->input("H_Bill_Type"))->N_BillName;
         switch ($billType) {
-            case 'Buying Bills':
+            case 'فاتورة مشتريات':
                 $billType = 1;
                 break;
-            case 'Saling Bills':
+            case 'فاتورة مبيعات':
                 $billType = 2;
                 break;
+                case 'فاتورة طلبيات':
+                    $billType = 3;
+                    break;
 
             default:
 
@@ -232,7 +235,7 @@ class BillsController extends Controller
         #endregion
 
 
-        return response()->json(['status' => 'Adding Data Successfully..']);
+        return response()->json(['status' => 'تمت العملية بنجاح']);
     }
 
 
@@ -349,7 +352,7 @@ class BillsController extends Controller
         $data =[
             'BillNumber'=> $getBillNumber,
         ];
-       
+
         return response()->json($data);
     }
 
@@ -388,6 +391,6 @@ class BillsController extends Controller
             "BillSettingState"=> $BillSettingState,
         ];
         return response()->json($Data);
-       
+
     }
 }

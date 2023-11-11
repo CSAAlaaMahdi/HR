@@ -36,3 +36,11 @@
     color: white;
     padding: 10px;
   }
+  .custom-header {
+    background-color: #283741; /* Set your desired color here */
+    color: white; /* Set text color to make it readable */
+
+  }
+  .custom-header .dx-treelist-text-content {
+    color: white; /* Override font color for the header text */
+  }

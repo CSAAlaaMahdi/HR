@@ -36,8 +36,17 @@ function brand_insert() {
         url: url ,
         data: data,
         success: function (response) {
-            alertify.set('notifier', 'position', 'top-left');
-            alertify.success(response.status);
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'success',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
             brand_fetch();
             brand_cleardata();
 

@@ -114,7 +114,9 @@ Route::resources([
     'itemFive'=>ItemFiveController::class,
     'ItemThree'=>ItemThreeController::class,
     'VIN'=>VINController::class,
-    'Bills'=>BillsController::class,
+    'BillsBuying'=>BillsController::class,
+    'BillsSaling'=>BillsController::class,
+    'BillsOrdering'=>BillsController::class,
     'Bonds'=>BondsController::class,
     'BondsPayment'=>BondsController::class,
     'BondsBills'=>BondsController::class,
@@ -131,11 +133,27 @@ Route::resources([
 
 ]);
 
-Route::get('Billsfill/filldata', [BillsController::class, 'filldata']);
-Route::get('Billsfill/GetID', [BillsController::class, 'getItemID']);
-Route::get('Billsfill/getBillNumber', [BillsController::class, 'getBillNumber']);
-Route::get('BillsGetCurrencyEqual/GetCurrencyEqual', [BillsController::class, 'getCurrencyEqual']);
-Route::get('BillsSettingGet/GetBillSetting',[BillsController::class,'GetBillSetting']);
+#region Bills
+Route::get('BillsBuyingfill/filldata', [BillsController::class, 'filldata']);
+Route::get('BillsBuyingfill/GetID', [BillsController::class, 'getItemID']);
+Route::get('BillsBuyingfill/getBillNumber', [BillsController::class, 'getBillNumber']);
+Route::get('BillsBuyingGetCurrencyEqual/GetCurrencyEqual', [BillsController::class, 'getCurrencyEqual']);
+Route::get('BillsBuyingSettingGet/GetBillSetting',[BillsController::class,'GetBillSetting']);
+Route::get('BillsSalingfill/filldata', [BillsController::class, 'filldata']);
+Route::get('BillsSalingfill/GetID', [BillsController::class, 'getItemID']);
+Route::get('BillsSalingfill/getBillNumber', [BillsController::class, 'getBillNumber']);
+Route::get('BillsSalingGetCurrencyEqual/GetCurrencyEqual', [BillsController::class, 'getCurrencyEqual']);
+Route::get('BillsSalingSettingGet/GetBillSetting',[BillsController::class,'GetBillSetting']);
+Route::get('BillsOrderingfill/filldata', [BillsController::class, 'filldata']);
+Route::get('BillsOrderingfill/GetID', [BillsController::class, 'getItemID']);
+Route::get('BillsOrderingfill/getBillNumber', [BillsController::class, 'getBillNumber']);
+Route::get('BillsOrderingGetCurrencyEqual/GetCurrencyEqual', [BillsController::class, 'getCurrencyEqual']);
+Route::get('BillsOrderingSettingGet/GetBillSetting',[BillsController::class,'GetBillSetting']);
+#endregion
+
+
+
+
 Route::get('usersfill/filldata', [UserController::class, 'filldata']);
 Route::get('groupsnamesfill/filldata', [GroupController::class, 'filldata']);
 Route::get('salesgroupsfill/filldata', [SalesGroupController::class, 'filldata']);

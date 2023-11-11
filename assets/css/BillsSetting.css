@@ -71,7 +71,7 @@
     color:white /* Set your desired summary row color here */
   }
 
-  .nav-tabsBills .nav-link.active {
+  /* .nav-tabsBills .nav-link.active {
     background-color: #fa8e5c;
     color: rgb(14, 14, 14);
     border: 3px solid #283741;
@@ -82,4 +82,4 @@
     color: rgb(223, 223, 223);
     border: 3px solid #283741;
     border-radius: 7px 7px 0px 0px;
-}
+} */

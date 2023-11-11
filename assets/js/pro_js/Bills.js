@@ -1,61 +1,10 @@
 Bills_fetch();
 Bills_filldata();
-
+setting();
 // Begin Create Components of Store Page
 $(document).ready(function () {
 
-    let billType = $.trim($("#card_Billstitle").text());
-    $.ajax({
-        type: "GET",
-        url: "BillsSettingGet/GetBillSetting",
-        data:{billType:billType},
-        success: function (response) {
-            $(() => {
-                $("#H_Cash_Amount").dxTextBox({
-                    placeholder: "cash Amount",
-                    inputAttr: { "aria-label": "Cash Amount" },
-                    readOnly: true,
-                    valueFormat:"#0.00",
-                    visible:Number(response.BillSettingState.Header_Cash_Visible) === 1
-                });
-                if(Number(response.BillSettingState.Header_Cash_Visible) === 0)
-                        $('#H_CashAmount_Lable').hide();
-                else    $("#H_CashAmount_Label").show();
-            });
 
-            $(() => {
-                $("#H_Pay_Type").dxSwitch({
-                    onText:"Cash",
-                    offText:"Debit",
-                    visible:Number(response.BillSettingState.Pay_Type) === 1,
-                    onValueChanged: function(e) {
-                        // This function will be called when the switch value changes
-                        if(e.value){
-                            let onText = $('#H_Pay_Type').dxSwitch('instance').option("onText");
-                           $('#lb_PayType').html(onText);
-                           let totalBill = Number($("#F_Total_Price_Bill").dxTextBox("instance").option("value"));
-                           $("#H_Cash_Amount").dxTextBox("instance").option("value",totalBill);
-        
-                        }
-                        else{
-        
-                            $("#H_Cash_Amount").dxTextBox("instance").option("value",0);
-                            let offText = $('#H_Pay_Type').dxSwitch('instance').option("offText");
-                           $('#lb_PayType').html(offText);
-        
-                        }
-        
-                    }
-                });
-                if(Number(response.BillSettingState.Pay_Type) === 0)
-                    $('#lb_PayType').hide();
-                else $('#lb_PayType').show();
-            });
-
-
-
-        }
-    });
     $((message) => {
         $("#notificationContainer").dxToast({
             message: message,
@@ -75,6 +24,52 @@ $(document).ready(function () {
         });
     });
     $(() => {
+        $("#H_Pay_Type").dxSwitch({
+            onText:"نقدي",
+            offText:"آجل",
+            // visible:Number(response.BillSettingState.Pay_Type) === 1,
+            onValueChanged: function(e) {
+                // This function will be called when the switch value changes
+                if(e.value){
+                    let onText = $('#H_Pay_Type').dxSwitch('instance').option("onText");
+                   $('#lb_PayType').html(onText);
+                   let totalBill = Number($("#F_Total_Price_Bill").dxTextBox("instance").option("value"));
+                   $("#H_Cash_Amount").dxTextBox("instance").option("value",totalBill);
+
+                }
+                else{
+
+                    $("#H_Cash_Amount").dxTextBox("instance").option("value",0);
+                    let offText = $('#H_Pay_Type').dxSwitch('instance').option("offText");
+                   $('#lb_PayType').html(offText);
+
+                }
+
+            }
+        });
+        // if(Number(response.BillSettingState.Pay_Type) === 0)
+        //     $('#lb_PayType').hide();
+        // else $('#lb_PayType').show();
+    });
+    $(() => {
+
+        $("#H_Cash_Amount").dxTextBox({
+            placeholder: "قيمة التسديد",
+            inputAttr: { "aria-label": "Cash Amount" },
+            readOnly: true,
+            valueFormat:"#0.00",
+            // visible:Number(response.BillSettingState.Header_Cash_Visible) === 1
+        });
+        // if(Number(response.BillSettingState.Header_Cash_Visible) === 0)
+        // {
+        //      $('#H_CashAmount_Lable').hide();
+        // }
+
+        // else    {
+        //     $("#H_CashAmount_Label").show();
+        // }
+    });
+    $(() => {
         $("#H_Guid").dxTextBox({
             placeholder: "Guid",
             inputAttr: { "aria-label": "Guid" },
@@ -82,7 +77,7 @@ $(document).ready(function () {
     });
     $(() => {
         $("#H_Bill_Number").dxTextBox({
-            placeholder: "Bill Number",
+            placeholder: "رقم الفاتورة",
             inputAttr: { "aria-label": "Bill Number" },
             readOnly: true,
         });
@@ -106,15 +101,15 @@ $(document).ready(function () {
             },
         });
     });
-    
+
     $(() => {
         $("#H_Currency_Equal").dxTextBox({
-            placeholder: "Equal",
+            placeholder: "القيمة",
             inputAttr: { "aria-label": "Equal" },
             readOnly: false,
         });
     });
-   
+
 
     $(() => {
         $("#H_Note_Header").dxTextArea({
@@ -124,13 +119,13 @@ $(document).ready(function () {
             autoResizeEnabled: true,
             // value: longText,
             maxLength: 500,
-            label: "Notes",
+            label: "البيان",
         });
     });
     $(() => {
 
         $("#F_Total_Price_Bill").dxTextBox({
-            placeholder: "Total Price",
+            placeholder: "اجمالي السعر",
             inputAttr: { "aria-label": "Total " },
             readOnly: true,
             dataType:"number",
@@ -151,17 +146,12 @@ $(document).ready(function () {
     });
     $(() => {
         $("#F_Item_Discount").dxTextBox({
-            placeholder: "Item Discount",
+            placeholder: "خصم المواد",
             inputAttr: { "aria-label": "Item Discount" },
             readOnly: true,
             dataType:"number",
             format:"#0.00",
             value:0,
-            // onValueChanged: function (e) {
-            //     var roundedValue = parseFloat(e.value).toFixed(2);
-            //     e.component.option("value", roundedValue);
-
-            // },
              cellTemplate: function(container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "bold"; // Set the desired font weight
@@ -185,17 +175,11 @@ $(document).ready(function () {
     });
     $(() => {
         $("#F_Bill_Discount").dxTextBox({
-            placeholder: "Bill Discount",
+            placeholder: "خصم الفاتورة",
             inputAttr: { "aria-label": "Bill Discount" },
             readOnly: true,
             value:0,
             dataType: "number",
-            // onValueChanged: function (e) {
-            //     var roundedValue = parseFloat(e.value).toFixed(3);
-            //     e.component.option("value", roundedValue);
-
-            // },
-
              cellTemplate: function(container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "bold"; // Set the desired font weight
@@ -219,15 +203,10 @@ $(document).ready(function () {
     });
     $(() => {
         $("#F_Total_Discount").dxTextBox({
-            placeholder: "Total Discount",
+            placeholder: "اجمالي الخصم",
             inputAttr: { "aria-label": "Total Discount" },
             readOnly: true,
             value:0,
-            // onValueChanged: function (e) {
-
-            //     var roundedValue = parseFloat(e.value).toFixed(2);
-            //     e.component.option("value", roundedValue);
-            // }
              cellTemplate: function(container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "bold"; // Set the desired font weight
@@ -251,15 +230,10 @@ $(document).ready(function () {
     });
     $(() => {
         $("#F_Bill_AddAmount").dxTextBox({
-            placeholder: "Add Amount",
+            placeholder: "الاضافة",
             inputAttr: { "aria-label": "AddAmount" },
             readOnly: true,
             value: 0,
-            // onValueChanged: function (e) {
-            //     var roundedValue = parseFloat(e.value).toFixed(2);
-            //     e.component.option("value", roundedValue);
-
-            // },
              cellTemplate: function(container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "bold"; // Set the desired font weight
@@ -283,15 +257,10 @@ $(document).ready(function () {
     });
     $(() => {
         $("#F_Item_Add").dxTextBox({
-            placeholder: "Item Add",
+            placeholder: "اضافة للمواد",
             inputAttr: { "aria-label": "Item Add" },
             readOnly: true,
             value: 0,
-            // onValueChanged: function (e) {
-            //     var roundedValue = parseFloat(e.value).toFixed(2);
-            //     e.component.option("value", roundedValue);
-
-            // },
              cellTemplate: function(container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "bold"; // Set the desired font weight
@@ -315,14 +284,14 @@ $(document).ready(function () {
     });
     $(() => {
         $("#F_Currency_Guid").dxTextBox({
-            placeholder: "Currency Guid",
+            placeholder: "العملة",
             inputAttr: { "aria-label": "Total " },
             readOnly: true,
         });
     });
     $(() => {
         $("#F_Currency_Equal").dxTextBox({
-            placeholder: "Equal",
+            placeholder: "القيمة",
             inputAttr: { "aria-label": "Discount" },
             readOnly: true,
             onValueChanged: function (e){
@@ -522,14 +491,10 @@ $(document).ready(function () {
     });
     $(() => {
         $("#F_Total_Add").dxTextBox({
-            placeholder: "Total Add",
+            placeholder: "اجمالي الاضافات",
             inputAttr: { "aria-label": "Total Add" },
             readOnly: true,
             value: 0,
-            // onValueChanged: function (e){
-            //     var roundedValue = parseFloat(e.value).toFixed(2);
-            //     e.component.option("value", roundedValue);
-            // }
              cellTemplate: function(container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "bold"; // Set the desired font weight
@@ -584,7 +549,51 @@ $(document).ready(function () {
     });
 });
 // End Components.
+function setting(){
+    let billType = $.trim($("#card_Billstitle").text());
+    let url = '';
+    switch (billType) {
+        case 'فاتورة مشتريات':
+                url = 'BillsBuyingSettingGet/'
+            break;
+        case 'فاتورة مبيعات':
+                url = 'BillsSalingSettingGet/'
+        break;
+        case 'فاتورة طلبيات':
+                url = 'BillsOrderingSettingGet/'
+        break;
 
+        default:
+            break;
+    }
+    $.ajax({
+        type: "GET",
+        url: url + "GetBillSetting",
+        data:{billType:billType},
+        success: function (response) {
+
+           if(Number(response.BillSettingState.Header_Cash_Visible) === 1){
+            $('#H_Cash_Amount')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#H_CashAmount_Lable').show();
+           }else{
+            $('#H_CashAmount_Lable').hide();
+            $('#H_Cash_Amount')
+            .dxTextBox("instance")
+            .option("visible",false);
+           }
+
+
+
+
+
+
+        }
+
+
+    });
+}
 function Bills_cleardata() {
     $("#H_Guid").dxTextBox("instance").option("value", "");
     $("#H_Bill_Date").dxDateBox("instance").option("Date", "");
@@ -608,7 +617,23 @@ function Bills_cleardata() {
 function Bills_chechdata() {}
 
 function Bills_UpdateOrInsert() {
-    let url = "Bills";
+    let BillType = $.trim($("#card_Billstitle").text());
+    let url = '';
+    switch (BillType) {
+        case 'فاتورة مشتريات':
+                url = 'BillsBuying'
+            break;
+        case 'فاتورة مبيعات':
+                url = 'BillsSaling'
+        break;
+        case 'فاتورة طلبيات':
+                url = 'BillsOrdering'
+        break;
+
+        default:
+            break;
+    }
+
     var selectedDate = $("#H_Bill_Date").dxDateBox("instance").option("value");
     var formattedDate = new Intl.DateTimeFormat("en-US", {
         year: "numeric",
@@ -688,7 +713,7 @@ function Bills_UpdateOrInsert() {
             } else return 0;
         })(),
     };
-    console.log(data);
+
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -700,22 +725,39 @@ function Bills_UpdateOrInsert() {
         url: url,
         data: data,
         success: function (response) {
-            if (response) {
-                $("#notificationContainer")
-                    .dxToast("instance")
-                    .option("message", response.status);
-                $("#notificationContainer").dxToast("instance").show();
-                // Bills_cleardata();
-                // Bills_fetch();
-                // Bills_filldata();
-            }
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'success',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
         },
     });
 }
 
 function Bills_filldata() {
-    let billType = $("#card_Billstitle").text();
-    var url = "Billsfill/";
+    let billType = $.trim($("#card_Billstitle").text());
+    let url = '';
+    switch (billType) {
+        case 'فاتورة مشتريات':
+                url = 'BillsBuyingfill/'
+            break;
+        case 'فاتورة مبيعات':
+                url = 'BillsSalingfill/'
+        break;
+        case 'فاتورة طلبيات':
+                url = 'BillsOrderingfill/'
+        break;
+
+        default:
+            break;
+    }
+
     $(document).ready(function () {
         $.ajax({
             type: "GET",
@@ -728,7 +770,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "St_Guid",
                         deferRendering: false,
-                        placeholder: "Select Store Name",
+                        placeholder: "اختر اسم المخزن",
                         visible:
                             Number(response.billSetting.Store_Visible) ===
                             1,
@@ -747,11 +789,11 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "St_Name",
-                                        caption: "Store Name",
+                                        caption: "اسم المخزن",
                                     },
                                     {
                                         dataField: "St_Code",
-                                        caption: "Code",
+                                        caption: "كود المخزن",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -795,7 +837,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "Cs_Guid",
                         deferRendering: false,
-                        placeholder: "Select Customer",
+                        placeholder: "اختر العميل",
                         inputAttr: { "aria-label": "Customer" },
                         displayExpr(item) {
                             return item && `${item.Cs_Name}`;
@@ -810,7 +852,7 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "Cs_Name",
-                                        caption: "Customer",
+                                        caption: "العميل",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -852,7 +894,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account",
+                        placeholder: "اختر الحساب",
                         visible:
                             Number(response.billSetting.Acc_Visible) ===
                             1,
@@ -872,11 +914,11 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "Ac_Name",
-                                        caption: "Account Name",
+                                        caption: "اسم الحساب",
                                     },
                                     {
                                         dataField: "Ac_Code_Mask",
-                                        caption: "Code",
+                                        caption: "كود الحساب",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -921,7 +963,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "Cur_Guid",
                         deferRendering: false,
-                        placeholder: "Select Currency",
+                        placeholder: "اختر العملة",
                         inputAttr: { "aria-label": "Currency" },
                         visible:Number(response.billSetting.Currency_Visible) ===1,
                         displayExpr(item) {
@@ -936,11 +978,11 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "Cur_Name",
-                                        caption: "Currency",
+                                        caption: "العملة",
                                     },
                                     {
                                         dataField: "Cur_Cost",
-                                        caption: "Cost",
+                                        caption: "قيمة العملة",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -1175,10 +1217,26 @@ function Bills_filldata() {
                             let selectedValue = e.value;
                             let data = {
                                 CurrencyGuid: selectedValue,
-                            };
+                            }
+                            let billType = $.trim($("#card_Billstitle").text());
+                            let url2 = '';
+                            switch (billType) {
+                                case 'فاتورة مشتريات':
+                                        url2 = 'BillsBuyingGetCurrencyEqual/GetCurrencyEqual'
+                                    break;
+                                case 'فاتورة مبيعات':
+                                        url2 = 'BillsSalingGetCurrencyEqual/GetCurrencyEqual'
+                                break;
+                                case 'فاتورة طلبيات':
+                                        url2 = 'BillsOrderingGetCurrencyEqual/GetCurrencyEqual'
+                                break;
+
+                                default:
+                                    break;
+                            }
                             $.ajax({
                                 type: "GET",
-                                url: "BillsGetCurrencyEqual/GetCurrencyEqual",
+                                url: url2,
                                 data: data,
                                 success: function (response) {
                                     $("#H_Currency_Equal")
@@ -1224,7 +1282,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Bill type",
+                        placeholder: "اختر نوع الفاتورة",
                         inputAttr: { "aria-label": "Bill Type" },
                         displayExpr(item) {
                             return item && `${item.N_BillName}  `;
@@ -1238,7 +1296,7 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "N_BillName",
-                                        caption: "Bill Name",
+                                        caption: "اسم الفاتورة",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -1282,7 +1340,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Customer",
+                        placeholder: "حساب الفاتورة",
                         inputAttr: { "aria-label": "Store Name" },
                         visible:
                         Number(response.billSetting.Acc_Contra_Visible) ===
@@ -1302,11 +1360,11 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "Ac_Name",
-                                        caption: "Account Name",
+                                        caption: "اسم الحساب",
                                     },
                                     {
                                         dataField: "Ac_Code_Mask",
-                                        caption: "Code",
+                                        caption: "كود الحساب",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -1350,7 +1408,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account",
+                        placeholder: "اختر الحساب",
                         inputAttr: { "aria-label": "Discount Account" },
                         visible:
                         Number(response.billSetting.Discount_Visible) ===
@@ -1370,11 +1428,11 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "Ac_Name",
-                                        caption: "Account Name",
+                                        caption: "اسم الحساب",
                                     },
                                     {
                                         dataField: "Ac_Code_Mask",
-                                        caption: "Code",
+                                        caption: "كود الحساب",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -1420,7 +1478,7 @@ function Bills_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Bill Number",
+                        placeholder: "اختر رقم الفاتورة",
                         inputAttr: { "aria-label": "Bill" },
                         displayExpr(item) {
                             return item && `${item.Bill_Number}  `;
@@ -1434,7 +1492,7 @@ function Bills_filldata() {
                                 columns: [
                                     {
                                         dataField: "Bill_Number",
-                                        caption: "Bill Number",
+                                        caption: "رقم الفاتورة",
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -1454,9 +1512,25 @@ function Bills_filldata() {
                                     );
                                     let headerGuid = keys[0].Guid;
 
+                                    let billTypeforgetting = $.trim($("#card_Billstitle").text());
+                                    let urlforgetting = '';
+                                    switch (billTypeforgetting) {
+                                        case 'فاتورة مشتريات':
+                                                urlforgetting = 'BillsBuying/'
+                                            break;
+                                        case 'فاتورة مبيعات':
+                                                urlforgetting = 'BillsSaling/'
+                                        break;
+                                        case 'فاتورة طلبيات':
+                                                urlforgetting = 'BillsOrdering/'
+                                        break;
+
+                                        default:
+                                            break;
+                                    }
                                     $.ajax({
                                         type: "GET",
-                                        url: "Bills/show",
+                                        url: urlforgetting +"show",
                                         data: { HeaderGuid: headerGuid },
                                         success: function (response) {
                                             $("#gridContainer").dxDataGrid({
@@ -1603,10 +1677,26 @@ function Bills_filldata() {
 
 function Bills_fetch() {
     $("#CashAmount").hide();
+    let billType = $.trim($("#card_Billstitle").text());
+    let url = '';
+    switch (billType) {
+        case 'فاتورة مشتريات':
+                url = 'BillsBuying/'
+            break;
+        case 'فاتورة مبيعات':
+                url = 'BillsSaling/'
+        break;
+        case 'فاتورة طلبيات':
+                url = 'BillsOrdering/'
+        break;
+
+        default:
+            break;
+    }
     let itemsforadd = [];
-    let url = "Bills/";
+
     let data = {
-        Bill_Type: $.trim($("#card_Billstitle").text()),
+        Bill_Type: billType,
     };
 
     $.ajax({
@@ -1647,27 +1737,28 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Guid",
-                            caption: "ID",
+                            caption: "ت",
                             visible: false,
                         },
                         {
                             dataField: "Item_Barcode",
-                            caption: "Barcode",
+                            caption: "باركود",
                             visible:
                                 Number(response.getBillSetting.Item_Barcode) ===
                                 1,
                         },
                         {
                             dataField: "Item_PartNumber",
-                            caption: "Part Number",
+                            caption: "رمز المادة",
                             lookup: {
                                 dataSource: response.getItems,
                                 displayExpr: "IT_PartNumber",
                                 valueExpr: "IT_PartNumber",
+                             
                             },
                             visible:
                                 Number(response.getBillSetting.Item_Code) === 1,
-                                cellTemplate: function(container, options) {
+                            cellTemplate: function(container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "bold"; // Set the desired font weight
                                     let fontSize = "16px";
@@ -1683,7 +1774,7 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Name",
-                            caption: "Item Name",
+                            caption: "اسم المادة",
                             lookup: {
                                 dataSource: response.getItems,
                                 displayExpr: "IT_Name",
@@ -1694,7 +1785,7 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Unit",
-                            caption: "Unit",
+                            caption: "الوحدة",
                             lookup: {
                                 dataSource: response.getUnits,
                                 displayExpr: "Ui_Name",
@@ -1703,9 +1794,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Count",
-                            caption: "QY",
+                            caption: "الكمية",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             cellTemplate: function(container, options) {
                                 var cellValue = options.value;
                                 var fontWeight = "bold"; // Set the desired font weight
@@ -1731,34 +1822,34 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Qty1",
-                            caption: "Qty1",
+                            caption: "كمية1",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             visible:
                                 Number(response.getBillSetting.Item_Qty1) === 1,
 
                         },
                         {
                             dataField: "Item_Qty2",
-                            caption: "Qty2",
+                            caption: "كمية2",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             visible:
                                 Number(response.getBillSetting.Item_Qty2) === 1,
                         },
                         {
                             dataField: "Item_Qty3",
-                            caption: "Qty3",
+                            caption: "كمية3",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             visible:
                                 Number(response.getBillSetting.Item_Qty3) === 1,
                         },
                         {
                             dataField: "Item_Price",
-                            caption: "Item Price",
+                            caption: "سعر المفرد",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             format:"#0.00",
                             visible:
                                 Number(response.getBillSetting.Item_Price) ===
@@ -1785,9 +1876,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Price_Total",
-                            caption: "Total Price",
+                            caption: "الاجمالي",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             readOnly: false,
                             format:"#0.00",
                             visible:
@@ -1816,9 +1907,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Discount",
-                            caption: "Discount",
+                            caption: "خصم",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             format:"#0.00",
                             visible:
                                 Number(
@@ -1846,9 +1937,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Extra",
-                            caption: "Extra Item",
+                            caption: "اضافة",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             value: 0,
                             format:"#0.00",
                             visible:
@@ -1876,9 +1967,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Item_Price_Final",
-                            caption: "Final Price",
+                            caption: "صافي الاجمالي",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             readOnly: false,
                             format:"#0.00",
                             visible:
@@ -1907,9 +1998,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Cost_Price",
-                            caption: "Cost Price",
+                            caption: "سعر التكلفة",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             readOnly: false,
                             format:"#0.00",
                             visible:
@@ -1937,7 +2028,7 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "ProductionDate",
-                            caption: "Production Date",
+                            caption: "تاريخ الانتاج",
                             dataType: "date",
                             readOnly: true,
                             visible:
@@ -1947,7 +2038,7 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "ExpireDate",
-                            caption: "Expire Date",
+                            caption: "تاريخ النفاذ",
                             dataType: "date",
                             readOnly: true,
                             visible:
@@ -1957,7 +2048,7 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Currency_Guid",
-                            caption: "Currency",
+                            caption: "العملة",
                             readOnly: true,
                             visible:
                                 Number(
@@ -1971,9 +2062,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Currency_Equal",
-                            caption: "Currency Equal",
+                            caption: "قيمة العملة",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             readOnly: false,
                             format:"#0.00",
                             visible:
@@ -2146,17 +2237,7 @@ function Bills_fetch() {
                                     CostPrice
                                 );
 
-                                // let griddatasource = $("#gridContainer").dxDataGrid("instance").option("dataSource");
-                                // let ItemDiscountSummation = 0;
-                                // for (let index = 0; index < griddatasource.length; index++) {
-                                //     // ItemDiscountSummation += Number(griddatasource[index].Item_Discount);
-                                //     let test = griddatasource[index].Item_Discount;
-                                //     console.log(test);
 
-                                // };
-                                // $("#F_Item_Discount")
-                                //     .dxTextBox("instance")
-                                //     .option("value", ItemDiscountSummation);
 
                             };
                         }
@@ -2273,7 +2354,24 @@ function Bills_fetch() {
                     onRowRemoving: function (e) {
                         // console.log("Row removing event:", e.data.Guid);
 
-                        $.ajaxSetup({
+
+                        let billTypefordeleting = $.trim($("#card_Billstitle").text());
+                        let urlfordeleting = '';
+                        switch (billTypefordeleting) {
+                            case 'فاتورة مشتريات':
+                                    urlfordeleting = 'BillsBuying/'
+                                break;
+                            case 'فاتورة مبيعات':
+                                    urlfordeleting = 'BillsSaling/'
+                            break;
+                            case 'فاتورة طلبيات':
+                                    urlfordeleting = 'BillsOrdering/'
+                            break;
+
+                            default:
+                                break;
+                         }
+                         $.ajaxSetup({
                             headers: {
                                 "X-CSRF-TOKEN": $(
                                     'meta[name="csrf-token"]'
@@ -2282,24 +2380,27 @@ function Bills_fetch() {
                         });
                         $.ajax({
                             type: "DELETE",
-                            url: "Bills/destroy",
+                            url: urlfordeleting +"destroy",
                             data: {
                                 Guid: e.data.Guid,
                             },
-
                             success: function (response) {
-                                if (response) {
-                                    $("#notificationContainer")
-                                        .dxToast("instance")
-                                        .option("message", response.status);
-                                    $("#notificationContainer")
-                                        .dxToast("instance")
-                                        .show();
+                                DevExpress.ui.notify({
+                                    message: response.status,
+                                    position: {
+                                      my: 'top left',
+                                      at: 'top left'
+                                    },
+                                    type:'error',
+                                    width: '300',
+                                    height:'150',
+                                    hideAfter: 2000
+                                  });
                                     Bills_UpdateOrInsert();
                                     // Bills_cleardata();
                                     // Bills_fetch();
                                     // Bills_filldata();
-                                }
+
                             },
                         });
                     },
@@ -2313,7 +2414,7 @@ function Bills_fetch() {
                                 location: "after",
                                 widget: "dxButton",
                                 options: {
-                                    text: "Delete Selected Records",
+                                    text: "حذف المواد المختارة",
                                     icon: "trash",
                                     disabled: true,
                                     onClick() {
@@ -2375,7 +2476,7 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Account_Guid",
-                            caption: "Account",
+                            caption: "الحساب",
                             lookup: {
                                 dataSource: response.getAccounts,
                                 displayExpr: "Ac_Name",
@@ -2384,9 +2485,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Dis_Amount",
-                            caption: "Discount",
+                            caption: "الخصم",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             cellTemplate: function(container, options) {
                                 var cellValue = options.value;
                                 var fontWeight = "bold"; // Set the desired font weight
@@ -2412,9 +2513,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Dis_Percent",
-                            caption: "Discount %",
+                            caption: "خصم %",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             visible:
                                 Number(response.getBillSetting.DiscountPercent) ===
                                 1,
@@ -2442,9 +2543,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Add_Amount",
-                            caption: "Add Amount",
+                            caption: "اضافة",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             visible:
                                 Number(response.getBillSetting.AddAmount) ===
                                 1,
@@ -2470,9 +2571,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Add_Percent",
-                            caption: "Add Amount %",
+                            caption: "اضافة %",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             visible:
                                 Number(response.getBillSetting.AddAmountPercent) ===
                                 1,
@@ -2501,11 +2602,11 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Notes",
-                            caption: "Notes",
+                            caption: "بيان",
                         },
                         {
                             dataField: "Currency_Guid",
-                            caption: "Currency",
+                            caption: "العملة",
                             readOnly: true,
                             visible:
                                 Number(
@@ -2519,9 +2620,9 @@ function Bills_fetch() {
                         },
                         {
                             dataField: "Currency_Equal",
-                            caption: "Currency Equal",
+                            caption: "التعادل",
                             dataType: "number",
-                            alignment: "left",
+                            alignment: "right",
                             readOnly: false,
                             format:"#0.00",
                             visible:
@@ -2972,7 +3073,22 @@ function Bills_fetch() {
 
                     },
                     onRowRemoving: function (e) {
+                        let billTypefordeleting = $.trim($("#card_Billstitle").text());
+                        let urlfordeleting = '';
+                        switch (billTypefordeleting) {
+                            case 'فاتورة مشتريات':
+                                urlfordeleting = 'BillsBuying/'
+                                break;
+                            case 'فاتورة مبيعات':
+                                urlfordeleting = 'BillsSaling/'
+                            break;
+                            case 'فاتورة طلبيات':
+                                urlfordeleting = 'BillsOrdering/'
+                            break;
 
+                            default:
+                                break;
+                        }
                         $.ajaxSetup({
                             headers: {
                                 "X-CSRF-TOKEN": $(
@@ -2980,26 +3096,32 @@ function Bills_fetch() {
                                 ).attr("content"),
                             },
                         });
+
                         $.ajax({
                             type: "DELETE",
-                            url: "Bills/destroy",
+                            url: urlfordeleting +"destroy",
                             data: {
                                 Guid: e.data.Guid,
                             },
 
                             success: function (response) {
-                                if (response) {
-                                    $("#notificationContainer")
-                                        .dxToast("instance")
-                                        .option("message", response.status);
-                                    $("#notificationContainer")
-                                        .dxToast("instance")
-                                        .show();
+
+                                DevExpress.ui.notify({
+                                    message: response.status,
+                                    position: {
+                                      my: 'top left',
+                                      at: 'top left'
+                                    },
+                                    type:'error',
+                                    width: '300',
+                                    height:'150',
+                                    hideAfter: 2000
+                                  });
                                     Bills_UpdateOrInsert();
                                     // Bills_cleardata();
                                     // Bills_fetch();
                                     // Bills_filldata();
-                                }
+
                             },
                         });
                     },
@@ -3013,7 +3135,7 @@ function Bills_fetch() {
                                 location: "after",
                                 widget: "dxButton",
                                 options: {
-                                    text: "Delete Selected Records",
+                                    text: "حذف الحقول المختارة",
                                     icon: "trash",
                                     disabled: true,
                                     onClick() {
@@ -3041,10 +3163,27 @@ function Bills_fetch() {
 }
 
 function getIDofItem(partnumber) {
+    let BillType = $.trim($("#card_Billstitle").text());
+    let url = '';
+    switch (BillType) {
+        case 'فاتورة مشتريات':
+                url = 'BillsBuyingfill/'
+            break;
+        case 'فاتورة مبيعات':
+                url = 'BillsSalingfill/'
+        break;
+        case 'فاتورة طلبيات':
+                url = 'BillsOrderingfill/'
+        break;
+
+        default:
+            break;
+    }
+
     if (partnumber != null) {
         var result = $.ajax({
             type: "GET",
-            url: "Billsfill/GetID",
+            url: url +"GetID",
             data: { PartNumber: partnumber },
         });
         return result
@@ -3059,19 +3198,33 @@ function getIDofItem(partnumber) {
 $(document).ready(function () {
     $("#btnNewAdd").dxButton({
         stylingMode: "contained",
-        text: "New",
+        text: "اضافة",
         type: "success",
         icon: "add",
         width: 120,
         onClick() {
             let billType = $("#H_Bill_Type").dxDropDownBox("instance").option("value");
-            let url = "Billsfill/";
+            let BillTypeGetting = $.trim($("#card_Billstitle").text());
+            let url = '';
+            switch (BillTypeGetting) {
+                case 'فاتورة مشتريات':
+                        url = 'BillsBuyingfill/'
+                    break;
+                case 'فاتورة مبيعات':
+                        url = 'BillsSalingfill/'
+                break;
+                case 'فاتورة طلبيات':
+                        url = 'BillsOrderingfill/'
+                break;
+
+                default:
+                    break;
+            }
             $.ajax({
                 type: "GET",
                 url: url + "getBillNumber",
                 data: { BillType: billType },
                 success: function (response) {
-                    console.log(response);
                     Bills_cleardata();
                     Bills_fetch();
                     Bills_filldata();
@@ -3089,8 +3242,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#btnSave").dxButton({
         stylingMode: "contained",
-        text: "Save",
-        type: "Default",
+        text: "حفظ",
+        type: "default",
         icon: "check",
         width: 120,
         onClick() {

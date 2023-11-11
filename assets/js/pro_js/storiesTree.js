@@ -306,6 +306,7 @@ function StoriesTree_fetch() {
                             columnFixing: {
                                 enabled: true,
                             },
+                            focusedRowEnabled:true,
                             columnChooser: { enabled: true },
                             columns: [
                                 {
@@ -316,6 +317,27 @@ function StoriesTree_fetch() {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
                                     // fixed: true,
                                 },
                                 {
@@ -326,6 +348,27 @@ function StoriesTree_fetch() {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
                                 },
                                 {
                                     dataField: "St_State",
@@ -335,6 +378,37 @@ function StoriesTree_fetch() {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        if(cellValue ==='مفعل'){
+                                            var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = 'green';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                        }else{
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = 'red';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                        }
+                                        
+                                    },
                                 },
                                 {
                                     dataField: "ItemCounts",
@@ -481,6 +555,12 @@ function StoriesTree_fetch() {
                                             // );
                                         }
                                     });
+                            },
+                            onContentReady: function (e) {
+                                // Add custom class to the header panel
+                                e.element
+                                    .find(".dx-treelist-headers")
+                                    .addClass("custom-header");
                             },
 
                             rowDragging: {

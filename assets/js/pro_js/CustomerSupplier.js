@@ -77,10 +77,17 @@ function CustomerSupplier_insert() {
         url: url,
         data: data,
         success: function (response) {
-            console.log(response);
-            alertify.set("notifier", "position", "top-right");
-            alertify.success(response.status);
-            DevExpress.ui.notify('Data Has Been Inserted Successfully ....');
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'success',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
             CustomerSupplier_fetch();
         },
     });
@@ -114,9 +121,17 @@ function CustomerSupplier_update() {
         url: url + "update",
         data: data,
         success: function (response) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.success(response.status);
-            DevExpress.ui.notify('Data Has Been Updated...');
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'warning',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
             CustomerSupplier_fetch();
         },
     });
@@ -136,7 +151,7 @@ function CustomerSupplier_filldata() {
                         value: null,
                         valueExpr: "Guid",
                         deferRendering: false,
-                        placeholder: "Select Account For this Store",
+                        placeholder: "ادخل حساب الاب",
                         inputAttr: { "aria-label": "Account" },
                         displayExpr(item) {
                             return item && `${item.Ac_Name}   -${item.Ac_Code_Mask} `;
@@ -147,14 +162,23 @@ function CustomerSupplier_filldata() {
                             const value = e.component.option("value");
                             const $dataGrid = $("<div>").dxDataGrid({
                                 dataSource: e.component.getDataSource(),
-                                columns: ["Ac_Name", "Ac_Code_Mask"],
+                                columns: [
+                                    {
+                                        dataField:"Ac_Name",
+                                        caption:"اسم الحساب"
+                                    },
+                                    {
+                                        dataField:"Ac_Code_Mask",
+                                        caption:"كود الحساب"
+                                    }
+                                ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10},
                                 filterRow: { visible: true },
                                 scrolling: { mode: "virtual" },
                                 selection: { mode: "single" },
                                 selectedRowKeys: value,
-                                height: "100%",
+                                height: 300,
                                 onSelectionChanged(selectedItems) {
                                     const keys = selectedItems.selectedRowKeys;
                                     const hasSelection = keys.length;
@@ -185,7 +209,7 @@ function CustomerSupplier_filldata() {
                         value: null,
                         valueExpr: "Gs_Guid",
                         deferRendering: false,
-                        placeholder: "Select Parent Store.",
+                        placeholder: "ادخل مجموعة البيع",
                         inputAttr: { "aria-label": "Sales_Group" },
                         displayExpr(item) {
                             return item && `${item.Gs_Name}   -${item.Gs_SalesRatio} % `;
@@ -196,14 +220,24 @@ function CustomerSupplier_filldata() {
                             const value = e.component.option("value");
                             const $dataGrid = $("<div>").dxDataGrid({
                                 dataSource: e.component.getDataSource(),
-                                columns: ["Gs_Name", "Gs_SalesRatio"],
+                                columns: [
+                                    {
+                                        dataField:"Gs_Name",
+                                        caption:"المجموعة"
+
+                                    },
+                                    {
+                                        dataField:"Gs_SalesRatio",
+                                        caption:"النسبة"
+                                    }
+                                ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10 },
                                 filterRow: { visible: true },
                                 scrolling: { mode: "virtual" },
                                 selection: { mode: "single" },
                                 selectedRowKeys: value,
-                                height: "100%",
+                                height: 300,
                                 onSelectionChanged(selectedItems) {
                                     const keys = selectedItems.selectedRowKeys;
                                     const hasSelection = keys.length;
@@ -222,87 +256,8 @@ function CustomerSupplier_filldata() {
 
                             e.component.on("valueChanged", (args) => {
                                 dataGrid.selectRows(args.value, true);
+                            $('#Cs_GroupSales').dxTextBox("instance").option("value",code);
 
-                                // let guid = $('#Cs_Guid').dxTextBox("instance").option("value");
-                                // if(guid == null || guid == "")
-                                // {
-                                //     $.ajax({
-                                //         type: "GET",
-                                //         data:{Cs_Guid:args.value},
-                                //         url: "customersupplier/setCode",
-                                //         success: function (response) {
-
-                                //             if(args.value){
-                                //                 if(response.getData){
-                                //                     let child =Number(response.getData.Cs_SalesGroup);
-                                //                     let parent = Number(response.getParent.Cs_SalesGroup);
-                                //                     let result = 0;
-                                //                     let finalResult = 0;
-                                //                     let count = 1;
-                                //                     while (child != parent)
-                                //                     {
-                                //                         result = child % 10;
-                                //                         finalResult = (finalResult * count) + result;
-                                //                         count *= 10;
-                                //                         child = Math.floor(child / 10) ;
-                                //                     }
-                                //                     finalResult++;
-
-                                //                     let stcode = response.getParent.Cs_SalesGroup;
-                                //                     let newCode= stcode+finalResult;
-                                //                     $('#Cs_GroupSales').dxTextBox("instance").option("value",newCode);
-                                //                 }else{
-                                //                     let code=response.getParent.Cs_SalesGroup + 1 ;
-                                //                     $('#Cs_GroupSales').dxTextBox("instance").option("value",code);
-                                //                 }
-                                //             }else{
-                                //                  let x = Number(response.getData.Cs_SalesGroup) +1;
-                                //                 $('#Cs_GroupSales').dxTextBox("instance").option("value",x);
-                                //             }
-
-
-                                //         }
-                                //     });
-                                // }
-                                // else{
-                                //     $.ajax({
-                                //         type: "GET",
-                                //         data:{Cs_Guid:args.value},
-                                //         url: "customersupplier/setCode",
-                                //         success: function (response) {
-
-                                //             if(args.value){
-                                //                 if(response.getData){
-                                //                     let child =Number(response.getData.Cs_SalesGroup);
-                                //                     let parent = Number(response.getParent.Cs_SalesGroup);
-                                //                     let result = 0;
-                                //                     let finalResult = 0;
-                                //                     let count = 1;
-                                //                     while (child != parent)
-                                //                     {
-                                //                         result = child % 10;
-                                //                         finalResult = (finalResult * count) + result;
-                                //                         count *= 10;
-                                //                         child = Math.floor(child / 10) ;
-                                //                     }
-                                //                     finalResult++;
-
-                                //                     let stcode = response.getParent.Cs_SalesGroup;
-                                //                     let newCode= stcode+finalResult;
-                                //                     $('#Cs_GroupSales').dxTextBox("instance").option("value",newCode);
-                                //                 }else{
-                                //                     let code=response.getParent.Cs_SalesGroup + 1 ;
-                                //                     $('#Cs_GroupSales').dxTextBox("instance").option("value",code);
-                                //                 }
-                                //             }else{
-                                //                  let x = Number(response.getData.Cs_SalesGroup) +1;
-                                //                 $('#Cs_GroupSales').dxTextBox("instance").option("value",x);
-                                //             }
-
-
-                                //         }
-                                //     });
-                                // }
 
                                 e.component.close();
                             });
@@ -317,7 +272,9 @@ function CustomerSupplier_filldata() {
                     $("#Cs_Type").dxSelectBox({
                         dataSource: response.getType,
                         valueExpr: "Name",
-                        displayExpr: "Name"
+                        displayExpr: "Name",
+                        placeholder:"اختر نوع الحساب"
+
                     });
                 })
 
@@ -363,129 +320,299 @@ function CustomerSupplier_fetch() {
                         },
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
+                        focusedRowEnabled:true,
                         showBorders: true,
                         columns: [
                           {
                             dataField: 'Cs_Name',
-                            caption:'Account Name',
+                            caption:'الاسم',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "18px";
+                                let fontColor = '#283741';
+                                // var formattedValue = new Intl.NumberFormat("en-US", {
+                                //     style: "decimal",
+                                //     minimumFractionDigits: 0,
+                                //     maximumFractionDigits: 3,
+                                //     minimumIntegerDigits: 1,
+                                //     useGrouping: true,
+                                // }).format(cellValue);
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color" :fontColor,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            },
                             // groupIndex: 0,
                           },
                           {
                             dataField: 'Cs_State',
-                            caption: 'State',
+                            caption: 'الحالة',
                             cellTemplate: function(container, options) {
-                                var cellValue = options.data.Cs_State;
-
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "18px";
+                                let fontColor = '#283741';
                                 $("<div>")
-                                  .text(cellValue)
-                                  .appendTo(container)
-                                  .addClass(cellValue === "خامل" ? "inactive-cell" : "");
-                              }
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color" :fontColor,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            },
 
                           },
                           {
                             dataField: 'Cs_GroupSalesName',
-                            caption: 'Group',
+                            caption: 'المجموعة',
                             dataType: 'number',
                             format: 'percent',
-                            alignment: 'left',
+                            alignment: 'right',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "18px";
+                                let fontColor = '#283741';
+                                // var formattedValue = new Intl.NumberFormat("en-US", {
+                                //     style: "decimal",
+                                //     minimumFractionDigits: 0,
+                                //     maximumFractionDigits: 3,
+                                //     minimumIntegerDigits: 1,
+                                //     useGrouping: true,
+                                // }).format(cellValue);
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color" :fontColor,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            },
 
                           },
                           {
                             dataField: 'Cs_ParentAccount',
-                            caption: 'Parent Account',
+                            caption: 'الحساب الاب',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "18px";
+                                let fontColor = '#283741';
+                                // var formattedValue = new Intl.NumberFormat("en-US", {
+                                //     style: "decimal",
+                                //     minimumFractionDigits: 0,
+                                //     maximumFractionDigits: 3,
+                                //     minimumIntegerDigits: 1,
+                                //     useGrouping: true,
+                                // }).format(cellValue);
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color" :fontColor,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            },
 
                           },
                           {
                             dataField: 'Cs_Type',
-                            caption: 'Account Type',
-
+                            caption: 'نوع الحساب',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "18px";
+                                let fontColor = '#283741';
+                                // var formattedValue = new Intl.NumberFormat("en-US", {
+                                //     style: "decimal",
+                                //     minimumFractionDigits: 0,
+                                //     maximumFractionDigits: 3,
+                                //     minimumIntegerDigits: 1,
+                                //     useGrouping: true,
+                                // }).format(cellValue);
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color" :fontColor,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            },
                           },
                           {
                             dataField: 'Cs_Debit',
-                            caption: 'Debit',
-
+                            caption: 'مدين',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "18px";
+                                let fontColor = 'red';
+                                var formattedValue = new Intl.NumberFormat("en-US", {
+                                    style: "decimal",
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 3,
+                                    minimumIntegerDigits: 1,
+                                    useGrouping: true,
+                                }).format(cellValue);
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color" :fontColor,
+                                    })
+                                    .text(formattedValue)
+                                    .appendTo(container);
+                            },
                           },
                           {
                             dataField: 'Cs_Credit',
-                            caption: 'Credit',
+                            caption: 'دائن',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "18px";
+                                let fontColor = 'green';
+                                var formattedValue = new Intl.NumberFormat("en-US", {
+                                    style: "decimal",
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 3,
+                                    minimumIntegerDigits: 1,
+                                    useGrouping: true,
+                                }).format(cellValue);
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color" :fontColor,
+                                    })
+                                    .text(formattedValue)
+                                    .appendTo(container);
+                            },
 
                           },
                           {
-                            caption: "Actions",
+                            caption: "الحدث",
 
                             width: 200,
                             cellTemplate: function(container, options) {
                                 var row = options.row.data;
+                                var link1 = $("<div>");
+                                link1.dxButton({
+                                    stylingMode: "contained",
+                                    type: "normal",
+                                    icon: "edit",
+                                    onClick() {
+                                        var rowData = options.data;
 
-                                var link1 = $("<a>")
-                                .addClass("custom-link")
-                                .text("Edit")
-                                .on("click", function(e) {
-                                    e.preventDefault();
-                                    // Link 1 click action
-                                    var rowData = options.data;
-
-                                    $('#Cs_Guid').dxTextBox("instance").option({value:options.data.Cs_Guid});
-                                    $('#Cs_Name').dxTextBox("instance").option({value:options.data.Cs_Name});
-                                    $('#Cs_Address').dxTextBox("instance").option({value:options.data.Cs_Address});
-                                    $('#Cs_Email').dxTextBox("instance").option({value:options.data.Cs_Email});
-                                    $('#Cs_Mobile').dxTextBox("instance").option({value:options.data.Cs_Mobile});
-                                    $('#Cs_Type').dxSelectBox("instance").option({value:options.data.Cs_Type});
-                                    $('#Cs_Notes').dxTextArea("instance").option({value:options.data.Cs_Notes});
-                                    $('#Cs_GroupSales').dxDropDownBox("instance").option("value",options.data.Cs_GroupSales);
-                                    $('#Cs_Account').dxDropDownBox("instance").option("value",options.data.Cs_Account);
-
-
-                                    if(options.data.Cs_State=='مفعل'){
-                                        $('#Cs_State').dxSwitch("instance").option({value:true});
-                                    }else{
-                                        $('#Cs_State').dxSwitch("instance").option({value:false});
-                                    }
+                                        $('#Cs_Guid').dxTextBox("instance").option({value:options.data.Cs_Guid});
+                                        $('#Cs_Name').dxTextBox("instance").option({value:options.data.Cs_Name});
+                                        $('#Cs_Address').dxTextBox("instance").option({value:options.data.Cs_Address});
+                                        $('#Cs_Email').dxTextBox("instance").option({value:options.data.Cs_Email});
+                                        $('#Cs_Mobile').dxTextBox("instance").option({value:options.data.Cs_Mobile});
+                                        $('#Cs_Type').dxSelectBox("instance").option({value:options.data.Cs_Type});
+                                        $('#Cs_Notes').dxTextArea("instance").option({value:options.data.Cs_Notes});
+                                        $('#Cs_GroupSales').dxDropDownBox("instance").option("value",options.data.Cs_GroupSales);
+                                        $('#Cs_Account').dxDropDownBox("instance").option("value",options.data.Cs_Account);
 
 
+                                        if(options.data.Cs_State=='مفعل'){
+                                            $('#Cs_State').dxSwitch("instance").option({value:true});
+                                        }else{
+                                            $('#Cs_State').dxSwitch("instance").option({value:false});
+                                        }
 
-                                    var displaycard =
-                                    document.getElementById("CustomerSupplieraction");
-                                    if (displaycard.style.display == "none") {
 
-                                        document.getElementById(
-                                            "card_CustomerSuppliertitle"
-                                        ).innerText = "Edit Data";
-                                        displaycard.style.display = "block";
-                                        document
-                                            .getElementById("card_CustomerSuppliertitle")
-                                            .scrollIntoView();
-                                    } else {
 
-                                        displaycard.style.display = "none";
-                                        document.getElementById(
-                                            "card_CustomerSuppliertitle"
-                                        ).innerText = "";
-                                        displaycard.style.display = "block";
-                                        document.getElementById(
-                                            "card_CustomerSuppliertitle"
-                                        ).innerText = "Edit Data";
-                                        document
-                                            .getElementById("card_CustomerSuppliertitle")
-                                            .scrollIntoView();
-                                    }
+                                        var displaycard =
+                                        document.getElementById("CustomerSupplieraction");
+                                        if (displaycard.style.display == "none") {
+
+                                            document.getElementById(
+                                                "card_CustomerSuppliertitle"
+                                            ).innerText = "تعديل البيانات";
+                                            displaycard.style.display = "block";
+                                            document
+                                                .getElementById("card_CustomerSuppliertitle")
+                                                .scrollIntoView();
+                                        } else {
+
+                                            displaycard.style.display = "none";
+                                            document.getElementById(
+                                                "card_CustomerSuppliertitle"
+                                            ).innerText = "";
+                                            displaycard.style.display = "block";
+                                            document.getElementById(
+                                                "card_CustomerSuppliertitle"
+                                            ).innerText = "تعديل البيانات";
+                                            document
+                                                .getElementById("card_CustomerSuppliertitle")
+                                                .scrollIntoView();
+                                        }
+                                    },
                                 });
 
-                            var link2 = $("<a>")
-                                .addClass("custom-link")
-                                .text("Delete")
-                                .on("click", function(e) {
-                                    e.preventDefault();
+                                var link2 = $("<div>");
+                                link2.dxButton({
+                                    stylingMode: "contained",
+                                    icon: "trash",
+                                    type:'normal',
+                                    onClick() {
+                                        var rowData = options.data;
 
+                                        $('#Cur_Guid').dxTextBox("instance").option({value:options.data.Cur_Guid});
+                                        let data={
+                                            Cur_Guid:$("#Cur_Guid").dxTextBox("instance").option("value"),
+                                        }
+
+                                        $.ajaxSetup({
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            }
+                                        });
+                                        $.ajax({
+                                            type: "DELETE",
+                                            url: "customersupplier/destroy",
+                                            data: data,
+                                            success: function (response) {
+                                                DevExpress.ui.notify({
+                                                    message: response.status,
+                                                    position: {
+                                                      my: 'top left',
+                                                      at: 'top left'
+                                                    },
+                                                    type:'error',
+                                                    width: '300',
+                                                    height:'150',
+                                                    hideAfter: 2000
+                                                  });
+                                                CustomerSupplier_fetch();
+
+                                            }
+                                        });
+                                    },
                                 });
+
 
                             $(container).append(link1, link2);
                             }
                         },
 
                         ],
-
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header");
+                        },
                       });
 
                     });
@@ -500,7 +627,7 @@ function CustomerSupplier_fetch() {
 
 // Begin Context Menu items
 const contextMenuItems = [
-    { text: "Create New Account" },
+    { text: "انشاء حساب جديد" },
 ];
 
 $(() => {
@@ -513,7 +640,7 @@ $(() => {
             if (!e.itemData.items) {
 
                 switch (e.itemData.text) {
-                    case "Create New Account":
+                    case "انشاء حساب جديد":
                         var displaycard =
                         document.getElementById("CustomerSupplieraction");
                         if (displaycard.style.display == "none") {
@@ -522,7 +649,7 @@ $(() => {
                             })
                             document.getElementById(
                                 "card_CustomerSuppliertitle"
-                            ).innerText = "Add New Store ";
+                            ).innerText = "اضافة حساب";
 
                             CustomerSupplier_cleardata();
                             // CustomerSupplier_setStCode();
@@ -543,7 +670,7 @@ $(() => {
                             displaycard.style.display = "block";
                             document.getElementById(
                                 "card_CustomerSuppliertitle"
-                            ).innerText = "Add New Store   ";
+                            ).innerText = "اضافة حساب";
                             document
                                 .getElementById("card_CustomerSuppliertitle")
                                 .scrollIntoView();
@@ -566,9 +693,9 @@ $(() => {
 $(document).ready(function () {
     $("#danger-contained").dxButton({
         stylingMode: "contained",
-        text: "Close",
+        text: "اغلاق",
         icon:'close',
-        type: "Default",
+        type: "danger",
         width: 120,
         onClick() {
             var displaycard = document.getElementById("CustomerSupplieraction");
@@ -588,8 +715,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#btnSave").dxButton({
         stylingMode: "contained",
-        text: "Save",
-        type: "Default",
+        text: "حفظ",
+        type: "default",
         icon: 'check',
         width: 120,
         onClick() {
@@ -600,7 +727,7 @@ $(document).ready(function () {
                 CustomerSupplier_update();
             }
 
-            DevExpress.ui.notify('The Done button was clicked');
+
         },
     });
 });
@@ -611,7 +738,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(() => {
         $("#Cs_Name").dxTextBox({
-            placeholder: "Enter the Name of Account",
+            placeholder: "ادخل اسم الحساب",
             inputAttr: { "aria-label": "Store_Name" },
 
         });
@@ -625,19 +752,19 @@ $(document).ready(function () {
     });
     $(() => {
         $("#Cs_Address").dxTextBox({
-            placeholder: "Address of the Store",
+            placeholder: "العنوان",
             inputAttr: { "aria-label": "Address" },
         });
     });
     $(() => {
         $("#Cs_Mobile").dxTextBox({
-            placeholder: "Mobile Number ",
+            placeholder: "رقم الموبايل",
             inputAttr: { "aria-label": "Mobile" },
         });
     });
     $(() => {
         $("#Cs_Email").dxTextBox({
-            placeholder: "Email of Account",
+            placeholder: "البريد الالكتروني",
             inputAttr: { "aria-label": "Email" },
         });
     });
@@ -681,7 +808,7 @@ $(document).ready(function () {
             autoResizeEnabled: true,
             // value: longText,
             maxLength: 500,
-            label: "Notes",
+            label: "ملاحظات",
         });
     });
 });

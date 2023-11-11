@@ -80,8 +80,4 @@
   #Cs_GroupSales-container > .dx-field > .dx-field-value {
     width: 75%;
   }
-  .inactive-cell {
-    background-color: red;
-    color: white;
-    padding: 10px;
-  }
+

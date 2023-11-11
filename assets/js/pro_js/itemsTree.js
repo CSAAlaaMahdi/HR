@@ -175,6 +175,27 @@ function ItemsTree_fetch() {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
                                     // fixed: true,
                                 },
                                 {
@@ -185,6 +206,21 @@ function ItemsTree_fetch() {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = 'blue';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
                                 },
                                 {
                                     dataField: "IT_PartNumber",
@@ -194,6 +230,21 @@ function ItemsTree_fetch() {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
                                 },
                                 {
                                     dataField: "IT_State",
@@ -203,6 +254,37 @@ function ItemsTree_fetch() {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        if(cellValue ==='مفعلة'){
+                                            var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = 'green';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                        }else{
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = 'red';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                        }
+                                        
+                                    },
                                 },
                                 {
                                     dataField: "IT_Count",
@@ -365,6 +447,12 @@ function ItemsTree_fetch() {
                                             // );
                                         }
                                     });
+                            },
+                            onContentReady: function (e) {
+                                // Add custom class to the header panel
+                                e.element
+                                    .find(".dx-treelist-headers")
+                                    .addClass("custom-header");
                             },
 
                             rowDragging: {

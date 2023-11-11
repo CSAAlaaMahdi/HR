@@ -93,6 +93,7 @@ function fetchdata_itemFour() {
                             allowedPageSizes: [10, 25, 50, 100, "all"],
                             showNavigationButtons: true,
                         },
+                        focusedRowEnabled:true,
                         remoteOperations: false,
                         searchPanel: {
                             visible: true,
@@ -113,22 +114,88 @@ function fetchdata_itemFour() {
                                 caption: "ت",
                                 width: 100,
                                 alignment: 'right',
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "bold"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    let fontColor = 'green';
+                                    var formattedValue = new Intl.NumberFormat("en-US", {
+                                        style: "decimal",
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 3,
+                                        minimumIntegerDigits: 1,
+                                        useGrouping: true,
+                                    }).format(cellValue);
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color" :fontColor,
+                                        })
+                                        .text(formattedValue)
+                                        .appendTo(container);
+                                },
                             },
                             {
                                 dataField: "IT4_DateRange",
                                 caption: "تاريخ الانتاج",
                                 width: 200,
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "bold"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    let fontColor = '#283741';
+
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color" :fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
                                 // groupIndex: 0,
                             },
                             {
                                 dataField: "IT4_Model",
                                 caption: "الطراز",
                                 width: 250,
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "bold"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    let fontColor = '#283741';
+
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color" :fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
                                 // groupIndex: 0,
                             },
                             {
                                 dataField: "IT4_FramesOptions",
                                 caption: "خيارات الفريم",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "bold"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    let fontColor = '#283741';
+
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color" :fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
                                 // groupIndex: 0,
                             },
 
@@ -292,6 +359,12 @@ function fetchdata_itemFour() {
                                 },
                             },
                         ],
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header");
+                        },
                         masterDetail: {
                             enabled: true,
                             template(container, options) {
@@ -310,15 +383,60 @@ function fetchdata_itemFour() {
                                                 dataField: "IT5_ModelDate",
                                                 caption: "تاريخ الطراز",
                                                 width: 175,
+                                                cellTemplate: function(container, options) {
+                                                    var cellValue = options.value;
+                                                    var fontWeight = "bold"; // Set the desired font weight
+                                                    let fontSize = "17px";
+                                                    let fontColor = '#295f83';
+
+                                                    $("<div>")
+                                                        .css({
+                                                            "font-size" :fontSize,
+                                                            "font-weight" : fontWeight,
+                                                            "color" :fontColor,
+                                                        })
+                                                        .text(cellValue)
+                                                        .appendTo(container);
+                                                },
                                             },
                                             {
                                                 dataField: "IT5_MatchingModels",
                                                 caption: "الطراز المطابق",
                                                 width: 175,
+                                                cellTemplate: function(container, options) {
+                                                    var cellValue = options.value;
+                                                    var fontWeight = "bold"; // Set the desired font weight
+                                                    let fontSize = "17px";
+                                                    let fontColor = '#295f83';
+
+                                                    $("<div>")
+                                                        .css({
+                                                            "font-size" :fontSize,
+                                                            "font-weight" : fontWeight,
+                                                            "color" :fontColor,
+                                                        })
+                                                        .text(cellValue)
+                                                        .appendTo(container);
+                                                },
                                             },
                                             {
                                                 dataField: "IT5_ModelOptions",
                                                 caption: "مواصفات الطراز",
+                                                cellTemplate: function(container, options) {
+                                                    var cellValue = options.value;
+                                                    var fontWeight = "bold"; // Set the desired font weight
+                                                    let fontSize = "17px";
+                                                    let fontColor = '#295f83';
+
+                                                    $("<div>")
+                                                        .css({
+                                                            "font-size" :fontSize,
+                                                            "font-weight" : fontWeight,
+                                                            "color" :fontColor,
+                                                        })
+                                                        .text(cellValue)
+                                                        .appendTo(container);
+                                                },
                                             },
                                             {
                                                 caption: "الحدث",

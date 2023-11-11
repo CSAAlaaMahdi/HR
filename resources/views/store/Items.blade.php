@@ -225,7 +225,7 @@
 
 
 
-                <ul class="nav nav-tabs">
+                <ul class="nav nav-tabsItems">
                     <li class="nav-item"><a href="#itemGeneral" class="nav-link active" data-bs-toggle="tab">عام</a>
                     </li>
                     <li class="nav-item"><a href="#itemsUnits" class="nav-link" data-bs-toggle="tab">وحدات</a>

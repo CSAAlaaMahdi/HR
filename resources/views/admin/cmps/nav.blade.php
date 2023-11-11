@@ -261,8 +261,11 @@
 
             </ul>
         </li>
-        <li class="nav-item has-treeview menu-close">
-            <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{(request()->routeIs('customersupplier.index')
+        )? 'menu-open' :'menu-close' }}">
+            <a href="#" class="nav-link {{(request()->routeIs('customersupplier.index')
+            )?'active':''
+            }}">
                 <img src="{{url('assets/img/icons/icons8_staff_32px.png')}}" alt="">
                 <p>
                     العملاء والموردين
@@ -288,8 +291,12 @@
             </ul>
 
         </li>
-        <li class="nav-item has-treeview menu-close">
-            <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{(request()->routeIs('VIN.index')
+        )?'menu-open':'menu-close'
+        }}">
+            <a href="#" class="nav-link {{(request()->routeIs('VIN.index')
+            )? 'active':''
+            }}">
                 <img src="{{url('assets/img/icons/icons8_receipt_32px.png')}}" alt=""
                         style="margin-right: 5px">
                 <p>
@@ -311,8 +318,12 @@
 
             </ul>
         </li>
-        <li class="nav-item has-treeview menu-close">
-            <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{(request()->routeIs('BillsBuying.index') || request()->routeIs('BillsSaling.index')
+        || request()->routeIs('BillsOrdering.index')
+        )?'menu-open':'menu-close'}}">
+            <a href="#" class="nav-link {{(request()->routeIs('BillsBuying.index') || request()->routeIs('BillsSaling.index')
+                || request()->routeIs('BillsOrdering.index')
+                )?'active':''}}">
                 <img src="{{url('assets/img/icons/icons8_receipt_32px.png')}}" alt=""
                         style="margin-right: 5px">
                 <p>
@@ -323,31 +334,33 @@
             <ul class="nav nav-treeview">
 
                 <li class="nav-item" id="Login_BillBuying">
-                    <a href="{{route('Bills.index',['billType'=>'Buying Bills'])}}" class="nav-link {{ request()->routeIs('Bills.index',['billType'=>'Buying Bills']) ? 'active' : '' }}">
+                    <a href="{{route('BillsBuying.index',['billType'=>'فاتورة مشتريات'])}}" class="nav-link {{ request()->routeIs('BillsBuying.index',['billType'=>'فاتورة مشتريات']) ? 'active' : '' }}">
                         &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<img src="{{url('assets/img/icons/icons8_buying_32px.png')}}" alt=""
                         style="margin-right: 5px" >
                         <p >فاتورة مشتريات</p>
                     </a>
                 </li>
                 <li class="nav-item" id="Login_BillBuying">
-                    <a href="{{route('Bills.index',['billType'=>'Sailing Bills'])}}" class="nav-link {{ request()->routeIs('Bills.index',['billType'=>'Sailing Bills']) ? 'active' : '' }}">
+                    <a href="{{route('BillsSaling.index',['billType'=>'فاتورة مبيعات'])}}" class="nav-link {{ request()->routeIs('BillsSaling.index',['billType'=>'فاتورة مبيعات']) ? 'active' : '' }}">
                         &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<img src="{{url('assets/img/icons/icons8_buying_32px.png')}}" alt=""
                         style="margin-right: 5px" >
                         <p>فاتورة مبيعات</p>
                     </a>
                 </li>
                 <li class="nav-item" id="Login_OrderBills">
-                    <a href="{{route('Bills.index',['billType'=>'Order Bills'])}}" class="nav-link {{ request()->routeIs('Bills.index',['billType'=>'Order Bills']) ? 'active' : '' }}">
+                    <a href="{{route('BillsOrdering.index',['billType'=>'فاتورة طلبيات'])}}" class="nav-link {{ request()->routeIs('BillsOrdering.index',['billType'=>'فاتورة طلبيات']) ? 'active' : '' }}">
                         &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<img src="{{url('assets/img/icons/icons8_buying_32px.png')}}" alt=""
                         style="margin-right: 5px" >
-                        <p>فاتورة طلبية</p>
+                        <p>فاتورة طلبيات</p>
                     </a>
                 </li>
 
             </ul>
         </li>
-        <li class="nav-item has-treeview menu-close">
-            <a href="#" class="nav-link">
+        <li class="nav-item has-treeview {{(request()->routeIs('items.index') || request()->routeIs('itemsTree.index')
+        || request()->routeIs('stories.index'))? 'menu-open':'menu-close'}}">
+            <a href="#" class="nav-link {{(request()->routeIs('items.index') || request()->routeIs('itemsTree.index')
+                || request()->routeIs('stories.index'))? 'active':''}}">
                 <i class="nav-icon fa fa-store-alt"></i>
                 <p>
                     المخازن والمستودعات

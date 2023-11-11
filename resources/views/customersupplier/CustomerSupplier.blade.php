@@ -1,33 +1,15 @@
-@extends('admin.layout.main')
-@section('title', 'Customer And Supplier')
+@extends('admin.layout.mainarabic')
+{{-- @section('title', 'Customer And Supplier') --}}
 @section('content')
 
-<style>
-    .custom-link {
-        background-color: rgb(202, 237, 253);
-        padding: 8px 16px;
-        margin: 5px;
-        text-align: center;
-        font-size: 14px;
-        border-radius: 4px;
-        text-decoration: underline;
-        color: blue;
-        cursor: pointer;
-    }
-</style>
 
 <div class="row border g-0 rounded shadow-sm " >
     <div class="col p-4">
         <div class="col-md-12 mt-2">
             <div class="card " id="firstCard">
                 <div class="card-header"   style="background-color: #343A40">
-
-                    {{-- <button class="btn btn-primary btn-sm m-1 float-end MainStoreAdd">Add Main Store
-                    </button>
-                    <button class="btn btn-warning btn-sm m-1 float-end CustomerSupplierEdit">Edit Store
-                    </button> --}}
-
-                    <h4 style="color: white;">Customer _ Supplier Accounts</h4>
+                
+                    <h4 style="color: white;">العملاء والمجهزون</h4>
 
                 </div>
                 <div class="card-body">
@@ -46,7 +28,7 @@
         <div class="col-md-12 mt-5">
             <div class="card CustomerSupplieraction" id="CustomerSupplieraction" >
                 <div class="card-header " style="background-color: #343A40">
-                    <div id="danger-contained" style="float:right"></div>
+                    <div id="danger-contained" style="float:left"></div>
                     <h4 style="color: white;" id="card_CustomerSuppliertitle" class="card_CustomerSuppliertitle"> </h4>
 
                 </div>
@@ -70,7 +52,7 @@
                                   </div>
                                 <div class="dx-fieldset" id="CsName-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Name</div>
+                                      <div class="dx-field-label">الاسم</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_Name"></div>
                                       </div>
@@ -79,7 +61,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="Cs_State-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">State</div>
+                                      <div class="dx-field-label">الحالة</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_State"></div>
                                       </div>
@@ -88,7 +70,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="Cs_GroupSales-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Sales_Group</div>
+                                      <div class="dx-field-label">مجموعة البيع</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_GroupSales"></div>
                                       </div>
@@ -97,7 +79,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="Cs_Account-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Account</div>
+                                      <div class="dx-field-label">الحساب الاب</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_Account"></div>
                                       </div>
@@ -106,7 +88,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="Cs_Type-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Account_Type</div>
+                                      <div class="dx-field-label">نوع الحساب</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_Type"></div>
                                       </div>
@@ -120,7 +102,7 @@
 
                                 <div class="dx-fieldset" id="Cs_Address-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Address</div>
+                                      <div class="dx-field-label">العنوان</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_Address"></div>
                                       </div>
@@ -129,7 +111,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="Cs_Email-container" >
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Email</div>
+                                      <div class="dx-field-label">البريد</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_Email"></div>
                                       </div>
@@ -138,7 +120,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="Cs_Mobile-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Mobile</div>
+                                      <div class="dx-field-label">موبايل</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_Mobile"></div>
                                       </div>
@@ -147,7 +129,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="Cs_Notes-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Notes</div>
+                                      <div class="dx-field-label">ملاحظات</div>
                                       <div class="dx-field-value">
                                         <div id="Cs_Notes"></div>
                                       </div>
@@ -158,7 +140,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="btnSave" style="float:left"></div>
+                        <div id="btnSave" style="float:right"></div>
 
                     </div>
                 </div>
@@ -170,7 +152,7 @@
 
 
     </div>
-    <script type="text/javascript" src="{{url('resources/js/pro_js/CustomerSupplier.js')}}"></script>
+    <script type="text/javascript" src="{{url('assets/js/pro_js/CustomerSupplier.js')}}"></script>
     <script>
         $("#CustomerSupplieraction").hide();
     </script>

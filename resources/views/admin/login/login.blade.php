@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url('resources/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('resources/css/dataTables.bootstrap5.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('resources/css/style.css') }}">
-    <link rel="stylesheet" href="{{ url('resources/bootstrap-icons-1.4.1/bootstrap-icons.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('resources/css/style2.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url('resources/css/bootstrap.rtl.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/dataTables.bootstrap5.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/bootstrap-icons-1.4.1/bootstrap-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/style2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.rtl.min.css') }}">
 
 
     <title>تسجيل الدخول</title>
@@ -57,8 +57,8 @@
     </div>
     </div>
 
-        <script type="text/javascript" src="{{ url('resources/js/Template/jquery-3.6.0.min.js') }}"></script>
-        <script type="text/javascript" src="{{ url('resources/js/pro_js/login.js') }}"></script>
+        <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url('assets/js/pro_js/login.js') }}"></script>
 </body>
 
 </html>

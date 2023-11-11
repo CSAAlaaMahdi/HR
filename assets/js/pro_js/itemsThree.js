@@ -48,6 +48,18 @@ function fetchdata_ItemThree() {
                             {
                                 dataField: "IT2_Count_Kind2",
                                 caption: "الوحدة",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
                                 // groupIndex: 0,
                             },
                             {
@@ -55,24 +67,102 @@ function fetchdata_ItemThree() {
                                 caption: "الكمية",
                                 dataType: "numeric",
                                 alignment: "right",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "bold"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    let fontColor = '#283741';
+                                    var formattedValue = new Intl.NumberFormat("en-US", {
+                                        style: "decimal",
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 3,
+                                        minimumIntegerDigits: 1,
+                                        useGrouping: true,
+                                    }).format(cellValue);
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color" :fontColor,
+                                        })
+                                        .text(formattedValue)
+                                        .appendTo(container);
+                                },
                             },
                             {
                                 dataField: "IT2_Smallest",
                                 caption: "الوحدة الاصغر",
                                 dataType: "numeric",
                                 alignment: "right",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "bold"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    let fontColor = 'red'
+                                    var formattedValue = new Intl.NumberFormat("en-US", {
+                                        style: "decimal",
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 3,
+                                        minimumIntegerDigits: 1,
+                                        useGrouping: true,
+                                    }).format(cellValue);
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color" : fontColor,
+                                        })
+                                        .text(formattedValue)
+                                        .appendTo(container);
+                                },
                             },
                             {
                                 dataField: "IT2_StoreName2",
                                 caption: "المخزن",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
                             },
                             {
                                 dataField: "IT2_BillType",
                                 caption: "الفاتورة",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
                             },
                             {
                                 dataField: "IT2_ItemPosition",
                                 caption: "موقع المادة",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "18px";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
                             },
                             {
                                 caption: "الحدث",
@@ -194,6 +284,12 @@ function fetchdata_ItemThree() {
                                     valueFormat: "#0.00",
                                 },
                             ],
+                        },
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header");
                         },
                     });
                 });
