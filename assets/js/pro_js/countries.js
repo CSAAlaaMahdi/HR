@@ -76,6 +76,7 @@ function country_fetch() {
                             highlightCaseSensitive: true,
                             width: 300,
                         },
+                        focusedRowEnabled:true,
                         filterRow: { visible: true },
                         groupPanel: { visible: true },
                         grouping: {
@@ -88,6 +89,20 @@ function country_fetch() {
                             {
                                 dataField: "C_Name",
                                 caption: "اسم الدولة",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "16px";
+                                    let fontColor ="#283741";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color":fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                }
                                 // groupIndex: 0,
                             },
 
@@ -198,18 +213,23 @@ function country_fetch() {
                                                     });
                                                     country_fetch();
                                                     country_cleardata();
-                                                  
+
                                                 },
                                             });
                                         },
                                     });
 
-                                   
+
 
                                     $(container).append(link1, link2);
                                 },
                             },
                         ],
+                        onContentReady :function (e) {
+                            e.element.find('.dx-datagrid-headers')
+                            .addClass("custom-header_Countries");
+                         }
+
                     });
                 });
             },

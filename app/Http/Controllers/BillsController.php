@@ -60,15 +60,16 @@ class BillsController extends Controller
     public function store(Request $request)
     {
         $billType = BillsType::find($request->input("H_Bill_Type"))->N_BillName;
+        $billTypeState = 0;
         switch ($billType) {
             case 'فاتورة مشتريات':
-                $billType = 1;
+                $billTypeState = 1;
                 break;
             case 'فاتورة مبيعات':
-                $billType = 2;
+                $billTypeState = 2;
                 break;
             case 'فاتورة طلبيات':
-                $billType = 3;
+                $billTypeState = 3;
                 break;
 
             default:
@@ -113,71 +114,75 @@ class BillsController extends Controller
         #endregion operation on Bill Header....
 
         #region Bill Body ...
-        $billBody = $request->input('Bill_Body');
-        if (empty($billBody)) {
-        } else {
-            foreach ($billBody as $billBodyData) {
-                $bodyRowID = BillBody::max('RowID');
-                $guidBody = $billBodyData['Guid'];
-                if ($guidBody === '00000000-0000-0000-0000-000000000000') {
-                    $guidBody = strtoupper(Uuid::uuid4()->toString());
-                    $bodyRowID = $bodyRowID + 1;
+            $billBody = $request->input('Bill_Body');
+            if (empty($billBody)) {
+            } else {
+                foreach ($billBody as $billBodyData) {
+                    $bodyRowID = BillBody::max('RowID');
+                    $guidBody = $billBodyData['Guid'];
+                    if ($guidBody === '00000000-0000-0000-0000-000000000000') {
+                        $guidBody = strtoupper(Uuid::uuid4()->toString());
+                        $bodyRowID = $bodyRowID + 1;
+                    }
+                    $Bill_Body =  BillBody::updateOrCreate(
+                        [
+                            'Guid' => $guidBody
+                        ],
+                        [
+                            'Item_Guid' => $billBodyData['Item_Guid'],
+                            'Item_Barcode' => $billBodyData['Item_Barcode'],
+                            'Item_Unit' => $billBodyData['Item_Unit'],
+                            'Item_Count' => $billBodyData['Item_Count'],
+                            'Item_Qty1' => $billBodyData['Item_Qty1'],
+                            'Item_Qty2' => $billBodyData['Item_Qty2'],
+                            'Item_Qty3' => $billBodyData['Item_Qty3'],
+                            'Item_Price' => $billBodyData['Item_Price'],
+                            'Item_Price_Total' => $billBodyData['Item_Price_Total'],
+                            'Item_Discount' => $billBodyData['Item_Discount'],
+                            'Item_Extra' => $billBodyData['Item_Extra'],
+                            'Item_Price_Final' => $billBodyData['Item_Price_Final'],
+                            'CostPrice' => $billBodyData['CostPrice'],
+                            'ProductionDate' => $billBodyData['ProductionDate'],
+                            'ExpireDate' => $billBodyData['ExpireDate'],
+                            'Store_Guid' => $request->input('H_Store_Guid'),
+                            'Branch_Guid' => null,
+                            'Currency_Guid' => $currencyGuid,
+                            'Currency_Equal' => $currencyEqual,
+                            'Profits' => $billBodyData['Profits'],
+                            'Header_Guid' => $headerGuid,
+                            'RowID' => $bodyRowID,
+                        ]
+                    );
+
+                    #region Update The Store and Item Count....
+                    // Update Item Store......
+                    $billSettingState = BillSetting::find($billTypeState);
+                    // dd($billSettingState->AffectOfStore);
+                    if ($billSettingState->AffectOfStore === "1") {
+                        $storeMovement = ItemsThree::updateOrCreate(
+                            [
+                                'IT2_BillGuid' => $guidBody,
+                            ],
+                            [
+                                'IT2_FK_IT' => $billBodyData['Item_Guid'],
+                                'IT2_Count_Kind' => $billBodyData['Item_Unit'],
+                                'IT2_Count' => $billBodyData['Item_Count'],
+                                'IT2_SmallestCount' => (Unitname::find($billBodyData['Item_Unit'])->Ui_Piece) * ($billBodyData['Item_Count']),
+                                'IT2_State' => true,
+                                'IT2_StoreName' => $request->input("H_Store_Guid"),
+                                'IT2_BillType' => $billTypeState,
+
+                            ]
+                        );
+                        // Update Count of Item....
+                        $this->updateItemCount($billBodyData['Item_Guid']);
+                    }
+
+                    #endregion
                 }
-                $Bill_Body =  BillBody::updateOrCreate(
-                    [
-                        'Guid' => $guidBody
-                    ],
-                    [
-                        'Item_Guid' => $billBodyData['Item_Guid'],
-                        'Item_Barcode' => $billBodyData['Item_Barcode'],
-                        'Item_Unit' => $billBodyData['Item_Unit'],
-                        'Item_Count' => $billBodyData['Item_Count'],
-                        'Item_Qty1' => $billBodyData['Item_Qty1'],
-                        'Item_Qty2' => $billBodyData['Item_Qty2'],
-                        'Item_Qty3' => $billBodyData['Item_Qty3'],
-                        'Item_Price' => $billBodyData['Item_Price'],
-                        'Item_Price_Total' => $billBodyData['Item_Price_Total'],
-                        'Item_Discount' => $billBodyData['Item_Discount'],
-                        'Item_Extra' => $billBodyData['Item_Extra'],
-                        'Item_Price_Final' => $billBodyData['Item_Price_Final'],
-                        'Cost_Price' => $billBodyData['Cost_Price'],
-                        'ProductionDate' => $billBodyData['ProductionDate'],
-                        'ExpireDate' => $billBodyData['ExpireDate'],
-                        'Store_Guid' => $request()->input('H_Store_Guid'),
-                        'Branch_Guid' => null,
-                        'Currency_Guid' => $currencyGuid,
-                        'Currency_Equal' => $currencyEqual,
-                        'Header_Guid' => $headerGuid,
-                        'RowID' => $bodyRowID,
-                    ]
-                );
-
-                // Update Item Store......
-                $storeMovement = ItemsThree::updateOrCreate(
-                    [
-                        'IT2_BillGuid' => $guidBody,
-                    ],
-                    [
-                        'IT2_FK_IT' => $billBodyData['Item_Guid'],
-                        'IT2_Count_Kind' => $billBodyData['Item_Unit'],
-                        'IT2_Count' => $billBodyData['Item_Count'],
-                        'IT2_SmallestCount' => (Unitname::find($billBodyData['Item_Unit'])->Ui_Piece) * ($billBodyData['Item_Count']),
-                        'IT2_State' => true,
-                        'IT2_StoreName' => $request->input("H_Store_Guid"),
-                        'IT2_BillType' => $billType,
-
-                    ]
-                );
-                // Update Count of Item....
-                $this->updateItemCount($billBodyData['Item_Guid']);
             }
-        }
-
-
         #endregion
-
-
-
+        
         #region Bill Footer...
         $billFooterGuid = $request->input('F_Guid');
         $footerRowID = BillFooter::max('RowID');
@@ -200,8 +205,9 @@ class BillsController extends Controller
                 'Total_Discount' => $request->input('F_Total_Discount'),
                 'Item_Discount' => $request->input('F_Item_Discount'),
                 'Bill_Discount' => $request->input('F_Bill_Discount'),
-                'TotalAward' => $request->input('F_TotalAward'),
-                'checkAward' => $request->input('F_checkAward'),
+                'Total_Add' => $request->input('F_Total_Add'),
+                'Item_Add' => $request->input('F_Item_Add'),
+                'Bill_AddAmount' => $request->input('F_Bill_AddAmount'),
                 'Currency_Guid' => $request->input('F_Currency_Guid'),
                 'Currency_Equal' => $request->input('F_Currency_Equal'),
                 'RowID' => $footerRowID,
@@ -233,7 +239,9 @@ class BillsController extends Controller
                     'Header_Guid' => $headerGuid,
                     'Account_Guid' => $billDisAddData['Account_Guid'],
                     'Dis_Amount' => $billDisAddData['Dis_Amount'],
+                    'Dis_Percent' => $billDisAddData['Dis_Percent'],
                     'Add_Amount' => $billDisAddData['Add_Amount'],
+                    'Add_Percent' => $billDisAddData['Add_Percent'],
                     'Notes' => $billDisAddData['Notes'],
                     'Currency_Guid' => $currencyGuid,
                     'Currency_Equal' => $currencyEqual,
@@ -354,7 +362,7 @@ class BillsController extends Controller
     {
         $billType = $request->input('BillType');
         $getBillNumber = BillHeader::where('Bill_Type', '=', $billType)->first();
-        if ($getBillNumber === null) {
+        if ($getBillNumber === null || $getBillNumber == '') {
             $getBillNumber = 0;
         } else {
             $getBillNumber = $getBillNumber->max('Bill_Number');

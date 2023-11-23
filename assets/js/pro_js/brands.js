@@ -88,6 +88,7 @@ function brand_fetch() {
                           highlightCaseSensitive: true,
                           width:300,
                         },
+                        focusedRowEnabled:true,
                         filterRow: { visible: true },
                         groupPanel: { visible: true },
                         grouping: {
@@ -100,7 +101,21 @@ function brand_fetch() {
                           {
                             dataField: 'B_Name',
                             caption:'اسم الماركة',
-                            // groupIndex: 0,
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "450"; // Set the desired font weight
+                                let fontSize = "16px";
+                                let fontColor ="#2F4F4F";
+
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color":fontColor,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            }
                           },
 
                           {
@@ -189,12 +204,18 @@ function brand_fetch() {
                                                 });
                                             },
                                 });
-                              
+
                             $(container).append(link1, link2);
                             }
                         },
 
                         ],
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header_Brands");
+                        },
 
                       });
 
@@ -282,7 +303,7 @@ $(() => {
                 }
 
 
-                
+
             }
         },
     });

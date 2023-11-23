@@ -21,7 +21,7 @@ class ItemsTreeController extends Controller
     public function create(Request $request)
     {
         $data =[
-            'ItemsTree' => collect(DB::select("SET NOCOUNT ON ; exec Items_GetTree"))
+            'ItemsTree' => collect(DB::select("SET NOCOUNT ON ; exec Tb_Items_GetTree"))
                 ->all()
         ];
         return response()->json($data);

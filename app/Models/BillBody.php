@@ -37,7 +37,7 @@ class BillBody extends Model
         'SeqGuid',
         'Branch_Guid',
         'Avg_Price',
-        'Cost_Price',
+        'CostPrice',
         'Item_Barcode',
         'RowID'
 

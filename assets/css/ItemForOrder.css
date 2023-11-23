@@ -1,19 +1,13 @@
-#ComName-container > .dx-field > .dx-field-label {
+#Items-container > .dx-field > .dx-field-label {
     width: 25%;
     font-size: 1.2rem;
+    color: #283741;
   }
 
-  #ComName-container > .dx-field > .dx-field-value {
+  #Items-container > .dx-field > .dx-field-value {
     width: 75%;
-  }
-  #ComGuid-container > .dx-field > .dx-field-label {
-    width: 25%;
-    font-size: 1.2rem;
   }
 
-  #ComGuid-container > .dx-field > .dx-field-value {
-    width: 75%;
-  }
 
   .inactive-cell {
     background-color: red;

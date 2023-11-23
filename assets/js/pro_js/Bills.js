@@ -47,9 +47,7 @@ $(document).ready(function () {
 
             }
         });
-        // if(Number(response.BillSettingState.Pay_Type) === 0)
-        //     $('#lb_PayType').hide();
-        // else $('#lb_PayType').show();
+
     });
     $(() => {
 
@@ -60,14 +58,7 @@ $(document).ready(function () {
             valueFormat:"#0.00",
             // visible:Number(response.BillSettingState.Header_Cash_Visible) === 1
         });
-        // if(Number(response.BillSettingState.Header_Cash_Visible) === 0)
-        // {
-        //      $('#H_CashAmount_Lable').hide();
-        // }
 
-        // else    {
-        //     $("#H_CashAmount_Label").show();
-        // }
     });
     $(() => {
         $("#H_Guid").dxTextBox({
@@ -131,8 +122,8 @@ $(document).ready(function () {
             dataType:"number",
             format:"#0.00",
             onValueChanged: function(e) {
-                var formattedValue = e.component.option("value").toLocaleString();
-                e.component.option("value", formattedValue);
+                // var formattedValue = e.component.option("value").toLocaleString();
+                // e.component.option("value", formattedValue);
             },
 
         });
@@ -316,8 +307,8 @@ $(document).ready(function () {
                                 girdData[index].Item_Extra = ItemExtra / currencyEqual;
                                 let FinalPrice = Number(girdData[index].Item_Price_Final) ;
                                 girdData[index].Item_Price_Final = FinalPrice / currencyEqual;
-                                let CostPrice = Number(girdData[index].Cost_Price) ;
-                                girdData[index].Cost_Price = CostPrice / currencyEqual;
+                                let CostPrice = Number(girdData[index].CostPrice) ;
+                                girdData[index].CostPrice = CostPrice / currencyEqual;
                                 girdData[index].Currency_Guid = currencyGuid;
                                 girdData[index].Currency_Equal = currencyEqual;
                                 let discountItem = parseFloat($("#F_Item_Discount").dxTextBox("instance").option("value"));
@@ -342,8 +333,8 @@ $(document).ready(function () {
                                 girdData[index].Item_Extra = (ItemExtra * Number(girdData[index].Currency_Equal)) / currencyEqual;
                                 let FinalPrice = Number(girdData[index].Item_Price_Final) ;
                                 girdData[index].Item_Price_Final = (FinalPrice * Number(girdData[index].Currency_Equal)) / currencyEqual;
-                                let CostPrice = Number(girdData[index].Cost_Price) ;
-                                girdData[index].Cost_Price = (CostPrice * Number(girdData[index].Currency_Equal)) / currencyEqual;
+                                let CostPrice = Number(girdData[index].CostPrice) ;
+                                girdData[index].CostPrice = (CostPrice * Number(girdData[index].Currency_Equal)) / currencyEqual;
                                 girdData[index].Currency_Guid = currencyGuid;
                                 girdData[index].Currency_Equal = currencyEqual;
                                 let discountItem = parseFloat($("#F_Item_Discount").dxTextBox("instance").option("value"));
@@ -370,8 +361,8 @@ $(document).ready(function () {
                                 girdData[index].Item_Extra = ItemExtra * Currency_Equal;
                                 let FinalPrice = Number(girdData[index].Item_Price_Final) ;
                                 girdData[index].Item_Price_Final = FinalPrice * Currency_Equal;
-                                let CostPrice = Number(girdData[index].Cost_Price) ;
-                                girdData[index].Cost_Price = CostPrice * Currency_Equal;
+                                let CostPrice = Number(girdData[index].CostPrice) ;
+                                girdData[index].CostPrice = CostPrice * Currency_Equal;
                                 girdData[index].Currency_Guid = currencyGuid;
                                 girdData[index].Currency_Equal = currencyEqual;
                                 let discountItem = parseFloat($("#F_Item_Discount").dxTextBox("instance").option("value"));
@@ -395,8 +386,8 @@ $(document).ready(function () {
                                 girdData[index].Item_Extra = (ItemExtra * Number(girdData[index].Currency_Equal)) / currencyEqual;
                                 let FinalPrice = Number(girdData[index].Item_Price_Final) ;
                                 girdData[index].Item_Price_Final = (FinalPrice * Number(girdData[index].Currency_Equal)) / currencyEqual;
-                                let CostPrice = Number(girdData[index].Cost_Price) ;
-                                girdData[index].Cost_Price = (CostPrice * Number(girdData[index].Currency_Equal)) / currencyEqual;
+                                let CostPrice = Number(girdData[index].CostPrice) ;
+                                girdData[index].CostPrice = (CostPrice * Number(girdData[index].Currency_Equal)) / currencyEqual;
                                 girdData[index].Currency_Guid = currencyGuid;
                                 girdData[index].Currency_Equal = currencyEqual;
                                 let discountItem = parseFloat($("#F_Item_Discount").dxTextBox("instance").option("value"));
@@ -584,8 +575,94 @@ function setting(){
             .option("visible",false);
            }
 
-
-
+           if(Number(response.BillSettingState.Pay_Type) === 1){
+            $('#H_Pay_Type')
+            .dxSwitch("instance")
+            .option("visible",true);
+            $('#lb_PayType').show();
+           }else{
+            $('#lb_PayType').hide();
+            $('#H_Pay_Type')
+            .dxSwitch("instance")
+            .option("visible",false);
+           }
+           if(Number(response.BillSettingState.Footer_BillTotal) === 1){
+            $('#F_Total_Price_Bill')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#F_Total_Price_Bill_lb').show();
+           }else{
+            $('#F_Total_Price_Bill')
+            .dxTextBox("instance")
+            .option("visible",false);
+            $('#F_Total_Price_Bill_lb').hide();
+           }
+           if(Number(response.BillSettingState.Footer_ItemDiscount) === 1){
+            $('#F_Item_Discount')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#F_Item_Discount_lb').show();
+           }else{
+            $('#F_Item_Discount')
+            .dxTextBox("instance")
+            .option("visible",false);
+            $('#F_Item_Discount_lb').hide();
+           }
+           if(Number(response.BillSettingState.Footer_BillDiscount) === 1){
+            $('#F_Bill_Discount')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#F_Bill_Discount_lb').show();
+           }else{
+            $('#F_Bill_Discount')
+            .dxTextBox("instance")
+            .option("visible",false);
+            $('#F_Bill_Discount_lb').hide();
+           }
+           if(Number(response.BillSettingState.Footer_BillAdd) === 1){
+            $('#F_Bill_AddAmount')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#F_Bill_AddAmount_lb').show();
+           }else{
+            $('#F_Bill_AddAmount')
+            .dxTextBox("instance")
+            .option("visible",false);
+            $('#F_Bill_AddAmount_lb').hide();
+           }
+           if(Number(response.BillSettingState.Footer_TotalDiscount) === 1){
+            $('#F_Total_Discount')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#F_Total_Discount_lb').show();
+           }else{
+            $('#F_Total_Discount')
+            .dxTextBox("instance")
+            .option("visible",false);
+            $('#F_Total_Discount_lb').hide();
+           }
+           if(Number(response.BillSettingState.Footer_ItemAdd) === 1){
+            $('#F_Item_Add')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#F_Item_Add_lb').show();
+           }else{
+            $('#F_Item_Add')
+            .dxTextBox("instance")
+            .option("visible",false);
+            $('#F_Item_Add_lb').hide();
+           }
+           if(Number(response.BillSettingState.Footer_TotalAdd) === 1){
+            $('#F_Total_Add')
+            .dxTextBox("instance")
+            .option("visible",true);
+            $('#F_Total_Add_lb').show();
+           }else{
+            $('#F_Total_Add')
+            .dxTextBox("instance")
+            .option("visible",false);
+            $('#F_Total_Add_lb').hide();
+           }
 
 
 
@@ -688,9 +765,7 @@ function Bills_UpdateOrInsert() {
         Bill_Body: billBody,
         Bill_DisAdd: billDisAdd,
         F_Guid: $("#F_Guid").dxTextBox("instance").option("value"),
-        F_Total_Price_Bill: $("#F_Total_Price_Bill")
-            .dxTextBox("instance")
-            .option("value"),
+        F_Total_Price_Bill: $("#F_Total_Price_Bill").dxTextBox("instance").option("value"),
         F_Total_Discount: $("#F_Total_Discount")
             .dxTextBox("instance")
             .option("value"),
@@ -700,20 +775,16 @@ function Bills_UpdateOrInsert() {
         F_Bill_Discount: $("#F_Bill_Discount")
             .dxTextBox("instance")
             .option("value"),
-        F_TotalAward: $("#F_TotalAward").dxTextBox("instance").option("value"),
+        F_Item_Add: $("#F_Item_Add").dxTextBox("instance").option("value"),
+        F_Bill_AddAmount: $("#F_Bill_AddAmount").dxTextBox("instance").option("value"),
+        F_Total_Add: $("#F_Total_Add").dxTextBox("instance").option("value"),
         F_Currency_Guid: $("#F_Currency_Guid")
             .dxTextBox("instance")
             .option("value"),
-        F_Currency_Equal: $("#F_Currency_Equal")
-            .dxTextBox("instance")
-            .option("value"),
-        F_checkAward: (function () {
-            if ($("#F_checkAward").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-    };
+        F_Currency_Equal: Number($("#F_Currency_Equal").dxTextBox("instance").option("value")),
 
+    };
+    console.log(data);
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -979,10 +1050,52 @@ function Bills_filldata() {
                                     {
                                         dataField: "Cur_Name",
                                         caption: "العملة",
+                                        cellTemplate: function(container, options) {
+                                            var cellValue = options.value;
+                                            var fontWeight = "600"; // Set the desired font weight
+                                            let fontSize = "16px";
+                                            let fontColor = '#283741';
+                                            // var formattedValue = new Intl.NumberFormat("en-US", {
+                                            //     style: "decimal",
+                                            //     minimumFractionDigits: 0,
+                                            //     maximumFractionDigits: 3,
+                                            //     minimumIntegerDigits: 1,
+                                            //     useGrouping: true,
+                                            // }).format(cellValue);
+                                            $("<div>")
+                                                .css({
+                                                    "font-size" :fontSize,
+                                                    "font-weight" : fontWeight,
+                                                    "color" :fontColor,
+                                                })
+                                                .text(cellValue)
+                                                .appendTo(container);
+                                        },
                                     },
                                     {
                                         dataField: "Cur_Cost",
                                         caption: "قيمة العملة",
+                                        cellTemplate: function(container, options) {
+                                            var cellValue = options.value;
+                                            var fontWeight = "600"; // Set the desired font weight
+                                            let fontSize = "16px";
+                                            let fontColor = '#283741';
+                                            var formattedValue = new Intl.NumberFormat("en-US", {
+                                                style: "decimal",
+                                                minimumFractionDigits: 0,
+                                                maximumFractionDigits: 3,
+                                                minimumIntegerDigits: 1,
+                                                useGrouping: true,
+                                            }).format(cellValue);
+                                            $("<div>")
+                                                .css({
+                                                    "font-size" :fontSize,
+                                                    "font-weight" : fontWeight,
+                                                    "color" :fontColor,
+                                                })
+                                                .text(formattedValue)
+                                                .appendTo(container);
+                                        },
                                     },
                                 ],
                                 hoverStateEnabled: true,
@@ -1724,6 +1837,7 @@ function Bills_fetch() {
                     },
                     rowAlternationEnabled: true,
 
+
                     columns: [
                         {
                             dataField: "Guid",
@@ -1997,7 +2111,7 @@ function Bills_fetch() {
                                 }
                         },
                         {
-                            dataField: "Cost_Price",
+                            dataField: "CostPrice",
                             caption: "سعر التكلفة",
                             dataType: "number",
                             alignment: "right",
@@ -2175,6 +2289,10 @@ function Bills_fetch() {
                             },
                         ],
                     },
+                    export: {
+                        enabled: true,
+                        formats: ['xlsx', 'pdf']
+                    },
 
                     onEditorPrepared: function (e) {
 
@@ -2253,7 +2371,7 @@ function Bills_fetch() {
                                 PriceTotal - Discount + Extra * quantity;
                             row.Item_Price_Final = PriceFinal;
                             let ItemPrice = Number(row.Item_Price);
-                            row.Cost_Price =
+                            row.CostPrice =
                                 ItemPrice - Discount / quantity + Extra;
                         }
                         if (
@@ -2287,7 +2405,7 @@ function Bills_fetch() {
                                     (ItemPrice - (newValue / quantity))  + (Extra * quantity);
                                 grid.cellValue(
                                     rowIndex,
-                                    "Cost_Price",
+                                    "CostPrice",
                                     CostPrice
                                 );
 
@@ -2330,7 +2448,7 @@ function Bills_fetch() {
                                     (args.value / quantity);
                                 grid.cellValue(
                                     rowIndex,
-                                    "Cost_Price",
+                                    "CostPrice",
                                     CostPrice
                                 );
 
@@ -2345,7 +2463,7 @@ function Bills_fetch() {
                         e.data.Item_Price = 0;
                         e.data.Item_Price_Total =0;
                         e.data.Item_Price_Final = 0;
-                        e.data.Cost_Price =0;
+                        e.data.CostPrice =0;
                         let CurrencyGuid = $("#H_Currency_Guid").dxDropDownBox("instance").option("value"); //response.getCurrency.Cur_Guid;
                         let CurrencyEqual = $("#H_Currency_Equal").dxTextBox("instance").option("value");//response.getCurrency.Cur_Cost;
                         e.data.Currency_Guid = CurrencyGuid;
@@ -2353,6 +2471,17 @@ function Bills_fetch() {
                         e.data.Header_Guid =
                             "00000000-0000-0000-0000-000000000000";
                         e.data.Guid = "00000000-0000-0000-0000-000000000000";
+                        e.data.Item_Qty1 = 0;
+                        e.data.Item_Qty2 = 0;
+                        e.data.Item_Qty3 = 0;
+                        e.data.ProductionDate = null;
+                        e.data.ExpireDate= null;
+                        e.data.Item_Barcode = null;
+                        e.data.Item_PartNumber = null;
+                        e.data.Item_Name = null;
+                        e.data.Item_Unit = null;
+                        e.data.Profits = 0;
+
                     },
                     onContentReady: function (e) {
                         // Add custom class to the header panel
@@ -2458,6 +2587,7 @@ function Bills_fetch() {
                             },
                         });
                     },
+
                     toolbar: {
                         items: [
                             {

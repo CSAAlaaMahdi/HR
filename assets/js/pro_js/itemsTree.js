@@ -177,8 +177,8 @@ function ItemsTree_fetch() {
                                     ],
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
                                         let fontColor = '#283741';
                                         // var formattedValue = new Intl.NumberFormat("en-US", {
                                         //     style: "decimal",
@@ -208,8 +208,8 @@ function ItemsTree_fetch() {
                                     ],
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
                                         let fontColor = 'blue';
                                        
                                         $("<div>")
@@ -232,8 +232,8 @@ function ItemsTree_fetch() {
                                     ],
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
                                         let fontColor = '#283741';
                                        
                                         $("<div>")
@@ -257,8 +257,8 @@ function ItemsTree_fetch() {
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
                                         if(cellValue ==='مفعلة'){
-                                            var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
+                                            var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
                                         let fontColor = 'green';
                                        
                                         $("<div>")
@@ -291,42 +291,100 @@ function ItemsTree_fetch() {
                                     caption: "عدد",
                                     format:'number',
                                     alignment:'right',
-                                    validationRules: [
-                                        {
-                                            type: "required",
-                                        },
-                                    ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = '#283741';
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    },
                                 },
                                 {
                                     dataField: "IT_ItemUnit",
                                     caption: "الوحدة",
-                                    validationRules: [
-                                        {
-                                            type: "required",
-                                        },
-                                    ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = '#283741';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
                                 },
                                 {
                                     dataField: "IT_LastPriceBuying",
                                     caption: "اخر شراء",
                                     format:'number',
                                     alignment:'right',
-                                    validationRules: [
-                                        {
-                                            type: "required",
-                                        },
-                                    ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = 'red';
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    },
                                 },
                                 {
                                     dataField: "IT_LastPriceSaling",
                                     caption: "اخر بيع",
                                     format:'number',
                                     alignment:'right',
-                                    validationRules: [
-                                        {
-                                            type: "required",
-                                        },
-                                    ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = 'green';
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    },
                                 },
                                 {
                                     caption: "الحدث",

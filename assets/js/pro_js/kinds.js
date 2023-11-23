@@ -80,6 +80,7 @@ function kinds_fetch() {
                           allowedPageSizes: [10, 25, 50, 100, 'all'],
                           showNavigationButtons: true,
                         },
+                        focusedRowEnabled:true,
                         remoteOperations: false,
                         searchPanel: {
                           visible: true,
@@ -117,11 +118,11 @@ function kinds_fetch() {
 
                                             $('#K_Guid').dxTextBox("instance").option({value:options.data.K_Guid});
                                             $('#K_Name').dxTextBox("instance").option({value:options.data.K_Name});
-        
+
                                             var displaycard =
                                             document.getElementById("kindsaction");
                                             if (displaycard.style.display == "none") {
-        
+
                                                 document.getElementById(
                                                     "card_kindstitle"
                                                 ).innerText = "تعديل البيانات";
@@ -130,7 +131,7 @@ function kinds_fetch() {
                                                     .getElementById("card_kindstitle")
                                                     .scrollIntoView();
                                             } else {
-        
+
                                                 displaycard.style.display = "none";
                                                 document.getElementById(
                                                     "card_kindstitle"
@@ -158,7 +159,7 @@ function kinds_fetch() {
                                             let data={
                                                 K_Guid:$("#K_Guid").dxTextBox("instance").option("value"),
                                             }
-    
+
                                             $.ajaxSetup({
                                                 headers: {
                                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -182,18 +183,24 @@ function kinds_fetch() {
                                                       });
                                                     kinds_fetch();
 
-    
+
                                                 }
                                             });
                                         },
                                     });
-                                
+
 
                                 $(container).append(link1, link2);
                                 }
                         },
 
                         ],
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header_Kinds");
+                        },
 
                       });
 

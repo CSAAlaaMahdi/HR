@@ -1,5 +1,5 @@
-@extends('admin.layout.main')
-@section('title', 'Saling Groups')
+@extends('admin.layout.mainarabic')
+{{-- @section('title', 'Saling Groups') --}}
 @section('content')
 
 <style>
@@ -30,7 +30,7 @@
                     <button class="btn btn-warning btn-sm m-1 float-end SalesGroupsEdit">Edit Store
                     </button> --}}
 
-                    <h4 style="color: white;">Saling Groups</h4>
+                    <h4 style="color: white;">مجموعة البيع</h4>
 
                 </div>
                 <div class="card-body">
@@ -49,7 +49,7 @@
         <div class="col-md-12 mt-5">
             <div class="card SalesGroupsaction" id="SalesGroupsaction" >
                 <div class="card-header " style="background-color: #343A40">
-                    <div id="danger-contained" style="float:right"></div>
+                    <div id="danger-contained" style="float:left"></div>
                     <h4 style="color: white;" id="card_SalesGroupstitle" class="card_SalesGroupstitle"> </h4>
 
                 </div>
@@ -74,7 +74,7 @@
                                   </div>
                                 <div class="dx-fieldset" id="GsName-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">Name</div>
+                                      <div class="dx-field-label">اسم المجموعة</div>
                                       <div class="dx-field-value">
                                         <div id="Gs_Name"></div>
                                       </div>
@@ -84,7 +84,7 @@
 
                                   <div class="dx-fieldset" id="Gs_State-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">State</div>
+                                      <div class="dx-field-label">الحالة</div>
                                       <div class="dx-field-value">
                                         <div id="Gs_State"></div>
                                       </div>
@@ -93,7 +93,7 @@
                                   </div>
                                   <div class="dx-fieldset" id="GsRatio-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">TheRatio</div>
+                                      <div class="dx-field-label">نسبة البيع</div>
                                       <div class="dx-field-value">
                                         <div id="Gs_Ratio"></div>
                                       </div>
@@ -101,7 +101,7 @@
                                     </div>
                                   </div>
                                   <hr>
-                                  <div id="btnSave" style="float:left"></div>
+                                  <div id="btnSave" style="float:right"></div>
 
                             </div>
                         </div>
@@ -117,7 +117,7 @@
 
 
     </div>
-    <script type="text/javascript" src="{{url('resources/js/pro_js/salesGroups.js')}}"></script>
+    <script type="text/javascript" src="{{url('assets/js/pro_js/salesGroups.js')}}"></script>
 
 
 

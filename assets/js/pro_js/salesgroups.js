@@ -68,9 +68,17 @@ function SalesGroups_insert() {
         url: url,
         data: data,
         success: function (response) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.success(response.status);
-            DevExpress.ui.notify('Data Has Been Inserted Successfully ....');
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'success',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
             SalesGroups_cleardata();
             SalesGroups_fetch();
         },
@@ -99,9 +107,17 @@ function SalesGroups_update() {
         url: url + "update",
         data: data,
         success: function (response) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.success(response.status);
-            DevExpress.ui.notify('Data Has Been Updated...');
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'warning',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
             SalesGroups_fetch();
         },
     });
@@ -134,7 +150,9 @@ function SalesGroups_fetch() {
                         searchPanel: {
                           visible: true,
                           highlightCaseSensitive: true,
+                          width:400,
                         },
+                        focusedRowEnabled:true,
                         filterRow: { visible: true },
                         groupPanel: { visible: true },
                         grouping: {
@@ -146,99 +164,165 @@ function SalesGroups_fetch() {
                         columns: [
                           {
                             dataField: 'Gs_Name',
-                            caption:'Group Name',
+                            caption:'اسم المجموعة',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "450"; // Set the desired font weight
+                                let fontSize = "16px";
+
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            },
                             // groupIndex: 0,
                           },
                           {
                             dataField: 'Gs_State',
-                            caption: 'State',
+                            caption: 'الحالة',
                             cellTemplate: function(container, options) {
-                                var cellValue = options.data.Gs_State;
+                                var cellValue = options.value;
+                                if(cellValue === 'غير نشطة')
+                                {
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "16px";
+                                   let fontColor = "red";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color":fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                }else{
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "16px";
+                                   let fontColor = "green";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color":fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                }
 
-                                $("<div>")
-                                  .text(cellValue)
-                                  .appendTo(container)
-                                  .addClass(cellValue === "Inactive" ? "inactive-cell" : "");
-                              }
+                            },
 
                           },
                           {
                             dataField: 'Gs_SalesRatio',
-                            caption: 'Percent %',
+                            caption: 'نسبة البيع',
                             dataType: 'number',
-                            format: 'percent',
                             alignment: 'center',
                             allowGrouping: false,
                             // cellTemplate: discountCellTemplate,
-                            cssClass: 'bullet',
+                            format: {
+                                type: "percent",
+                                precision: 1, // Display percentage as a whole number
+                            },
+                            calculateDisplayValue: (data) => {
+                                return data.Gs_SalesRatio / 100; // Assuming your data is in 1700 format
+                            },
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "bold"; // Set the desired font weight
+                                let fontSize = "16px";
+                                var formattedValue = (cellValue).toFixed(1) + "%";
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                    })
+                                    .text(formattedValue)
+                                    .appendTo(container);
+                            }
                           },
                           {
-                            caption: "Actions",
+                            caption: "الحدث",
 
                             width: 200,
                             cellTemplate: function(container, options) {
                                 var row = options.row.data;
 
-                                var link1 = $("<a>")
-                                .addClass("custom-link")
-                                .text("Edit")
-                                .on("click", function(e) {
-                                    e.preventDefault();
-                                    // Link 1 click action
-                                    var rowData = options.data;
+                                var link1=$('<div>');
+                                link1.dxButton({
+                                            stylingMode: "contained",
+                                            type: "normal",
+                                            icon: "edit",
+                                            onClick() {
+                                                var rowData = options.data;
 
-                                    $('#Gs_Guid').dxTextBox("instance").option({value:options.data.Gs_Guid});
-                                    $('#Gs_Name').dxTextBox("instance").option({value:options.data.Gs_Name});
-                                    $('#Gs_Ratio').dxTextBox("instance").option({value:options.data.Gs_SalesRatio});
+                                                $('#Gs_Guid').dxTextBox("instance").option({value:options.data.Gs_Guid});
+                                                $('#Gs_Name').dxTextBox("instance").option({value:options.data.Gs_Name});
+                                                $('#Gs_Ratio').dxTextBox("instance").option({value:options.data.Gs_SalesRatio});
 
-                                    if(options.data.Gs_State=='Active'){
-                                        $('#Gs_State').dxSwitch("instance").option({value:true});
-                                    }else{
-                                        $('#Gs_State').dxSwitch("instance").option({value:false});
-                                    }
+                                                if(options.data.Gs_State==='نشطة'){
+                                                    $('#Gs_State').dxSwitch("instance").option({value:true});
+                                                }else{
+                                                    $('#Gs_State').dxSwitch("instance").option({value:false});
+                                                }
 
 
 
-                                    var displaycard =
-                                    document.getElementById("SalesGroupsaction");
-                                    if (displaycard.style.display == "none") {
+                                                var displaycard =
+                                                document.getElementById("SalesGroupsaction");
+                                                if (displaycard.style.display == "none") {
 
-                                        document.getElementById(
-                                            "card_SalesGroupstitle"
-                                        ).innerText = "Edit Data";
-                                        displaycard.style.display = "block";
-                                        document
-                                            .getElementById("card_SalesGroupstitle")
-                                            .scrollIntoView();
-                                    } else {
+                                                    document.getElementById(
+                                                        "card_SalesGroupstitle"
+                                                    ).innerText = "تحديث البيانات";
+                                                    displaycard.style.display = "block";
+                                                    document
+                                                        .getElementById("card_SalesGroupstitle")
+                                                        .scrollIntoView();
+                                                } else {
 
-                                        displaycard.style.display = "none";
-                                        document.getElementById(
-                                            "card_SalesGroupstitle"
-                                        ).innerText = "";
-                                        displaycard.style.display = "block";
-                                        document.getElementById(
-                                            "card_SalesGroupstitle"
-                                        ).innerText = "Edit Data";
-                                        document
-                                            .getElementById("card_SalesGroupstitle")
-                                            .scrollIntoView();
-                                    }
+                                                    displaycard.style.display = "none";
+                                                    document.getElementById(
+                                                        "card_SalesGroupstitle"
+                                                    ).innerText = "";
+                                                    displaycard.style.display = "block";
+                                                    document.getElementById(
+                                                        "card_SalesGroupstitle"
+                                                    ).innerText = "تحديث البيانات";
+                                                    document
+                                                        .getElementById("card_SalesGroupstitle")
+                                                        .scrollIntoView();
+                                                }
+                                             },
+                                })
+
+                                var link2 = $("<div>");
+                                link2.dxButton({
+                                            stylingMode: "contained",
+                                            icon: "trash",
+                                            type:'normal',
+                                            onClick() {
+                                                var rowData = options.data;
+
+
+
+                                            },
                                 });
 
-                            var link2 = $("<a>")
-                                .addClass("custom-link")
-                                .text("Delete")
-                                .on("click", function(e) {
-                                    e.preventDefault();
-
-                                });
 
                             $(container).append(link1, link2);
                             }
                         },
 
                         ],
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-headerSalesGroup");
+                        },
 
                       });
 
@@ -255,7 +339,7 @@ function SalesGroups_fetch() {
 
 // Begin Context Menu items
 const contextMenuItems = [
-    { text: "Create New Group" },
+    { text: "انشاء مجموعة بيع" },
 
 ];
 
@@ -269,14 +353,14 @@ $(() => {
             if (!e.itemData.items) {
 
                 switch (e.itemData.text) {
-                    case "Create New Group":
+                    case "انشاء مجموعة بيع":
                         var displaycard =
                         document.getElementById("SalesGroupsaction");
                         if (displaycard.style.display == "none") {
 
                             document.getElementById(
                                 "card_SalesGroupstitle"
-                            ).innerText = "Add New Saling Group ";
+                            ).innerText = "اضافة مجموعة";
 
                             SalesGroups_cleardata();
                             // SalesGroups_setStCode();
@@ -295,7 +379,7 @@ $(() => {
                             displaycard.style.display = "block";
                             document.getElementById(
                                 "card_SalesGroupstitle"
-                            ).innerText = "Add New Saling Group ";
+                            ).innerText = "اضافة مجموعة";
                             document
                                 .getElementById("card_SalesGroupstitle")
                                 .scrollIntoView();
@@ -318,7 +402,7 @@ $(() => {
 $(document).ready(function () {
     $("#danger-contained").dxButton({
         stylingMode: "contained",
-        text: "Close",
+        text: "اغلاق",
         type: "danger",
         width: 120,
         onClick() {
@@ -339,8 +423,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#btnSave").dxButton({
         stylingMode: "contained",
-        text: "Save",
-        type: "Default",
+        text: "حفظ",
+        type: "default",
         icon: 'check',
         width: 120,
         onClick() {
@@ -362,7 +446,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(() => {
         $("#Gs_Name").dxTextBox({
-            placeholder: "Enter the Name of Group",
+            placeholder: "ادخل اسم المجموعة",
             inputAttr: { "aria-label": "Name" },
 
         });
@@ -376,7 +460,7 @@ $(document).ready(function () {
     });
     $(() => {
         $("#Gs_Ratio").dxTextBox({
-            placeholder: "The Ratio of Saling",
+            placeholder: "نسبة البيع",
             inputAttr: { "aria-label": "TheRatio" },
         });
     });

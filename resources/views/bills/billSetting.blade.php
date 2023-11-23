@@ -56,7 +56,7 @@
                                                 <div class="col-md-3">
                                                     <div class="dx-fieldset" id="BillsSettingToggle-container">
                                                         <div class="dx-field">
-                                                            <div class="dx-field-label">نوع الدفع</div>
+                                                            <div class="dx-field-label" >نوع الدفع</div>
                                                             <div class="dx-field-value">
                                                                 <div id="Pay_Type"></div>
                                                             </div>
@@ -129,6 +129,24 @@
                                                             </div>
                                                             <span id="error_CloseBillAfterPayment"
                                                                 class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="BillsSettingToggle-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">التاثير في المخزن</div>
+                                                            <div class="dx-field-value">
+                                                                <div id="AffectOfStore"></div>
+                                                            </div>
+                                                            <span id="error_AffectOfStore" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="BillsSettingToggle-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">الارباح</div>
+                                                            <div class="dx-field-value">
+                                                                <div id="Profits"></div>
+                                                            </div>
+                                                            <span id="error_Profits" class="text-danger"></span>
                                                         </div>
                                                     </div>
 

@@ -20,3 +20,11 @@
     color: white;
     padding: 10px;
   }
+.custom-header_Brands {
+    background-color: #283741;
+    color: white;
+}
+.custom-header_Brands .dx-datagrid-text-content {
+    color: white;
+    font-size: 16px;
+}

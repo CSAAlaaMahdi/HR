@@ -18,133 +18,31 @@ class ItemController extends Controller
 
     public function create(Request $request)
     {
-        $totalFilteredRecord = $totalDataRecord = $draw_val = "";
-        $columnIT_list = array(
-            0 => 'id',
-            1 => 'IT_ItemType',
-            2 => 'IT_ItemName',
-            3 => 'IT_PartNumber',
-            4 => 'IT_CarType',
-            5 => 'IT_Engine',
-            6 => 'IT_ModelCode',
-            7 => 'IT_VIN',
-            8 => 'IT_FuelSystem',
-            9 => 'IT_Transmission',
-            10 => 'IT_CarNo',
-            11 => 'IT_Year'
-        );
 
-        $totalDataRecord = Item::count();
-
-        $totalFilteredRecord = $totalDataRecord;
-
-        $limit_val = $request->input('length');
-        $start_val = $request->input('start');
-        $dir_val = $request->input('order.0.dir');
-
-        if (empty($request->input('search.value'))) {
-            if (empty($request->input('order.0.column'))) {
-                $post_data = Item::offset($start_val)
-                    ->limit($limit_val)
-                    ->get();
-            } else {
-                $order_val = $columnIT_list[$request->input('order.0.column')];
-                $post_data = Item::offset($start_val)
-                    ->limit($limit_val)
-                    ->orderBy($order_val, $dir_val)
-                    ->get();
-            }
-        } else {
-            $search_text = $request->input('search.value');
-            if (empty($request->input('order.0.column'))) {
-                $post_data =  Item::where('IT_ItemName', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ItemType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_PartNumber', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Engine', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ModelCode', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_VIN', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_FuelSystem', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Transmission', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarNo', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Year', 'LIKE', "%{$search_text}%")
-                    ->offset($start_val)
-                    ->limit($limit_val)
-                    ->get();
-
-                $totalFilteredRecord = Item::where('IT_ItemName', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ItemType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_PartNumber', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Engine', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ModelCode', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_VIN', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_FuelSystem', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Transmission', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarNo', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Year', 'LIKE', "%{$search_text}%")
-                    ->count();
-            } else {
-                $order_val = $columnIT_list[$request->input('order.0.column')];
-                $post_data =  Item::where('IT_ItemName', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ItemType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_PartNumber', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Engine', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ModelCode', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_VIN', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_FuelSystem', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Transmission', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarNo', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Year', 'LIKE', "%{$search_text}%")
-                    ->offset($start_val)
-                    ->limit($limit_val)
-                    ->orderBy($order_val, $dir_val)
-                    ->get();
-
-                $totalFilteredRecord = Item::where('IT_ItemName', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ItemType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_PartNumber', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarType', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Engine', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_ModelCode', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_VIN', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_FuelSystem', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Transmission', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_CarNo', 'LIKE', "%{$search_text}%")
-                    ->orWhere('IT_Year', 'LIKE', "%{$search_text}%")
-                    ->count();
-            }
-        }
-
-        $draw_val = $request->input('draw');
-        $get_json_data = array(
-            "draw"            => intval($draw_val),
-            "recordsTotal"    => intval($totalDataRecord),
-            "recordsFiltered" => intval($totalFilteredRecord),
-            "data"            => $post_data
-        );
-        return response()->json($get_json_data);
+        $data = [
+            'getItems' => Item::all(),
+        ];
+        return response()->json($data);
     }
 
 
     public function store(Request $request)
     {
-        $Item = new Item([
-            'IT_ItemType' => $request->post('IT_ItemType'),
-            'IT_ItemName' => $request->post('IT_ItemName'),
-            'IT_PartNumber' => $request->post('IT_PartNumber'),
-            'IT_QY' => $request->post('IT_QY'),
-            'IT_CarType' => $request->post('IT_CarType'),
-            'IT_Engine' => $request->post('IT_Engine'),
-            'IT_ModelCode' => $request->post('IT_ModelCode'),
-            'IT_FuelSystem' => $request->post('IT_FuelSystem'),
-            'IT_Transmission' => $request->post('IT_Transmission'),
-            'IT_CarNo' => $request->post('IT_CarNo'),
-            'IT_VIN' => $request->post('IT_VIN'),
-            'IT_Year' => $request->post('IT_Year'),
+        $Item = Item::updateOrCreate(
+            [
+                'id' => $request->input('IT_Guid'),
+            ],
+            [
+                // 'IT2_FK_IT' => $billBodyData['Item_Guid'],
+                // 'IT2_Count_Kind' => $billBodyData['Item_Unit'],
+                // 'IT2_Count' => $billBodyData['Item_Count'],
+                // 'IT2_SmallestCount' => (Unitname::find($billBodyData['Item_Unit'])->Ui_Piece) * ($billBodyData['Item_Count']),
+                // 'IT2_State' => true,
+                // 'IT2_StoreName' => $request->input("H_Store_Guid"),
+                // 'IT2_BillType' => $billTypeState,
 
-        ]);
+            ]
+        );
         $Item->save();
 
         return response()->json(['status' => 'Adding Data Successfully..']);
@@ -198,13 +96,13 @@ class ItemController extends Controller
     {
 
         $data = [
-            'getItemType' => Item::select('IT_ItemType')->groupBy('IT_ItemType')->get(),
-            'getItemName' => Item::select('IT_ItemName')->groupBy('IT_ItemName')->get(),
-            'getCarType' => Item::select('IT_CarType')->groupBy('IT_CarType')->get(),
-            'getEngine' => Item::select('IT_Engine')->groupBy('IT_Engine')->get(),
-            'getModelCode' => Item::select('IT_ModelCode')->groupBy('IT_ModelCode')->get(),
-            'getFuelSystem' => Item::select('IT_FuelSystem')->groupBy('IT_FuelSystem')->get(),
-            'getTransmission' => Item::select('IT_Transmission')->groupBy('IT_Transmission')->get(),
+            'ItemType' => Item::whereNotNull('IT_ItemType')->orderBy('IT_ItemType','asc')->distinct()->pluck('IT_ItemType'),
+            'ItemName' => Item::whereNotNull('IT_ItemName')->orderBy('IT_ItemName','asc')->distinct()->pluck('IT_ItemName'),
+            'CarType' => Item::whereNotNull('IT_CarType')->orderBy('IT_CarType','asc')->distinct()->pluck('IT_CarType'),
+            'Engine' => Item::whereNotNull('IT_Engine')->orderBy('IT_Engine','asc')->distinct()->pluck('IT_Engine'),
+            'ModelCode' => Item::whereNotNull('IT_ModelCode')->orderBy('IT_ModelCode','asc')->distinct()->pluck('IT_ModelCode'),
+            'FuelSystem' => Item::whereNotNull('IT_FuelSystem')->orderBy('IT_FuelSystem','asc')->distinct()->pluck('IT_FuelSystem'),
+            'Transmission' => Item::whereNotNull('IT_Transmission')->orderBy('IT_Transmission','asc')->distinct()->pluck('IT_Transmission'),
         ];
         return response()->json($data);
     }
@@ -215,10 +113,10 @@ class ItemController extends Controller
 
     }
     public function addNewRow(){
-        $getInfo = item::latest()->first();
-        $data =[
-            'getLast'=> $getInfo,
-        ];
-        return response()->json($data);
+        // $getInfo = item::latest()->first();
+        // $data =[
+        //     'getLast'=> $getInfo,
+        // ];
+        // return response()->json($data);
     }
 }

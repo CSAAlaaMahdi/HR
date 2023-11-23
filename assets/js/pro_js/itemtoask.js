@@ -1,162 +1,339 @@
 itemstoask_fetch();
 itemstoask_filldata();
-$(document).on('click', '.itemstoaskAdd', function () {
 
-    itemstoask_cleardata();
-    $.ajax({
-        type: "GET",
-        url: "getLast/getInfo",
-        success: function (response) {
-            $('#IT_ItemType').val(response.getLast.IT_ItemType);
-            $('#IT_QY').val(response.getLast.IT_QY);
-            $('#IT_CarType').val(response.getLast.IT_CarType);
-            $('#IT_Engine').val(response.getLast.IT_Engine);
-            $('#IT_ModelCode').val(response.getLast.IT_ModelCode);
-            $('#IT_FuelSystem').val(response.getLast.IT_FuelSystem);
-            $('#IT_Transmission').val(response.getLast.IT_Transmission);
-            $('#IT_CarNo').val(response.getLast.IT_CarNo);
-            $('#IT_VIN').val(response.getLast.IT_VIN);
-            $('#IT_Year').val(response.getLast.IT_Year);
-        }
+// Begin Create Components of Store Page
+$(document).ready(function () {
+    $(() => {
+        $("#IT_Guid").dxTextBox({
+            placeholder: "ت",
+            inputAttr: { "aria-label": "IT_Guid" },
+
+        });
     });
 
-
-    var displaycard = document.getElementById("itemstoaskaction");
-    if (displaycard.style.display == "none") {
-        document.getElementById("card_itemstoasktitle").innerText = "Add New Battrey";
-        displaycard.style.display = "block";
-        document.getElementById('card_itemstoasktitle').scrollIntoView();
-    } else {
-
-        displaycard.style.display = "none";
-        document.getElementById("card_itemstoasktitle").innerText = "";
-
-        displaycard.style.display = "block";
-        document.getElementById("card_itemstoasktitle").innerText = "Add New Battrey";
-        document.getElementById('card_itemstoasktitle').scrollIntoView();
-
-    }
-});
-$(document).on('click', '.itemstoaskClose', function () {
-    var displaycard = document.getElementById("itemstoaskaction");
-    itemstoask_cleardata();
-    document.getElementById("card_itemstoasktitle").innerText = "";
-    displaycard.style.display = "none";
-
-
-});
-
-$(document).on('click', '.itemstoaskSave', function () {
-
-    var IT_id = document.getElementById("IT_id").value;
-
-    if (IT_id == '') {
-
-        itemstoask_chechdata();
-        if (error_IT_ItemType != '' || error_IT_ItemName !='' || error_IT_PartNumber !='') {
-            return false;
-        } else {
-            itemstoask_insert();
-            itemstoask_cleardata();
-        }
-    } else {
-        itemstoask_update();
-        itemstoask_cleardata();
-    }
-
-});
-
-$(document).on('click', '.itemstoaskDelete', function () {
-    var url = 'itemstoask/';
-    var tabledata = $('#itemstoask_data').DataTable();
-    var itemstoask = tabledata.row($(this).closest('tr')).data();
-    var itemstoaskvalue = itemstoask[Object.keys(itemstoask)[0]];
-
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+    $(() => {
+        $("#IT_PartNumber").dxTextBox({
+            placeholder: "رمز المادة",
+            inputAttr: { "aria-label": "IT_PartNumber" },
+        });
     });
-    $.ajax({
-        type: "DELETE",
-        url: url + 'destroy',
-        data: {
-            'getid': itemstoaskvalue,
-        },
-
-        success: function (response) {
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success(response.status);
-            $('#itemstoask_data').DataTable().ajax.reload();
-        }
+    $(() => {
+        $("#IT_VIN").dxTextBox({
+            placeholder: "ادخل شاصي العجلة ",
+            inputAttr: { "aria-label": "IT_VIN" },
+        });
     });
-});
+    $(() => {
+        $("#IT_Year").dxTextBox({
+            placeholder: "السنة ",
+            inputAttr: { "aria-label": "Years" },
+        });
+    });
+    $(() => {
+        $("#IT_CarNo").dxTextBox({
+            placeholder: "رقم العجلة ",
+            inputAttr: { "aria-label": "Years" },
+        });
+    });
+    $(() => {
+        $("#IT_QY").dxNumberBox({
+            placeholder: "0",
+            inputAttr: { "aria-label": "Ask Limit" },
+            // Specify any additional options here
+            value: null, // Initial value, you can set this to any default value you want
+            showSpinButtons: true, // Enable spin buttons for easier value adjustment
+            format: "#0", // Format the number without decimal places
+            step: 1, // Set the step for incremental adjustments
+            useLargeSpinButtons: true, // Use larger spin buttons for better touch usability
+            // Add any other options you need
 
-$(document).on('click', '.itemstoaskEdit', function () {
-    var url = 'itemstoask/';
-    var tabledata = $('#itemstoask_data').DataTable();
-    var itemstoask = tabledata.row($(this).closest('tr')).data();
-    var itemstoaskvalue = itemstoask[Object.keys(itemstoask)[0]];
-    $.ajax({
-        type: "GET",
-        url: url + 'show',
-        data: {
-            'getid': itemstoaskvalue,
-        },
-
-        success: function (response) {
-
-            $('#IT_id').val(response['id']);
-            $('#IT_ItemType').val(response['IT_ItemType']);
-            $('#IT_ItemName').val(response['IT_ItemName']);
-            $('#IT_PartNumber').val(response['IT_PartNumber']);
-            $('#IT_QY').val(response['IT_QY']);
-            $('#IT_CarType').val(response['IT_CarType']);
-            $('#IT_Engine').val(response['IT_Engine']);
-            $('#IT_ModelCode').val(response['IT_ModelCode']);
-            $('#IT_FuelSystem').val(response['IT_FuelSystem']);
-            $('#IT_Transmission').val(response['IT_Transmission']);
-            $('#IT_CarNo').val(response['IT_CarNo']);
-            $('#IT_VIN').val(response['IT_VIN']);
-            $('#IT_Year').val(response['IT_Year']);
-
-            var displaycard = document.getElementById("itemstoaskaction");
-            if (displaycard.style.display == "none") {
-                document.getElementById("card_itemstoasktitle").innerText = "Edit Data";
-                displaycard.style.display = "block";
-                document.getElementById('card_itemstoasktitle').scrollIntoView();
-            } else {
-                displaycard.style.display = "none";
-                document.getElementById('card_itemstoasktitle').innerText = "";
-                document.getElementById('card_itemstoasktitle').innerText = "Edit Data";
-                displaycard.style.display = "block";
-                document.getElementById('card_itemstoasktitle').scrollIntoView();
-
+            // Use the 'onValueChanged' event to perform actions when the value changes
+            onValueChanged: function(e) {
+                // Your custom logic here if needed
             }
+        });
+    });
+
+    $(() => {
+        const searchBox = $("#IT_Engine")
+            .dxSelectBox({
+                // dataSource: products,
+                // displayExpr: "IT_Engine",
+                inputAttr: { "aria-label": "IT_Engine" },
+                // valueExpr: "IT_Engine",
+                searchEnabled: true,
+                placeholder:"ادخل تفاصيل المحرك",
+                itemTemplate: function(data, index, element) {
+                    // Customize the appearance of each item
+                    var $itemElement = $(element);
+                    $itemElement.text(data); // Replace YourProperty with the actual property you want to display
+                    $itemElement.css({
+                        "font-size": "17px",
+                        "font-weight": "600",
+                        "color": "#283741",
+                        // Add any additional styles you need
+                    });
+                },
+
+            })
+            .dxSelectBox("instance");
+    });
+    $(() => {
+        const searchBox = $("#IT_ModelCode")
+            .dxSelectBox({
+                // dataSource: products,
+                // displayExpr: "IT_ModelCode",
+                inputAttr: { "aria-label": "ModelCode" },
+                // valueExpr: "IT_ModelCode",
+                searchEnabled: true,
+                placeholder:"ادخل تفاصيل الموديل",
+                itemTemplate: function(data, index, element) {
+                    // Customize the appearance of each item
+                    var $itemElement = $(element);
+                    $itemElement.text(data); // Replace YourProperty with the actual property you want to display
+                    $itemElement.css({
+                        "font-size": "17px",
+                        "font-weight": "600",
+                        "color": "#283741",
+                        // Add any additional styles you need
+                    });
+                },
+            })
+            .dxSelectBox("instance");
+    });
+    $(() => {
+        const searchBox = $("#IT_FuelSystem")
+            .dxSelectBox({
+                // dataSource: products,
+                // displayExpr: "IT_FuelSystem",
+                inputAttr: { "aria-label": "IT_FuelSystem" },
+                // valueExpr: "IT_FuelSystem",
+                searchEnabled: true,
+                placeholder:"ادخل نوع الوقود",
+                itemTemplate: function(data, index, element) {
+                    // Customize the appearance of each item
+                    var $itemElement = $(element);
+                    $itemElement.text(data); // Replace YourProperty with the actual property you want to display
+                    $itemElement.css({
+                        "font-size": "17px",
+                        "font-weight": "600",
+                        "color": "#283741",
+                        // Add any additional styles you need
+                    });
+                },
+            })
+            .dxSelectBox("instance");
+    });
+    $(() => {
+        const searchBox = $("#IT_Transmission")
+            .dxSelectBox({
+                // dataSource: products,
+                // displayExpr: "IT_Transmission",
+                inputAttr: { "aria-label": "IT_Transmission" },
+                // valueExpr: "IT_Transmission",
+                searchEnabled: true,
+                placeholder:"ادخل  نوع ناقل الحركة",
+                itemTemplate: function(data, index, element) {
+                    // Customize the appearance of each item
+                    var $itemElement = $(element);
+                    $itemElement.text(data); // Replace YourProperty with the actual property you want to display
+                    $itemElement.css({
+                        "font-size": "17px",
+                        "font-weight": "600",
+                        "color": "#283741",
+                        // Add any additional styles you need
+                    });
+                },
+            })
+            .dxSelectBox("instance");
+    });
+    $(() => {
+        const searchBox = $("#IT_ItemType")
+            .dxSelectBox({
+                // dataSource: products,
+                // displayExpr: "IT_ItemType",
+                inputAttr: { "aria-label": "IT_ItemType" },
+                // valueExpr: "IT_ItemType",
+                searchEnabled: true,
+                placeholder:"ادخل  نوع  المادة",
+                itemTemplate: function(data, index, element) {
+                    // Customize the appearance of each item
+                    var $itemElement = $(element);
+                    $itemElement.text(data); // Replace YourProperty with the actual property you want to display
+                    $itemElement.css({
+                        "font-size": "17px",
+                        "font-weight": "600",
+                        "color": "#283741",
+                        // Add any additional styles you need
+                    });
+                },
+            })
+            .dxSelectBox("instance");
+    });
+    $(() => {
+        const searchBox = $("#IT_CarType")
+            .dxSelectBox({
+                // dataSource: products,
+                // displayExpr: "IT_CarType",
+                inputAttr: { "aria-label": "IT_CarType" },
+                // valueExpr: "IT_CarType",
+                searchEnabled: true,
+                placeholder:"ادخل  نوع  العجلة",
+                itemTemplate: function(data, index, element) {
+                    // Customize the appearance of each item
+                    var $itemElement = $(element);
+                    $itemElement.text(data); // Replace YourProperty with the actual property you want to display
+                    $itemElement.css({
+                        "font-size": "17px",
+                        "font-weight": "600",
+                        "color": "#283741",
+                        // Add any additional styles you need
+                    });
+                },
+            })
+            .dxSelectBox("instance");
+    });
+    $(() => {
+        const searchBox = $("#IT_ItemName")
+            .dxSelectBox({
+                // dataSource: products,
+                // displayExpr: "IT_ItemName",
+                inputAttr: { "aria-label": "IT_ItemName" },
+                // valueExpr: "IT_ItemName",
+                searchEnabled: true,
+                placeholder:"ادخل  اسم  المادة",
+                itemTemplate: function(data, index, element) {
+                    // Customize the appearance of each item
+                    var $itemElement = $(element);
+                    $itemElement.text(data); // Replace YourProperty with the actual property you want to display
+                    $itemElement.css({
+                        "font-size": "17px",
+                        "font-weight": "600",
+                        "color": "#283741",
+                        // Add any additional styles you need
+                    });
+                },
+            })
+            .dxSelectBox("instance");
+    });
+    $(() => {
+        $("#IT_Notes").dxTextArea({
+            // ...
+            minHeight: 50,
+            maxHeight: 300,
+            autoResizeEnabled: true,
+            // value: longText,
+            maxLength: 500,
+            label: "ملاحظات",
+        });
+    });
+
+});
+// End Components.
 
 
-
-        }
+$(document).ready(function () {
+    $("#danger-contained").dxButton({
+        stylingMode: "contained",
+        text: "اغلاق",
+        type: "danger",
+        icon:"close",
+        width: 120,
+        height:50,
+        onClick() {
+            var displaycard = document.getElementById("Itemsaction");
+            if (displaycard.style.display == "block") {
+                document.getElementById("card_Itemstitle").innerText = "";
+                // StoriesTree_cleardata();
+                // StoriesTree_setStCode();
+                displaycard.style.display = "none";
+                document.getElementById("firstCard").scrollIntoView();
+            }
+        },
     });
 });
 
 
+// Button Save Data
+$(document).ready(function () {
+    $("#btnSave").dxButton({
+        stylingMode: "contained",
+        text: "حفظ",
+        type: "default",
+        icon: 'check',
+        width: 120,
+        height:52,
+        onClick() {
+            // let IT_Guid = $('#IT_Guid').dxTextBox("instance").option("value");
+            // if(IT_Guid == null || IT_Guid ==""){
+            //     // StoriesTree_insert();
+            // }else{
+            //     // StoriesTree_update();
+            // }
+
+
+        },
+    });
+});
+// End Button Save
+// Button Add Data
+$(document).ready(function () {
+    $("#btnAddNew").dxButton({
+        stylingMode: "contained",
+        text: "اضافة",
+        type: "success",
+        icon: 'plus',
+        width: 120,
+        height:52,
+        onClick() {
+            var displaycard =
+                        document.getElementById("Itemsaction");
+                        if (displaycard.style.display == "none") {
+                            // ItemsTree_filldata();
+                            document.getElementById(
+                                "card_Itemstitle"
+                            ).innerText = "اضافة مادة";
+
+                            displaycard.style.display = "block";
+                            document
+                                .getElementById("btnSave")
+                                .scrollIntoView();
+                        } else {
+                            displaycard.style.display = "none";
+                            document.getElementById(
+                                "card_Itemstitle"
+                            ).innerText = "";
+                            displaycard.style.display = "block";
+                            document.getElementById(
+                                "card_Itemstitle"
+                            ).innerText = "اضافة مادة";
+                            document
+                                .getElementById("btnSave")
+                                .scrollIntoView();
+                        }
+
+
+        },
+    });
+});
+// End Button Add
 
 
 function itemstoask_cleardata() {
-    $('#IT_id').val('');
-    $('#IT_ItemType').val('');
-    $('#IT_ItemName').val('');
-    $('#IT_PartNumber').val('');
-    $('#IT_QY').val('');
-    $('#IT_CarType').val('');
-    $('#IT_Engine').val('');
-    $('#IT_ModelCode').val('');
-    $('#IT_FuelSystem').val('');
-    $('#IT_Transmission').val('');
-    $('#IT_CarNo').val('');
-    $('#IT_VIN').val('');
-    $('#IT_Year').val('');
+    $("#IT_Guid").dxTextBox("instance").option("value","");
+    $("#IT_ItemType").dxSelectBox("instance").option("value","");
+    $("#IT_ItemName").dxSelectBox("instance").option("value","");
+    $("#IT_CarType").dxSelectBox("instance").option("value","");
+    $("#IT_Engine").dxSelectBox("instance").option("value","");
+    $("#IT_ModelCode").dxSelectBox("instance").option("value","");
+    $("#IT_FuelSystem").dxSelectBox("instance").option("value","");
+    $("#IT_Transmission").dxSelectBox("instance").option("value","");
+    $("#IT_QY").dxNumberBox("instance").option("value",0);
+    $("#IT_PartNumber").dxTextBox("instance").option("value","");
+    $("#IT_CarNo").dxTextBox("instance").option("value","");
+    $("#IT_VIN").dxTextBox("instance").option("value","");
+    $("#IT_Year").dxTextBox("instance").option("value","");
+    $("#IT_Notes").dxTextArea("instance").option("value","");
 
 }
 
@@ -187,21 +364,23 @@ function itemstoask_chechdata() {
 
 }
 
-function itemstoask_insert() {
+function itemstoask_UpdateOrCreate() {
     var url = 'itemstoask';
     var data = {
-        'IT_ItemType': $('.IT_ItemType').val(),
-        'IT_ItemName': $('.IT_ItemName').val(),
-        'IT_PartNumber': $('.IT_PartNumber').val(),
-        'IT_QY': $('.IT_QY').val(),
-        'IT_CarType': $('.IT_CarType').val(),
-        'IT_Engine': $('.IT_Engine').val(),
-        'IT_ModelCode': $('.IT_ModelCode').val(),
-        'IT_FuelSystem': $('.IT_FuelSystem').val(),
-        'IT_Transmission': $('.IT_Transmission').val(),
-        'IT_CarNo': $('.IT_CarNo').val(),
-        'IT_VIN': $('.IT_VIN').val(),
-        'IT_Year': $('.IT_Year').val(),
+        'IT_Guid' : $('#IT_Guid').dxTextBox("instance").option("value"),
+        'IT_ItemType': $('#IT_ItemType').dxSelectBox("instance").option("value"),
+        'IT_ItemName': $('#IT_ItemName').dxSelectBox("instance").option("value"),
+        'IT_PartNumber': $('#IT_PartNumber').dxTextBox("instance").option("value"),
+        'IT_QY': $('#IT_QY').dxNumberBox("instance").option("value"),
+        'IT_CarType': $('#IT_CarType').dxSelectBox("instance").option("value"),
+        'IT_Engine': $('#IT_Engine').dxSelectBox("instance").option("value"),
+        'IT_ModelCode': $('#IT_ModelCode').dxSelectBox("instance").option("value"),
+        'IT_FuelSystem': $('#IT_FuelSystem').dxSelectBox("instance").option("value"),
+        'IT_Transmission': $('#IT_Transmission').dxSelectBox("instance").option("value"),
+        'IT_CarNo': $('#IT_CarNo').dxTextBox("instance").option("value"),
+        'IT_VIN': $('#IT_VIN').dxTextBox("instance").option("value"),
+        'IT_Year': $('#IT_Year').dxTextBox("instance").option("value"),
+        'IT_Notes': $('#IT_Notes').dxTextArea("instance").option("value"),
 
     };
     $.ajaxSetup({
@@ -215,12 +394,17 @@ function itemstoask_insert() {
         url: url ,
         data: data,
         success: function (response) {
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success(response.status);
-            var tabldata = $('#itemstoask_data').DataTable();
-            tabldata.ajax.reload();
-
-
+            DevExpress.ui.notify({
+                message: response.status,
+                position: {
+                  my: 'top left',
+                  at: 'top left'
+                },
+                type:'success',
+                width: '300',
+                height:'150',
+                hideAfter: 2000
+              });
         },
 
     });
@@ -235,35 +419,48 @@ function itemstoask_filldata() {
             type: "GET",
             url: url + 'filldata',
             success: function (response) {
-                $('#IT_ItemTypeBrowser').empty();
-                $.each(response.getItemType, function (indexInArray, valueOfElement) {
-                    $('#IT_ItemTypeBrowser').append('<option value="' + valueOfElement.IT_ItemType + '">' + valueOfElement.IT_ItemType + '</option>');
-                });
 
-                $('#IT_CarTypeBrowser').empty();
-                $.each(response.getCarType, function (indexInArray, valueOfElement) {
-                    $('#IT_CarTypeBrowser').append('<option value="' + valueOfElement.IT_CarType + '">' + valueOfElement.IT_CarType + '</option>');
-                });
+                $('#IT_ItemType')
+                .dxSelectBox("instance")
+                .option({
+                    dataSource:response.ItemType,
+                })
+                $('#IT_ItemName')
+                .dxSelectBox("instance")
+                .option({
+                    dataSource:response.ItemName,
+                })
 
-                $('#IT_EngineBrowser').empty();
-                $.each(response.getEngine, function (indexInArray, valueOfElement) {
-                    $('#IT_EngineBrowser').append('<option value="' + valueOfElement.IT_Engine + '">' + valueOfElement.IT_Engine + '</option>');
-                });
+                $('#IT_CarType')
+                .dxSelectBox("instance")
+                .option({
+                    dataSource:response.CarType,
+                })
 
-                $('#IT_ModelCodeBrowser').empty();
-                $.each(response.getModelCode, function (indexInArray, valueOfElement) {
-                    $('#IT_ModelCodeBrowser').append('<option value="' + valueOfElement.IT_ModelCode + '">' + valueOfElement.IT_ModelCode + '</option>');
-                });
+                $('#IT_Engine')
+                .dxSelectBox("instance")
+                .option({
+                    dataSource:response.Engine,
+                })
 
-                $('#IT_FuelSystemBrowser').empty();
-                $.each(response.getFuelSystem, function (indexInArray, valueOfElement) {
-                    $('#IT_FuelSystemBrowser').append('<option value="' + valueOfElement.IT_FuelSystem + '">' + valueOfElement.IT_FuelSystem + '</option>');
-                });
+                $('#IT_ModelCode')
+                .dxSelectBox("instance")
+                .option({
+                    dataSource:response.ModelCode,
+                })
 
-                $('#IT_TransmissionBrowser').empty();
-                $.each(response.getTransmission, function (indexInArray, valueOfElement) {
-                    $('#IT_TransmissionBrowser').append('<option value="' + valueOfElement.IT_Transmission + '">' + valueOfElement.IT_Transmission + '</option>');
-                });
+                $('#IT_Transmission')
+                .dxSelectBox("instance")
+                .option({
+                    dataSource:response.Transmission,
+                })
+
+                $('#IT_FuelSystem')
+                .dxSelectBox("instance")
+                .option({
+                    dataSource:response.FuelSystem,
+                })
+
             }
         });
 
@@ -272,196 +469,454 @@ function itemstoask_filldata() {
 function itemstoask_fetch() {
 
     $(document).ready(function () {
-        var url = 'itemstoask/'
-        var tabledata = $('#itemstoask_data').DataTable({
-
-            "responsive": true,
-            "processing": true,
-            "serverSide": true,
-
-            "order": [0,'desc'],
-            "ajax": {
+        $(document).ready(function () {
+            var url = "itemstoask/";
+            $.ajax({
                 type: "GET",
                 url: url + "create",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+                success: function (response) {
 
-            },
+                    $(function () {
+                        const dataGrid = $("#ItemsDataGrid").dxDataGrid({
+                            dataSource: response.getItems,
+                            keyExpr: "id",
+                            paging: {
+                                enabled: true,
+                                pageSize: 5, // Number of records per page
+                                pageIndex: 0, // Initially show the first page
+                            },
+                            pager: {
+                                showPageSizeSelector: true,
+                                showInfo: true,
+                                allowedPageSizes: [10, 25, 50, 100, "all"],
+                                showNavigationButtons: true,
+                            },
+                            remoteOperations: false,
+                            searchPanel: {
+                                visible: true,
+                                highlightCaseSensitive: true,
+                                width: 500,
+                            },
+                            filterRow: { visible: true },
+                            groupPanel: { visible: true },
+                            grouping: {
+                                autoExpandAll: false,
+                            },
+                            allowColumnReordering: true,
+                            rowAlternationEnabled: true,
+                            focusedRowEnabled:true,
+                            showBorders: true,
+                            columns: [
+                                {
+                                    dataField:"id",
+                                    caption:"ت",
+                                    width:75,
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = '#283741';
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    },
 
-            "columns": [{
-                "data": "id",
-                title:'Order ID',
-                orderable:true,
+                                },
+                                {
+                                    dataField: "IT_ItemType",
+                                    caption: "نوع المادة",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "14px";
+                                        let fontColor = '#283741';
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                    // groupIndex: 0,
+                                },
+                                {
+                                    dataField: "IT_ItemName",
+                                    caption: "اسم المادة",
+                                    alignment: "center",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "14px";
+                                        let fontColor = '#283741';
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                                "white-space": "pre-wrap",
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_PartNumber",
+                                    caption: "رمز المادة ",
+                                    alignment: "center",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "15px";
+                                        let fontColor = '#283741'
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_QY",
+                                    caption: "العدد",
+                                    width:75,
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = '#283741'
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_CarType",
+                                    caption: "نوع العجلة",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "15px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_Engine",
+                                    caption: " المحرك",
+                                    width: 100,
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "14px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_ModelCode",
+                                    caption: " الموديل",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "14px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_FuelSystem",
+                                    caption: " نوع الوقود",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "14px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_Transmission",
+                                    caption: " ناقل الحركة",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "14px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_CarNo",
+                                    caption: " رقم العجلة",
+                                    width:100,
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "15px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_VIN",
+                                    caption: " الشاصي",
+                                    width: 250,
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "15px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                                "white-space" :"pre-wrap",
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    dataField: "IT_Notes",
+                                    caption: " الملاحظات",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = "#283741"
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" : fontColor,
+                                                "white-space" : "pre-wrap",
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+                                },
+                                {
+                                    caption: "الحدث",
 
-            },
-            {
-                "data": "IT_ItemType"
-            },
-            {
-                "data": "IT_ItemName"
-            },
-            {
-                "data": "IT_PartNumber"
-            },
-            {
-                "data": "IT_QY"
-            },
-            {
-                "data": "IT_CarType"
-            },
-            {
-                "data": "IT_Engine"
-            },
-            {
-                "data": "IT_ModelCode"
-            },
-            {
-                "data": "IT_FuelSystem"
-            },
-            {
-                "data": "IT_Transmission"
-            },
-            {
-                "data": "IT_CarNo"
-            },
-            {
-                "data": "IT_VIN"
-            },
-            {
-                "data": "IT_Year"
-            },
-            {
-                "data": null,
-                render: function (data, type) {
-                    return type === 'display' ?
-                        '<button  class="btn btn-success btn-sm m-1 itemstoaskEdit"><i class="bi bi-pen"></i> Edit </button>' +
-                        '<button  class="btn btn-danger btn-sm m-1 itemstoaskDelete"><i class="bi bi-trash"></i> Del </button>' : data;
-                }
-            }
+                                    width: 200,
+                                    cellTemplate: function (container, options) {
+                                        var row = options.row.data;
 
+                                        var link1 = $("<div>");
+                                        link1.dxButton({
+                                            stylingMode: "contained",
+                                            type: "normal",
+                                            icon: "edit",
+                                            onClick() {
+                                                var rowData = options.data;
 
+                                                let url = "ItemThree/";
+                                                let data = {
+                                                    IT2_ID: rowData.IT2_ID,
+                                                };
+                                                $.ajax({
+                                                    type: "GET",
+                                                    url: url + "show",
+                                                    data: data,
+                                                    success: function (response) {
+                                                        $("#IT2_ID")
+                                                            .dxTextBox("instance")
+                                                            .option({
+                                                                value: response.id,
+                                                            });
+                                                        $("#IT2_ItemPosition")
+                                                            .dxTextArea("instance")
+                                                            .option({
+                                                                value: response.IT2_ItemPosition,
+                                                            });
+                                                        if (
+                                                            response.IT2_State ==
+                                                            true
+                                                        ) {
+                                                            $("#IT2_State")
+                                                                .dxSwitch(
+                                                                    "instance"
+                                                                )
+                                                                .option(
+                                                                    "value",
+                                                                    true
+                                                                );
+                                                        } else {
+                                                            $("#IT2_State")
+                                                                .dxSwitch(
+                                                                    "instance"
+                                                                )
+                                                                .option(
+                                                                    "value",
+                                                                    false
+                                                                );
+                                                        }
 
-            ],
-            "columnDefs": [{
-                "targets": [0, 11, 12, 13],
-                "orderable": false,
+                                                        var displaycard =
+                                                            document.getElementById(
+                                                                "Storesaction"
+                                                            );
+                                                        if (
+                                                            displaycard.style
+                                                                .display == "none"
+                                                        ) {
+                                                            document.getElementById(
+                                                                "card_Storestitle"
+                                                            ).innerText =
+                                                                "تحديث البيانات";
+                                                            displaycard.style.display =
+                                                                "block";
+                                                            document
+                                                                .getElementById(
+                                                                    "card_Storestitle"
+                                                                )
+                                                                .scrollIntoView();
+                                                        } else {
+                                                            displaycard.style.display =
+                                                                "none";
+                                                            document.getElementById(
+                                                                "card_Storestitle"
+                                                            ).innerText = "";
+                                                            displaycard.style.display =
+                                                                "block";
+                                                            document.getElementById(
+                                                                "card_Storestitle"
+                                                            ).innerText =
+                                                                "تحديث البيانات";
+                                                            document
+                                                                .getElementById(
+                                                                    "card_Storestitle"
+                                                                )
+                                                                .scrollIntoView();
+                                                        }
+                                                    },
+                                                });
+                                            },
+                                        });
 
-            }],
+                                        var link2 = $("<div>");
+                                        link2.dxButton({
+                                            stylingMode: "contained",
+                                            icon: "trash",
+                                            onClick() {
+                                                var rowData = options.data;
+                                            },
+                                        });
 
-        //    "order":[[0,'desc']],
-            "lengthMenu": [
-                [5, 10, 15, 20, 25, 100,250,500,1000],
-                [5, 10, 15, 20, 25, 100,250,500,1000]
-            ],
-            "initComplete": function() {
-                tabledata.buttons().container().appendTo('#itemstoask_data_wrapper .col-md-6:eq(0)');
-                $("#itemstoask_data").show();
-            },
-            'dom': "<'row'<'col-sm-12 col-md-6'Bl><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-
-            "buttons": [{
-                    'extend': 'print',
-                    // title: function() {
-                    //     var printTitle = '<img src="admin/assets/img/avatar.png" style="width: 64px; height: 64px;;"><h4 style="text-align: center; color:red;">JobCard Report</h4><br>'+
-                    //     '<h4 style="text-align: center; color:red;">Alaa Mhdi</h4><br>';
-                    //     return printTitle
-                    // },
-                    'exportOptions': {
-                        'columns': ':visible'
-                    }
+                                        $(container).append(link1, link2);
+                                    },
+                                },
+                            ],
+                            summary: {
+                                totalItems: [
+                                    {
+                                        column: "IT2_Smallest",
+                                        summaryType: "sum",
+                                        valueFormat: "#0.00",
+                                    },
+                                ],
+                            },
+                            onContentReady: function (e) {
+                                // Add custom class to the header panel
+                                e.element
+                                    .find(".dx-datagrid-headers")
+                                    .addClass("custom-header");
+                            },
+                        });
+                    });
                 },
-                {
-                    'extend': 'copy',
-                    'exportOptions': {
-                        'columns': [0, ':visible']
-                    }
-                },
-                {
-                    'extend': 'excel',
-                    'exportOptions': {
-                        'columns': ':visible'
-                    }
-                },
-                {
-                    'extend': 'pdf',
-                    'exportOptions': {
-                        'columns': ':visible'
-                    }
-                },
-                {
-                    'extend': 'colvis',
-                    'postfixButtons': ['colvisRestore']
-                }
-            ],
-            // "language": {
-            //     "decimal": "",
-            //     "emptyTable": "لا توجد بيانات",
-            //     "info": "عرض _START_ من _ENIT_ من _TOTAL_ مدخلات",
-            //     "infoEmpty": "عرض 0 to 0 of 0 مدخلات",
-            //     "infoFiltered": "(تصفية من _MAX_ اجمالي المدخلات)",
-            //     "infoPostFix": "",
-            //     "thousands": ",",
-            //     "lengthMenu": "عرض _MENU_ مدخلات",
-            //     "loadingRecords": "تحميل ....",
-            //     "processing": "معالجة....",
-            //     "search": "بحث:",
-            //     "zeroRecords": "لا توجد بيانات مطابقة لعملية البحث",
-            //     "paginate": {
-            //         "first": "الاول",
-            //         "last": "الاخير",
-            //         "next": "التالي",
-            //         "previous": "السابق"
-            //     },
-            //     "aria": {
-            //         "sortAscending": ": activate to sort column ascending",
-            //         "sortDescending": ": activate to sort column descending"
-            //     }
-            // },
+            });
         });
-        // tabledata.order([0,'desc']).draw();
-
 
     });
 
 }
 
-function itemstoask_update() {
-    var url = 'itemstoask/';
-    var data = {
-        'IT_id': $('.IT_id').val(),
-        'IT_ItemType': $('.IT_ItemType').val(),
-        'IT_ItemName': $('.IT_ItemName').val(),
-        'IT_PartNumber': $('.IT_PartNumber').val(),
-        'IT_QY': $('.IT_QY').val(),
-        'IT_CarType': $('.IT_CarType').val(),
-        'IT_Engine': $('.IT_Engine').val(),
-        'IT_ModelCode': $('.IT_ModelCode').val(),
-        'IT_FuelSystem': $('.IT_FuelSystem').val(),
-        'IT_Transmission': $('.IT_Transmission').val(),
-        'IT_CarNo': $('.IT_CarNo').val(),
-        'IT_VIN': $('.IT_VIN').val(),
-        'IT_Year': $('.IT_Year').val(),
-
-    };
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        method: "PUT",
-        url: url + 'update',
-        data: data,
-        success: function (response) {
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success(response.status);
-            var tabldata = $('#itemstoask_data').DataTable();
-            tabldata.ajax.reload();
-
-
-        }
-    });
-}
 
 

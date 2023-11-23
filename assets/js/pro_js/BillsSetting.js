@@ -3,7 +3,7 @@
 BillsSetting_filldata();
 
 function BillsSettingTree_cleardata() {
-   
+
 }
 //Begin CRUD Function...
 
@@ -354,6 +354,16 @@ function BillsSetting_update() {
         })(),
         BodyGrid_Visible: (function () {
             if ($("#BodyGrid_Visible").dxSwitch("instance").option("value")) {
+                return 1;
+            } else return 0;
+        })(),
+        AffectOfStore: (function () {
+            if ($("#AffectOfStore").dxSwitch("instance").option("value")) {
+                return 1;
+            } else return 0;
+        })(),
+        Profits: (function () {
+            if ($("#Profits").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
@@ -925,7 +935,7 @@ function BillsSetting_filldata() {
 
 
                                             //#endregion
-                                          
+
                                             //#region  Data of Toggles
                                             if(response.getBillSetting.Pay_Type == true)$('#Pay_Type').dxSwitch("instance").option("value",true);
                                             else $('#Pay_Type').dxSwitch("instance").option("value",false);
@@ -1043,9 +1053,13 @@ function BillsSetting_filldata() {
                                             else $('#DisAddGrid_Visible').dxSwitch("instance").option("value",false);
                                             if(response.getBillSetting.BodyGrid_Visible == true)$('#BodyGrid_Visible').dxSwitch("instance").option("value",true);
                                             else $('#BodyGrid_Visible').dxSwitch("instance").option("value",false);
+                                            if(response.getBillSetting.AffectOfStore == true)$('#AffectOfStore').dxSwitch("instance").option("value",true);
+                                            else $('#AffectOfStore').dxSwitch("instance").option("value",false);
+                                            if(response.getBillSetting.Profits == true)$('#Profits').dxSwitch("instance").option("value",true);
+                                            else $('#Profits').dxSwitch("instance").option("value",false);
 
                                             //#endregion
-                                            
+
 
 
                                         }
@@ -1078,7 +1092,7 @@ function BillsSetting_filldata() {
 }
 
 function BillsSettingTree_fetch() {
-   
+
 }
 
 
@@ -1130,7 +1144,7 @@ $(document).ready(function () {
         icon: 'plus',
         width: 120,
         onClick() {
-          
+
         },
     });
 });
@@ -1364,6 +1378,12 @@ $(document).ready(function () {
     });
     $(() => {
         $("#BodyGrid_Visible").dxSwitch({});
+    });
+    $(() => {
+        $("#AffectOfStore").dxSwitch({});
+    });
+    $(() => {
+        $("#Profits").dxSwitch({});
     });
 
     $(() => {

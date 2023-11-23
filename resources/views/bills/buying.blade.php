@@ -197,7 +197,7 @@
                             </div>
                             <div class="dx-fieldset" id="Footer-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">اجمالي الفاتورة</div>
+                                    <div class="dx-field-label" id="F_Total_Price_Bill_lb">اجمالي الفاتورة</div>
                                     <div class="dx-field-value">
                                         <div id="F_Total_Price_Bill"></div>
                                     </div>
@@ -206,7 +206,7 @@
                             </div>
                             <div class="dx-fieldset" id="Footer-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">خصم المواد</div>
+                                    <div class="dx-field-label" id="F_Item_Discount_lb">خصم المواد</div>
                                     <div class="dx-field-value">
                                         <div id="F_Item_Discount"></div>
                                     </div>
@@ -215,7 +215,7 @@
                             </div>
                             <div class="dx-fieldset" id="Footer-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">خصم الفاتورة</div>
+                                    <div class="dx-field-label" id="F_Bill_Discount_lb">خصم الفاتورة</div>
                                     <div class="dx-field-value">
                                         <div id="F_Bill_Discount"></div>
                                     </div>
@@ -224,7 +224,7 @@
                             </div>
                             <div class="dx-fieldset" id="Footer-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">اضافة الفاتورة</div>
+                                    <div class="dx-field-label" id="F_Bill_AddAmount_lb">اضافة الفاتورة</div>
                                     <div class="dx-field-value">
                                         <div id="F_Bill_AddAmount"></div>
                                     </div>
@@ -253,7 +253,7 @@
                             </div>
                             <div class="dx-fieldset" id="Footer-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">اجمالي الخصم</div>
+                                    <div class="dx-field-label" id="F_Total_Discount_lb">اجمالي الخصم</div>
                                     <div class="dx-field-value">
                                         <div id="F_Total_Discount"></div>
                                     </div>
@@ -262,7 +262,7 @@
                             </div>
                             <div class="dx-fieldset" id="Footer-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label"> اضافة للمواد</div>
+                                    <div class="dx-field-label" id="F_Item_Add_lb"> اضافة للمواد</div>
                                     <div class="dx-field-value">
                                         <div id="F_Item_Add"></div>
                                     </div>
@@ -271,7 +271,7 @@
                             </div>
                             <div class="dx-fieldset" id="Footer-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label"> اجمالي الاضافة</div>
+                                    <div class="dx-field-label" id="F_Total_Add_lb"> اجمالي الاضافة</div>
                                     <div class="dx-field-value">
                                         <div id="F_Total_Add"></div>
                                     </div>
@@ -287,53 +287,53 @@
                             <li class="nav-item"><a href="#BillDiscount" class="nav-link active" data-bs-toggle="tab">الخصومات والاضافة</a>
                             </li>
                             <li class="nav-item"><a href="#CashAmount" class="nav-link " data-bs-toggle="tab">التسديد</a></li>
-    
+
                         </ul>
-    
+
                         <div class="tab-content ">
-    
+
                             <div class="tab-pane mt-3 active" id="BillDiscount">
                                 <div class="row border g-0 rounded shadow-sm">
                                     <div class="col p-4">
-    
+
                                         <div class="col-md-12 mt-1 row flex">
-    
+
                                             <div class="demo-container">
                                                 <div id="data-grid-demo">
                                                     <div id="gridDeleteSelectedDiscount"></div>
                                                     <div id="gridContainerDiscount"></div>
                                                 </div>
                                             </div>
-    
-    
+
+
                                         </div>
-    
-    
+
+
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="tab-pane mt-3" id="CashAmount">
                                 <div class="row border g-0 rounded shadow-sm">
                                     <div class="col p-4">
-    
+
                                         <div class="col-md-12 mt-1 row flex">
-    
-    
-    
-    
+
+
+
+
                                         </div>
-    
-    
+
+
                                     </div>
                                 </div>
                             </div>
-    
-    
+
+
                         </div>
                     </div>
 
-                   
+
 
 
                 </div>

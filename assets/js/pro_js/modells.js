@@ -86,6 +86,7 @@ function models_fetch() {
                           highlightCaseSensitive: true,
                           width:300,
                         },
+                        focusedRowEnabled:true,
                         filterRow: { visible: true },
                         groupPanel: { visible: true },
                         grouping: {
@@ -117,11 +118,11 @@ function models_fetch() {
 
                                         $('#M_Guid').dxTextBox("instance").option({value:options.data.M_Guid});
                                         $('#M_Name').dxTextBox("instance").option({value:options.data.M_Name});
-    
+
                                         var displaycard =
                                         document.getElementById("modelsaction");
                                         if (displaycard.style.display == "none") {
-    
+
                                             document.getElementById(
                                                 "card_modelstitle"
                                             ).innerText = "تحديث البيانات";
@@ -130,7 +131,7 @@ function models_fetch() {
                                                 .getElementById("card_modelstitle")
                                                 .scrollIntoView();
                                         } else {
-    
+
                                             displaycard.style.display = "none";
                                             document.getElementById(
                                                 "card_modelstitle"
@@ -187,14 +188,19 @@ function models_fetch() {
                                     });
                                     },
                                 });
-                              
+
 
                             $(container).append(link1, link2);
                             }
                         },
 
                         ],
-
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header_Models");
+                        },
                       });
 
                     });

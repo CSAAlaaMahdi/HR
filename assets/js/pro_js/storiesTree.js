@@ -319,7 +319,7 @@ function StoriesTree_fetch() {
                                     ],
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "450"; // Set the desired font weight
+                                        var fontWeight = "600"; // Set the desired font weight
                                         let fontSize = "16px";
                                         let fontColor = '#283741';
                                         // var formattedValue = new Intl.NumberFormat("en-US", {
@@ -350,7 +350,7 @@ function StoriesTree_fetch() {
                                     ],
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "450"; // Set the desired font weight
+                                        var fontWeight = "600"; // Set the desired font weight
                                         let fontSize = "16px";
                                         let fontColor = '#283741';
                                         // var formattedValue = new Intl.NumberFormat("en-US", {
@@ -408,6 +408,44 @@ function StoriesTree_fetch() {
                                             .appendTo(container);
                                         }
                                         
+                                    },
+                                },
+                                {
+                                    dataField: "St_IsGroup",
+                                    caption: "نوع المخزن ",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);  
+                                    },
+                                },
+                                {
+                                    dataField: "St_AccountName",
+                                    caption: "اسم الحساب ",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "600"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                       
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);  
                                     },
                                 },
                                 {

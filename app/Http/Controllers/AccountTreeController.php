@@ -27,17 +27,26 @@ class AccountTreeController extends Controller
             'AccountTree' => collect(DB::select("SET NOCOUNT ON ; exec Account_GetTree"))
                 ->all()
         ];
+        $data =[
+            "AccountTree"=> AccountTree::select('*')->get(),
+        ];
 
 
-        return response()->json($query);
+        return response()->json($data);
     }
 
     public function create(Request $request)
     {
         $data =[
-            'AccountTree' => collect(DB::select("SET NOCOUNT ON ; exec Account_GetTree"))
+            'AccountTree' => collect(DB::select("SET NOCOUNT ON ; exec Tb_AccountsTreeGet"))
                 ->all()
         ];
+        // $data =[
+        //     "AccountTree"=> AccountTree::select('Guid','Parent_Guid','Ac_Code_Mask','Ac_Name' )
+           
+        //     ->orderBy('Ac_RowID','asc')
+        //     ->get(),
+        // ];
         return response()->json($data);
     }
 
@@ -103,7 +112,7 @@ class AccountTreeController extends Controller
         return response()->json($data);
     }
     public function setCode(Request $request){
-        $ac_Guid = $request->post('Ac_Guid');
+        $ac_Guid = $request->input('Ac_Guid');
 
         $getdata= AccountTree::where('Parent_Guid',$ac_Guid)->orderBy('Ac_RowID','DESC')->first();
         $getParent = AccountTree::where('Guid',$ac_Guid)->first();

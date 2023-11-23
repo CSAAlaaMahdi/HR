@@ -151,13 +151,14 @@ function accounttree_fetch() {
             type: "GET",
             url: url + "create",
             success: function (response) {
+                console.log(response);
                 $(function () {
                     const treeList = $("#tree-list")
                         .dxTreeList({
                             dataSource: response.AccountTree,
-                            rootValue: null,
-                            keyExpr: "Ac_Guid",
-                            parentIdExpr: "Ac_ParentGuid",
+                            rootValue: '00000000-0000-0000-0000-000000000000',
+                            keyExpr: "Guid",
+                            parentIdExpr: "Parent_Guid",
                             autoExpandAll: false,
                             allowColumnReordering: true,
                             allowColumnResizing: true,
@@ -178,8 +179,8 @@ function accounttree_fetch() {
                                     ],
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
+                                        var fontWeight = "700"; // Set the desired font weight
+                                        let fontSize = "17px";
                                         let fontColor = '#283741';
                                         // var formattedValue = new Intl.NumberFormat("en-US", {
                                         //     style: "decimal",
@@ -200,7 +201,7 @@ function accounttree_fetch() {
                                     // fixed: true,
                                 },
                                 {
-                                    dataField: "Ac_MaskCode",
+                                    dataField: "Ac_Code_Mask",
                                     caption: "كود الحساب",
                                     validationRules: [
                                         {
@@ -209,8 +210,8 @@ function accounttree_fetch() {
                                     ],
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
+                                        var fontWeight = "700"; // Set the desired font weight
+                                        let fontSize = "17px";
                                         let fontColor = '#283741';
                                         // var formattedValue = new Intl.NumberFormat("en-US", {
                                         //     style: "decimal",
@@ -232,26 +233,112 @@ function accounttree_fetch() {
                                 {
                                     dataField: "Ac_State",
                                     caption: "حالة الحساب",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "700"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = '#283741';
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
 
                                 },
                                 {
                                     dataField: "Ac_Type",
                                     caption: "نوع الحساب",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "700"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
 
                                 },
                                 {
-                                    dataField: "Ac_Parent",
+                                    dataField: "Ac_ParentName",
                                     caption: " الحساب الاب",
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "650"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = '#283741';
+                                        // var formattedValue = new Intl.NumberFormat("en-US", {
+                                        //     style: "decimal",
+                                        //     minimumFractionDigits: 0,
+                                        //     maximumFractionDigits: 3,
+                                        //     minimumIntegerDigits: 1,
+                                        //     useGrouping: true,
+                                        // }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
 
                                 },
+                                
                                 {
-                                    dataField: "Balance",
+                                    dataField: "Ac_Balance",
                                     caption: "الرصيد",
                                     validationRules: [
                                         {
                                             type: "required",
                                         },
                                     ],
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "650"; // Set the desired font weight
+                                        let fontSize = "17px";
+                                        let fontColor = '#283741';
+                                        var formattedValue = new Intl.NumberFormat("en-US", {
+                                            style: "decimal",
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 3,
+                                            minimumIntegerDigits: 1,
+                                            useGrouping: true,
+                                        }).format(cellValue);
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(formattedValue)
+                                            .appendTo(container);
+                                    },
+                                   
                                 },
 
                                 {
@@ -350,24 +437,14 @@ function accounttree_fetch() {
                                     },
                                 },
                             ],
+                           
 
                             filterRow: { visible: true },
                             searchPanel: {
                                  visible: true,
                                 width:400,
                                 },
-                            // editing: {
-                            // mode: "row",
-                            //     allowUpdating: true,
-                            //     allowDeleting: true,
-                            //     allowAdding: true,
-
-                            // },
-                            // onRowClick: function(e) {
-                            // Enable editing for the clicked row
-                            // e.component.editRow(e.rowIndex);
-
-                            // },
+                           
                             selection: { mode: "single" },
                             onSelectionChanged: function (e) {
                                 e.component
@@ -455,6 +532,8 @@ function accounttree_fetch() {
         });
     });
 }
+
+
 
 function accounttree_update() {
     var url = "accounttree/";

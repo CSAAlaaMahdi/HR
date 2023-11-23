@@ -93,6 +93,20 @@ function Units_fetch() {
                             {
                                 dataField: "Ui_Name",
                                 caption: "اسم الوحدة",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "16px";
+                                    let fontColor ="#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color":fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                }
                                 // groupIndex: 0,
                             },
                             {
@@ -100,10 +114,45 @@ function Units_fetch() {
                                 caption: "القطعة",
                                 dataType: "number",
                                 alignment: "right",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "16px";
+                                    let fontColor ="#2F4F4F";
+                                    var formattedValue = new Intl.NumberFormat("en-US", {
+                                        style: "decimal",
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 3,
+                                        minimumIntegerDigits: 1,
+                                        useGrouping: true,
+                                    }).format(cellValue);
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color":fontColor,
+                                        })
+                                        .text(formattedValue)
+                                        .appendTo(container);
+                                }
                             },
                             {
                                 dataField: "Ui_PieceType",
                                 caption: "نوع القطعة",
+                                cellTemplate: function(container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "16px";
+                                    let fontColor ="#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size" :fontSize,
+                                            "font-weight" : fontWeight,
+                                            "color":fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                }
                             },
                             {
                                 caption: "الحدث",
@@ -236,7 +285,14 @@ function Units_fetch() {
                                     $(container).append(link1, link2);
                                 },
                             },
+
                         ],
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header_Units");
+                        },
                     });
                 });
             },

@@ -22,5 +22,6 @@ class Item extends Model
         'IT_CarNo',
         'IT_VIN',
         'IT_Year',
+        'IT_Notes',
     ];
 }

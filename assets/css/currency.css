@@ -27,5 +27,15 @@
     color: white;
     padding: 10px;
   }
+  .custom-header_Currencies {
+    background-color: #283741; /* Set your desired color here */
+    color: white; /* Set text color to make it readable */
+
+  }
+  .custom-header_Currencies .dx-datagrid-text-content {
+    color: white; /* Override font color for the header text */
+    font-size: 16px;
+  }
+
 
 

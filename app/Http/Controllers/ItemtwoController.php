@@ -217,7 +217,7 @@ class ItemtwoController extends Controller
         return response()->json($data);
     }
     public function setMaskCode(Request $request){
-        $IT_ID = $request->post('IT_ID');
+        $IT_ID = $request->input('IT_ID');
 
         $getdata= Itemstwo::where('IT_ParentID',$IT_ID)->orderBy('id','DESC')->first();
         $getParent = Itemstwo::where('id',$IT_ID)->first();

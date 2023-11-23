@@ -100,6 +100,7 @@ function currency_fetch() {
                         grouping: {
                           autoExpandAll: false,
                         },
+                        focusedRowEnabled:true,
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
@@ -107,6 +108,21 @@ function currency_fetch() {
                           {
                             dataField: 'Cur_Name',
                             caption:'اسم العملة',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "450"; // Set the desired font weight
+                                let fontSize = "16px";
+                                let fontColor ="#2F4F4F";
+
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color":fontColor,
+                                    })
+                                    .text(cellValue)
+                                    .appendTo(container);
+                            }
                             // groupIndex: 0,
                           },
                           {
@@ -114,6 +130,27 @@ function currency_fetch() {
                             caption:'القيمة',
                             format:'number',
                             alignment:'right',
+                            cellTemplate: function(container, options) {
+                                var cellValue = options.value;
+                                var fontWeight = "450"; // Set the desired font weight
+                                let fontSize = "16px";
+                                let fontColor ="#283741";
+                                var formattedValue = new Intl.NumberFormat("en-US", {
+                                    style: "decimal",
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 3,
+                                    minimumIntegerDigits: 1,
+                                    useGrouping: true,
+                                }).format(cellValue);
+                                $("<div>")
+                                    .css({
+                                        "font-size" :fontSize,
+                                        "font-weight" : fontWeight,
+                                        "color":fontColor,
+                                    })
+                                    .text(formattedValue)
+                                    .appendTo(container);
+                            }
                             // groupIndex: 0,
                           },
 
@@ -176,7 +213,7 @@ function currency_fetch() {
                                         let data={
                                             Cur_Guid:$("#Cur_Guid").dxTextBox("instance").option("value"),
                                         }
-    
+
                                         $.ajaxSetup({
                                             headers: {
                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -199,19 +236,24 @@ function currency_fetch() {
                                                     hideAfter: 2000
                                                   });
                                                 currency_fetch();
-    
+
                                             }
                                         });
                                     },
                                 });
-                         
+
 
                             $(container).append(link1, link2);
                             }
                         },
 
                         ],
-
+                        onContentReady: function (e) {
+                            // Add custom class to the header panel
+                            e.element
+                                .find(".dx-datagrid-headers")
+                                .addClass("custom-header_Currencies");
+                        },
                       });
 
                     });

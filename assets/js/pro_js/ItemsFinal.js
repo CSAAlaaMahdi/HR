@@ -799,14 +799,14 @@ function Item_FillData(){
 function setMaskCode(){
     let selectValue= $('#IT_ParentID').dxDropDownBox("instance").option("value");
 
-    if(selectValue==null){
+    if(selectValue == null){
         $.ajax({
             type: "GET",
             data:{IT_ID:selectValue},
             url: "itemCode/setCode",
             success: function (response) {
                     if(response.getData){
-                        let code=Number(response.getData.IT_Code) + 1 ;
+                        let code = Number(response.getData.IT_Code) + 1 ;
                         $('#IT_Code').dxTextBox("instance").option("value",code);
                     }else{
 
@@ -820,7 +820,7 @@ function setMaskCode(){
             data:{IT_ID:selectValue},
             url: "itemCode/setCode",
             success: function (response) {
-
+                    console.log(response);
                     if(response.getData){
                         let child =Number(response.getData.IT_Code);
                         let parent = Number(response.getParent.IT_Code);

@@ -25,13 +25,13 @@ class BillsSettingController extends Controller
 
     public function create(Request $request)
     {
-       
+
     }
 
 
     public function store(Request $request)
     {
-       
+
     }
 
 
@@ -130,6 +130,8 @@ class BillsSettingController extends Controller
         $data->Footer_TotalDiscount = $request->post('Footer_TotalDiscount');
         $data->DisAddGrid_Visible = $request->post('DisAddGrid_Visible');
         $data->BodyGrid_Visible = $request->post('BodyGrid_Visible');
+        $data->AffectOfStore = $request->post('AffectOfStore');
+        $data->Profits = $request->post('Profits');
 
         $data->update();
 
@@ -167,5 +169,5 @@ class BillsSettingController extends Controller
        return response()->json($data);
     }
 
-   
+
 }

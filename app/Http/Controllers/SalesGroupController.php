@@ -23,7 +23,7 @@ class SalesGroupController extends Controller
     public function create(Request $request)
     {
 
-        $getData = SalesGroup::select('Gs_Guid','Gs_Name',DB::raw("CASE WHEN Gs_State = 1 THEN 'Active' ELSE 'Inactive' END AS Gs_State"),'Gs_SalesRatio','Gs_RowID')-> orderBy('Gs_RowID', 'ASC')->get();
+        $getData = SalesGroup::select('Gs_Guid','Gs_Name',DB::raw("CASE WHEN Gs_State = 1 THEN N'نشطة' ELSE N'غير نشطة' END AS Gs_State"),'Gs_SalesRatio','Gs_RowID')-> orderBy('Gs_RowID', 'ASC')->get();
         $data = [
             'getSalesGroup' => $getData,
         ];
@@ -44,7 +44,7 @@ class SalesGroupController extends Controller
         ]);
         $SalesGroup->save();
 
-        return response()->json(['status' => 'Adding Data Successfully..']);
+        return response()->json(['status' => 'تم اضافة البيانات بنجاح']);
     }
 
 
@@ -72,7 +72,7 @@ class SalesGroupController extends Controller
         // $data->Gs_UserName = session('User');
         $data->update();
 
-        return response()->json(['status' => ' Updating Successfully...']);
+        return response()->json(['status' => 'تم تعديل البيانات بنجاح']);
     }
 
 

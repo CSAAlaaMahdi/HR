@@ -86,6 +86,8 @@ class BillSetting extends Model
         'Footer_TotalDiscount',
         'DisAddGrid_Visible',
         'BodyGrid_Visible',
+        'AffectOfStore',
+        'Profits'
 
     ];
 }
