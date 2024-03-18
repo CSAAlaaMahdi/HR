@@ -135,7 +135,7 @@ class ItemsTreeController extends Controller
     // }
 
     public function setCode(Request $request){
-        $IT_ID=$request->post('IT_ID');
+        $IT_ID=$request->input('IT_ID');
          $data = [
             'setCode' => Itemstwo::where('IT_ParentID',$IT_ID)->orderBy('id',"DESC")->first(),
             'setCode2' => Itemstwo::where('id',$IT_ID)->first(),

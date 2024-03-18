@@ -384,7 +384,7 @@ function StoriesTree_fetch() {
                                             var fontWeight = "450"; // Set the desired font weight
                                         let fontSize = "16px";
                                         let fontColor = 'green';
-                                       
+
                                         $("<div>")
                                             .css({
                                                 "font-size" :fontSize,
@@ -397,7 +397,7 @@ function StoriesTree_fetch() {
                                         var fontWeight = "450"; // Set the desired font weight
                                         let fontSize = "16px";
                                         let fontColor = 'red';
-                                       
+
                                         $("<div>")
                                             .css({
                                                 "font-size" :fontSize,
@@ -407,7 +407,7 @@ function StoriesTree_fetch() {
                                             .text(cellValue)
                                             .appendTo(container);
                                         }
-                                        
+
                                     },
                                 },
                                 {
@@ -418,7 +418,7 @@ function StoriesTree_fetch() {
                                         var fontWeight = "600"; // Set the desired font weight
                                         let fontSize = "16px";
                                         let fontColor = '#283741';
-                                       
+
                                         $("<div>")
                                             .css({
                                                 "font-size" :fontSize,
@@ -426,7 +426,7 @@ function StoriesTree_fetch() {
                                                 "color" :fontColor,
                                             })
                                             .text(cellValue)
-                                            .appendTo(container);  
+                                            .appendTo(container);
                                     },
                                 },
                                 {
@@ -437,7 +437,7 @@ function StoriesTree_fetch() {
                                         var fontWeight = "600"; // Set the desired font weight
                                         let fontSize = "16px";
                                         let fontColor = '#283741';
-                                       
+
                                         $("<div>")
                                             .css({
                                                 "font-size" :fontSize,
@@ -445,7 +445,7 @@ function StoriesTree_fetch() {
                                                 "color" :fontColor,
                                             })
                                             .text(cellValue)
-                                            .appendTo(container);  
+                                            .appendTo(container);
                                     },
                                 },
                                 {
@@ -472,7 +472,7 @@ function StoriesTree_fetch() {
                                     cellTemplate: function(container, options) {
                                         var row = options.row.data;
 
-                                        var link1=$('<div>');
+                                        var link1=$('<div>').css({'background-color':'#7CEECE'});
                                         link1.dxButton({
                                             stylingMode: "contained",
                                             type: "normal",
@@ -544,10 +544,11 @@ function StoriesTree_fetch() {
                                                         },
                                         })
 
-                                        var link2 = $("<div>");
+                                        var link2 = $("<div>").css({'margin-right':'10px'});
                                         link2.dxButton({
                                             stylingMode: "contained",
                                             icon: "trash",
+                                            type:"default",
                                             onClick() {
                                                 $.ajax({
                                                     type: "GET",
@@ -556,8 +557,8 @@ function StoriesTree_fetch() {
                                                     dataType: "dataType",
                                                     success: function (response) { },
                                                 });
-                                              
-                                             
+
+
                                             },
                                         });
 
@@ -778,7 +779,7 @@ $(document).ready(function () {
                 StoriesTree_update();
             }
 
-           
+
         },
     });
 });

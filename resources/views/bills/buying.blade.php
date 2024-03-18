@@ -7,6 +7,7 @@
             <div class="card-header" style="background-color: #283741">
                 <div id="btnNewAdd" style="float: right"></div>
                 <div id="btnSave" style="float: right;margin-right: 15px"></div>
+                <div id="btnPrint" style="float: right;margin-right: 15px"></div>
                 <h4 style="color: white;float: left;margin-left: 50%" id="card_Billstitle" class="card_Billstitle">
                     {{ $billType }}</h4>
 
@@ -65,6 +66,24 @@
                                         <div id="H_Pay_Type"></div>
                                     </div>
                                     <span id="error_H_Pay_Type" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="dx-fieldset" id="HeaderToggle-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label" id="lb_SalingType">مباشر</div>
+                                    <div class="dx-field-value" >
+                                        <div id="H_SalingType"></div>
+                                    </div>
+                                    <span id="error_H_SalingType" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="dx-fieldset salingtypevisible" id="Header-container" >
+                                <div class="dx-field">
+                                    <div class="dx-field-label" >الفواتير </div>
+                                    <div class="dx-field-value">
+                                        <div id="H_Header_Guid"></div>
+                                    </div>
+                                    <span id="error_H_Header_Guid" class="text-danger"></span>
                                 </div>
                             </div>
 
@@ -332,7 +351,7 @@
 
                         </div>
                     </div>
-
+                    <div id="contextMenu"></div>
 
 
 

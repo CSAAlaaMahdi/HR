@@ -264,14 +264,7 @@ $(document).ready(function () {
         width: 120,
         height:52,
         onClick() {
-            // let IT_Guid = $('#IT_Guid').dxTextBox("instance").option("value");
-            // if(IT_Guid == null || IT_Guid ==""){
-            //     // StoriesTree_insert();
-            // }else{
-            //     // StoriesTree_update();
-            // }
-
-
+           itemstoask_UpdateOrCreate();
         },
     });
 });
@@ -405,6 +398,7 @@ function itemstoask_UpdateOrCreate() {
                 height:'150',
                 hideAfter: 2000
               });
+              itemstoask_fetch();
         },
 
     });
@@ -506,6 +500,24 @@ function itemstoask_fetch() {
                             rowAlternationEnabled: true,
                             focusedRowEnabled:true,
                             showBorders: true,
+                            export: {
+                                enabled: true,
+                                allowExportSelectedData: true,
+                              },
+                              onExporting(e) {
+                                const workbook = new ExcelJS.Workbook();
+                                const worksheet = workbook.addWorksheet('Employees');
+
+                                DevExpress.excelExporter.exportDataGrid({
+                                  component: e.component,
+                                  worksheet,
+                                  autoFilterEnabled: true,
+                                }).then(() => {
+                                  workbook.xlsx.writeBuffer().then((buffer) => {
+                                    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                                  });
+                                });
+                              },
                             columns: [
                                 {
                                     dataField:"id",
@@ -763,8 +775,8 @@ function itemstoask_fetch() {
                                     },
                                 },
                                 {
-                                    dataField: "IT_Notes",
-                                    caption: " الملاحظات",
+                                    dataField: "IT_Year",
+                                    caption: " السنة",
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
                                         var fontWeight = "600"; // Set the desired font weight
@@ -788,7 +800,7 @@ function itemstoask_fetch() {
                                     cellTemplate: function (container, options) {
                                         var row = options.row.data;
 
-                                        var link1 = $("<div>");
+                                        var link1 = $("<div>").css({'background-color':'#64DDBB'});
                                         link1.dxButton({
                                             stylingMode: "contained",
                                             type: "normal",
@@ -796,82 +808,123 @@ function itemstoask_fetch() {
                                             onClick() {
                                                 var rowData = options.data;
 
-                                                let url = "ItemThree/";
+                                                let url = "itemstoask/";
                                                 let data = {
-                                                    IT2_ID: rowData.IT2_ID,
+                                                    IT_Guid: rowData.id,
                                                 };
                                                 $.ajax({
                                                     type: "GET",
                                                     url: url + "show",
                                                     data: data,
                                                     success: function (response) {
-                                                        $("#IT2_ID")
+                                                        $("#IT_Guid")
                                                             .dxTextBox("instance")
                                                             .option({
                                                                 value: response.id,
                                                             });
-                                                        $("#IT2_ItemPosition")
+                                                        $("#IT_ItemType")
+                                                            .dxSelectBox("instance")
+                                                            .option({
+                                                                value: response.IT_ItemType,
+                                                            });
+                                                            $("#IT_ItemName")
+                                                            .dxSelectBox("instance")
+                                                            .option({
+                                                                value: response.IT_ItemName,
+                                                            });
+                                                            $("#IT_PartNumber")
+                                                            .dxTextBox("instance")
+                                                            .option({
+                                                                value: response.IT_PartNumber,
+                                                            });
+                                                            $("#IT_QY")
+                                                            .dxNumberBox("instance")
+                                                            .option({
+                                                                value: response.IT_QY,
+                                                            });
+                                                            $("#IT_CarType")
+                                                            .dxSelectBox("instance")
+                                                            .option({
+                                                                value: response.IT_CarType,
+                                                            });
+                                                            $("#IT_Engine")
+                                                            .dxSelectBox("instance")
+                                                            .option({
+                                                                value: response.IT_Engine,
+                                                            });
+                                                            $("#IT_ModelCode")
+                                                            .dxSelectBox("instance")
+                                                            .option({
+                                                                value: response.IT_ModelCode,
+                                                            });
+                                                            $("#IT_FuelSystem")
+                                                            .dxSelectBox("instance")
+                                                            .option({
+                                                                value: response.IT_FuelSystem,
+                                                            });
+                                                            $("#IT_Transmission")
+                                                            .dxSelectBox("instance")
+                                                            .option({
+                                                                value: response.IT_Transmission,
+                                                            });
+                                                            $("#IT_CarNo")
+                                                            .dxTextBox("instance")
+                                                            .option({
+                                                                value: response.IT_CarNo,
+                                                            });
+                                                            $("#IT_VIN")
+                                                            .dxTextBox("instance")
+                                                            .option({
+                                                                value: response.IT_VIN,
+                                                            });
+                                                            $("#IT_Year")
+                                                            .dxTextBox("instance")
+                                                            .option({
+                                                                value: response.IT_Year,
+                                                            });
+                                                            $("#IT_Notes")
                                                             .dxTextArea("instance")
                                                             .option({
-                                                                value: response.IT2_ItemPosition,
+                                                                value: response.IT_Notes,
                                                             });
-                                                        if (
-                                                            response.IT2_State ==
-                                                            true
-                                                        ) {
-                                                            $("#IT2_State")
-                                                                .dxSwitch(
-                                                                    "instance"
-                                                                )
-                                                                .option(
-                                                                    "value",
-                                                                    true
-                                                                );
-                                                        } else {
-                                                            $("#IT2_State")
-                                                                .dxSwitch(
-                                                                    "instance"
-                                                                )
-                                                                .option(
-                                                                    "value",
-                                                                    false
-                                                                );
-                                                        }
+
+
+
 
                                                         var displaycard =
                                                             document.getElementById(
-                                                                "Storesaction"
+                                                                "Itemsaction"
                                                             );
                                                         if (
                                                             displaycard.style
                                                                 .display == "none"
                                                         ) {
                                                             document.getElementById(
-                                                                "card_Storestitle"
+                                                                "card_Itemstitle"
                                                             ).innerText =
                                                                 "تحديث البيانات";
                                                             displaycard.style.display =
                                                                 "block";
                                                             document
                                                                 .getElementById(
-                                                                    "card_Storestitle"
+                                                                    "card_Itemstitle"
                                                                 )
                                                                 .scrollIntoView();
                                                         } else {
                                                             displaycard.style.display =
                                                                 "none";
                                                             document.getElementById(
-                                                                "card_Storestitle"
+                                                                "card_Itemstitle"
                                                             ).innerText = "";
                                                             displaycard.style.display =
                                                                 "block";
                                                             document.getElementById(
-                                                                "card_Storestitle"
+                                                                "card_Itemstitle"
                                                             ).innerText =
                                                                 "تحديث البيانات";
                                                             document
                                                                 .getElementById(
-                                                                    "card_Storestitle"
+                                                                    "card_Itemstitle"
                                                                 )
                                                                 .scrollIntoView();
                                                         }
@@ -880,12 +933,39 @@ function itemstoask_fetch() {
                                             },
                                         });
 
-                                        var link2 = $("<div>");
+                                        var link2 = $("<div>").css({'margin-right':'10px'});
                                         link2.dxButton({
                                             stylingMode: "contained",
                                             icon: "trash",
+                                            type:"default",
                                             onClick() {
                                                 var rowData = options.data;
+                                                $.ajaxSetup({
+                                                    headers: {
+                                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                    }
+                                                });
+                                                $.ajax({
+                                                    type: "DELETE",
+                                                    url: "itemstoask/destroy",
+                                                    data: {IT_Guid:rowData.id},
+
+                                                    success: function (response) {
+
+                                                        DevExpress.ui.notify({
+                                                            message: response.status,
+                                                            position: {
+                                                              my: 'top left',
+                                                              at: 'top left'
+                                                            },
+                                                            type:'error',
+                                                            width: '300',
+                                                            height:'150',
+                                                            hideAfter: 2000
+                                                          });
+                                                          itemstoask_fetch();
+                                                    }
+                                                });
                                             },
                                         });
 

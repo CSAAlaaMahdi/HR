@@ -27,7 +27,7 @@ class ItemtwoController extends Controller
     public function create(Request $request)
     {
 
-        $id=$request->post('IT_ID');
+        $id=$request->input('IT_ID');
         $data=[
             'getItemThree' =>collect(DB::select("SET NOCOUNT ON ; exec ItemThree_GetData @id ='" . $id . "'"))->all()
         ];
@@ -72,31 +72,31 @@ class ItemtwoController extends Controller
             // 'IT_CurrencyGuid' => $request->post('IT_CurrencyGuid'),
             // 'IT_CurrencyGuid2' => $request->post('IT_CurrencyGuid2'),
             // 'IT_CurrencyTrans' => $request->post('IT_CurrencyTrans'),
-            'IT_Normal_1_1' => $request->post('IT_Normal_1_1'),
-            'IT_Mid_1_1' => $request->post('IT_Mid_1_1'),
-            'IT_Good_1_1' => $request->post('IT_Good_1_1'),
-            'IT_VeryGood_1_1' => $request->post('IT_VeryGood_1_1'),
-            'IT_Excellent_1_1' => $request->post('IT_Excellent_1_1'),
-            'IT_Supper_1_1' => $request->post('IT_Supper_1_1'),
-            'IT_Normal_2_1' => $request->post('IT_Normal_2_1'),
-            'IT_Mid_2_1' => $request->post('IT_Mid_2_1'),
-            'IT_Good_2_1' => $request->post('IT_Good_2_1'),
-            'IT_VeryGood_2_1' => $request->post('IT_VeryGood_2_1'),
-            'IT_Excellent_2_1' => $request->post('IT_Excellent_2_1'),
-            'IT_Supper_2_1' => $request->post('IT_Supper_2_1'),
-            'IT_Normal_3_1' => $request->post('IT_Normal_3_1'),
-            'IT_Mid_3_1' => $request->post('IT_Mid_3_1'),
-            'IT_Good_3_1' => $request->post('IT_Good_3_1'),
-            'IT_VeryGood_3_1' => $request->post('IT_VeryGood_3_1'),
-            'IT_Excellent_3_1' => $request->post('IT_Excellent_3_1'),
-            'IT_Supper_3_1' => $request->post('IT_Supper_3_1'),
+            'IT_Normal_1_1' => $request->post('IT_Normal_1_1') !='NaN' ? $request->post('IT_Normal_1_1') : 0,
+            'IT_Mid_1_1' => $request->post('IT_Mid_1_1') !='NaN' ? $request->post('IT_Mid_1_1') : 0,
+            'IT_Good_1_1' => $request->post('IT_Good_1_1') !='NaN' ? $request->post('IT_Good_1_1') : 0,
+            'IT_VeryGood_1_1' => $request->post('IT_VeryGood_1_1') !='NaN' ? $request->post('IT_VeryGood_1_1') : 0,
+            'IT_Excellent_1_1' => $request->post('IT_Excellent_1_1') !='NaN' ? $request->post('IT_Excellent_1_1') : 0,
+            'IT_Supper_1_1' => $request->post('IT_Supper_1_1') !='NaN' ? $request->post('IT_Supper_1_1') : 0,
+            'IT_Normal_2_1' => $request->post('IT_Normal_2_1') !='NaN' ? $request->post('IT_Normal_2_1') : 0,
+            'IT_Mid_2_1' => $request->post('IT_Mid_2_1') !='NaN' ? $request->post('IT_Mid_2_1') : 0,
+            'IT_Good_2_1' => $request->post('IT_Good_2_1') !='NaN' ? $request->post('IT_Good_2_1') : 0,
+            'IT_VeryGood_2_1' => $request->post('IT_VeryGood_2_1') !='NaN' ? $request->post('IT_VeryGood_2_1') : 0,
+            'IT_Excellent_2_1' => $request->post('IT_Excellent_2_1') !='NaN' ? $request->post('IT_Excellent_2_1') : 0,
+            'IT_Supper_2_1' => $request->post('IT_Supper_2_1') !='NaN' ? $request->post('IT_Supper_2_1') : 0,
+            'IT_Normal_3_1' => $request->post('IT_Normal_3_1') !='NaN' ? $request->post('IT_Normal_3_1') : 0,
+            'IT_Mid_3_1' => $request->post('IT_Mid_3_1') !='NaN' ? $request->post('IT_Mid_3_1') : 0,
+            'IT_Good_3_1' => $request->post('IT_Good_3_1') !='NaN' ? $request->post('IT_Good_3_1') : 0,
+            'IT_VeryGood_3_1' => $request->post('IT_VeryGood_3_1') !='NaN' ? $request->post('IT_VeryGood_3_1') : 0,
+            'IT_Excellent_3_1' => $request->post('IT_Excellent_3_1') !='NaN' ? $request->post('IT_Excellent_3_1') : 0,
+            'IT_Supper_3_1' => $request->post('IT_Supper_3_1') !='NaN' ? $request->post('IT_Supper_3_1') : 0,
             // 'IT_UserName' => session('User'),
 
 
         ]);
         $Itemstwo->save();
 
-        return response()->json(['status' => 'Adding Data Successfully...']);
+        return response()->json(['status' => 'تم اضافة البيانات بنجاح']);
     }
 
 
@@ -131,6 +131,7 @@ class ItemtwoController extends Controller
         $data = Itemstwo::find($id);
         $data->IT_ParentID = $request->post('IT_ParentID');
         $data->IT_Name = $request->post('IT_Name');
+        $data->IT_ArabicName = $request->post('IT_ArabicName');
         $data->IT_PartNumber = $request->post('IT_PartNumber');
         $data->IT_PartNumber2 = $request->post('IT_PartNumber2');
         $data->IT_C_PartNumber = $request->post('IT_CPartNumber');
@@ -180,7 +181,7 @@ class ItemtwoController extends Controller
 
         $data->update();
 
-        return response()->json(['status' => 'Updating Data ... Successfully. ']);
+        return response()->json(['status' => 'تم تحديث البيانات بنجاح']);
     }
     public function updateItemThree(Request $request)
     {
@@ -198,7 +199,7 @@ class ItemtwoController extends Controller
         $id = $request->input('IT_ID');
         Itemstwo::find($id)->delete();
         return response()->json([
-            'status' => 'Deleting Successfully....'
+            'status' => 'تم حذف البيانات بنجاح'
         ]);
     }
     public function filldata()
@@ -232,7 +233,7 @@ class ItemtwoController extends Controller
     public function getITemCategory(Request $request)
     {
 
-        $itemCode = $request->post('itemCode');
+        $itemCode = $request->input('itemCode');
         $itemCategoryInfo = Itemstwo::where('IT_Code', '=', $itemCode)->get();
         $id = $itemCategoryInfo[0]->id;
         $itemChildren = Itemstwo::where('IT_ParentID', $id)->get();
@@ -246,7 +247,7 @@ class ItemtwoController extends Controller
 
     public function getmainaccountnumber(Request $request)
     {
-        $accountname = $request->post('accountname');
+        $accountname = $request->input('accountname');
         $data = AccountTree::where('Ac_Name', '=', $accountname)->get();
 
         return response()->json($data);
@@ -254,21 +255,21 @@ class ItemtwoController extends Controller
 
     public function checkCPartNumber(Request $request)
     {
-        $cpartnumber = $request->post('IT_C_PartNumber');
+        $cpartnumber = $request->input('IT_C_PartNumber');
         $data = Itemstwo::where([['IT_C_PartNumber', $cpartnumber],['IT_Tree',null]])->first();
         $data= $data ? $data : null;
         return response()->json(['getCpartNumber'=> $data]);
     }
     public function checkPartNumber(Request $request)
     {
-        $partnumber = $request->post('PartNumber');
+        $partnumber = $request->input('PartNumber');
         $data = Itemstwo::where([['IT_PartNumber', $partnumber],['IT_Tree',null]])->first();
         $data = $data ? $data->IT_PartNumber:null;
         return response()->json(['getPartNumber'=> $data]);
     }
     public function checkPartNumber2(Request $request)
     {
-        $partnumber2 = $request->post('PartNumber2');
+        $partnumber2 = $request->input('PartNumber2');
         $data = Itemstwo::where([['IT_PartNumber2', $partnumber2],['IT_Tree',null]])->first();
         $data= $data ? $data->IT_PartNumber2:null;
         return response()->json(['getPartNumber2'=> $data]);
@@ -276,7 +277,7 @@ class ItemtwoController extends Controller
 
     public function checkBarcode(Request $request)
     {
-        $barcode = $request->post('IT_Barcode');
+        $barcode = $request->input('IT_Barcode');
         $data = Itemstwo::where('IT_Barcode', '=', $barcode);
         return response()->json($data);
     }

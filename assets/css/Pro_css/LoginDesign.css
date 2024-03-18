@@ -1,0 +1,140 @@
+@font-face {
+    font-family: myFont;
+    src: url('../../assets/fonts/JF-FLAT-REGULAR.TTF');
+}
+@font-face {
+    font-family: myFont2;
+    src: url('../fonts/RobotoSlab-Regular.ttf');
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../../img/wallpaperflare.com_wallpaper.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper{
+    position: relative;
+    width: 400px;
+    height:550px ;
+    background: transparent;
+    border: 1px solid rgb(255, 255, 255,.5);
+    border-radius: 20px;
+    backdrop-filter: blur(35px);
+    box-shadow: 0 0 30px rgb(0, 0, 0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .form-box{
+    width: 100%;
+    padding: 40px;
+}
+.form-box h2{
+    font-size: 2em;
+    color: rgb(25, 25, 26);
+    text-align: center;
+}
+.input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid rgb(23, 23, 22);
+    margin: 30px 0;
+}
+.input-box label{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    color: rgb(32, 33, 33);
+    font-weight: 500;
+    pointer-events: none;
+    /* transition: .5s; */
+    transition: top 0.5s ease, font-size 0.5s ease;
+}
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+    font-size: 1em;
+    font-weight: 450;
+}
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+    color: rgb(23, 23, 24);
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+.input-box .icon{
+    position: absolute;
+    left: 8px;
+    font-size: 1.2em;
+    color: rgb(23, 22, 22);
+    line-height: 75px;
+
+}
+.logoimg{
+    position: relative;
+    border: none;
+    border-radius: 50px;
+    width: 170px;
+    height: 190px;
+
+
+
+}
+.logoimg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.submitLogin{
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid aliceblue;
+    outline: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: rgb(36, 36, 36);
+    margin-left:40px;
+    transition: .5s;
+
+}
+.submitLoginDesign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+
+}
+#error_username{
+    color: red;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: myFont;
+}
+#error_password{
+    color: red;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: myFont;
+}

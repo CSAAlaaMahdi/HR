@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\User2;
 
 class LoginController extends Controller
 {
@@ -17,12 +18,12 @@ class LoginController extends Controller
         $data=$request->input();
         $Username = $request->input('username');
         $password = $request->input('password');
-        $info = User::all();
+        $info = User2::all();
         if (count($info) > 0) {
 
-            $Userinfo = User::where('U_Name', $Username)->get();
+            $Userinfo = User2::where('U_Name', $Username)->get();
             if (count($Userinfo) > 0) {
-                if ($Userinfo[0]->password == $password) {
+                if ($Userinfo[0]->U_Password == $password) {
                     $request->session()->put('id',$Userinfo[0]->id);
                     $request->session()->put('User',$Userinfo[0]->U_Name);
                     $data=[

@@ -70,6 +70,15 @@
                                   <span id="error_Cur_Cost" class="text-danger"></span>
                                 </div>
                               </div>
+                              <div class="dx-fieldset" id="ToggleCurCost-container">
+                                <div class="dx-field">
+                                  <div class="dx-field-label">رئيسية</div>
+                                  <div class="dx-field-value">
+                                    <div id="Cur_IsMain"></div>
+                                  </div>
+                                  <span id="error_Cur_IsMain" class="text-danger"></span>
+                                </div>
+                              </div>
                               <hr>
                               <div id="btnSave" style="float:right"></div>
 

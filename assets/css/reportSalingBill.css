@@ -1,8 +1,24 @@
+@font-face {
+    font-family: myFont;
+    src: url('../fonts/JF-FLAT-REGULAR.TTF');
+}
+@font-face {
+    font-family: myFont2;
+    src: url('../fonts/DroidKufi-Bold.TTF');
+}
 body {
     display: flex;
+    min-height: 100vh;
     flex-direction: column;
     background-color: rgb(250, 250, 250);
-    font-family: 'Courier New', Courier, monospace,
+    /* font-family: 'Courier New', Courier, monospace, */
+    /* font-family: myFont2; */
+    /* background-image: url('assets/img/icons/letterhead.png');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+    background-attachment: fixed; */
+
 
 }
 
@@ -85,12 +101,90 @@ body {
 .columnheader1 {
     height: 80px;
     width: 33.33%;
+    float: right;
+    color: black;
+    text-align: center;
+    padding-top: 0;
+    font-family: myFont2;
+
+}
+.columnheader2 {
+    height: 80px;
+    width: 33.33%;
     float: left;
     color: black;
     text-align: center;
-    padding-top: -40px;
+    padding-top:-100px;
 
 }
+#BillTitle{
+    font-size: 1.2rem;
+
+    /* padding-top: 50px; */
+}
+#TitleInfo2 {
+    /* height: 80px;*/
+    /* width: 33.33%; */
+    float: left;
+    color: black;
+    text-align: right;
+    /* border: solid green; */
+
+}
+#TitleInfo1 {
+    /* height: 80px;*/
+    width: 50%;
+    float: right;
+    color: black;
+    text-align: right;
+    /* border: solid gray; */
+
+}
+.infospanTitle {
+    font-size: 1rem;
+    /* background-color: #0ea88a; */
+    width: 100px;
+    float: right;
+
+}
+.infospanDot {
+    font-size: 1.3rem;
+    /* background-color: #c52160; */
+    width: 50px;
+    float: right;
+    /* height: 150px; */
+
+
+}
+.infospanData {
+    font-size: 1.3rem;
+    /* background-color: #c52160; */
+    width: 100px;
+    float: right;
+    /* height: 150px; */
+
+
+}
+
+#LogoImage{
+    width: 150px;
+    height: 150px;
+    margin: 0px;
+}
+
+#billprint {
+    background-image: url('assets/img/icons/letterhead.png'); /* Update path as necessary */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+
+}
+/* #billprint{
+    background-size: 100% 100%;
+} */
 
 .columnsfooter {
     /* height: 85px; */

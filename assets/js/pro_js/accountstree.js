@@ -308,7 +308,7 @@ function accounttree_fetch() {
                                     },
 
                                 },
-                                
+
                                 {
                                     dataField: "Ac_Balance",
                                     caption: "الرصيد",
@@ -338,7 +338,7 @@ function accounttree_fetch() {
                                             .text(formattedValue)
                                             .appendTo(container);
                                     },
-                                   
+
                                 },
 
                                 {
@@ -349,7 +349,7 @@ function accounttree_fetch() {
                                         options
                                     ) {
                                         var row = options.row.data;
-                                        var link1 = $("<div>");
+                                        var link1 = $("<div>").css({'background-color':'#7CEECE'});
                                         link1.dxButton({
                                             stylingMode: "contained",
                                             type: "normal",
@@ -424,10 +424,11 @@ function accounttree_fetch() {
                                             },
                                         });
 
-                                        var link2 = $("<div>");
+                                        var link2 = $("<div>").css({'margin-right':'10px'});
                                         link2.dxButton({
                                             stylingMode: "contained",
                                             icon: "trash",
+                                            type:"default",
                                             onClick() {
                                                 var rowData = options.data;
                                             },
@@ -437,14 +438,14 @@ function accounttree_fetch() {
                                     },
                                 },
                             ],
-                           
+
 
                             filterRow: { visible: true },
                             searchPanel: {
                                  visible: true,
                                 width:400,
                                 },
-                           
+
                             selection: { mode: "single" },
                             onSelectionChanged: function (e) {
                                 e.component

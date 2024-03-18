@@ -31,6 +31,7 @@ class CurrencyController extends Controller
         $Currency = new Currency([
             'Cur_Name' => $request->post('Cur_Name'),
             'Cur_Cost' => $request->post('Cur_Cost'),
+            'Cur_IsMain' => $request->post('Cur_IsMain'),
             'Cur_RowID' => $rowid +1,
             // 'Cur_UserGuid' => session('User')
         ]);
@@ -60,6 +61,7 @@ class CurrencyController extends Controller
         $data = Currency::find($Guid);
         $data->Cur_Name = $request->post('Cur_Name');
         $data->Cur_Cost = $request->post('Cur_Cost');
+        $data->Cur_IsMain = $request->post('Cur_IsMain');
         // $data->Cur_UserGuid = session('User');
         $data->update();
 

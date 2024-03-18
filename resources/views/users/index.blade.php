@@ -1,138 +1,135 @@
-@extends('admin.layout.main')
-@section('title','Users')
+@extends('admin.layout.mainarabic')
 @section('content')
 <div class="row border g-0 rounded shadow-sm ">
     <div class="col p-4">
         <div class="col-md-12 mt-2">
-            <div class="card ">
-                <div class="card-header bg-dark">
-
-                    <button class="btn btn-primary btn-sm m-1 float-end usersAdd">ِAdd User
-                    </button>
-
-                    <h4 style="color: white;"> Users </h4>
+            <div class="card " id="firstCard">
+                <div class="card-header"   style="background-color: #343A40">
+                    <div id="btnNewAdd" style="float: right"></div>
+                    <h4 style="color: white;float: right;margin-right: 40%">المستخدمون</h4>
 
                 </div>
                 <div class="card-body">
 
-                    <table id="users_data" class="table table-bordered table-striped users_data" cellspacing="0" width="100%">
-                        <thead class="dataheader_users table-dark">
-                            <tr>
-                                <td>No</td>
-                                <td>User Name </td>
-                                <td>Permission Group </td>
-                                <td>User State </td>
-                                <td>Event</td>
-                            </tr>
-                        </thead>
-                        <tbody class="databody_users">
+                    <div class="datagrid" id="Usersdatagrid">
 
-                        </tbody>
-                    </table>
+                    </div>
+                    <div id="pagerContainer"></div>
+                    <div id="context-menu">
+
+                    </div>
 
                 </div>
             </div>
         </div>
         <div class="col-md-12 mt-5">
-            <div class="card usersaction" id="usersaction">
-                <div class="card-header bg-dark">
-                    <button class="btn btn-danger btn-sm m-1 mb-3 float-end usersClose">Close
-                    </button>
-                    <h4 style="color: white;" id="card_userstitle" class="card_userstitle"> </h4>
+            <div class="card Usersaction" id="Usersaction" >
+                <div class="card-header " style="background-color: #343A40">
+                    <div id="danger-contained" style="float:left"></div>
+                    <h4 style="color: white;" id="card_Userstitle" class="card_Userstitle"> </h4>
 
                 </div>
-                <div class="card-body ">
+                <div class="card-body">
                     <div class="row ">
 
-                        <div class="col-md-12 ">
+                        @csrf
+                        <div class="col-md-6">
                             <div class="form-group ">
-                                @csrf
-                                <div class="ms-12 row pt-3">
-                                    <div class="col-sm-auto">
-                                        <input type="text" name="u_id" id="u_id" class="form-control u_id" hidden>
-
-                                    </div>
-                                </div>
-
-                                <div class="ms-12 row pt-3">
-                                    <label for="" class="col-sm-2 col-form-label">  User Name :
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <input type="text" name="u_username" id="u_username" class="form-control u_username" autocomplete="off">
-                                        <span id="error_u_username" class="text-danger"></span>
-                                    </div>
-
-                                </div>
-
-                                <div class="ms-12 row pt-3">
-                                    <label for="" class="col-sm-2 col-form-label"> Password  :
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <input type="password" name="u_password" id="u_password" class="form-control u_password" autocomplete="off">
-                                        <span id="error_u_password" class="text-danger"></span>
-                                    </div>
-
-                                </div>
-
-
                                 <div class="ms-12 row pt-3">
 
-                                    <label for="" class="col-sm-2 col-form-label"> State :
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <select name="u_state" id="u_state" class="col-sm-11 col-form-label form-select u_state">
 
-                                        </select>
-                                        <span id="error_u_state" class="text-danger"></span>
-                                    </div>
                                 </div>
-
-                                <div class="ms-12 row pt-3">
-
-                                    <label for="" class="col-sm-2 col-form-label"> Permissions :
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <select name="u_permissiongroup" id="u_permissiongroup" class="col-sm-11 col-form-label form-select u_permissiongroup">
-
-                                        </select>
-                                        <span id="error_u_permissiongroup" class="text-danger"></span>
+                                <div class="dx-fieldset" id="Users-container" hidden>
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">UserGuid</div>
+                                      <div class="dx-field-value">
+                                        <div id="U_Guid"></div>
+                                      </div>
+                                      <span id="error_U_Guid" class="text-danger"></span>
                                     </div>
-                                </div>
-                                <div class="ms-12 row pt-3">
-
-                                    <label for="" class="col-sm-2 col-form-label"> Work Place  :
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <select name="u_workplace" id="u_workplace" class="col-sm-11 col-form-label form-select u_workplace">
-
-                                        </select>
-                                        <span id="error_u_workplace" class="text-danger"></span>
+                                  </div>
+                                <div class="dx-fieldset" id="Users-container">
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">البريد الالكتروني</div>
+                                      <div class="dx-field-value">
+                                        <div id="U_Email"></div>
+                                      </div>
+                                      <span id="error_U_Email" class="text-danger"></span>
                                     </div>
-                                </div>
-
-
-                                <hr>
-
-                                <div class="ms-12 row pt-3">
-                                    <label for="" class="col-sm-2 col-form-label"> </label>
-                                    <div class="col-sm-2">
-                                        <button class="btn btn-primary form-control usersSave">Save</button>
+                                    <div class="dx-field">
+                                        <div class="dx-field-label">الاسم </div>
+                                        <div class="dx-field-value">
+                                          <div id="U_Name"></div>
+                                        </div>
+                                        <span id="error_U_Name" class="text-danger"></span>
+                                      </div>
+                                  </div>
+                                  <div class="dx-fieldset" id="Users-container">
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">كلمة المرور</div>
+                                      <div class="dx-field-value">
+                                        <div id="U_Password"></div>
+                                      </div>
+                                      <span id="error_U_Password" class="text-danger"></span>
                                     </div>
-                                </div>
+                                  </div>
+                                  <div class="dx-fieldset" id="Users-container">
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">الحالة </div>
+                                      <div class="dx-field-value">
+                                        <div id="U_State"></div>
+                                      </div>
+                                      <span id="error_U_State" class="text-danger"></span>
+                                    </div>
+                                  </div>
+                                  <div class="dx-fieldset" id="Users-container">
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">القسم </div>
+                                      <div class="dx-field-value">
+                                        <div id="U_Department"></div>
+                                      </div>
+                                      <span id="error_U_Department" class="text-danger"></span>
+                                    </div>
+                                  </div>
+                                  <div class="dx-fieldset" id="Users-container">
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">المجموعة </div>
+                                      <div class="dx-field-value">
+                                        <div id="U_PermissionsGroup"></div>
+                                      </div>
+                                      <span id="error_U_PermissionsGroup" class="text-danger"></span>
+                                    </div>
+                                  </div>
+                                  <div class="dx-fieldset" id="Users-container">
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">صورة شخصية </div>
+                                      <div class="dx-field-value">
+                                        <div id="U_Image"></div>
+                                      </div>
+                                      <span id="error_U_Image" class="text-danger"></span>
+                                    </div>
+                                  </div>
+                                  <hr>
+                                  <div id="btnSave" style="float:right"></div>
+
                             </div>
                         </div>
+
 
                     </div>
                 </div>
             </div>
+
+
+
         </div>
 
 
-
     </div>
-
+    <script type="text/javascript" src="{{url('assets/js/pro_js/users.js')}}"></script>
+    <script>
+        $("#Usersaction").hide();
+    </script>
 </div>
-<script>
-    $("#usersaction").hide();
-</script>
-@endSection()
+
+    @endSection()

@@ -14,6 +14,7 @@ class Currency extends Model
     protected $fillable = [
         'Cur_Name',
         'Cur_Cost',
+        'Cur_IsMain',
         'Cur_RowID',
         'Cur_UserGuid',
     ];

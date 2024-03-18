@@ -90,6 +90,10 @@ class Itemstwo extends Model
     {
         return $this->hasMany(ItemsThree::class,'IT2_FK_IT');
     }
+    public function itemsBarcode()
+    {
+        return $this->hasMany(Itemstwo::class,'ITB_FK_IT');
+    }
 
     public function billbuyingitems(){
         return $this->belongsTo(BillBuyingItems::class,'BI_PartNumber','IT_PartNumber');

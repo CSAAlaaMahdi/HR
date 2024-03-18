@@ -31,7 +31,7 @@ class Bonds extends Model
         'st_Guid',
         'isLock',
         'isAccept',
-        'isPaidBill',
+        'IsPaidBill',
         'us_Guid',
         'Branch_Guid'
 

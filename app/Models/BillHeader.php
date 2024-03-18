@@ -32,6 +32,8 @@ class BillHeader extends Model
         'AcceptDate',
         'Bill_ID',
         'Note_Header',
+        'Header_Guid',
+        'SalingType',
         'UserGuid'
 
     ];

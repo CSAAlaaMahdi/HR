@@ -235,6 +235,8 @@
                     </li>
                     <li class="nav-item"><a href="#itemsFour" class="nav-link " data-bs-toggle="tab">تفاصيل المادة</a>
                     </li>
+                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">باركود المادة </a>
+                    </li>
 
 
                 </ul>
@@ -953,6 +955,99 @@
                         </div>
                     </div>
 
+                    <div class="tab-pane mt-3" id="itemsBarcode">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+                                <div class="col-md-12 mt-2">
+                                    <div class="card " id="FifthCard">
+                                        <div class="card-header" style="background-color: #343A40">
+
+
+                                            <div id="btnAddBarcode" style="float:left"></div>
+                                            <h4 style="color: white;">الباركودات</h4>
+
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="ItemsBarcodeDataGrid" id="ItemsBarcodeDataGrid">
+
+                                            </div>
+                                            <div id="pagerContainerItemsBarcode"></div>
+
+                                            <div id="context-menuItemsBarcode">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-5">
+                                    <div class="card ItemsBarcodeaction" id="ItemsBarcodeaction">
+                                        <div class="card-header " style="background-color: #343A40">
+                                            <div id="btnCloseItemsBarcode" style="float:left"></div>
+                                            <h4 style="color: white;" id="card_ItemsBarcodetitle" class="card_ItemsBarcodetitle">
+                                            </h4>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row ">
+
+                                                @csrf
+                                                <div class="col-md-6">
+                                                    <div class="form-group ">
+                                                        <div class="ms-12 row pt-3">
+                                                        </div>
+                                                        <div class="dx-fieldset" id="ItemsBarcode-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">ITB_ID</div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="ITB_ID"></div>
+                                                                </div>
+                                                                <span id="error_ITB_ID" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="ItemsBarcode-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">ITB KF </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="ITB_FK_IT"></div>
+                                                                </div>
+                                                                <span id="error_ITB_FK_IT" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="ItemsBarcode-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> الباركود</div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="ITB_Barcode"></div>
+                                                                </div>
+                                                                <span id="error_ITB_Barcode" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <hr>
+                                                        <div id="btnSaveBarcode" style="float:right"></div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
 
                 </div>
 
@@ -971,6 +1066,7 @@
     <script type="text/javascript" src="{{ url('assets/js/pro_js/itemsFive.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/pro_js/itemsThree.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/pro_js/ItemsFinal.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/js/pro_js/ItemsBarcode.js') }}"></script>
 
 
 
@@ -982,6 +1078,7 @@
         $('#ItemThreeaction').hide();
         $('#Modelsaction').hide();
         $('#ItemFifthaction').hide();
+        $('#ItemsBarcodeaction').hide();
         // $('#itemFiveaction2').hide();
     </script>
 @endSection()

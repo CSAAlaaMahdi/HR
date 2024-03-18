@@ -124,7 +124,7 @@ function brand_fetch() {
                             width: 200,
                             cellTemplate: function(container, options) {
                                 var row = options.row.data;
-                                var link1=$('<div>');
+                                var link1=$('<div>').css({'background-color':'#7CEECE'});
                                 link1.dxButton({
                                             stylingMode: "contained",
                                             type: "normal",
@@ -163,11 +163,11 @@ function brand_fetch() {
                                              },
                                 })
 
-                                var link2 = $("<div>");
+                                var link2 = $("<div>").css({'margin-right':'10px'});
                                 link2.dxButton({
                                             stylingMode: "contained",
                                             icon: "trash",
-                                            type:'normal',
+                                            type:'default',
                                             onClick() {
                                                 var rowData = options.data;
 

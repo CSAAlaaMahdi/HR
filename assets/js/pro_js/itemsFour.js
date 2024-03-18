@@ -205,7 +205,7 @@ function fetchdata_itemFour() {
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
 
-                                    var link1 = $("<div>");
+                                    var link1 = $("<div>").css({'background-color':'#7CEECE'});
                                     link1.dxButton({
                                         stylingMode: "contained",
                                         type: "normal",
@@ -289,7 +289,7 @@ function fetchdata_itemFour() {
                                         },
                                     });
 
-                                    var link2 = $("<div>");
+                                    var link2 = $("<div>").css({'background-color':'##27AE60','margin-right':'10px'});
                                     link2.dxButton({
                                         stylingMode: "contained",
                                         icon: "add",
@@ -336,12 +336,13 @@ function fetchdata_itemFour() {
                                             }
                                         },
                                     });
-                                    link2.css("margin", "5px");
 
-                                    var link3 = $("<div>");
+
+                                    var link3 = $("<div>").css({'margin-right':'10px'});
                                     link3.dxButton({
                                         stylingMode: "contained",
                                         icon: "trash",
+                                        type:"default",
                                         onClick() {
                                             $.ajax({
                                                 type: "GET",
@@ -353,7 +354,7 @@ function fetchdata_itemFour() {
 
                                         },
                                     });
-                                    link3.css("margin", "5px");
+
 
                                     $(container).append(link1, link2, link3);
                                 },
@@ -444,7 +445,7 @@ function fetchdata_itemFour() {
                                                 cellTemplate: function (container, options) {
                                                     var row = options.row.data;
 
-                                                    var link1 = $("<div>");
+                                                    var link1 = $("<div>").css({'background-color':'#7CEECE'});
                                                     link1.dxButton({
                                                         stylingMode: "contained",
                                                         type: "normal",
@@ -531,10 +532,11 @@ function fetchdata_itemFour() {
 
 
 
-                                                    var link3 = $("<div>");
+                                                    var link3 = $("<div>").css({'margin-right':'10px'});
                                                     link3.dxButton({
                                                         stylingMode: "contained",
                                                         icon: "trash",
+                                                        type:"default",
                                                         onClick() {
                                                             $.ajax({
                                                                 type: "GET",
@@ -546,7 +548,7 @@ function fetchdata_itemFour() {
 
                                                         },
                                                     });
-                                                    link3.css("margin", "5px");
+
 
                                                     $(container).append(link1, link3);
                                                 },

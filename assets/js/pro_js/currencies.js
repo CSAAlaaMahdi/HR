@@ -4,6 +4,8 @@ currency_fetch();
 function currency_cleardata() {
     $("#Cur_Guid").dxTextBox("instance").option("value","");
     $("#Cur_Name").dxTextBox("instance").option("value","");
+    $("#Cur_IsMain").dxSwitch("instance").option("value",false);
+
     $("#Cur_Cost").dxTextBox("instance").option("value","");
 }
 
@@ -31,6 +33,11 @@ function currency_insert() {
     var data = {
         'Cur_Name': $('#Cur_Name').dxTextBox("instance").option("value"),
         'Cur_Cost': $('#Cur_Cost').dxTextBox("instance").option("value"),
+        'Cur_IsMain': (function (){
+            if($("#Cur_IsMain").dxSwitch("instance").option("value")){
+                return 1;
+            }else return 0
+        }),
     };
     $.ajaxSetup({
         headers: {
@@ -161,7 +168,7 @@ function currency_fetch() {
                             cellTemplate: function(container, options) {
                                 var row = options.row.data;
 
-                                var link1 = $("<div>");
+                                var link1 = $("<div>").css({'background-color':'#7CEECE'});
                                 link1.dxButton({
                                     stylingMode: "contained",
                                     type: "normal",
@@ -172,6 +179,11 @@ function currency_fetch() {
                                         $('#Cur_Guid').dxTextBox("instance").option({value:options.data.Cur_Guid});
                                             $('#Cur_Name').dxTextBox("instance").option({value:options.data.Cur_Name});
                                             $('#Cur_Cost').dxTextBox("instance").option({value:options.data.Cur_Cost});
+                                            if(rowData.Cur_IsMain == true){
+                                                $('#Cur_IsMain').dxSwitch("instance").option({value:true});
+                                            }else{
+                                                $('#Cur_IsMain').dxSwitch("instance").option({value:false});
+                                            }
 
                                             var displaycard =
                                             document.getElementById("currencyaction");
@@ -201,11 +213,11 @@ function currency_fetch() {
                                     },
                                 });
 
-                                var link2 = $("<div>");
+                                var link2 = $("<div>").css({'margin-right':'10px'});
                                 link2.dxButton({
                                     stylingMode: "contained",
                                     icon: "trash",
-                                    type:'normal',
+                                    type:'default',
                                     onClick() {
                                         var rowData = options.data;
 
@@ -270,8 +282,14 @@ function currency_update() {
         'Cur_Guid': $('#Cur_Guid').dxTextBox("instance").option("value"),
         'Cur_Name': $('#Cur_Name').dxTextBox("instance").option("value"),
         'Cur_Cost': $('#Cur_Cost').dxTextBox("instance").option("value"),
+        'Cur_IsMain': (function (){
+            if($("#Cur_IsMain").dxSwitch("instance").option("value")){
+                return 1;
+            }else return 0
+        })(),
 
-    };
+        };
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -427,7 +445,9 @@ $(document).ready(function () {
 
         });
     });
-
+    $(() => {
+        $("#Cur_IsMain").dxSwitch({});
+    });
 
 });
 //

@@ -33,25 +33,31 @@ class ItemController extends Controller
                 'id' => $request->input('IT_Guid'),
             ],
             [
-                // 'IT2_FK_IT' => $billBodyData['Item_Guid'],
-                // 'IT2_Count_Kind' => $billBodyData['Item_Unit'],
-                // 'IT2_Count' => $billBodyData['Item_Count'],
-                // 'IT2_SmallestCount' => (Unitname::find($billBodyData['Item_Unit'])->Ui_Piece) * ($billBodyData['Item_Count']),
-                // 'IT2_State' => true,
-                // 'IT2_StoreName' => $request->input("H_Store_Guid"),
-                // 'IT2_BillType' => $billTypeState,
+                'IT_ItemType' => $request->input('IT_ItemType'),
+                'IT_ItemName' => $request->input('IT_ItemName'),
+                'IT_PartNumber' => $request->input('IT_PartNumber'),
+                'IT_QY' => $request->input('IT_QY'),
+                'IT_CarType' => $request->input('IT_CarType'),
+                'IT_Engine' => $request->input('IT_Engine'),
+                'IT_ModelCode' => $request->input('IT_ModelCode'),
+                'IT_FuelSystem' => $request->input('IT_FuelSystem'),
+                'IT_Transmission' => $request->input('IT_Transmission'),
+                'IT_CarNo' => $request->input('IT_CarNo'),
+                'IT_VIN' => $request->input('IT_VIN'),
+                'IT_Year' => $request->input('IT_Year'),
+                'IT_Notes' => $request->input('IT_Notes'),
+
 
             ]
         );
-        $Item->save();
 
-        return response()->json(['status' => 'Adding Data Successfully..']);
+        return response()->json(['status' => 'تم اجراء العملية بنجاح']);
     }
 
 
     public function show(Request $request)
     {
-        $id = $request->input('getid');
+        $id = $request->input('IT_Guid');
         $data = Item::find($id);
         return response()->json($data);
     }
@@ -65,31 +71,15 @@ class ItemController extends Controller
 
     public function update(Request $request)
     {
-        $id = $request->post('IT_id');
-        $data = Item::find($id);
-        $data->IT_ItemType = $request->post('IT_ItemType');
-        $data->IT_ItemName = $request->post('IT_ItemName');
-        $data->IT_PartNumber = $request->post('IT_PartNumber');
-        $data->IT_QY = $request->post('IT_QY');
-        $data->IT_CarType = $request->post('IT_CarType');
-        $data->IT_Engine = $request->post('IT_Engine');
-        $data->IT_ModelCode = $request->post('IT_ModelCode');
-        $data->IT_FuelSystem = $request->post('IT_FuelSystem');
-        $data->IT_Transmission = $request->post('IT_Transmission');
-        $data->IT_CarNo = $request->post('IT_CarNo');
-        $data->IT_VIN = $request->post('IT_VIN');
-        $data->IT_Year = $request->post('IT_Year');
-        $data->update();
 
-        return response()->json(['status' => ' Updating Successfully...']);
     }
 
 
     public function destroy(Request $request)
     {
-        $id = $request->post('getid');
+        $id = $request->post('IT_Guid');
         Item::find($id)->delete();
-        return response()->json(['status' => 'Deleting Successfully...']);
+        return response()->json(['status' => 'تم حذف البيانات بنجاح']);
     }
 
     public function filldata()

@@ -100,7 +100,7 @@ class CustomerSupplierController extends Controller
 
 
 
-        return response()->json(['status' => 'Adding Data Successfully..']);
+        return response()->json(['status' => 'تم اضافة الحساب بنجاح']);
     }
 
 
@@ -134,7 +134,7 @@ class CustomerSupplierController extends Controller
         // $data->Cs_UserName = session('User');
         $data->update();
 
-        return response()->json(['status' => ' Updating Successfully...']);
+        return response()->json(['status' => 'تم تحديث البيانات بنجاح']);
     }
 
 
@@ -149,14 +149,12 @@ class CustomerSupplierController extends Controller
     {
         $selectData = [
             [
-                'Name' => 'Customer',
+                'Name' => 'عميل',
             ],
             [
-                'Name' => 'Supplier',
+                'Name' => 'مجهز',
             ],
-            [
-                'Name' => 'Both',
-            ],
+
             // Add more data as needed
         ];
 
