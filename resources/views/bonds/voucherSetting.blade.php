@@ -51,7 +51,7 @@
                                     <div class="row border g-0 rounded shadow-sm">
                                         <div class="col p-4">
                                             <div class="col-md-12 mt-1 row flex">
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <div class="dx-fieldset" id="VoucherSettingToggle-container">
                                                         <div class="dx-field">
                                                             <div class="dx-field-label">مدين </div>
@@ -136,7 +136,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <div class="dx-fieldset" id="VoucherSettingToggle-container">
                                                         <div class="dx-field">
                                                             <div class="dx-field-label">العملة</div>
@@ -182,14 +182,14 @@
                                             <div class="col-md-12 mt-1 row flex">
 
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-6">
                                                     <div class="dx-fieldset" id="VoucherSetting-container" hidden>
                                                         <div class="dx-field">
-                                                            <div class="dx-field-label">SettingID</div>
+                                                            <div class="dx-field-label">id</div>
                                                             <div class="dx-field-value">
-                                                                <div id="SettingID"></div>
+                                                                <div id="id"></div>
                                                             </div>
-                                                            <span id="error_SettingID" class="text-danger"></span>
+                                                            <span id="error_id" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="dx-fieldset" id="VoucherSetting-container" hidden>
@@ -203,7 +203,7 @@
                                                     </div>
                                                     <div class="dx-fieldset" id="VoucherSetting-container">
                                                         <div class="dx-field">
-                                                            <div class="dx-field-label">نوع الفاتورة</div>
+                                                            <div class="dx-field-label">الحساب </div>
                                                             <div class="dx-field-value">
                                                                 <div id="Bill_Type_FK"></div>
                                                             </div>
@@ -213,107 +213,45 @@
 
                                                     <div class="dx-fieldset" id="VoucherSetting-container">
                                                         <div class="dx-field">
-                                                            <div class="dx-field-label">اسم الفاتورة</div>
+                                                            <div class="dx-field-label"> العملة</div>
                                                             <div class="dx-field-value">
-                                                                <div id="FormText"></div>
+                                                                <div id="CurrencyGuid"></div>
                                                             </div>
-                                                            <span id="error_FormText" class="text-danger"></span>
+                                                            <span id="error_CurrencyGuid" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                     <div class="dx-fieldset" id="VoucherSetting-container">
                                                         <div class="dx-field">
-                                                            <div class="dx-field-label">نموذج الطباعة</div>
+                                                            <div class="dx-field-label">عدد الاسطر </div>
+                                                            <div class="dx-field-value">
+                                                                <div id="RowsNoGrid"></div>
+                                                            </div>
+                                                            <span id="error_RowsNoGrid" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSetting-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">عدد النسخ للطباعة </div>
+                                                            <div class="dx-field-value">
+                                                                <div id="No_Copy_Print"></div>
+                                                            </div>
+                                                            <span id="error_No_Copy_Print" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSetting-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">نموذج الطباعة </div>
                                                             <div class="dx-field-value">
                                                                 <div id="Print_Temp"></div>
                                                             </div>
                                                             <span id="error_Print_Temp" class="text-danger"></span>
                                                         </div>
                                                     </div>
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">عددا لطابعات</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Print_Count"></div>
-                                                            </div>
-                                                            <span id="error_Print_Count" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
 
 
 
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">الحساب</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Acc_Guid"></div>
-                                                            </div>
-                                                            <span id="error_Acc_Guid" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">الحساب المقابل</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Acc_Contra_Account"></div>
-                                                            </div>
-                                                            <span id="error_Acc_Contra_Account"
-                                                                class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">حساب العميل\المورد</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Cust_Acc_Guid"></div>
-                                                            </div>
-                                                            <span id="error_Cust_Acc_Guid" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">المخزن</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Store_Guid"></div>
-                                                            </div>
-                                                            <span id="error_Store_Guid" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">حساب الخصومات</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Discount_Guid"></div>
-                                                            </div>
-                                                            <span id="error_Discount_Guid" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">العملة</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Currency_Guid"></div>
-                                                            </div>
-                                                            <span id="error_Currency_Guid" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dx-fieldset" id="VoucherSetting-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">نوع الوحدة</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="Unit_Type"></div>
-                                                            </div>
-                                                            <span id="error_Unit_Type" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
                                             </div>
 
                                         </div>

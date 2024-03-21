@@ -62,6 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/ItemsBarcode.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Users.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/UsersGroups.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/BondsSetting.css') }}">
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/Template/datatables.min.js') }}"></script>
