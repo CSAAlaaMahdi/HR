@@ -12,7 +12,6 @@
     <div class="col-md-12 ">
         <div class="card VoucherSettingaction" id="VoucherSettingaction">
             <div class="card-header" style="background-color: #283741">
-                <div id="btnNewAdd" style="float: right"></div>
                 <div id="btnSave" style="float: right;margin-right: 15px"></div>
                 <h4 style="color: white;float: left;margin-left: 50%" id="card_VoucherSettingtitle"
                     class="card_VoucherSettingtitle">
@@ -27,7 +26,7 @@
                     @csrf
                     <div class="col-md-12 row flex">
                         <div class="col-md-6">
-                            <div class="dx-fieldset" id="Header-Search">
+                            <div class="dx-fieldset" id="VoucherSetting-Search">
                                 <div class="dx-field">
                                     <div class="dx-field-label">بحث</div>
                                     <div class="dx-field-value">
@@ -205,9 +204,9 @@
                                                         <div class="dx-field">
                                                             <div class="dx-field-label">الحساب </div>
                                                             <div class="dx-field-value">
-                                                                <div id="Bill_Type_FK"></div>
+                                                                <div id="Acc_Guid"></div>
                                                             </div>
-                                                            <span id="error_Bill_Type_FK" class="text-danger"></span>
+                                                            <span id="error_Acc_Guid" class="text-danger"></span>
                                                         </div>
                                                     </div>
 
@@ -281,8 +280,8 @@
     </div>
 
 
-    <script type="text/javascript" src="{{ url('assets/js/pro_js/VoucherSetting.js') }}"></script>
-    <script id="individualTemplate" type="text/html">
+    <script type="text/javascript" src="{{ url('assets/js/pro_js/BondsSetting.js') }}"></script>
+    {{-- <script id="individualTemplate" type="text/html">
         <p>This is Contacts Tab</p>
-    </script>
+    </script> --}}
 @endSection()

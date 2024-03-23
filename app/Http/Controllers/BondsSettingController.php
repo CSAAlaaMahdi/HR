@@ -52,17 +52,25 @@ class BondsSettingController extends Controller
 
     public function show(Request $request)
     {
-        // where('Acc_Contra_Guid','!=','00000000-0000-0000-0000-000000000000')->
-        // $B_Guid = $request->input('B_Guid');
-        // $B_Type = $request->input('B_Type');
-        // $getParentGuid = Bonds::where([['Bond_Number', $B_Guid], ['Vou_Type', $B_Type]])->select('Parent_Guid')->first()->Parent_Guid;
-        // $BondInfo = Bonds::where('Parent_Guid', $getParentGuid)->orderBy('Vou_Row_No')->get();
+        $id = $request->input('BondsSettingID');
+        $getBondsSetting = BondsSetting::find($id);
+        $getBondsSetting->Debit_Visible = $getBondsSetting->Debit_Visible > 0 ? True:False;
+        $getBondsSetting->Credit_Visible = $getBondsSetting->Credit_Visible > 0 ? True:False;
+        $getBondsSetting->NoteAll_Visible = $getBondsSetting->NoteAll_Visible > 0 ? True:False;
+        $getBondsSetting->Note_Acc_Visible = $getBondsSetting->Note_Acc_Visible > 0 ? True:False;
+        $getBondsSetting->Acc_Guid_Visible = $getBondsSetting->Acc_Guid_Visible > 0 ? True:False;
+        $getBondsSetting->txtUserVisible01 = $getBondsSetting->txtUserVisible01 > 0 ? True:False;
+        $getBondsSetting->txtUserVisible02 = $getBondsSetting->txtUserVisible02 > 0 ? True:False;
+        $getBondsSetting->txtUserVisible03 = $getBondsSetting->txtUserVisible03 > 0 ? True:False;
+        $getBondsSetting->txtUserVisible04 = $getBondsSetting->txtUserVisible04 > 0 ? True:False;
+        $getBondsSetting->CurrencyVisible = $getBondsSetting->CurrencyVisible > 0 ? True:False;
+        $getBondsSetting->BranchVisible = $getBondsSetting->BranchVisible > 0 ? True:False;
+        $getBondsSetting->CostVisible = $getBondsSetting->CostVisible > 0 ? True:False;
+        $data = [
+            'getBondsSetting' => $getBondsSetting,
+        ];
 
-        // $data = [
-        //     'getBondBody' => $BondInfo,
-        // ];
-
-        // return response()->json($data);
+        return response()->json($data);
     }
 
 
@@ -85,19 +93,13 @@ class BondsSettingController extends Controller
 
     public function filldata(Request $request)
     {
-        // $BondType = $request->input('BondType');
-        // $getBondType = BondsSetting::where('Form_Text', $BondType)->first();
-        // $data = [
-        //     'getAccounts' => AccountTree::select('Guid', 'Ac_Name', 'Ac_Code_Mask')->orderBy('Ac_RowID', 'ASC')->get(),
-        //     'getCurrency' => Currency::all(),
-        //     'defualtAccount' => $getBondType->Acc_Guid,
-        //     'getBondsType' => BondsSetting::all(),
-        //     'defualtCurrencyGuid' => $getBondType->CurrencyGuid,
-        //     'defualtCurrencyEqual' => Currency::where('Cur_Guid', $getBondType->CurrencyGuid)->first()->Cur_Cost,
-        //     'getBonds' => $getBondType,
-        //     'getBondsNumbers' => Bonds::select('Bond_Number')->where('Vou_Type', $getBondType->id)->groupBy('Bond_Number')->get(),
-        // ];
-        // return response()->json($data);
+        $data = [
+            'getAccounts' => AccountTree::select('Guid', 'Ac_Name', 'Ac_Code_Mask')->orderBy('Ac_RowID', 'ASC')->get(),
+            'getCurrency' => Currency::all(),
+            'getBondsSetting' => BondsSetting::all(),
+
+        ];
+        return response()->json($data);
 
     }
 
