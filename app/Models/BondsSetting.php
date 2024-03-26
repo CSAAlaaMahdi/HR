@@ -13,7 +13,7 @@ class BondsSetting extends Model
         'Receipts_Type',
         'Acc_Guid',
         'Currency_Guid',
-        'RowsNoGuid',
+        'RowsNoGrid',
         'Debit_Visible',
         'Credit_Visible',
         'AcceptZero',

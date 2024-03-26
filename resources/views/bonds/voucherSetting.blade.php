@@ -163,6 +163,33 @@
                                                             <span id="error_CostVisible" class="text-danger"></span>
                                                         </div>
                                                     </div>
+                                                    <div class="dx-fieldset" id="VoucherSettingToggle-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">حفظ وجديد</div>
+                                                            <div class="dx-field-value">
+                                                                <div id="SaveAndNew"></div>
+                                                            </div>
+                                                            <span id="error_SaveAndNew" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSettingToggle-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">يقبل الصفر </div>
+                                                            <div class="dx-field-value">
+                                                                <div id="AcceptZero"></div>
+                                                            </div>
+                                                            <span id="error_AcceptZero" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSettingToggle-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">حفظ وطباعة  </div>
+                                                            <div class="dx-field-value">
+                                                                <div id="SaveAndPrint"></div>
+                                                            </div>
+                                                            <span id="error_SaveAndPrint" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
 
@@ -244,6 +271,42 @@
                                                                 <div id="Print_Temp"></div>
                                                             </div>
                                                             <span id="error_Print_Temp" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSetting-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">نص 1</div>
+                                                            <div class="dx-field-value">
+                                                                <div id="txtUser01Optional"></div>
+                                                            </div>
+                                                            <span id="error_txtUser01Optional" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSetting-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">نص 2  </div>
+                                                            <div class="dx-field-value">
+                                                                <div id="txtUser02Optional"></div>
+                                                            </div>
+                                                            <span id="error_txtUser02Optional" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSetting-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">نص 3  </div>
+                                                            <div class="dx-field-value">
+                                                                <div id="txtUser03Optional"></div>
+                                                            </div>
+                                                            <span id="error_txtUser03Optional" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dx-fieldset" id="VoucherSetting-container">
+                                                        <div class="dx-field">
+                                                            <div class="dx-field-label">نص 4  </div>
+                                                            <div class="dx-field-value">
+                                                                <div id="txtUser04Optional"></div>
+                                                            </div>
+                                                            <span id="error_txtUser04Optional" class="text-danger"></span>
                                                         </div>
                                                     </div>
 

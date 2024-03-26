@@ -26,27 +26,32 @@ class BondsSettingController extends Controller
 
     public function create(Request $request)
     {
-        // $getBond = $request->input('B_Guid');
-        // $BondType = $request->input('BondType');
-        // $BondTypeSetting = BondsSetting::where('Form_Text', $BondType)->first();
 
-        // $data = [
 
-        //     'getAccounts' => AccountTree::select('Guid', 'Ac_Name', 'Ac_Code_Mask')->orderBy('Ac_RowID', 'ASC')->get(),
-        //     'getBonds' => Bonds::where('Guid', $getBond)->get(),
-        //     'State' => $BondTypeSetting,
 
-        // ];
-        // return response()->json($data);
+
     }
 
 
     public function store(Request $request)
     {
 
+        $BondsSetting = BondsSetting::updateOrCreate(
+            [
+                'id' => $request->post('id'),
+            ],
+            [
+                'st_Guid' => $request->post('st_Guid'),
+                'RowsNoGrid' => $request->post('RowsNoGrid'),
+                'No_Copy_Print' => $request->post('No_Copy_Print'),
+                'txtUser01Optional' => $request->post('txtUser01Optional'),
+                'txtUser02Optional' => $request->post('txtUser02Optional'),
+                'txtUser03Optional' => $request->post('txtUser03Optional'),
+                'txtUser04Optional' => $request->post('txtUser04Optional'),
+            ]
+            );
 
-
-        // return response()->json(['status' => 'تم اجراء العملية بنجاح']);
+        return response()->json(['status' => 'تم اجراء العملية بنجاح']);
     }
 
 

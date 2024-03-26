@@ -8,365 +8,97 @@ function BondsSettingTree_cleardata() {
 //Begin CRUD Function...
 
 
-function BondsSetting_insert() {
-    // var url = "BondsSetting";
 
-    // var data = {
-    //     St_ParentGuid: $("#St_ParentStore").dxDropDownBox("instance").option("value"),
-    //     St_Name: $("#St_Name").dxTextBox("instance").option("value"),
-    //     St_Code: $("#St_Code").dxTextBox("instance").option("value"),
-    //     St_Account: $("#St_Account").dxDropDownBox("instance").option("value"),
-    //     St_State: (function () {
-    //         if ($("#St_State").dxSwitch("instance").option("value")) {
-    //             return 1;
-    //         } else return 0;
-    //     })(),
-    //     St_IsGroup: (function () {
-    //         if ($("#St_IsGroup").dxSwitch("instance").option("value")) {
-    //             return 1;
-    //         } else return 0;
-    //     })(),
-    //     St_Address: $("#St_Address").dxTextBox("instance").option("value"),
-    //     // St_StoreKeeper: $("#St_Stockkeeper").dxSelectBox("instance").option("value"),
-    //     St_Notes: $("#St_Notes").dxTextArea("instance").option("value"),
-    // };
-    // let test = $("#St_ParentStore").dxDropDownBox("instance").option("value");
-
-
-    // $.ajaxSetup({
-    //     headers: {
-    //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    //     },
-    // });
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: url,
-    //     data: data,
-    //     success: function (response) {
-    //         alertify.set("notifier", "position", "top-right");
-    //         alertify.success(response.status);
-    //         DevExpress.ui.notify('Data Has Been Inserted Successfully ....');
-    //         BondsSettingTree_fetch();
-    //     },
-    // });
-}
-function BondsSetting_update() {
-    var url = "BondsSetting/";
+function BondsSetting_UpdateOrCreate() {
+    var url = "bondsSetting";
     var data = {
-        SettingID : $('#SettingID').dxTextBox("instance").option("value"),
+        id : $('#id').dxTextBox("instance").option("value"),
         st_Guid : $('#st_Guid').dxTextBox("instance").option("value"),
-        Bill_Type_FK: $("#Bill_Type_FK").dxDropDownBox("instance").option("value"),
-        FormText: $("#FormText").dxTextBox("instance").option("value"),
-        Print_Count: $("#Print_Count").dxTextBox("instance").option("value"),
+        RowsNoGrid: $("#RowsNoGrid").dxTextBox("instance").option("value"),
+        No_Copy_Print: $("#No_Copy_Print").dxTextBox("instance").option("value"),
+        txtUser01Optional: $("#txtUser01Optional").dxTextBox("instance").option("value"),
+        txtUser02Optional: $("#txtUser02Optional").dxTextBox("instance").option("value"),
+        txtUser03Optional: $("#txtUser03Optional").dxTextBox("instance").option("value"),
+        txtUser04Optional: $("#txtUser04Optional").dxTextBox("instance").option("value"),
         Acc_Guid: $("#Acc_Guid").dxDropDownBox("instance").option("value"),
-        Acc_Contra_Account: $("#Acc_Contra_Account").dxDropDownBox("instance").option("value"),
-        Cust_Acc_Guid: $("#Cust_Acc_Guid").dxDropDownBox("instance").option("value"),
-        Store_Guid: $("#Store_Guid").dxDropDownBox("instance").option("value"),
-        Discount_Guid: $("#Discount_Guid").dxDropDownBox("instance").option("value"),
-        Currency_Guid: $("#Currency_Guid").dxDropDownBox("instance").option("value"),
-        Unit_Type: $("#Unit_Type").dxDropDownBox("instance").option("value"),
+        CurrencyGuid: $("#CurrencyGuid").dxDropDownBox("instance").option("value"),
 
-        Pay_Type: (function () {
-            if ($("#Pay_Type").dxSwitch("instance").option("value")) {
+        Debit_Visible: (function () {
+            if ($("#Debit_Visible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        No_Copy_Print: (function () {
-            if ($("#No_Copy_Print").dxSwitch("instance").option("value")) {
+        Credit_Visible: (function () {
+            if ($("#Credit_Visible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        IsCombine: (function () {
-            if ($("#IsCombine").dxSwitch("instance").option("value")) {
+        NoteAll_Visible: (function () {
+            if ($("#NoteAll_Visible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Qty_MustGreaterThanZero: (function () {
-            if ($("#Qty_MustGreaterThanZero").dxSwitch("instance").option("value")) {
+        Note_Acc_Visible: (function () {
+            if ($("#Note_Acc_Visible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Qty_MustGreaterThanZeroInStore: (function () {
-            if ($("#Qty_MustGreaterThanZeroInStore").dxSwitch("instance").option("value")) {
+        Acc_Guid_Visible: (function () {
+            if ($("#Acc_Guid_Visible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Save_And_New: (function () {
-            if ($("#Save_And_New").dxSwitch("instance").option("value")) {
+        txtUserVisible01: (function () {
+            if ($("#txtUserVisible01").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        CostPriceAffectedByDissAdd: (function () {
-            if ($("#CostPriceAffectedByDissAdd").dxSwitch("instance").option("value")) {
+        txtUserVisible02: (function () {
+            if ($("#txtUserVisible02").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        CloseBillAfterPayment: (function () {
-            if ($("#CloseBillAfterPayment").dxSwitch("instance").option("value")) {
+        txtUserVisible03: (function () {
+            if ($("#txtUserVisible03").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Acc_Visible: (function () {
-            if ($("#Acc_Visible").dxSwitch("instance").option("value")) {
+        txtUserVisible04: (function () {
+            if ($("#txtUserVisible04").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Acc_Contra_Visible: (function () {
-            if ($("#Acc_Contra_Visible").dxSwitch("instance").option("value")) {
+        CurrencyVisible: (function () {
+            if ($("#CurrencyVisible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Cust_Acc_Visible: (function () {
-            if ($("#Cust_Acc_Visible").dxSwitch("instance").option("value")) {
+        BranchVisible: (function () {
+            if ($("#BranchVisible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Store_Visible: (function () {
-            if ($("#Store_Visible").dxSwitch("instance").option("value")) {
+        CostVisible: (function () {
+            if ($("#CostVisible").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Discount_Visible: (function () {
-            if ($("#Discount_Visible").dxSwitch("instance").option("value")) {
+        SaveAndNew: (function () {
+            if ($("#SaveAndNew").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Currency_Visible: (function () {
-            if ($("#Currency_Visible").dxSwitch("instance").option("value")) {
+        AcceptZero: (function () {
+            if ($("#AcceptZero").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Item_Ch_Highx: (function () {
-            if ($("#Item_Ch_Highx").dxSwitch("instance").option("value")) {
+        SaveAndPrint: (function () {
+            if ($("#SaveAndPrint").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
-        Item_Ch_Lowx: (function () {
-            if ($("#Item_Ch_Lowx").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Ch_OrderLimitx: (function () {
-            if ($("#Item_Ch_OrderLimitx").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Ch_Zero: (function () {
-            if ($("#Item_Ch_Zero").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Cost_Visible: (function () {
-            if ($("#Cost_Visible").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Save_And_Print: (function () {
-            if ($("#Save_And_Print").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Show_Before_Print: (function () {
-            if ($("#Show_Before_Print").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Barcode: (function () {
-            if ($("#Item_Barcode").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Code: (function () {
-            if ($("#Item_Code").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Name: (function () {
-            if ($("#Item_Name").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Qty1: (function () {
-            if ($("#Item_Qty1").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Qty2: (function () {
-            if ($("#Item_Qty2").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Qty3: (function () {
-            if ($("#Item_Qty3").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Price: (function () {
-            if ($("#Item_Price").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Price_Total: (function () {
-            if ($("#Item_Price_Total").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Price_Net: (function () {
-            if ($("#Item_Price_Net").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Discount: (function () {
-            if ($("#Item_Discount").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Extra: (function () {
-            if ($("#Item_Extra").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Notes_Show: (function () {
-            if ($("#Item_Notes_Show").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Length: (function () {
-            if ($("#Item_Length").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Width: (function () {
-            if ($("#Item_Width").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Count: (function () {
-            if ($("#Item_Count").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Item_Image: (function () {
-            if ($("#Item_Image").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        ProductionDate: (function () {
-            if ($("#ProductionDate").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        ExpireDateAlert: (function () {
-            if ($("#ExpireDateAlert").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Branch_Guid: (function () {
-            if ($("#Branch_Guid").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        PercentagePrice: (function () {
-            if ($("#PercentagePrice").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Dis_Amount: (function () {
-            if ($("#Dis_Amount").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Dis_Amount_Percent: (function () {
-            if ($("#Dis_Amount_Percent").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Dis_Percent_Affect: (function () {
-            if ($("#Dis_Percent_Affect").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Add_Amount: (function () {
-            if ($("#Add_Amount").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Add_Amount_Percent: (function () {
-            if ($("#Add_Amount_Percent").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Add_Percent_Affect: (function () {
-            if ($("#Add_Percent_Affect").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Header_Cash_Visible: (function () {
-            if ($("#Header_Cash_Visible").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Header_Notes_Visible: (function () {
-            if ($("#Header_Notes_Visible").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Footer_BillTotal: (function () {
-            if ($("#Footer_BillTotal").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Footer_ItemDiscount: (function () {
-            if ($("#Footer_ItemDiscount").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Footer_BillDiscount: (function () {
-            if ($("#Footer_BillDiscount").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Footer_BillAdd: (function () {
-            if ($("#Footer_BillAdd").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Footer_ItemAdd: (function () {
-            if ($("#Footer_ItemAdd").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Footer_TotalAdd: (function () {
-            if ($("#Footer_TotalAdd").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Footer_TotalDiscount: (function () {
-            if ($("#Footer_TotalDiscount").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        DisAddGrid_Visible: (function () {
-            if ($("#DisAddGrid_Visible").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        BodyGrid_Visible: (function () {
-            if ($("#BodyGrid_Visible").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        AffectOfStore: (function () {
-            if ($("#AffectOfStore").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
-        Profits: (function () {
-            if ($("#Profits").dxSwitch("instance").option("value")) {
-                return 1;
-            } else return 0;
-        })(),
+
 
     };
 
@@ -376,8 +108,8 @@ function BondsSetting_update() {
         },
     });
     $.ajax({
-        method: "PUT",
-        url: url + "update",
+        method: "POST",
+        url: url,
         data: data,
         success: function (response) {
             DevExpress.ui.notify({
@@ -575,17 +307,20 @@ function BondsSetting_filldata() {
                                         url: "bondsSetting/show",
                                         data: {BondsSettingID:BondsSettingID},
                                         success: function (response) {
-                                            // console.log(response);
+
                                             //#region  Data of TextBox and so on...
                                             $('#id').dxTextBox("instance").option("value",response.getBondsSetting.id);
                                             $('#st_Guid').dxTextBox("instance").option("value",response.getBondsSetting.st_Guid);
                                             $('#RowsNoGrid').dxTextBox("instance").option("value",response.getBondsSetting.RowsNoGrid);
                                             $('#No_Copy_Print').dxTextBox("instance").option("value",response.getBondsSetting.No_Copy_Print);
+                                            $('#txtUser01Optional').dxTextBox("instance").option("value",response.getBondsSetting.txtUser01Optional);
+                                            $('#txtUser02Optional').dxTextBox("instance").option("value",response.getBondsSetting.txtUser02Optional);
+                                            $('#txtUser03Optional').dxTextBox("instance").option("value",response.getBondsSetting.txtUser03Optional);
+                                            $('#txtUser04Optional').dxTextBox("instance").option("value",response.getBondsSetting.txtUser04Optional);
 
                                             if(response.getBondsSetting.Debit_Visible)
                                             $('#Debit_Visible').dxSwitch("instance").option("value",true)
                                             else $('#Debit_Visible').dxSwitch("instance").option("value",false)
-
                                             if(response.getBondsSetting.Credit_Visible)
                                             $('#Credit_Visible').dxSwitch("instance").option("value",true)
                                             else $('#Credit_Visible').dxSwitch("instance").option("value",false)
@@ -601,6 +336,25 @@ function BondsSetting_filldata() {
                                             if(response.getBondsSetting.txtUserVisible01)
                                             $('#txtUserVisible01').dxSwitch("instance").option("value",true)
                                             else $('#txtUserVisible01').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.txtUserVisible02)
+                                            $('#txtUserVisible02').dxSwitch("instance").option("value",true)
+                                            else $('#txtUserVisible02').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.txtUserVisible03)
+                                            $('#txtUserVisible03').dxSwitch("instance").option("value",true)
+                                            else $('#txtUserVisible03').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.txtUserVisible04)
+                                            $('#txtUserVisible04').dxSwitch("instance").option("value",true)
+                                            else $('#txtUserVisible04').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.CurrencyVisible)
+                                            $('#CurrencyVisible').dxSwitch("instance").option("value",true)
+                                            else $('#CurrencyVisible').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.BranchVisible)
+                                            $('#BranchVisible').dxSwitch("instance").option("value",true)
+                                            else $('#BranchVisible').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.CostVisible)
+                                            $('#CostVisible').dxSwitch("instance").option("value",true)
+                                            else $('#CostVisible').dxSwitch("instance").option("value",false)
+
 
                                             //#endregion
 
@@ -659,7 +413,7 @@ $(document).ready(function () {
         icon: 'check',
         width: 120,
         onClick() {
-            BondsSetting_update();
+            BondsSetting_UpdateOrCreate();
 
         },
     });
@@ -733,7 +487,39 @@ $(document).ready(function () {
     $(() => {
         $("#CostVisible").dxSwitch({});
     });
-
+    $(() => {
+        $("#SaveAndNew").dxSwitch({});
+    });
+    $(() => {
+        $("#AcceptZero").dxSwitch({});
+    });
+    $(() => {
+        $("#SaveAndPrint").dxSwitch({});
+    });
+    $(() =>{
+        $('#txtUser01Optional').dxTextBox({
+            placeholder: "النص",
+            inputAttr: { "aria-label": "text" },
+        });
+    })
+    $(() =>{
+        $('#txtUser02Optional').dxTextBox({
+            placeholder: "النص",
+            inputAttr: { "aria-label": "text" },
+        });
+    })
+    $(() =>{
+        $('#txtUser03Optional').dxTextBox({
+            placeholder: "النص",
+            inputAttr: { "aria-label": "text" },
+        });
+    })
+    $(() =>{
+        $('#txtUser04Optional').dxTextBox({
+            placeholder: "النص",
+            inputAttr: { "aria-label": "text" },
+        });
+    })
 });
 // End Components.
 
