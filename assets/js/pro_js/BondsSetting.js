@@ -307,7 +307,7 @@ function BondsSetting_filldata() {
                                         url: "bondsSetting/show",
                                         data: {BondsSettingID:BondsSettingID},
                                         success: function (response) {
-
+                                            console.log(response);
                                             //#region  Data of TextBox and so on...
                                             $('#id').dxTextBox("instance").option("value",response.getBondsSetting.id);
                                             $('#st_Guid').dxTextBox("instance").option("value",response.getBondsSetting.st_Guid);
@@ -354,8 +354,15 @@ function BondsSetting_filldata() {
                                             if(response.getBondsSetting.CostVisible)
                                             $('#CostVisible').dxSwitch("instance").option("value",true)
                                             else $('#CostVisible').dxSwitch("instance").option("value",false)
-
-
+                                            if(response.getBondsSetting.Save_And_Print)
+                                            $('#SaveAndPrint').dxSwitch("instance").option("value",true)
+                                            else $('#SaveAndPrint').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.SaveAndNew)
+                                            $('#SaveAndNew').dxSwitch("instance").option("value",true)
+                                            else $('#SaveAndNew').dxSwitch("instance").option("value",false)
+                                            if(response.getBondsSetting.AcceptZero)
+                                            $('#AcceptZero').dxSwitch("instance").option("value",true)
+                                            else $('#AcceptZero').dxSwitch("instance").option("value",false)
                                             //#endregion
 
 

@@ -33,6 +33,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" type="text/css" href=" {{ url('assets/css/style.css') }}" ">
     <link rel="stylesheet" type="text/css" href=" {{ url('assets/css/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ url('assets/bootstrap-icons-1.4.1/bootstrap-icons.css') }}"> --}}
+
+    <link rel="stylesheet" href="{{ url('assets/plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ url('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ url('assets/plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ url('assets/plugins/summernote/summernote-bs4.css') }}">
+
+
+
     <link rel="stylesheet" type="text/css" href=" {{ url('assets/css/style.css') }}" ">
     <link rel="stylesheet" href=" {{ url('assets/css/style2.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/alertify.css') }}">
@@ -101,6 +112,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     </script>
 
+<script src="{{ url('assets/plugins/sparklines/sparkline.js') }}"></script>
+<!-- JQVMap -->
+<script src="{{ url('assets/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
+<script src="{{ url('assets/plugins/jqvmap/maps/jquery.vmap.world.js') }}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{ url('assets/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
+<!-- daterangepicker -->
+<script src="{{ url('assets/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ url('assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ url('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<!-- Summernote -->
+<script src="{{ url('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<!-- overlayScrollbars -->
+<script src="{{ url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
 </head>
 
@@ -166,16 +192,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Bootstrap 4 -->
     <script src="{{ url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
     <!-- AdminLTE App -->
+
     <script src="{{ url('assets/dist/js/adminlte.min.js') }}"></script>
 
-    {{-- <script type="text/javascript" src="{{ url('assets/dx/js/dx-diagram.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/dx/js/dx-gantt.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/dx/js/dx-quill.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/dx/js/dx.all.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/dx/js/exceljs.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/dx/js/FileSaver.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/dx/js/polyfill_7.4.0_polyfill.min.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script> --}}
 
 </body>
 

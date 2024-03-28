@@ -48,6 +48,21 @@ class BondsSettingController extends Controller
                 'txtUser02Optional' => $request->post('txtUser02Optional'),
                 'txtUser03Optional' => $request->post('txtUser03Optional'),
                 'txtUser04Optional' => $request->post('txtUser04Optional'),
+                'Debit_Visible' => $request->post('Debit_Visible'),
+                'Credit_Visible' => $request->post('Credit_Visible'),
+                'NoteAll_Visible' => $request->post('NoteAll_Visible'),
+                'Note_Acc_Visible' => $request->post('Note_Acc_Visible'),
+                'Acc_Guid_Visible' => $request->post('Acc_Guid_Visible'),
+                'txtUserVisible01' => $request->post('txtUserVisible01'),
+                'txtUserVisible02' => $request->post('txtUserVisible02'),
+                'txtUserVisible03' => $request->post('txtUserVisible03'),
+                'txtUserVisible04' => $request->post('txtUserVisible04'),
+                'CurrencyVisible' => $request->post('CurrencyVisible'),
+                'BranchVisible' => $request->post('BranchVisible'),
+                'CostVisible' => $request->post('CostVisible'),
+                'SaveAndNew' => $request->post('SaveAndNew'),
+                'AcceptZero' => $request->post('AcceptZero'),
+                'Save_And_Print' => $request->post('SaveAndPrint'),
             ]
             );
 
@@ -71,6 +86,9 @@ class BondsSettingController extends Controller
         $getBondsSetting->CurrencyVisible = $getBondsSetting->CurrencyVisible > 0 ? True:False;
         $getBondsSetting->BranchVisible = $getBondsSetting->BranchVisible > 0 ? True:False;
         $getBondsSetting->CostVisible = $getBondsSetting->CostVisible > 0 ? True:False;
+        $getBondsSetting->Save_And_Print = $getBondsSetting->Save_And_Print > 0 ? True:False;
+        $getBondsSetting->SaveAndNew = $getBondsSetting->SaveAndNew > 0 ? True:False;
+        $getBondsSetting->AcceptZero = $getBondsSetting->AcceptZero > 0 ? True:False;
         $data = [
             'getBondsSetting' => $getBondsSetting,
         ];
