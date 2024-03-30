@@ -33,7 +33,11 @@ class Bonds extends Model
         'isAccept',
         'IsPaidBill',
         'us_Guid',
-        'Branch_Guid'
+        'Branch_Guid',
+        'txtUser01Optional',
+        'txtUser02Optional',
+        'txtUser03Optional',
+        'txtUser04Optional',
 
     ];
 

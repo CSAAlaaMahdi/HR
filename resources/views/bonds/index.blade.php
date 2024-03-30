@@ -7,7 +7,7 @@
             <div class="card-header" style="background-color: #283741">
                 <div id="btnNewAdd" style="float: right"></div>
                 <div id="btnSave" style="float: right;margin-right: 15px"></div>
-                <h4 style="color: white;float: right;margin-right: 35%" id="card_Bondstitle" class="card_Bondstitle">
+                <h4 style="color: white;float: right;margin-right: 25%" id="card_Bondstitle" class="card_Bondstitle">
                     {{ $BondType }}</h4>
 
 
@@ -31,7 +31,7 @@
                     <hr>
                     <div class="col-md-12 row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="dx-fieldset" id="Bond-container" hidden>
                                 <div class="dx-field">
                                     <div class="dx-field-label">Guid</div>
@@ -68,21 +68,48 @@
                                     <span id="error_B_Datex" class="text-danger"></span>
                                 </div>
                             </div>
-                            {{-- <div class="dx-fieldset" id="HeaderToggle-container">
+                            <div class="dx-fieldset" id="User01-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">Cash</div>
+                                    <div class="dx-field-label" id="L_txtUser01Optional">نص1</div>
                                     <div class="dx-field-value">
-                                        <div id="B_Pay_Type"></div>
+                                        <div id="B_txtUser01Optional"></div>
                                     </div>
-                                    <span id="error_B_Pay_Type" class="text-danger"></span>
+                                    <span id="error_B_txtUser01Optional" class="text-danger"></span>
                                 </div>
-                            </div> --}}
+                            </div>
+                            <div class="dx-fieldset" id="User02-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label" id="L_txtUser02Optional">نص2</div>
+                                    <div class="dx-field-value">
+                                        <div id="B_txtUser02Optional"></div>
+                                    </div>
+                                    <span id="error_B_txtUser02Optional" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="dx-fieldset" id="User03-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label" id="L_txtUser03Optional">نص3</div>
+                                    <div class="dx-field-value">
+                                        <div id="B_txtUser03Optional"></div>
+                                    </div>
+                                    <span id="error_B_txtUser03Optional" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="dx-fieldset" id="User04-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label" id="L_txtUser04Optional">نص4</div>
+                                    <div class="dx-field-value">
+                                        <div id="B_txtUser04Optional"></div>
+                                    </div>
+                                    <span id="error_B_txtUser04Optional" class="text-danger"></span>
+                                </div>
+                            </div>
 
                         </div>
 
 
-                        <div class="col-md-3">
-                            <div class="dx-fieldset" id="Header-container">
+                        <div class="col-md-4">
+                            <div class="dx-fieldset" id="Bond-container">
                                 <div class="dx-field">
                                     <div class="dx-field-label">رقم القيد</div>
                                     <div class="dx-field-value">
@@ -92,7 +119,7 @@
                                 </div>
 
                             </div>
-                            <div class="dx-fieldset" id="Header-container">
+                            <div class="dx-fieldset" id="Bond-container">
                                 <div class="dx-field">
                                     <div class="dx-field-label">العملة</div>
                                     <div class="dx-field-value">
@@ -101,7 +128,7 @@
                                     <span id="error_B_Currency_Guid" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="dx-fieldset" id="Header-container">
+                            <div class="dx-fieldset" id="Bond-container">
                                 <div class="dx-field">
                                     <div class="dx-field-label">التعادل</div>
                                     <div class="dx-field-value">
@@ -110,19 +137,6 @@
                                     <span id="error_B_Currency_Equal" class="text-danger"></span>
                                 </div>
 
-                            </div>
-
-
-                        </div>
-                        <div class="col-md-3">
-                            <div class="dx-fieldset" id="Bond-container">
-                                <div class="dx-field">
-                                    <div class="dx-field-label">البيان</div>
-                                    <div class="dx-field-value">
-                                        <div id="B_Note"></div>
-                                    </div>
-                                    <span id="error_B_Note" class="text-danger"></span>
-                                </div>
                             </div>
                             <div class="dx-fieldset" id="Bond-container" hidden>
                                 <div class="dx-field">
@@ -144,7 +158,8 @@
                             </div>
 
                         </div>
-                        <div class="col-md-3">
+
+                        <div class="col-md-4">
                             <div class="dx-fieldset" id="BondToggle-container" hidden>
                                 <div class="dx-field">
                                     <div class="dx-field-label">فاتورة</div>
@@ -156,7 +171,7 @@
                             </div>
                             <div class="dx-fieldset" id="BondToggle-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">مقبول</div>
+                                    <div class="dx-field-label">مدقق</div>
                                     <div class="dx-field-value">
                                         <div id="B_IsAccept"></div>
                                     </div>
@@ -185,6 +200,20 @@
                         </div>
 
                         <hr>
+
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-md-10">
+                            <div class="dx-fieldset" id="BondNote-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label">البيان</div>
+                                    <div class="dx-field-value">
+                                        <div id="B_Note"></div>
+                                    </div>
+                                    <span id="error_B_Note" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="demo-container">

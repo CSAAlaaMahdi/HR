@@ -158,7 +158,7 @@ function Bonds_filldata() {
             url: url + "filldata",
             data: { BondType: stateURL},
             success: function (response) {
-
+                console.log(response.getBonds);
                 let type = response.getBonds['id'];
                 switch (type) {
                     case 3:
@@ -168,6 +168,30 @@ function Bonds_filldata() {
                     default:
                         $('#B_IsBill').dxSwitch("instance").option("value",false);
                         break;
+                }
+                if(response.getBonds['txtUserVisible01'] ==='0'){
+                    $('#User01-container').hide();
+                }else{
+                    $("#L_txtUser01Optional").html(response.getBonds['txtUser01Optional']);
+                    $('#User01-container').show();
+                }
+                if(response.getBonds['txtUserVisible02'] ==='0'){
+                    $('#User02-container').hide();
+                }else{
+                    $("#L_txtUser02Optional").html(response.getBonds['txtUser02Optional']);
+                    $('#User02-container').show();
+                }
+                if(response.getBonds['txtUserVisible03'] ==='0'){
+                    $('#User03-container').hide();
+                }else{
+                    $("#L_txtUser03Optional").html(response.getBonds['txtUser03Optional']);
+                    $('#User03-container').show();
+                }
+                if(response.getBonds['txtUserVisible04'] ==='0'){
+                    $('#User04-container').hide();
+                }else{
+                    $("#L_txtUser04Optional").html(response.getBonds['txtUser04Optional']);
+                    $('#User04-container').show();
                 }
                 $(() => {
                     let dataGrid;
@@ -452,6 +476,10 @@ function Bonds_filldata() {
                                             $('#B_Bond_Type').dxDropDownBox("instance").option("value",typeVou);
                                             $('#B_Note').dxTextArea("instance").option("value",response.getBondBody[0].Notes);
                                             $('#B_st_Guid').dxTextBox("instance").option("value",response.getBondBody[0].st_Guid);
+                                            $('#B_txtUser01Optional').dxTextBox("instance").option("value",response.getBondBody[0].txtUser01Optional);
+                                            $('#B_txtUser02Optional').dxTextBox("instance").option("value",response.getBondBody[0].txtUser02Optional);
+                                            $('#B_txtUser03Optional').dxTextBox("instance").option("value",response.getBondBody[0].txtUser03Optional);
+                                            $('#B_txtUser04Optional').dxTextBox("instance").option("value",response.getBondBody[0].txtUser04Optional);
                                             if(response.getBondBody[0].Is_Bill ==true){
                                                 $('#B_IsBill').dxSwitch("instance").option("value",true);
                                             }else{
@@ -959,6 +987,34 @@ $(document).ready(function () {
             placeholder: "st Guid",
             inputAttr: { "aria-label": "st_Guid" },
             readOnly: true,
+        });
+    });
+    $(() => {
+        $("#B_txtUser01Optional").dxTextBox({
+            placeholder: "ادخل المعلومات",
+            inputAttr: { "aria-label": "txtuser01" },
+
+        });
+    });
+    $(() => {
+        $("#B_txtUser02Optional").dxTextBox({
+            placeholder: "ادخل المعلومات",
+            inputAttr: { "aria-label": "txtuser02" },
+
+        });
+    });
+    $(() => {
+        $("#B_txtUser03Optional").dxTextBox({
+            placeholder: "ادخل المعلومات",
+            inputAttr: { "aria-label": "txtuser03" },
+
+        });
+    });
+    $(() => {
+        $("#B_txtUser04Optional").dxTextBox({
+            placeholder: "ادخل المعلومات",
+            inputAttr: { "aria-label": "txtuser04" },
+
         });
     });
 

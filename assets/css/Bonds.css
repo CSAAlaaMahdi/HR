@@ -1,36 +1,94 @@
 #Bond-container > .dx-field > .dx-field-label {
     width: 25%;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: rgb(43, 43, 43);
     font-weight: bold;
   }
 
   #Bond-container > .dx-field > .dx-field-value {
     width: 75%;
+    font-size: 0.8rem;
+  }
+  #Bond2-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 0.8rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #Bond2-container > .dx-field > .dx-field-value {
+    width: 75%;
+    font-size: 0.8rem;
+  }
+  #User01-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 0.8rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #User01-container > .dx-field > .dx-field-value {
+    width: 75%;
+    font-size: 0.8rem;
+  }
+  #User02-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 0.8rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #User02-container > .dx-field > .dx-field-value {
+    width: 75%;
+    font-size: 0.8rem;
+  }
+  #User03-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 0.8rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #User03-container > .dx-field > .dx-field-value {
+    width: 75%;
+    font-size: 0.8rem;
+  }
+  #User04-container > .dx-field > .dx-field-label {
+    width: 25%;
+    font-size: 0.8rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #User04-container > .dx-field > .dx-field-value {
+    width: 75%;
+    font-size: 0.8rem;
+  }
+  #BondNote-container > .dx-field > .dx-field-label {
+    width: 9%;
+    font-size: 0.8rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #BondNote-container > .dx-field > .dx-field-value {
+    width: 91%;
+    font-size: 0.8rem;
   }
   #Bond-Search > .dx-field > .dx-field-label {
-    width: 6%;
-    font-size: 1rem;
+    width: 12%;
+    font-size: 0.8rem;
     color: rgb(43, 43, 43);
     font-weight: bold;
   }
 
   #Bond-Search > .dx-field > .dx-field-value {
-    width: 30%;
-  }
-  #Footer-container > .dx-field > .dx-field-label {
-    width: 35%;
-    font-size: 1rem;
-    color: rgb(43, 43, 43);
-    font-weight: bold;
+    width: 85%;
   }
 
-  #Footer-container > .dx-field > .dx-field-value {
-    width: 65%;
-  }
   #BondToggle-container > .dx-field > .dx-field-label {
     width: 25%;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: rgb(43, 43, 43);
     font-weight: bold;
   }
@@ -39,17 +97,7 @@
     width: 6%;
     float:right
   }
-  #FooterToggle-container > .dx-field > .dx-field-label {
-    width: 25%;
-    font-size: 1rem;
-    color: rgb(43, 43, 43);
-    font-weight: bold;
-  }
 
-  #FooterToggle-container > .dx-field > .dx-field-value {
-    width: 17%;
-    float:right
-  }
   .custom-header {
     background-color: #283741; /* Set your desired color here */
     color: white; /* Set text color to make it readable */
