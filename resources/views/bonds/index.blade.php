@@ -9,15 +9,14 @@
                     <div id="btnNewAdd" style="float: right"></div>
                     <div id="btnSave" style="float: right;margin-right: 15px"></div>
                 </div>
-                <div style="width: 25%;background-color:rgb(195, 223, 40)">hello2</div>
-                <div style="width: 25%;background-color:rgb(74, 41, 223)">hello3</div>
-                <div style="width: 25%;background-color:rgb(126, 7, 173)">hello4</div>
-                {{--
-
-
-                <h4 style="color: white;float: right" id="card_Bondstitle" class="card_Bondstitle">
-                    {{ $BondType }}</h4>
-                 <div id="btnPrint" style="float: left" ></div> --}}
+                <div style="width: 25%;">
+                    <h4 style="color: white;float: left" id="card_Bondstitle" class="card_Bondstitle">
+                        {{ $BondType }}</h4>
+                </div>
+                <div style="width: 25%;"></div>
+                <div style="width: 25%;">
+                    <div id="btnPrint" ></div>
+                </div>
 
             </div>
             {{-- <div id="notificationContainer"></div> --}}
@@ -47,6 +46,15 @@
                                         <div id="B_Guid"></div>
                                     </div>
                                     <span id="error_B_Guid" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="dx-fieldset" id="Bond-container" hidden>
+                                <div class="dx-field">
+                                    <div class="dx-field-label">ParentGuid</div>
+                                    <div class="dx-field-value">
+                                        <div id="B_ParentGuid"></div>
+                                    </div>
+                                    <span id="error_B_ParentGuid" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="dx-fieldset" id="Bond-container">

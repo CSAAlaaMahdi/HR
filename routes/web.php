@@ -42,7 +42,6 @@ use App\Http\Controllers\ReportSalingBillController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UsersGroupsController;
 use App\Http\Controllers\VINController;
-use App\Models\BondsSetting;
 
 /*
 |--------------------------------------------------------------------------
@@ -194,13 +193,11 @@ Route::get('BondsStarterfill/filldata',[BondsController::class,'filldata']);
 Route::get('BondsStarterfill/getBondNumber',[BondsController::class,'getBondNumber']);
 Route::get('BondsBillsfill/filldata',[BondsController::class,'filldata']);
 Route::get('BondsBillsfill/getBondNumber',[BondsController::class,'getBondNumber']);
+Route::get('BondPrint/CreatePrint',[BondsController::class,'CreatePrint']);
+Route::get('BondPrint/BondPrint',[BondsController::class,'BondPrint']);
 
 Route::get('bondsSettingfill/filldata',[BondsSettingController::class,'filldata']);
-
-
-
 Route::get('BillsSettingfill/filldata',[BillsSettingController::class,'filldata']);
-
 
 Route::get('StoriesTreesfill/setStCode',[StoriesTreeController::class,'setStCode']);
 Route::get('StoriesTreesfill/filldata',[StoriesTreeController::class,'filldata']);

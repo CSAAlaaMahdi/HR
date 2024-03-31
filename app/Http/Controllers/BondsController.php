@@ -482,5 +482,84 @@ class BondsController extends Controller
         return response()->json($data);
     }
 
+    // Print Bond ............
+    function CreatePrint(Request $request)
+    {
+        // $parentGuid = $request->input('ParentGuid');
+        $BondNumber = $request->input('BondNumber');
+        $BondType = $request->input('BondType');
+        $request->session()->put('Bond_Number', $BondNumber);
+        $request->session()->put('Bond_Type', $BondType);
+    }
+
+    function BondPrint(Request $request)
+    {
+
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 50,
+            'margin_bottom' => 10,
+            'margin_header' => 3,
+            'margin_footer' => 5,
+        ]);
+        $mpdf->autoScriptToLang = true;
+        $mpdf->autoLangToFont = true;
+        $footer = $this->Setfooter();
+        $header = $this->Setheader();
+        $mpdf->SetHTMLHeader($header);
+        $mpdf->SetHTMLFooter($footer);
+        $stylesheet = file_get_contents(url('assets/css/Pro_css/PrintBond.css'));
+        try {
+            $html = $this->PrintPage();
+            $mpdf->WriteHTML($stylesheet, 1);
+            $mpdf->WriteHTML($html);
+            return redirect()->to($mpdf->Output('filename.pdf', 'I'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function PrintPage()
+    {
+        $BondType = session('Bond_Type');
+        $BondNumber = session('Bond_Number');
+
+        $Bond = Bonds::where([
+            ['Vou_Type',$BondType],
+            ['Bond_Number',$BondNumber],
+            ['Credit','<>',0]
+            ])->orderBy('Vou_Row_No')->get()
+            ->map(function($item){
+                $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
+
+                return $item;
+            });
+       
+        $query = [
+            'Bond' => $Bond,
+
+        ];
+
+
+        return view('bonds.bondPrint', $query);
+    }
+
+    public function Setheader()
+    {
+        $BondType = session('Bond_Type');
+        $BondName = BondsSetting::find($BondType)->Form_Text;
+        $query = [
+            'BondName' => $BondName,
+        ];
+        return view('bonds.bondHeader', $query)->render();
+    }
+
+    public function Setfooter()
+    {
+        return view('bonds.bondFooter')->render();
+    }
 
 }

@@ -475,6 +475,7 @@ function Bonds_filldata() {
                                             });
                                             let typeVou = Number(response.getBondBody[0].Vou_Type);
                                             $('#B_Guid').dxTextBox("instance").option("value",response.getBondBody[0].Guid);
+                                            $('#B_ParentGuid').dxTextBox("instance").option("value",response.getBondBody[0].Parent_Guid);
                                             $('#B_Bond_Number').dxTextBox("instance").option("value",response.getBondBody[0].Bond_Number);
                                             $('#B_Doc_Number').dxTextBox("instance").option("value",response.getBondBody[0].Doc_Number);
                                             $('#B_Datex').dxDateBox("instance").option("Date",response.getBondBody[0].Datex);
@@ -856,15 +857,15 @@ function getIDofItem(partnumber){
 
 function Bonds_Print(){
 
-    let headerGuid = $('#H_Guid').dxTextBox("instance").option("value");
-    let url = 'BillPrint/CreatePrint';
-    let url2 = 'BillPrint/BillPrint';
+    let BondNumber = $('#B_GetBonds').dxDropDownBox("instance").option("value");
+    let BondType = $('#B_Bond_Type').dxDropDownBox("instance").option("value");
+    let url = 'BondPrint/CreatePrint';
+    let url2 = 'BondPrint/BondPrint';
     $.ajax({
         type: "GET",
         url: url ,
-        data: {Header_Guid:headerGuid},
+        data: {BondNumber:BondNumber,BondType:BondType},
         success: function(response) {
-
 
             var a = document.createElement('a');
             a.href = url2 ;
@@ -933,11 +934,11 @@ $(document).ready(function () {
         icon: "print",
         width: 150,
         onClick() {
-           Bonds_Print()
+          Bonds_Print();
 
         },
         elementAttr:{
-            style: 'background-color: #3498db; color: #ffffff;width:110px;'
+            style: 'background-color: #3498db; color: #ffffff;width:110px;float:left'
         }
 
 
@@ -988,6 +989,13 @@ $(document).ready(function () {
         $("#B_Guid").dxTextBox({
             placeholder: "Guid",
             inputAttr: { "aria-label": "Guid" },
+
+        });
+    });
+    $(() => {
+        $("#B_ParentGuid").dxTextBox({
+            placeholder: "ادخل المعلومات",
+            inputAttr: { "aria-label": "txtuser04" },
 
         });
     });
