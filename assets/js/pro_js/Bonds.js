@@ -23,7 +23,10 @@ function Bonds_cleardata() {
     $('#gridContainer').dxDataGrid({
             'dataSource':"",
     });
-
+    $('#B_txtUser01Optional').dxTextBox("instance").option("value","");
+    $('#B_txtUser02Optional').dxTextBox("instance").option("value","");
+    $('#B_txtUser03Optional').dxTextBox("instance").option("value","");
+    $('#B_txtUser04Optional').dxTextBox("instance").option("value","");
 
 }
 //Begin CRUD Function...
@@ -72,6 +75,10 @@ function Bonds_UpdateOrInsert() {
         B_Bond_Type: $('#B_Bond_Type').dxDropDownBox("instance").option("value"),
         B_st_Guid: $('#B_st_Guid').dxTextBox("instance").option("value"),
         B_Doc_Number: $('#B_Doc_Number').dxTextBox("instance").option("value"),
+        B_txtUser01Optional: $('#B_txtUser01Optional').dxTextBox("instance").option("value"),
+        B_txtUser02Optional: $('#B_txtUser02Optional').dxTextBox("instance").option("value"),
+        B_txtUser03Optional: $('#B_txtUser03Optional').dxTextBox("instance").option("value"),
+        B_txtUser04Optional: $('#B_txtUser04Optional').dxTextBox("instance").option("value"),
         B_IsBill: (function () {
             if ($("#B_IsBill").dxSwitch("instance").option("value")) {
                 return 1;
@@ -158,7 +165,6 @@ function Bonds_filldata() {
             url: url + "filldata",
             data: { BondType: stateURL},
             success: function (response) {
-                console.log(response.getBonds);
                 let type = response.getBonds['id'];
                 switch (type) {
                     case 3:
@@ -169,6 +175,7 @@ function Bonds_filldata() {
                         $('#B_IsBill').dxSwitch("instance").option("value",false);
                         break;
                 }
+
                 if(response.getBonds['txtUserVisible01'] ==='0'){
                     $('#User01-container').hide();
                 }else{
@@ -193,6 +200,7 @@ function Bonds_filldata() {
                     $("#L_txtUser04Optional").html(response.getBonds['txtUser04Optional']);
                     $('#User04-container').show();
                 }
+
                 $(() => {
                     let dataGrid;
 
@@ -845,6 +853,28 @@ function getIDofItem(partnumber){
     }
 
 }
+
+function Bonds_Print(){
+
+    let headerGuid = $('#H_Guid').dxTextBox("instance").option("value");
+    let url = 'BillPrint/CreatePrint';
+    let url2 = 'BillPrint/BillPrint';
+    $.ajax({
+        type: "GET",
+        url: url ,
+        data: {Header_Guid:headerGuid},
+        success: function(response) {
+
+
+            var a = document.createElement('a');
+            a.href = url2 ;
+            window.open(a.href, '_blank');
+
+        }
+
+    });
+
+}
 // End CRUD Functions.
 
 $(document).ready(function () {
@@ -895,6 +925,24 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $("#btnPrint").dxButton({
+        stylingMode: "contained",
+        text: "طباعة ",
+        type: "default",
+        icon: "print",
+        width: 150,
+        onClick() {
+           Bonds_Print()
+
+        },
+        elementAttr:{
+            style: 'background-color: #3498db; color: #ffffff;width:110px;'
+        }
+
+
+    });
+});
 
 // Button Save Data
 $(document).ready(function () {

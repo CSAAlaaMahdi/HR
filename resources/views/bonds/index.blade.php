@@ -4,15 +4,23 @@
 
     <div class="col-md-12 ">
         <div class="card Bondsaction" id="Bondsaction">
-            <div class="card-header" style="background-color: #283741">
-                <div id="btnNewAdd" style="float: right"></div>
-                <div id="btnSave" style="float: right;margin-right: 15px"></div>
-                <h4 style="color: white;float: right;margin-right: 25%" id="card_Bondstitle" class="card_Bondstitle">
-                    {{ $BondType }}</h4>
+            <div class="card-header row" style="background-color: #283741;margin:0px">
+                <div style="width: 25%;">
+                    <div id="btnNewAdd" style="float: right"></div>
+                    <div id="btnSave" style="float: right;margin-right: 15px"></div>
+                </div>
+                <div style="width: 25%;background-color:rgb(195, 223, 40)">hello2</div>
+                <div style="width: 25%;background-color:rgb(74, 41, 223)">hello3</div>
+                <div style="width: 25%;background-color:rgb(126, 7, 173)">hello4</div>
+                {{--
 
+
+                <h4 style="color: white;float: right" id="card_Bondstitle" class="card_Bondstitle">
+                    {{ $BondType }}</h4>
+                 <div id="btnPrint" style="float: left" ></div> --}}
 
             </div>
-            <div id="notificationContainer"></div>
+            {{-- <div id="notificationContainer"></div> --}}
             <div class="card-body">
                 <div class="row">
 

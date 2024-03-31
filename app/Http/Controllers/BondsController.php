@@ -57,6 +57,10 @@ class BondsController extends Controller
         $IsAccept = $request->post('B_IsAccept');
         $IsLock = $request->post('B_IsLock');
         $IsPaidBill = $request->post('B_IsPaidBill');
+        $txtUser01Optional = $request->post('B_txtUser01Optional');
+        $txtUser02Optional = $request->post('B_txtUser02Optional');
+        $txtUser03Optional = $request->post('B_txtUser03Optional');
+        $txtUser04Optional = $request->post('B_txtUser04Optional');
 
         $BondBody = $request->post('Bond_Body');
 
@@ -124,6 +128,10 @@ class BondsController extends Controller
                                     'Credit' => 0,
                                     'Debit' => $BondBody[$i]['Credit'],
                                     'Vou_Row_No' => $Vou_Row_No,
+                                    'txtUser01Optional' => $txtUser01Optional,
+                                    'txtUser02Optional' => $txtUser02Optional,
+                                    'txtUser03Optional' => $txtUser03Optional,
+                                    'txtUser04Optional' => $txtUser04Optional,
 
                                 ]
                             );
@@ -154,6 +162,10 @@ class BondsController extends Controller
                                     'Credit' => $BondBody[$i]['Credit'],
                                     'Debit' => 0,
                                     'Vou_Row_No' => $Vou_Row_No,
+                                    'txtUser01Optional' => $txtUser01Optional,
+                                    'txtUser02Optional' => $txtUser02Optional,
+                                    'txtUser03Optional' => $txtUser03Optional,
+                                    'txtUser04Optional' => $txtUser04Optional,
 
                                 ]
                             );
@@ -239,6 +251,10 @@ class BondsController extends Controller
                                     'Credit' => $BondBody[$i]['Debit'],
                                     'Debit' => 0,
                                     'Vou_Row_No' => $Vou_Row_No,
+                                    'txtUser01Optional' => $txtUser01Optional,
+                                    'txtUser02Optional' => $txtUser02Optional,
+                                    'txtUser03Optional' => $txtUser03Optional,
+                                    'txtUser04Optional' => $txtUser04Optional,
 
                                 ]
                             );
@@ -269,6 +285,10 @@ class BondsController extends Controller
                                     'Credit' =>0 ,
                                     'Debit' => $BondBody[$i]['Debit'],
                                     'Vou_Row_No' => $Vou_Row_No,
+                                    'txtUser01Optional' => $txtUser01Optional,
+                                    'txtUser02Optional' => $txtUser02Optional,
+                                    'txtUser03Optional' => $txtUser03Optional,
+                                    'txtUser04Optional' => $txtUser04Optional,
 
                                 ]
                             );
@@ -353,6 +373,10 @@ class BondsController extends Controller
                                     'Credit' => $BondBody[$i]['Credit'],
                                     'Debit' => $BondBody[$i]['Debit'],
                                     'Vou_Row_No' => $Vou_Row_No,
+                                    'txtUser01Optional' => $txtUser01Optional,
+                                    'txtUser02Optional' => $txtUser02Optional,
+                                    'txtUser03Optional' => $txtUser03Optional,
+                                    'txtUser04Optional' => $txtUser04Optional,
 
                                 ]
                             );
@@ -409,25 +433,7 @@ class BondsController extends Controller
 
     public function update(Request $request)
     {
-        // $id = $request->post('BB_ID');
-        // $data = BillBuying::find($id);
-        // $data->BB_BillNumber = $request->post('BB_BillNumber');
-        // $data->BB_BillDate = $request->post('BB_BillDate');
-        // $data->BB_Customer = $request->post('BB_Customer');
-        // $data->BB_Provider = $request->post('BB_Provider');
-        // $data->BB_BillType = $request->post('BB_BillType');
-        // $data->BB_Currency = $request->post('BB_Currency');
-        // $data->BB_CurrencyCost = $request->post('BB_CurrencyCost');
-        // $data->BB_Credit = $request->post('BB_Credit');
-        // $data->BB_Debt = $request->post('BB_Debt');
-        // $data->BB_TotalMoney = $request->post('BB_TotalMoney');
-        // $data->BB_StoreName = $request->post('BB_StoreName');
-        // $data->BB_Notes = $request->post('BB_Notes');
-        // $data->BB_State = $request->post('BB_State');
-        // $data->BB_UserName = session('User');
-        // $data->update();
-
-        // return response()->json(['status' => ' Updating Successfully...']);
+       
     }
 
 
