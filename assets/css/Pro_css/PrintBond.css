@@ -99,7 +99,6 @@ body{
 }
 
 .infoData{
-    background-color: #0ea88a;
     display: flex;
     flex-direction: row;
     width: 100%;

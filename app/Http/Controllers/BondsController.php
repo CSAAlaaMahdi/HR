@@ -433,7 +433,7 @@ class BondsController extends Controller
 
     public function update(Request $request)
     {
-       
+
     }
 
 
@@ -527,17 +527,19 @@ class BondsController extends Controller
         $BondType = session('Bond_Type');
         $BondNumber = session('Bond_Number');
 
-        $Bond = Bonds::where([
+        $Bond = Bonds::select('Tb_Vou.*', 'accounttreemains.Ac_Code_Mask as Acc_MaskCode')
+            ->join('accounttreemains', 'Tb_Vou.Guid', '=', 'accounttreemains.Guid')
+            ->where([
             ['Vou_Type',$BondType],
             ['Bond_Number',$BondNumber],
             ['Credit','<>',0]
             ])->orderBy('Vou_Row_No')->get()
             ->map(function($item){
                 $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
-
+                $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
                 return $item;
             });
-       
+
         $query = [
             'Bond' => $Bond,
 

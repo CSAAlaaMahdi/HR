@@ -16,8 +16,8 @@
 
             </div>
             <div id="rightcontent2" class="rightcontent">
-                <div id="spanStyle2">: {{$Bond[0]['Currency_Guid']}}</div>
-                <div id="spanStyle2">: {{$Bond[0]['Credit']}}</div>
+                <div id="spanStyle2">: {{ $Bond[0]['Currency_Guid'] }}</div>
+                <div id="spanStyle2">: {{ $Bond[0]['Credit'] }}</div>
 
             </div>
         </div>
@@ -28,42 +28,47 @@
                 <div id="spanStyle1">التاريخ</div>
             </div>
             <div id="rightcontent2" class="rightcontent">
-                <div id="spanStyle2">: {{$Bond[0]['Bond_Number']}}</div>
-                <div id="spanStyle2">: {{$Bond[0]['created_at']}}</div>
+                <div id="spanStyle2">: {{ $Bond[0]['Bond_Number'] }}</div>
+                <div id="spanStyle2">: {{ $Bond[0]['created_at'] }}</div>
 
             </div>
         </div>
+
         <div class="infoData">
-            
-                <div style="width: 20%;background-color: red">استلمت من السيد :</div>
-                <div style="width:60%;background-color:blue">dddd</div>
-          
-           
+            <div style="width: 16%;float: right;">استلمت من السيد :</div>
+            <div style="width:84%; border-bottom:1px dotted black;float: left;">علاء مهدي حسن</div>
         </div>
+        <div class="infoData">
+            <div style="width: 10%;float: right;">مبلغ قدره:</div>
+            <div style="width:90%; border-bottom:1px dotted black;float: left;">علاء مهدي حسن</div>
+        </div>
+        <div class="infoData">
+            <div style="width: 10%;float: right;"> مقابل:</div>
+            <div style="width:90%; border-bottom:1px dotted black;float: left;">علاء مهدي حسن</div>
+        </div>
+        <br><br>
+        <br>
+        <br>
+
         <div class="Items">
             <table class="table cs_table borderd">
                 <thead>
                     <tr>
-                        <td>ت</td>
-                        <td>اسم المادة</td>
-                        <td>المعرف</td>
-                        <td>الكمية</td>
-                        <td>سعر الوحدة</td>
-                        <td>الاجمالي</td>
+                        <td>الحساب الدائن</td>
+                        <td> الدليل المحاسبي</td>
+                        <td>المبلغ</td>
+
                     </tr>
                 </thead>
                 <tbody>
 
-                    {{-- @foreach ($BillItems as $value)
+                    @foreach ($Bond as $value)
                         <tr>
-                            <td>{{ ++$Count }}</td>
-                            <td>{{ $value->Item_Guid }}</td>
-                            <td>{{ $value->Item_PartNumber }}</td>
-                            <td>{{ $value->Item_Qty1 }}</td>
-                            <td>{{ $value->Item_Price }} </td>
-                            <td>{{ $value->Item_Price_Final }}</td>
+                            <td>{{ $value->Acc_Guid }}</td>
+                            <td>{{ $value->Acc_MaskCode }}</td>
+                            <td>{{ $value->Credit }}</td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
 
 
                 </tbody>
