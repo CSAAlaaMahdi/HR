@@ -11,11 +11,11 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
         <li
-            class="nav-item has-treeview {{ request()->routeIs('home.index*') || request()->routeIs('main.index') ? 'menu-open' : 'menu-close' }} ">
+            class="nav-item has-treeview {{ request()->routeIs('home.index') || request()->routeIs('main.index') ? 'menu-open' : 'menu-close' }} ">
             <a href="#"
-                class="nav-link {{ request()->routeIs('home.index*') || request()->routeIs('main.index') ? 'active' : '' }} ">
+                class="nav-link {{ request()->routeIs('home.index') || request()->routeIs('main.index') ? 'active' : '' }} ">
                 <img src="{{ url('assets/img/navbar/icons8_dashboard_64px.png') }}" alt=""
-                    style="margin-right: 5px; width: 32px; height: 32;">
+                    style=" width: 32px; height: 32px;">
                 {{-- <i class="nav-icon fas fa-tachometer-alt"></i> --}}
                 <p style="margin-right: 10px">
                     الرئيسية
@@ -29,11 +29,11 @@
 
                         @if (request()->routeIs('main.index'))
                             <img src="{{ url('assets/img/navbar/icons8_home_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style=" width: 32px; height: 32px;">
                             <p style="margin-right:10px">الرئيسية</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_home_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style=" width: 32px; height: 32px;">
                             <p style="margin-right:10px">الرئيسية</p>
                         @endif
                     </a>
@@ -44,11 +44,11 @@
 
                         @if (request()->routeIs('home.index'))
                             <img src="{{ url('assets/img/navbar/icons8_home_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style=" width: 32px; height: 32px;">
                             <p style="margin-right:10px">الرئيسية</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_home_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الرئيسية</p>
                         @endif
                     </a>
@@ -80,7 +80,7 @@
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_settings_64px.png') }}" alt=""
-                    style="margin-right: 5px; width: 32px; height: 32;">
+                    style="width: 32px; height: 32px;">
                 <p style="margin-right: 10px">
                     الاعدادات
                     <i class="right fas fa-angle-left"></i>
@@ -92,11 +92,11 @@
                         class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
                         @if (request()->routeIs('users.index'))
                             <img src="{{ url('assets/img/navbar/icons8_users_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style=" width: 32px; height: 32px;">
                             <p style="margin-right:10px">المستخدمون</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_users_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">المستخدمون</p>
                         @endif
                     </a>
@@ -106,11 +106,11 @@
                         class="nav-link {{ request()->routeIs('usersgroups.index') ? 'active' : '' }}">
                         @if (request()->routeIs('usersgroups.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">المجموعات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">المجموعات</p>
                         @endif
                     </a>
@@ -120,11 +120,11 @@
                         class="nav-link {{ request()->routeIs('permissions.index') ? 'active' : '' }}">
                         @if (request()->routeIs('permissions.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الصلاحيات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الصلاحيات</p>
                         @endif
                     </a>
@@ -134,11 +134,11 @@
                         class="nav-link {{ request()->routeIs('frame.index') ? 'active' : '' }}">
                         @if (request()->routeIs('frame.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">النماذج</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">النماذج</p>
                         @endif
                     </a>
@@ -148,11 +148,11 @@
                         class="nav-link {{ request()->routeIs('state.index') ? 'active' : '' }}">
                         @if (request()->routeIs('state.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الحالة</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الحالة</p>
                         @endif
                     </a>
@@ -162,11 +162,11 @@
                         class="nav-link {{ request()->routeIs('salesgroups.index') ? 'active' : '' }}">
                         @if (request()->routeIs('salesgroups.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">مجموعة البيع</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">مجموعة البيع</p>
                         @endif
                     </a>
@@ -176,11 +176,11 @@
                         class="nav-link {{ request()->routeIs('BillsSetting.index') ? 'active' : '' }}">
                         @if (request()->routeIs('BillsSetting.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">اعدادات الفواتير</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">اعدادات الفواتير</p>
                         @endif
                     </a>
@@ -190,11 +190,11 @@
                         class="nav-link {{ request()->routeIs('bondsSetting.index') ? 'active' : '' }}">
                         @if (request()->routeIs('bondsSetting.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">اعدادات السندات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">اعدادات السندات</p>
                         @endif
                     </a>
@@ -205,11 +205,11 @@
                         class="nav-link {{ request()->routeIs('groupsnames.index') ? 'active' : '' }}">
                         @if (request()->routeIs('groupsnames.index'))
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">اسماء المجموعات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">اسماء المجموعات</p>
                         @endif
                     </a>
@@ -241,7 +241,7 @@
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_database_view_64px.png') }}" alt=""
-                    style="margin-right: 5px; width: 32px; height: 32;">
+                    style="width: 28px; height: 28px;">
                 <p style="margin-right: 10px">
                     بيانات ثابتة
                     <i class="right fas fa-angle-left"></i>
@@ -255,11 +255,11 @@
                         class="nav-link {{ request()->routeIs('unitname.index') ? 'active' : '' }}">
                         @if (request()->routeIs('unitname.index'))
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style=" width: 32px; height: 32px;">
                             <p style="margin-right:10px">الوحدات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الوحدات</p>
                         @endif
                     </a>
@@ -269,11 +269,11 @@
                         class="nav-link {{ request()->routeIs('brand.index') ? 'active' : '' }}">
                         @if (request()->routeIs('brand.index'))
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الماركات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الماركات</p>
                         @endif
                     </a>
@@ -284,11 +284,11 @@
                         class="nav-link {{ request()->routeIs('company.index') ? 'active' : '' }}">
                         @if (request()->routeIs('company.index'))
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الشركات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الشركات</p>
                         @endif
                     </a>
@@ -298,11 +298,11 @@
                         class="nav-link {{ request()->routeIs('country.index') ? 'active' : '' }}">
                         @if (request()->routeIs('country.index'))
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الدول</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الدول</p>
                         @endif
                     </a>
@@ -312,11 +312,11 @@
                         class="nav-link {{ request()->routeIs('currency.index') ? 'active' : '' }}">
                         @if (request()->routeIs('currency.index'))
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">العملات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">العملات</p>
                         @endif
                     </a>
@@ -327,11 +327,11 @@
                         class="nav-link {{ request()->routeIs('kind.index') ? 'active' : '' }}">
                         @if (request()->routeIs('kind.index'))
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">النوع</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">النوع</p>
                         @endif
                     </a>
@@ -341,11 +341,11 @@
                         class="nav-link {{ request()->routeIs('modell.index') ? 'active' : '' }}">
                         @if (request()->routeIs('modell.index'))
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الطراز</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">الطراز</p>
                         @endif
                     </a>
@@ -366,7 +366,7 @@
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_bank_building_64px.png') }}" alt=""
-                    style="width: 32px;height: 32px;margin-right:5px">
+                    style="width: 32px;height: 32px;">
                 <p style="margin-right: 10px">
                     الحسابات
                     <i class="right fas fa-angle-left"></i>
@@ -378,11 +378,11 @@
                         class="nav-link {{ request()->routeIs('accounttree.index') ? 'active' : '' }}">
                         @if (request()->routeIs('accounttree.index'))
                             <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">شجرة الحسابات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">شجرة الحسابات</p>
                         @endif
                     </a>
@@ -391,11 +391,11 @@
                     <a href="" class="nav-link ">
                         @if (request()->routeIs('accounttree.index'))
                             <img src="{{ url('assets/img/navbar/icons8_Scales_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">ميزان المراجعة</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Scales_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">ميزان المراجعة</p>
                         @endif
                     </a>
@@ -404,11 +404,11 @@
                     <a href="" class="nav-link ">
                         @if (request()->routeIs('accounttree.index'))
                             <img src="{{ url('assets/img/navbar/icons8_moleskine_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">دفتر الاستاذ</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_moleskine_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">دفتر الاستاذ</p>
                         @endif
                     </a>
@@ -434,7 +434,7 @@
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_finance_document_64px.png') }}" alt=""
-                    style="margin-right: 5px;width:32px;height: 32px;">
+                    style="width:32px;height: 32px;">
                 <p style="margin-right: 10px">
                     السندات
                     <i class="right fas fa-angle-left"></i>
@@ -447,11 +447,11 @@
                         class="nav-link {{ request()->routeIs('Bonds.index', ['BondType' => 'سند قبض']) ? 'active' : '' }}">
                         @if (request()->routeIs('Bonds.index', ['BondType' => 'سند قبض']))
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">سند قبض</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">سند قبض</p>
                         @endif
                     </a>
@@ -461,11 +461,11 @@
                         class="nav-link {{ request()->routeIs('BondsPayment.index', ['BondType' => 'سند صرف']) ? 'active' : '' }}">
                         @if (request()->routeIs('BondsPayment.index', ['BondType' => 'سند صرف']))
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">سند صرف</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">سند صرف</p>
                         @endif
                     </a>
@@ -475,11 +475,11 @@
                         class="nav-link {{ request()->routeIs('BondsStarter.index', ['BondType' => 'قيد افتتاحي']) ? 'active' : '' }}">
                         @if (request()->routeIs('BondsStarter.index', ['BondType' => 'قيد افتتاحي']))
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">قيد افتتاحي</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">قيد افتتاحي</p>
                         @endif
                     </a>
@@ -489,11 +489,11 @@
                         class="nav-link {{ request()->routeIs('BondsDoc.index', ['BondType' => 'سند قيد']) ? 'active' : '' }}">
                         @if (request()->routeIs('BondsDoc.index', ['BondType' => 'سند قيد']))
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">سند قيد </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">سند قيد </p>
                         @endif
                     </a>
@@ -503,11 +503,11 @@
                         class="nav-link {{ request()->routeIs('BondsBills.index', ['BondType' => 'قيد الفواتير']) ? 'active' : '' }}">
                         @if (request()->routeIs('BondsBills.index', ['BondType' => 'قيد الفواتير']))
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">قيد الفواتير</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Dollar_coin_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">قيد الفواتير</p>
                         @endif
                     </a>
@@ -522,7 +522,7 @@
             <a href="#"
                 class="nav-link {{ request()->routeIs('customersupplier.index') || request()->routeIs('customersupplier.inex') ? 'active' : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_People_64px.png') }}" alt=""
-                    style="margin-right: 5px;width:32px;height: 32px;">
+                    style="width:32px;height: 32px;">
                 <p style="margin-right: 10px">
                     العملاء والموردين
                     <i class="right fas fa-angle-left"></i>
@@ -534,11 +534,11 @@
                         class="nav-link {{ request()->routeIs('customersupplier.index') ? 'active' : '' }}">
                         @if (request()->routeIs('customersupplier.index'))
                             <img src="{{ url('assets/img/navbar/icons8_Staff_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> عميل / مورد </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Staff_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> عميل / مورد </p>
                         @endif
                     </a>
@@ -548,11 +548,11 @@
                     <a href="" class="nav-link ">
                         @if (request()->routeIs('customersupplier.index'))
                             <img src="{{ url('assets/img/navbar/icons8_Report_File_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">كشف حساب</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Report_File_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">كشف حساب</p>
                         @endif
                     </a>
@@ -578,7 +578,7 @@
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_cheque_64px.png') }}" alt=""
-                    style="margin-right: 5px;width:32px;height: 32px;">
+                    style="width:32px;height: 32px;">
                 <p style="margin-right: 10px">
                     الفواتير
                     <i class="right fas fa-angle-left"></i>
@@ -591,11 +591,11 @@
                         class="nav-link {{ request()->routeIs('BillsBuying.index', ['billType' => 'فاتورة مشتريات']) ? 'active' : '' }}">
                         @if (request()->routeIs('BillsBuying.index', ['billType' => 'فاتورة مشتريات']))
                             <img src="{{ url('assets/img/navbar/icons8_shopping_cart_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة مشتريات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_shopping_cart_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">فاتورة مشتريات </p>
                         @endif
                     </a>
@@ -605,11 +605,11 @@
                         class="nav-link {{ request()->routeIs('BillsSaling.index', ['billType' => 'فاتورة مبيعات']) ? 'active' : '' }}">
                         @if (request()->routeIs('BillsSaling.index', ['billType' => 'فاتورة مبيعات']))
                             <img src="{{ url('assets/img/navbar/icons8_sale_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة مبيعات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_sale_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px">فاتورة مبيعات </p>
                         @endif
                     </a>
@@ -619,11 +619,11 @@
                         class="nav-link {{ request()->routeIs('BillsOrdering.index', ['billType' => 'فاتورة طلبيات']) ? 'active' : '' }}">
                         @if (request()->routeIs('BillsOrdering.index', ['billType' => 'فاتورة طلبيات']))
                             <img src="{{ url('assets/img/navbar/icons8_Buy_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة طلبيات</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Buy_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة طلبيات</p>
                         @endif
                     </a>
@@ -633,11 +633,11 @@
                         class="nav-link {{ request()->routeIs('DeliveryBills.index', ['billType' => 'فاتورة تسليم']) ? 'active' : '' }}">
                         @if (request()->routeIs('DeliveryBills.index', ['billType' => 'فاتورة تسليم']))
                             <img src="{{ url('assets/img/navbar/icons8_Buy_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة تسليم</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Buy_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة تسليم</p>
                         @endif
                     </a>
@@ -647,11 +647,11 @@
                         class="nav-link {{ request()->routeIs('ReceiveBills.index', ['billType' => 'فاتورة استلام']) ? 'active' : '' }}">
                         @if (request()->routeIs('ReceiveBills.index', ['billType' => 'فاتورة استلام']))
                             <img src="{{ url('assets/img/navbar/icons8_Buy_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة استلام</p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Buy_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> فاتورة استلام</p>
                         @endif
                     </a>
@@ -672,7 +672,7 @@
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_Online_Store_64px.png') }}" alt=""
-                style="margin-right: 5px;width:32px;height: 32px;">
+                style="width:32px;height: 32px;">
                 <p style="margin-right: 10px">
                     المخازن والمستودعات
                     <i class="right fas fa-angle-left"></i>
@@ -685,11 +685,11 @@
                         class="nav-link {{ request()->routeIs('items.index') ? 'active' : '' }}">
                         @if (request()->routeIs('items.index'))
                             <img src="{{ url('assets/img/navbar/icons8_Clipboard_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> بطاقة مادة </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Clipboard_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> بطاقة مادة </p>
                         @endif
                     </a>
@@ -699,11 +699,11 @@
                         class="nav-link {{ request()->routeIs('itemsTree.index') ? 'active' : '' }}">
                         @if (request()->routeIs('itemsTree.index'))
                             <img src="{{ url('assets/img/navbar/icons8_Flow_Chart_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> شجرة المواد  </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Flow_Chart_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> شجرة المواد  </p>
                         @endif
                     </a>
@@ -713,11 +713,11 @@
                         class="nav-link {{ request()->routeIs('stories.index') ? 'active' : '' }}">
                         @if (request()->routeIs('stories.index'))
                             <img src="{{ url('assets/img/navbar/icons8_Flow_Chart_64px_1.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> دليل المخازن  </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_Flow_Chart_64px.png') }}" alt=""
-                                style="margin-right: 5px; width: 32px; height: 32;">
+                                style="width: 32px; height: 32px;">
                             <p style="margin-right:10px"> دليل المخازن  </p>
                         @endif
                     </a>
@@ -729,7 +729,7 @@
         <li class="nav-item has-treeview {{ request()->routeIs('VIN.index') ? 'menu-open' : 'menu-close' }}">
             <a href="#" class="nav-link {{ request()->routeIs('VIN.index') ? 'active' : '' }}">
                 <img src="{{ url('assets/img/icons/icons8_receipt_32px.png') }}" alt=""
-                    style="margin-right: 5px">
+                    style="">
                 <p>
                     VIN
                     <i class="right fas fa-angle-left"></i>
@@ -807,16 +807,6 @@
 
             </ul>
         </li>
-        {{-- <li class="nav-item" id="Login_Reports">
-            <a href="{{ route('reports.index') }}" class="nav-link {{ request()->routeIs('reports.index') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-chart-area"></i>
-                <p>Reports</p>
-            </a>
-        </li>
- --}}
-
-
-
 
     </ul>
 </nav>

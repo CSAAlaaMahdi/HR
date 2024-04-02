@@ -135,7 +135,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         @include('admin.cmps.navbar');
 
-        <aside class="main-sidebar sidebar-dark-primary elevation-4 ">
+
+
+
+
+
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
                 <img src="{{ url('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -162,14 +167,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         </div>
 
-        <aside class="control-sidebar control-sidebar-dark">
+        {{-- <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
             <div class="p-3">
                 <h5>Title</h5>
                 <p>Sidebar content</p>
 
             </div>
-        </aside>
+        </aside> --}}
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->

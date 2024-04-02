@@ -866,7 +866,7 @@ function Bonds_Print(){
         url: url ,
         data: {BondNumber:BondNumber,BondType:BondType},
         success: function(response) {
-
+            
             var a = document.createElement('a');
             a.href = url2 ;
             window.open(a.href, '_blank');

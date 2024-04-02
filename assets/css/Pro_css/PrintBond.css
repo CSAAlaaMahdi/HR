@@ -177,21 +177,33 @@ body{
     /* background-color: rgb(250, 137, 31); */
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 300px;
 }
 .footercontent{
     float: right;
     /* width: 50%; */
 }
 #footercontent1{
-    width: 20%;
-    font-size: 0.8rem;
+
+    width: 33%;
+    font-size: 1rem;
     font-weight: 200;
+    /* text-align: center; */
 
 }
 #footercontent2{
-    width: 80%;
-    font-size: 0.9rem;
+
+    width: 33%;
+    font-size: 1rem;
     font-weight: 200;
+    text-align: center;
+
+}
+#footercontent3{
+
+    width: 33%;
+    font-size: 1rem;
+    font-weight: 200;
+    text-align: center;
 
 }

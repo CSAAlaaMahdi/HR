@@ -36,7 +36,7 @@
 
         <div class="infoData">
             <div style="width: 16%;float: right;">استلمت من السيد :</div>
-            <div style="width:84%; border-bottom:1px dotted black;float: left;">علاء مهدي حسن</div>
+            <div style="width:84%; border-bottom:1px dotted black;float: left;"> {{ $Bond[0]['txtUser01Optional'] }} </div>
         </div>
         <div class="infoData">
             <div style="width: 10%;float: right;">مبلغ قدره:</div>
@@ -44,56 +44,15 @@
         </div>
         <div class="infoData">
             <div style="width: 10%;float: right;"> مقابل:</div>
-            <div style="width:90%; border-bottom:1px dotted black;float: left;">علاء مهدي حسن</div>
+            <div style="width:90%; border-bottom:1px dotted black;float: left;"> {{ $Bond[0]['Notes'] }}</div>
         </div>
         <br><br>
         <br>
         <br>
+        @include('bonds.bondBody')
 
-        <div class="Items">
-            <table class="table cs_table borderd">
-                <thead>
-                    <tr>
-                        <td>الحساب الدائن</td>
-                        <td> الدليل المحاسبي</td>
-                        <td>المبلغ</td>
+        @include('bonds.bondBodyFooter')
 
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach ($Bond as $value)
-                        <tr>
-                            <td>{{ $value->Acc_Guid }}</td>
-                            <td>{{ $value->Acc_MaskCode }}</td>
-                            <td>{{ $value->Credit }}</td>
-                        </tr>
-                    @endforeach
-
-
-                </tbody>
-                <tfoot>
-                    <tr>
-                        {{-- <td colspan="3"> الاجمالي</td>
-                        <td>{{ $BillItems->sum('Item_Qty1') }}</td>
-                        <td></td>
-                        <td>{{ $BillItems->sum('Item_Price_Final') }}</td> --}}
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="footerinfo">
-            <div id="footercontent1" class="footercontent">
-                {{-- <span>اجمالي الخصومات</span><br>
-                <span>اجمالي الاضافات</span><br>
-                <span>مبلغ الفاتورة</span><br> --}}
-            </div>
-            <div id="footercontent2" class="footercontent">
-                {{-- <span>: {{$BillFooter['Total_Discount']}}</span><br>
-                <span>: {{$BillFooter['Total_Add']}}</span><br>
-                <span>: {{$BillFooter['Total_Price_Bill']}}</span><br> --}}
-            </div>
-        </div>
 
     </div>
 

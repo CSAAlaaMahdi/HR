@@ -282,7 +282,7 @@ class BondsController extends Controller
                                     'isLock' => $IsLock,
                                     'NotesAll' => $BondBody[$i]['NotesAll'],
                                     'Notes' => $Note,
-                                    'Credit' =>0 ,
+                                    'Credit' => 0,
                                     'Debit' => $BondBody[$i]['Debit'],
                                     'Vou_Row_No' => $Vou_Row_No,
                                     'txtUser01Optional' => $txtUser01Optional,
@@ -325,7 +325,7 @@ class BondsController extends Controller
                                     'Currency_Equal' => $CurrencyEqual,
                                     'NotesAll' => $BondBody[$i]['NotesAll'],
                                     'Notes' => $Note,
-                                    'Credit' =>0 ,
+                                    'Credit' => 0,
                                     'Debit' => $BondBody[$i]['Credit'],
 
                                 ]
@@ -433,7 +433,6 @@ class BondsController extends Controller
 
     public function update(Request $request)
     {
-
     }
 
 
@@ -469,7 +468,6 @@ class BondsController extends Controller
             'getBondsNumbers' => Bonds::select('Bond_Number')->where('Vou_Type', $getBondType->id)->groupBy('Bond_Number')->get(),
         ];
         return response()->json($data);
-
     }
 
     public function getBondNumber(Request $request)
@@ -527,26 +525,56 @@ class BondsController extends Controller
         $BondType = session('Bond_Type');
         $BondNumber = session('Bond_Number');
 
-        $Bond = Bonds::select('Tb_Vou.*', 'accounttreemains.Ac_Code_Mask as Acc_MaskCode')
-            ->join('accounttreemains', 'Tb_Vou.Guid', '=', 'accounttreemains.Guid')
-            ->where([
-            ['Vou_Type',$BondType],
-            ['Bond_Number',$BondNumber],
-            ['Credit','<>',0]
-            ])->orderBy('Vou_Row_No')->get()
-            ->map(function($item){
-                $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
-                $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
-                return $item;
-            });
+        switch ($BondType) {
+            case '1':
+                $Bond = Bonds::select('Tb_Vou.*', 'accounttreemains.Ac_Code_Mask as Acc_MaskCode')
+                    ->join('accounttreemains', 'Tb_Vou.Acc_Guid', '=', 'accounttreemains.Guid')
+                    ->where([
+                        ['Vou_Type', $BondType],
+                        ['Bond_Number', $BondNumber],
+                        ['Credit', '<>', 0]
+                    ])->orderBy('Vou_Row_No')->get()
+                    ->map(function ($item) {
+                        $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
+                        $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
+                        return $item;
+                    });
 
-        $query = [
-            'Bond' => $Bond,
+                $query = [
+                    'Bond' => $Bond,
 
-        ];
+                ];
 
 
-        return view('bonds.bondPrint', $query);
+                return view('bonds.bondPrint', $query);
+                break;
+
+            case '2':
+                $Bond = Bonds::select('Tb_Vou.*', 'accounttreemains.Ac_Code_Mask as Acc_MaskCode')
+                    ->join('accounttreemains', 'Tb_Vou.Acc_Guid', '=', 'accounttreemains.Guid')
+                    ->where([
+                        ['Vou_Type', $BondType],
+                        ['Bond_Number', $BondNumber],
+                        ['Debit', '<>', 0]
+                    ])->orderBy('Vou_Row_No')->get()
+                    ->map(function ($item) {
+                        $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
+                        $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
+                        return $item;
+                    });
+
+                $query = [
+                    'Bond' => $Bond,
+
+                ];
+
+
+                return view('bonds.bondPrint', $query);
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 
     public function Setheader()
@@ -563,5 +591,4 @@ class BondsController extends Controller
     {
         return view('bonds.bondFooter')->render();
     }
-
 }
