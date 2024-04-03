@@ -33,9 +33,11 @@
             @case(2)
                 <thead>
                     <tr>
-                        <td>الحساب المدين</td>
-                        <td> الدليل المحاسبي</td>
-                        <td>المبلغ</td>
+                        <td> المدين</td>
+                        <td> الدائن</td>
+                        <td>  الفرعي</td>
+                        <td>الحساب</td>
+                        <td>الدليل المحاسبي</td>
 
                     </tr>
                 </thead>
@@ -43,9 +45,11 @@
 
                     @foreach ($Bond as $value)
                         <tr>
+                            <td>{{ $value->Debit }}</td>
+                            <td>{{ $value->Credit }}</td>
+                            <td></td>
                             <td>{{ $value->Acc_Guid }}</td>
                             <td>{{ $value->Acc_MaskCode }}</td>
-                            <td>{{ $value->Debit }}</td>
                         </tr>
                     @endforeach
 

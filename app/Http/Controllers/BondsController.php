@@ -539,10 +539,11 @@ class BondsController extends Controller
                         $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
                         return $item;
                     });
-                $collection = collect($Bond);
+                
                 $query = [
                     'Bond' => $Bond,
-                    'TotalMoney' => $collection->pluck('Credit')->sum(),
+                    'TotalMoney' => number_format($Bond->pluck('Credit')->sum(),0,'.',',') ,
+                    'NW' => $this->convert_number_to_words($Bond->pluck('Credit')->sum()),
 
                 ];
 
@@ -556,17 +557,22 @@ class BondsController extends Controller
                     ->where([
                         ['Vou_Type', $BondType],
                         ['Bond_Number', $BondNumber],
-                        ['Debit', '<>', 0]
-                    ])->orderBy('Vou_Row_No')->get()
+                    ])->orderByDesc('Vou_Row_No')->get()
                     ->map(function ($item) {
                         $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
                         $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
+                        if (is_numeric($item['Credit'])) {
+                            $item['Credit'] = number_format($item['Credit'], 0, '.', ',');
+                        }
+                      
+                       
                         return $item;
                     });
+        
                 // $collection = collect($Bond);
                 $query = [
                     'Bond' => $Bond,
-                    'TotalMoney' => $Bond->pluck('Debit')->sum(),
+                    'TotalMoney' => number_format( $Bond->pluck('Debit')->sum(),0,'.',','),
                     'NW' => $this->convert_number_to_words($Bond->pluck('Debit')->sum())
                 ];
 
