@@ -17,7 +17,7 @@
             </div>
             <div id="rightcontent2" class="rightcontent">
                 <div id="spanStyle2">: {{ $Bond[0]['Currency_Guid'] }}</div>
-                <div id="spanStyle2">: {{ $Bond[0]['Credit'] }}</div>
+                <div id="spanStyle2" class="TotalMoney">: {{ $TotalMoney }}</div>
 
             </div>
         </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="infoData">
             <div style="width: 10%;float: right;">مبلغ قدره:</div>
-            <div style="width:90%; border-bottom:1px dotted black;float: left;">علاء مهدي حسن</div>
+            <div style="width:90%; border-bottom:1px dotted black;float: left;"> {{ $NW }}</div>
         </div>
         <div class="infoData">
             <div style="width: 10%;float: right;"> مقابل:</div>
@@ -49,6 +49,8 @@
         <br><br>
         <br>
         <br>
+
+        
         @include('bonds.bondBody')
 
         @include('bonds.bondBodyFooter')

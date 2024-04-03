@@ -539,9 +539,10 @@ class BondsController extends Controller
                         $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
                         return $item;
                     });
-
+                $collection = collect($Bond);
                 $query = [
                     'Bond' => $Bond,
+                    'TotalMoney' => $collection->pluck('Credit')->sum(),
 
                 ];
 
@@ -562,10 +563,11 @@ class BondsController extends Controller
                         $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
                         return $item;
                     });
-
+                // $collection = collect($Bond);
                 $query = [
                     'Bond' => $Bond,
-
+                    'TotalMoney' => $Bond->pluck('Debit')->sum(),
+                    'NW' => $this->convert_number_to_words($Bond->pluck('Debit')->sum())
                 ];
 
 
@@ -590,5 +592,173 @@ class BondsController extends Controller
     public function Setfooter()
     {
         return view('bonds.bondFooter')->render();
+    }
+
+    // Convert Numbers to Words....
+    public function convert_number_to_words($number)
+    {
+
+        $hyphen = ' و ';
+        $conjunction = ' و ';
+        $separator = ' و ';
+        $negative = 'negative ';
+        $decimal = ' and Cents ';
+        $dictionary = array(
+            0 => 'صفر',
+            1 => 'واحد',
+            2 => 'اثنان',
+            3 => 'ثلاثة',
+            4 => 'اربعة',
+            5 => 'خمسة',
+            6 => 'ستة',
+            7 => 'سبعة',
+            8 => 'ثمانية',
+            9 => 'تسعة',
+            10 => 'عشرة',
+            11 => 'احد عشر',
+            12 => 'اثنى عشر',
+            13 => 'ثلاثة عشر',
+            14 => 'اربعة عشر',
+            15 => 'خمسة عشر',
+            16 => 'ستة عشر',
+            17 => 'سبعة عشر',
+            18 => 'ثمانية عشر',
+            19 => 'تسعة عشر',
+            20 => 'عشرون',
+            30 => 'ثلاثون',
+            40 => 'اربعون',
+            50 => 'خمسون',
+            60 => 'ستون',
+            70 => 'سبعون',
+            80 => 'ثمانون',
+            90 => 'تسعون',
+            100 => 'مائة',
+            1000 => 'الف',
+            1000000 => 'مليون',
+        );
+
+        if (!is_numeric($number)) {
+            return false;
+        }
+
+        if ($number < 0) {
+            return $negative . $this->convert_number_to_words(abs($number));
+        }
+
+        $string = $fraction = null;
+
+        if (strpos($number, '.') !== false) {
+            list($number, $fraction) = explode('.', $number);
+        }
+
+        switch (true) {
+            case $number < 21:
+                $string = $dictionary[$number];
+                break;
+            case $number < 100:
+                $tens = ((int)($number / 10)) * 10;
+                $units = $number % 10;
+
+                if ((int)($number) % 10 == 0) {
+                    $string = $dictionary[$tens];
+                } else {
+                    $string = $dictionary[$units];
+                    if ($units) {
+                        $string .= $hyphen . $dictionary[$tens];
+                    }
+                }
+
+                break;
+            case $number < 1000:
+                $hundreds = $number / 100;
+                $remainder = $number % 100;
+
+                if ((int)($number / 100) == 1) {
+                    $string = $dictionary[100];
+                    if ($remainder) {
+                        $string .= $conjunction . $this->convert_number_to_words($remainder);
+                    }
+                } elseif ((int)($number / 100) == 2) {
+                    $string = 'مائتان';
+                    if ($remainder) {
+                        $string .= $conjunction . $this->convert_number_to_words($remainder);
+                    }
+                } else {
+                    $string = $dictionary[$hundreds] . ' ' . $dictionary[100];
+                    if ($remainder) {
+                        $string .= $conjunction . $this->convert_number_to_words($remainder);
+                    }
+                }
+
+
+
+                break;
+            default:
+                $baseUnit = pow(1000, floor(log($number, 1000)));
+                $numBaseUnits = (int)($number / $baseUnit);
+                $remainder = $number % $baseUnit;
+                if ((int)($baseUnit) == 1000) {
+                    if ((int)($numBaseUnits)  == 1) {
+                        $string = $dictionary[$baseUnit];
+                        if ($remainder) {
+                            $string .= $remainder < 100 ? $conjunction : $separator;
+                            $string .= $this->convert_number_to_words($remainder);
+                        }
+                    } elseif ((int)($numBaseUnits)  == 2) {
+                        $string = 'الفان';
+                        if ($remainder) {
+                            $string .= $remainder < 100 ? $conjunction : $separator;
+                            $string .= $this->convert_number_to_words($remainder);
+                        }
+                    } else {
+                        $string = $this->convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
+                        if ($remainder) {
+                            $string .= $remainder < 100 ? $conjunction : $separator;
+                            $string .= $this->convert_number_to_words($remainder);
+                        }
+                    }
+                } elseif ((int)($baseUnit) == 1000000) {
+                    if ((int)($numBaseUnits)  == 1) {
+                        $string = $dictionary[$baseUnit];
+                        if ($remainder) {
+                            $string .= $remainder < 100 ? $conjunction : $separator;
+                            $string .= $this->convert_number_to_words($remainder);
+                        }
+                    } elseif ((int)($numBaseUnits)  == 2) {
+                        $string = 'مليونان';
+                        if ($remainder) {
+                            $string .= $remainder < 100 ? $conjunction : $separator;
+                            $string .= $this->convert_number_to_words($remainder);
+                        }
+                    } else {
+                        $string = $this->convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
+                        if ($remainder) {
+                            $string .= $remainder < 100 ? $conjunction : $separator;
+                            $string .= $this->convert_number_to_words($remainder);
+                        }
+                    }
+                }
+
+
+
+
+                // $string = $this->convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
+                // if ($remainder) {
+                //     $string .= $remainder < 100 ? $conjunction : $separator;
+                //     $string .= $this->convert_number_to_words($remainder);
+                // }
+                break;
+        }
+
+        if (null !== $fraction && is_numeric($fraction)) {
+            $string .= $decimal;
+            $words = array();
+            foreach (str_split((string)$fraction) as $number) {
+                $words[] = $dictionary[$number];
+            }
+            $string .= implode(' ', $words);
+        }
+
+        return $string;
     }
 }

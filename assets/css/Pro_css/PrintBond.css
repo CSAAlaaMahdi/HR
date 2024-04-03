@@ -181,10 +181,11 @@ body{
 }
 .footercontent{
     float: right;
+    display: flex;
+    flex-direction: row;
     /* width: 50%; */
 }
 #footercontent1{
-
     width: 33%;
     font-size: 1rem;
     font-weight: 200;
@@ -196,7 +197,7 @@ body{
     width: 33%;
     font-size: 1rem;
     font-weight: 200;
-    text-align: center;
+    /* text-align: center; */
 
 }
 #footercontent3{
@@ -204,6 +205,6 @@ body{
     width: 33%;
     font-size: 1rem;
     font-weight: 200;
-    text-align: center;
+    /* text-align: center; */
 
 }
