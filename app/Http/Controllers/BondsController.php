@@ -185,6 +185,7 @@ class BondsController extends Controller
                                     'NotesAll' => $BondBody[$i]['NotesAll'],
                                     'Credit' => 0,
                                     'Debit' => $BondBody[$i + 1]['Credit'],
+
                                 ]
                             );
 
@@ -306,7 +307,7 @@ class BondsController extends Controller
                                     'Currency_Equal' => $CurrencyEqual,
                                     'Notes' => $Note,
                                     'NotesAll' => $BondBody[$i]['NotesAll'],
-                                    'Credit' => $BondBody[$i + 1]['Credit'],
+                                    'Credit' => $BondBody[$i + 1]['Debit'],
                                     'Debit' => 0,
                                 ]
                             );
@@ -326,7 +327,7 @@ class BondsController extends Controller
                                     'NotesAll' => $BondBody[$i]['NotesAll'],
                                     'Notes' => $Note,
                                     'Credit' => 0,
-                                    'Debit' => $BondBody[$i]['Credit'],
+                                    'Debit' => $BondBody[$i]['Debit'],
 
                                 ]
                             );
@@ -537,9 +538,10 @@ class BondsController extends Controller
                     ->map(function ($item) {
                         $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
                         $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
+
                         return $item;
                     });
-                
+
                 $query = [
                     'Bond' => $Bond,
                     'TotalMoney' => number_format($Bond->pluck('Credit')->sum(),0,'.',',') ,
@@ -561,18 +563,16 @@ class BondsController extends Controller
                     ->map(function ($item) {
                         $item['Currency_Guid'] = Currency::find($item['Currency_Guid'])->Cur_Name;
                         $item['Acc_Guid'] = AccountTree::find($item['Acc_Guid'])->Ac_Name;
-                        if (is_numeric($item['Credit'])) {
-                            $item['Credit'] = number_format($item['Credit'], 0, '.', ',');
-                        }
-                      
-                       
+
                         return $item;
                     });
-        
-                // $collection = collect($Bond);
+
+                // dd($Bond->pluck('Debit')->sum());
+
                 $query = [
                     'Bond' => $Bond,
                     'TotalMoney' => number_format( $Bond->pluck('Debit')->sum(),0,'.',','),
+                    'TotalMoney2' => number_format( $Bond->pluck('Credit')->sum(),0,'.',','),
                     'NW' => $this->convert_number_to_words($Bond->pluck('Debit')->sum())
                 ];
 

@@ -40,7 +40,7 @@
         </div>
         <div class="infoData">
             <div style="width: 10%;float: right;">مبلغ قدره:</div>
-            <div style="width:90%; border-bottom:1px dotted black;float: left;"> {{ $NW }}</div>
+            <div style="width:90%; border-bottom:1px dotted black;float: left;"> فقط {{ $NW }} دينار عراقي لا غير</div>
         </div>
         <div class="infoData">
             <div style="width: 10%;float: right;"> مقابل:</div>
@@ -50,7 +50,7 @@
         <br>
         <br>
 
-        
+
         @include('bonds.bondBody')
 
         @include('bonds.bondBodyFooter')

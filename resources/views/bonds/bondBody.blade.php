@@ -57,7 +57,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-
+                        <td>{{ $TotalMoney }}</td>
+                        <td>{{ $TotalMoney2 }}</td>
+                        <td colspan="3"> فقط {{ $NW }} دينار عراقي لا غير</td>
                     </tr>
                 </tfoot>
             @break

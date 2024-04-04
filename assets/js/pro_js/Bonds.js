@@ -103,7 +103,7 @@ function Bonds_UpdateOrInsert() {
 
 
     };
-
+    // console.log(data);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -866,7 +866,7 @@ function Bonds_Print(){
         url: url ,
         data: {BondNumber:BondNumber,BondType:BondType},
         success: function(response) {
-            
+
             var a = document.createElement('a');
             a.href = url2 ;
             window.open(a.href, '_blank');
