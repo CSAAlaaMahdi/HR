@@ -1,39 +1,25 @@
 #Users-container > .dx-field > .dx-field-label {
     width: 25%;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     color: rgb(43, 43, 43);
     font-weight: bold;
   }
 
   #Users-container > .dx-field > .dx-field-value {
     width: 75%;
-
+    
   }
 
-  #ToggleUsers-container > .dx-field > .dx-field-label {
-    width: 25%;
-    font-size: 1rem;
-    color: rgb(43, 43, 43);
-    font-weight: bold;
-  }
 
-  #ToggleUsers-container > .dx-field > .dx-field-value {
-    width: 17%;
-    float:right
-  }
-  .inactive-cell {
-    background-color: red;
-    color: white;
-    padding: 10px;
-  }
   .custom-header_Users {
-    background-color: #283741; /* Set your desired color here */
+    background-color: #343A40; /* Set your desired color here */
     color: white; /* Set text color to make it readable */
+    font-size: 12px;
 
   }
   .custom-header_Users .dx-datagrid-text-content {
     color: white; /* Override font color for the header text */
-    font-size: 16px;
+    font-size: 12px;
   }
 
 

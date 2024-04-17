@@ -2,31 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User2 extends Authenticatable
+class Depts extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $table='users_tb';
-    protected $primaryKey = 'userid';
+    protected $table='dept_tb';
+    protected $primaryKey = 'deptid';
     protected $keyType = 'integer';
     protected $fillable = [
-        'loginname',
-        'username',
-        'pwd',
-        'ulvl',
-        'deptid',
-        'userPassW',
-        'teachno',
+        'deptname',
+
     ];
 
     /**

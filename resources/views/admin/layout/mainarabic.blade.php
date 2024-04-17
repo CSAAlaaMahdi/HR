@@ -10,39 +10,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>شركة المتانة</title>
+    <title> الموارد البشرية</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ url('assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('assets/dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <link rel="stylesheet" href="{{ url('assets/fonts/SansPro/SansPro.min.css') }}"> --}}
+
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap_rtl-v4.2.1/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap_rtl-v4.2.1/custom_rtl.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/mycustomstyle.css') }}">
-
     <link rel="stylesheet" href="{{ url('assets/plugins/chart.js/chart.css') }}">
     <link rel="stylesheet" href="{{ url('assets/plugins/chart.js/chart.min.css') }}">
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/devextreme/22.2.7/css/dx.material.orange.light.css"
-    rel="stylesheet"> --}}
     <link rel="stylesheet" type="text/css" href=" {{ url('assets/dx/dx.material.custom-scheme.css') }}" ">
-    {{-- <link rel="stylesheet" href="{{ url('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href=" {{ url('assets/css/dataTables.bootstrap5.min.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/buttons.bootstrap5.min.css') }}" ">
-    <link rel="stylesheet" type="text/css" href=" {{ url('assets/css/style.css') }}" ">
-    <link rel="stylesheet" type="text/css" href=" {{ url('assets/css/bootstrap-icons.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/bootstrap-icons-1.4.1/bootstrap-icons.css') }}"> --}}
-
     <link rel="stylesheet" href="{{ url('assets/plugins/jqvmap/jqvmap.min.css') }}">
-    <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ url('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    <!-- Daterange picker -->
     <link rel="stylesheet" href="{{ url('assets/plugins/daterangepicker/daterangepicker.css') }}">
-    <!-- summernote -->
     <link rel="stylesheet" href="{{ url('assets/plugins/summernote/summernote-bs4.css') }}">
-
-
 
     <link rel="stylesheet" type="text/css" href=" {{ url('assets/css/style.css') }}" ">
     <link rel="stylesheet" href=" {{ url('assets/css/style2.css') }}">
@@ -50,30 +35,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/alertify.min.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/bootstrap-treeview.min.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/main.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/accounts.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/salesGroups.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/customerSupplier.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/itemtree.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/units.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/brands.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/company.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/country.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/currency.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/kind.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/models.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/items.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/itemsFour.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/itemFifth.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/VIN.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/Bills.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/Bonds.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/BillsSetting.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/CarsInfo.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/ItemForOrder.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/ItemsBarcode.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Users.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/UsersGroups.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/BondsSetting.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Employee.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Certifications.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Comity.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Jobs.css') }}">
+
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/Template/datatables.min.js') }}"></script>
@@ -92,7 +59,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script type="text/javascript" src="{{ url('assets/js/Template/alertify.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/Template/alertify.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/Template/bootstrap-treeview.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/js/pro_js/menuNav.js') }}"></script>
 
 
     <script type="text/javascript" src="{{ url('assets/dx/js/dx-diagram.min.js') }}"></script>
@@ -103,6 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script type="text/javascript" src="{{ url('assets/dx/js/FileSaver.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/dx/js/polyfill_7.4.0_polyfill.min.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
     <script>
         $(function() {
             DevExpress.config({
@@ -144,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="index3.html" class="brand-link">
                 <img src="{{ url('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">شركة المتانة</span>
+                <span class="brand-text font-weight-light">الموارد البشرية </span>
             </a>
 
             <div class="sidebar">

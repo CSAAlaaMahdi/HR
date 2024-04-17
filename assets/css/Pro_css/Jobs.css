@@ -1,0 +1,31 @@
+#Job-container > .dx-field {
+  display: flex;
+  flex-direction: column; /* Set the flex direction to column */
+  align-items: flex-end; /* Align items to the start of the flex container */
+}
+#Job-container > .dx-field > .dx-field-label {
+    width: 100%;
+    font-size: 0.8rem;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
+  }
+
+  #Job-container > .dx-field > .dx-field-value {
+    width: 100%;
+    
+  }
+
+
+  .custom-header_Job {
+    background-color: #343A40; /* Set your desired color here */
+    color: white; /* Set text color to make it readable */
+    font-size: 13px;
+
+  }
+  .custom-header_Job .dx-datagrid-text-content {
+    color: white; /* Override font color for the header text */
+    font-size: 13px;
+  }
+
+
+

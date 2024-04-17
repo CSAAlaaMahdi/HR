@@ -21,11 +21,11 @@ class LoginController extends Controller
         $info = User2::all();
         if (count($info) > 0) {
 
-            $Userinfo = User2::where('U_Name', $Username)->get();
+            $Userinfo = User2::where('username', $Username)->get();
             if (count($Userinfo) > 0) {
-                if ($Userinfo[0]->U_Password == $password) {
-                    $request->session()->put('id',$Userinfo[0]->id);
-                    $request->session()->put('User',$Userinfo[0]->U_Name);
+                if ($Userinfo[0]->pwd == $password) {
+                    $request->session()->put('id',$Userinfo[0]->userid);
+                    $request->session()->put('User',$Userinfo[0]->username);
                     $data=[
                         'User'=>session('User'),
                         'id'=>session('id'),

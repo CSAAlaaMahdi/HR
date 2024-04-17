@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'ادارة الموارد البشرية'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://externalapp.local:8081/MMS'),
+    'url' => env('APP_URL', 'http://externalapp.local:8081/HR'),
 
     'asset_url' => env('ASSET_URL'),
 

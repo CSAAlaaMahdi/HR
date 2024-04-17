@@ -23,21 +23,7 @@
                 </p>
             </a>
             <ul class="nav nav-treeview">
-                <li class="nav-item" id="Login_Dashboard_Main">
-                    <a href="{{ route('main.index') }}"
-                        class="nav-link {{ request()->routeIs('main.index') ? 'active' : '' }}">
 
-                        @if (request()->routeIs('main.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_home_64px.png') }}" alt=""
-                                style=" width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الرئيسية</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_home_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الرئيسية</p>
-                        @endif
-                    </a>
-                </li>
                 <li class="nav-item" id="Login_Dashboard_Departments">
                     <a href="{{ route('home.index') }}"
                         class="nav-link {{ request()->routeIs('home.index') ? 'active' : '' }}">
@@ -58,26 +44,26 @@
         </li>
 
         <li
-            class="nav-item has-treeview {{ request()->routeIs('users.index') ||
-            request()->routeIs('permissions.index') ||
-            // request()->routeIs('frame.index') ||
-            request()->routeIs('usersgroups.index') ||
-            request()->routeIs('salesgroups.index') ||
-            request()->routeIs('bondsSetting.index') ||
-            request()->routeIs('BillsSetting.index')
-            // request()->routeIs('groupsnames.index')
-                ? 'menu-open'
+            class="nav-item has-treeview {{ request()->routeIs('users.index')
+                ? // request()->routeIs('permissions.index') ||
+                // request()->routeIs('frame.index') ||
+                // request()->routeIs('usersgroups.index') ||
+                // request()->routeIs('salesgroups.index') ||
+                // request()->routeIs('bondsSetting.index') ||
+                // request()->routeIs('BillsSetting.index')
+                // request()->routeIs('groupsnames.index')
+                'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
-                class="nav-link {{ request()->routeIs('users.index') ||
-                request()->routeIs('permissions.index') ||
-                // request()->routeIs('frame.index') ||
-                request()->routeIs('usersgroups.index') ||
-                request()->routeIs('salesgroups.index') ||
-                request()->routeIs('bondsSetting.index') ||
-                request()->routeIs('BillsSetting.index')
-                // request()->routeIs('groupsnames.index')
-                    ? 'active'
+                class="nav-link {{ request()->routeIs('users.index')
+                    ? // request()->routeIs('permissions.index') ||
+                    // request()->routeIs('frame.index') ||
+                    // request()->routeIs('usersgroups.index') ||
+                    // request()->routeIs('salesgroups.index') ||
+                    // request()->routeIs('bondsSetting.index') ||
+                    // request()->routeIs('BillsSetting.index')
+                    // request()->routeIs('groupsnames.index')
+                    'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_settings_64px.png') }}" alt=""
                     style="width: 32px; height: 32px;">
@@ -101,259 +87,103 @@
                         @endif
                     </a>
                 </li>
-                <li class="nav-item" id="Login_UsersGroups">
-                    <a href="{{ route('usersgroups.index') }}"
-                        class="nav-link {{ request()->routeIs('usersgroups.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('usersgroups.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">المجموعات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">المجموعات</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Permissions">
-                    <a href="{{ route('permissions.index') }}"
-                        class="nav-link {{ request()->routeIs('permissions.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('permissions.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الصلاحيات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الصلاحيات</p>
-                        @endif
-                    </a>
-                </li>
-                {{-- <li class="nav-item" id="Login_Frame">
-                    <a href="{{ route('frame.index') }}"
-                        class="nav-link {{ request()->routeIs('frame.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('frame.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">النماذج</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">النماذج</p>
-                        @endif
-                    </a>
-                </li> --}}
-                {{-- <li class="nav-item" id="Login_State">
-                    <a href="{{ route('state.index') }}"
-                        class="nav-link {{ request()->routeIs('state.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('state.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الحالة</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الحالة</p>
-                        @endif
-                    </a>
-                </li> --}}
-                <li class="nav-item" id="Login_SalingGroup">
-                    <a href="{{ route('salesgroups.index') }}"
-                        class="nav-link {{ request()->routeIs('salesgroups.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('salesgroups.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">مجموعة البيع</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">مجموعة البيع</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_BillsSetting">
-                    <a href="{{ route('BillsSetting.index') }}"
-                        class="nav-link {{ request()->routeIs('BillsSetting.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('BillsSetting.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">اعدادات الفواتير</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">اعدادات الفواتير</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_BondsSetting">
-                    <a href="{{ route('bondsSetting.index') }}"
-                        class="nav-link {{ request()->routeIs('bondsSetting.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('bondsSetting.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">اعدادات السندات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">اعدادات السندات</p>
-                        @endif
-                    </a>
-                </li>
 
-                {{-- <li class="nav-item" id="Login_GroupsName">
-                    <a href="{{ route('groupsnames.index') }}"
-                        class="nav-link {{ request()->routeIs('groupsnames.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('groupsnames.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">اسماء المجموعات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">اسماء المجموعات</p>
-                        @endif
-                    </a>
-                </li> --}}
 
             </ul>
         </li>
-
-
-
-        <li
-            class="nav-item has-treeview {{ request()->routeIs('unitname.index*') ||
-            request()->routeIs('brand.index*') ||
-            request()->routeIs('currency.index*') ||
-            request()->routeIs('country.index*') ||
-            request()->routeIs('kind.index*') ||
-            request()->routeIs('company.index*') ||
-            request()->routeIs('modell.index*')
-                ? 'menu-open'
-                : 'menu-close' }}">
-            <a href="#"
-                class="nav-link {{ request()->routeIs('unitname.index*') ||
-                request()->routeIs('brand.index*') ||
-                request()->routeIs('currency.index*') ||
-                request()->routeIs('country.index*') ||
-                request()->routeIs('kind.index*') ||
-                request()->routeIs('company.index*') ||
-                request()->routeIs('modell.index*')
-                    ? 'active'
-                    : '' }}">
-                <img src="{{ url('assets/img/navbar/icons8_database_view_64px.png') }}" alt=""
-                    style="width: 28px; height: 28px;">
-                <p style="margin-right: 10px">
-                    بيانات ثابتة
-                    <i class="right fas fa-angle-left"></i>
-                </p>
+        <li class="nav-item {{ request()->routeIs('employees.index') }}">
+            <a href="{{ route('employees.index') }}"
+                class="nav-link {{ request()->routeIs('employees.index') ? 'active' : '' }}">
+                @if (request()->routeIs('employees.index'))
+                    <img src="{{ url('assets/img/navbar/icons8_People_64px_1.png') }}" alt=""
+                        style=" width: 32px; height: 32px;">
+                    <p style="margin-right:10px">الموظفين</p>
+                @else
+                    <img src="{{ url('assets/img/navbar/icons8_People_64px.png') }}" alt=""
+                        style="width: 32px; height: 32px;">
+                    <p style="margin-right:10px">الموظفين</p>
+                @endif
             </a>
-            <ul class="nav nav-treeview">
 
-
-                <li class="nav-item" id="Login_Unitname">
-                    <a href="{{ route('unitname.index') }}"
-                        class="nav-link {{ request()->routeIs('unitname.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('unitname.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الوحدات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الوحدات</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Brand">
-                    <a href="{{ route('brand.index') }}"
-                        class="nav-link {{ request()->routeIs('brand.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('brand.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الماركات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الماركات</p>
-                        @endif
-                    </a>
-                </li>
-
-                <li class="nav-item" id="Login_Company">
-                    <a href="{{ route('company.index') }}"
-                        class="nav-link {{ request()->routeIs('company.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('company.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الشركات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الشركات</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Country">
-                    <a href="{{ route('country.index') }}"
-                        class="nav-link {{ request()->routeIs('country.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('country.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الدول</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الدول</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Currency">
-                    <a href="{{ route('currency.index') }}"
-                        class="nav-link {{ request()->routeIs('currency.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('currency.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">العملات</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">العملات</p>
-                        @endif
-                    </a>
-                </li>
-
-                <li class="nav-item" id="Login_Kinds">
-                    <a href="{{ route('kind.index') }}"
-                        class="nav-link {{ request()->routeIs('kind.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('kind.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">النوع</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">النوع</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Modell">
-                    <a href="{{ route('modell.index') }}"
-                        class="nav-link {{ request()->routeIs('modell.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('modell.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px_1.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الطراز</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_cells_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;">
-                            <p style="margin-right:10px">الطراز</p>
-                        @endif
-                    </a>
-                </li>
-
-            </ul>
         </li>
         <li
+        class="nav-item has-treeview {{ request()->routeIs('certifications.index') ||
+             request()->routeIs('comity.index') ||
+            request()->routeIs('jobs.index') 
+            // request()->routeIs('usersgroups.index') ||
+            // request()->routeIs('salesgroups.index') ||
+            // request()->routeIs('bondsSetting.index') ||
+            // request()->routeIs('BillsSetting.index')
+            // request()->routeIs('groupsnames.index')
+            ? 'menu-open'
+            : 'menu-close' }} ">
+        <a href="#"
+            class="nav-link {{ request()->routeIs('certifications.index') ||
+                request()->routeIs('comity.index')  ||
+                request()->routeIs('jobs.index')
+                // request()->routeIs('usersgroups.index') ||
+                // request()->routeIs('salesgroups.index') ||
+                // request()->routeIs('bondsSetting.index') ||
+                // request()->routeIs('BillsSetting.index')
+                // request()->routeIs('groupsnames.index')
+                ? 'active'
+                : '' }}">
+            <img src="{{ url('assets/img/navbar/icons8_settings_64px.png') }}" alt=""
+                style="width: 32px; height: 32px;">
+            <p style="margin-right: 10px">
+                الادارية
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item" id="Login_Certification">
+                <a href="{{ route('certifications.index') }}"
+                    class="nav-link {{ request()->routeIs('certifications.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('certifications.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_certificate_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الشهادات</p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_certificate_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الشهادات</p>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item" id="Login_Comity">
+                <a href="{{ route('comity.index') }}"
+                    class="nav-link {{ request()->routeIs('comity.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('comity.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_collaboration_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">اللجان</p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_collaboration_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">اللجان</p>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item" id="Login_Jobs">
+                <a href="{{ route('jobs.index') }}"
+                    class="nav-link {{ request()->routeIs('jobs.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('jobs.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_businessman_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">العناوين الوظيفية</p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_businessman_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">العناوين الوظيفية</p>
+                    @endif
+                </a>
+            </li>
+
+
+        </ul>
+    </li>
+
+        {{-- <li
             class="nav-item has-treeview {{ request()->routeIs('accounttree.index') ||
             request()->routeIs('accounttree') ||
             request()->routeIs('accounttree')
@@ -725,8 +555,8 @@
 
 
             </ul>
-        </li>
-        <li class="nav-item has-treeview {{ request()->routeIs('VIN.index') ? 'menu-open' : 'menu-close' }}">
+        </li> --}}
+        {{-- <li class="nav-item has-treeview {{ request()->routeIs('VIN.index') ? 'menu-open' : 'menu-close' }}">
             <a href="#" class="nav-link {{ request()->routeIs('VIN.index') ? 'active' : '' }}">
                 <img src="{{ url('assets/img/icons/icons8_receipt_32px.png') }}" alt=""
                     style="">
@@ -806,7 +636,7 @@
 
 
             </ul>
-        </li>
+        </li> --}}
 
     </ul>
 </nav>

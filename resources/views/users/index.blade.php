@@ -43,70 +43,73 @@
                                     <div class="dx-field">
                                       <div class="dx-field-label">UserGuid</div>
                                       <div class="dx-field-value">
-                                        <div id="U_Guid"></div>
+                                        <div id="userid"></div>
                                       </div>
-                                      <span id="error_U_Guid" class="text-danger"></span>
+                                      <span id="error_userid" class="text-danger"></span>
                                     </div>
                                   </div>
                                 <div class="dx-fieldset" id="Users-container">
-                                    <div class="dx-field">
-                                      <div class="dx-field-label">البريد الالكتروني</div>
-                                      <div class="dx-field-value">
-                                        <div id="U_Email"></div>
-                                      </div>
-                                      <span id="error_U_Email" class="text-danger"></span>
-                                    </div>
+                                    
                                     <div class="dx-field">
                                         <div class="dx-field-label">الاسم </div>
                                         <div class="dx-field-value">
-                                          <div id="U_Name"></div>
+                                          <div id="loginname"></div>
                                         </div>
-                                        <span id="error_U_Name" class="text-danger"></span>
+                                        <span id="error_loginname" class="text-danger"></span>
                                       </div>
                                   </div>
                                   <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">كلمة المرور</div>
+                                      <div class="dx-field-label"> اسم المستخدم</div>
                                       <div class="dx-field-value">
-                                        <div id="U_Password"></div>
+                                        <div id="username"></div>
                                       </div>
-                                      <span id="error_U_Password" class="text-danger"></span>
+                                      <span id="error_username" class="text-danger"></span>
                                     </div>
                                   </div>
                                   <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">الحالة </div>
+                                      <div class="dx-field-label">كلمة المرور </div>
                                       <div class="dx-field-value">
-                                        <div id="U_State"></div>
+                                        <div id="pwd"></div>
                                       </div>
-                                      <span id="error_U_State" class="text-danger"></span>
+                                      <span id="error_pwd" class="text-danger"></span>
+                                    </div>
+                                  </div>
+                                  <div class="dx-fieldset" id="Users-container">
+                                    <div class="dx-field">
+                                      <div class="dx-field-label">المستوى </div>
+                                      <div class="dx-field-value">
+                                        <div id="ulvl"></div>
+                                      </div>
+                                      <span id="error_ulvl" class="text-danger"></span>
                                     </div>
                                   </div>
                                   <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
                                       <div class="dx-field-label">القسم </div>
                                       <div class="dx-field-value">
-                                        <div id="U_Department"></div>
+                                        <div id="deptid"></div>
                                       </div>
-                                      <span id="error_U_Department" class="text-danger"></span>
+                                      <span id="error_deptid" class="text-danger"></span>
                                     </div>
                                   </div>
                                   <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">المجموعة </div>
+                                      <div class="dx-field-label">userPassW  </div>
                                       <div class="dx-field-value">
-                                        <div id="U_PermissionsGroup"></div>
+                                        <div id="UserPassW"></div>
                                       </div>
-                                      <span id="error_U_PermissionsGroup" class="text-danger"></span>
+                                      <span id="error_UserPassW" class="text-danger"></span>
                                     </div>
                                   </div>
                                   <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">صورة شخصية </div>
+                                      <div class="dx-field-label">teachno  </div>
                                       <div class="dx-field-value">
-                                        <div id="U_Image"></div>
+                                        <div id="teachno"></div>
                                       </div>
-                                      <span id="error_U_Image" class="text-danger"></span>
+                                      <span id="error_teachno" class="text-danger"></span>
                                     </div>
                                   </div>
                                   <hr>

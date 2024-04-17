@@ -1,0 +1,124 @@
+#Emp-container > .dx-field {
+  display: flex;
+  flex-direction: column; /* Set the flex direction to column */
+  align-items: flex-end; /* Align items to the start of the flex container */
+}
+#Emp-container > .dx-field > .dx-field-label {
+    width: 100%;
+    font-size: 0.8rem;
+    font-weight: 450;
+    color: rgb(34, 34, 34);
+    padding: 2px;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+  }
+
+  #Emp-container > .dx-field > .dx-field-value {
+    width: 100%;
+  }
+
+
+  #EmpToggle-container > .dx-field > .dx-field-label {
+    width: 30%;
+    font-size: 0.8rem;
+    color: rgb(34, 34, 34);
+    padding: 17px;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+  }
+
+  #EmpToggle-container > .dx-field > .dx-field-value {
+    width: 10%;
+    float: right;
+  }
+
+  #ItemRadio-container > .dx-field > .dx-field-value {
+    /* display: flex; */
+    width: 60%;
+    font-size: 1.2rem;
+  }
+  .custom-radio-group{
+    width: 60%;
+    font-size: 1.2rem;
+  }
+#Search-container {
+  width: 70%;
+}
+  #Search-container > .dx-field > .dx-field-label {
+    width: 30%;
+    font-size: 1.2rem;
+  }
+
+  #Search-container > .dx-field > .dx-field-value {
+    width: 70%;
+    /* float: right; */
+
+  }
+.Search_Image{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+#EmpImage {
+  height: 500px;
+  width: 400px;
+  border: #283741 solid 1px;
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+  display: block;
+  margin-bottom: 25px;
+}
+
+  .inactive-cell {
+    background-color: red;
+    color: white;
+    padding: 10px;
+  }
+
+
+
+  #tabPanel {
+    height: 250px;
+    width: 100%;
+    margin: 20px auto;
+    border: 1px solid;
+}
+
+#form, #radioGroup {
+    padding: 15px;
+}
+
+#textArea {
+    padding: 15px;
+    height: 100%;
+}
+.nav-tabsEmployee .nav-link.active {
+    background-color: #fa8e5c;
+    color: rgb(14, 14, 14);
+    width: 150px;
+    height: 50px;
+    border: 3px solid #283741;
+    border-radius: 15px 0px 15px 0px;
+}
+.nav-tabsEmployee .nav-link {
+    background-color: #283741;
+    color: rgb(223, 223, 223);
+    width:150px;
+    height: 50px;
+    border: 3px solid #bdc7cf;
+    border-radius: 15px 0px 15px 0px;
+}
+
+.custom-header {
+    background-color: #fa8e5c; /* Set your desired color here */
+    color: rgb(255, 255, 255); /* Set text color to make it readable */
+
+  }
+  .custom-header .dx-datagrid-text-content {
+    color: rgb(255, 255, 255); /* Override font color for the header text */
+  }

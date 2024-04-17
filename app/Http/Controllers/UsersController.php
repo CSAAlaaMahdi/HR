@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Depts;
 use App\Models\User2;
-use App\Models\UsersGroups;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Ramsey\Uuid\Uuid;
+
+
 
 class UsersController extends Controller
 {
@@ -23,8 +21,8 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
-        $getData = User2::all()->map(function ($item) {
-            $item['U_State'] = $item['U_State'] > 0 ? 'نشط' : 'خامل';
+        $getData = User2::orderBy('userid')->get()->map(function ($item) {
+            $item['deptid'] = Depts::find($item['deptid'])->deptname;
             return $item;
         });
         $data = [
@@ -37,21 +35,22 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
-        $Guid = $request->post('U_Guid');
+        $Guid = $request->post('userid');
         if ($Guid == null || $Guid == "") {
             $Guid = strtoupper(Uuid::uuid4()->toString());
         }
         $User = User2::updateOrCreate(
             [
-                'id' => $Guid,
+                'userid' => $Guid,
             ],
             [
-                'U_Email' => $request->post('U_Email'),
-                'U_Name' => $request->post('U_Name'),
-                'U_Password' => $request->post('U_Password'),
-                'U_State' => $request->post('U_State'),
-                'U_Department' => $request->post('U_Department'),
-                'U_PermissionsGroup' => $request->post('U_PermissionsGroup'),
+                'loginname' => $request->post('loginname'),
+                'username' => $request->post('username'),
+                'pwd' => $request->post('pwd'),
+                'deptid' => $request->post('deptid'),
+                'ulvl' => $request->post('ulvl'),
+                'UserPassW' => $request->post('UserPassW'),
+                'teachno' => $request->post('teachno'),
 
 
             ]
@@ -63,7 +62,7 @@ class UsersController extends Controller
 
     public function show(Request $request)
     {
-        $id = $request->input('U_Guid');
+        $id = $request->input('userid');
         $data = User2::find($id);
         return response()->json($data);
     }
@@ -77,21 +76,12 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $Guid = $request->post('Ui_Guid');
-        $data = User::find($Guid);
-        $data->Ui_Name = $request->post('Ui_Name');
-        $data->Ui_Piece = $request->post('Ui_Piece');
-        $data->Ui_PieceType = $request->post('Ui_PieceType');
-        // $data->Ui_UserName = session('User');
-        $data->update();
-
-        return response()->json(['status' => 'تم تحديث البيانات بنجاح']);
     }
 
 
     public function destroy(Request $request)
     {
-        $guid = $request->post('U_Guid');
+        $guid = $request->post('userid');
         User2::find($guid)->delete();
         return response()->json(['status' => 'تم حذف البيانات بنجاح']);
     }
@@ -99,10 +89,10 @@ class UsersController extends Controller
     public function filldata()
     {
 
-        $getUsersGroups = UsersGroups::orderBy('UG_RowID')->get();
+        $getDepts = Depts::all();
 
         $data = [
-            'getUsersGroups' => $getUsersGroups,
+            'getDepts' => $getDepts,
         ];
         return response()->json($data);
     }
