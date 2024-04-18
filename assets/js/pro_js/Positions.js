@@ -408,7 +408,7 @@ function Positions_fetch() {
 }
 
 function Positions_filldata() {
-    var url = "Positionsfill/";
+    var url = "positionsfill/";
     $(document).ready(function () {
         $.ajax({
             type: "GET",

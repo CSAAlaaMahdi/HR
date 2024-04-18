@@ -57,11 +57,20 @@
                                 </div>
                                 <div class="dx-fieldset" id="Positions-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">رقم الكتاب  </div>
+                                        <div class="dx-field-label">رقم الكتاب   </div>
                                         <div class="dx-field-value">
                                             <div id="docno"></div>
                                         </div>
                                         <span id="error_docno" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="dx-fieldset" id="Positions-container">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label"> الى تاريخ  </div>
+                                        <div class="dx-field-value">
+                                            <div id="dateto"></div>
+                                        </div>
+                                        <span id="error_dateto" class="text-danger"></span>
                                     </div>
                                 </div>
 
@@ -70,11 +79,11 @@
                             <div class="col-md-4">
                                 <div class="dx-fieldset" id="Positions-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">الدرجة او الشهادة  </div>
+                                        <div class="dx-field-label">المنصب </div>
                                         <div class="dx-field-value">
-                                            <div id="sdeg"></div>
+                                            <div id="ptypeid"></div>
                                         </div>
-                                        <span id="error_sdeg" class="text-danger"></span>
+                                        <span id="error_ptypeid" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="dx-fieldset" id="Positions-container">
@@ -94,37 +103,48 @@
 
                                 <div class="dx-fieldset" id="Positions-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label"> الاسماء  </div>
+                                        <div class="dx-field-label"> المكان  </div>
                                         <div class="dx-field-value">
-                                            <div id="sname"></div>
+                                            <div id="pname"></div>
                                         </div>
-                                        <span id="error_sname" class="text-danger"></span>
+                                        <span id="error_pname" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="dx-fieldset" id="Positions-container">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label"> من تاريخ  </div>
+                                        <div class="dx-field-value">
+                                            <div id="datefrom" class="text-danger"></span>
                                     </div>
                                 </div>
 
 
                             </div>
 
-                            <div class="col-md-4">
+                          
 
-                                <div class="dx-fieldset" id="Positions-container">
-                                    <div class="dx-field">
-                                        <div class="dx-field-label">نسخة مصورة  </div>
-                                        <div class="dx-field-value">
-                                            <div id="filepath"></div>
-                                        </div>
-                                        <span id="error_filepath" class="text-danger"></span>
+
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+
+                            <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label">نسخة مصورة  </div>
+                                    <div class="dx-field-value">
+                                        <div id="filepath"></div>
                                     </div>
+                                    <span id="error_filepath" class="text-danger"></span>
                                 </div>
-
-
                             </div>
 
 
                         </div>
-                        <hr>
-                        <div id="btnSave" style="float:right;margin-right:25px"></div>
                     </div>
+                    <hr>
+                    <div id="btnSave" style="float:right;margin-right:25px"></div>
                 </div>
 
 

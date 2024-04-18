@@ -59,3 +59,4 @@ Route::get('certificationsfill/filldata', [CertificationsController::class, 'fil
 Route::get('comityfill/filldata', [ComityController::class, 'filldata']);
 Route::get('jobsfill/filldata', [JobsController::class, 'filldata']);
 Route::get('supervisorsfill/filldata', [SupervisorsController::class, 'filldata']);
+Route::get('positionsfill/filldata', [PositionsController::class, 'filldata']);
