@@ -8,6 +8,8 @@ use App\Http\Controllers\CertificationsController;
 use App\Http\Controllers\ComityController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\PositionsController;
+use App\Http\Controllers\SupervisorsController;
 use App\Http\Controllers\UsersController;
 
 /*
@@ -47,6 +49,8 @@ Route::resources([
     'certifications' => CertificationsController::class,
     'comity' => ComityController::class,
     'jobs' => JobsController::class,
+    'supervisors' => SupervisorsController::class,
+    'positions' => PositionsController::class,
 
 ]);
 Route::get('usersfill/filldata', [UsersController::class, 'filldata']);
@@ -54,3 +58,4 @@ Route::get('employeesfill/filldata', [EmployeesController::class, 'filldata']);
 Route::get('certificationsfill/filldata', [CertificationsController::class, 'filldata']);
 Route::get('comityfill/filldata', [ComityController::class, 'filldata']);
 Route::get('jobsfill/filldata', [JobsController::class, 'filldata']);
+Route::get('supervisorsfill/filldata', [SupervisorsController::class, 'filldata']);

@@ -109,9 +109,9 @@
         <li
         class="nav-item has-treeview {{ request()->routeIs('certifications.index') ||
              request()->routeIs('comity.index') ||
-            request()->routeIs('jobs.index') 
-            // request()->routeIs('usersgroups.index') ||
-            // request()->routeIs('salesgroups.index') ||
+            request()->routeIs('jobs.index')||
+            request()->routeIs('supervisors.index')||
+            request()->routeIs('positions.index')
             // request()->routeIs('bondsSetting.index') ||
             // request()->routeIs('BillsSetting.index')
             // request()->routeIs('groupsnames.index')
@@ -120,9 +120,9 @@
         <a href="#"
             class="nav-link {{ request()->routeIs('certifications.index') ||
                 request()->routeIs('comity.index')  ||
-                request()->routeIs('jobs.index')
-                // request()->routeIs('usersgroups.index') ||
-                // request()->routeIs('salesgroups.index') ||
+                request()->routeIs('jobs.index')||
+                request()->routeIs('supervisors.index')||
+                request()->routeIs('positions.index')
                 // request()->routeIs('bondsSetting.index') ||
                 // request()->routeIs('BillsSetting.index')
                 // request()->routeIs('groupsnames.index')
@@ -175,6 +175,34 @@
                         <img src="{{ url('assets/img/navbar/icons8_businessman_64px.png') }}" alt=""
                             style="width: 32px; height: 32px;">
                         <p style="margin-right:10px">العناوين الوظيفية</p>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item" id="Login_Supervisor">
+                <a href="{{ route('supervisors.index') }}"
+                    class="nav-link {{ request()->routeIs('supervisors.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('supervisors.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_coach_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الاشراف </p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_coach_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الاشراف </p>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item" id="Login_Positions">
+                <a href="{{ route('positions.index') }}"
+                    class="nav-link {{ request()->routeIs('positions.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('positions.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_project_manager_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">المناصب </p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_project_manager_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">المناصب </p>
                     @endif
                 </a>
             </li>
