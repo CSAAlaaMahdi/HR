@@ -42,6 +42,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Jobs.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Supervisors.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Positions.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Vacations.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Thanks.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Activity.css') }}">
 
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>

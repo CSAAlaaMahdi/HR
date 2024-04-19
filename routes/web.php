@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\Admin;
@@ -10,7 +11,9 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\SupervisorsController;
+use App\Http\Controllers\ThanksController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\VacationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +35,7 @@ Route::get('/login/checking', [LoginController::class, 'checking']);
 
 Route::controller(Admin::class)->group(function () {
     Route::get('/dashboard', 'index')->name('home.index');
-    Route::get('/dashboard/departmentMovements', 'departmentMovements')->name('dashboard.fetch');
-    Route::get('/dashboard/monthMovements', 'monthsMovements')->name('dashboard.movements');
+    
 
 });
 Route::controller(DashboardMain::class)->group(function () {
@@ -51,6 +53,9 @@ Route::resources([
     'jobs' => JobsController::class,
     'supervisors' => SupervisorsController::class,
     'positions' => PositionsController::class,
+    'vacations' => VacationsController::class,
+    'thanks' => ThanksController::class,
+    'activity' => ActivityController::class,
 
 ]);
 Route::get('usersfill/filldata', [UsersController::class, 'filldata']);
@@ -60,3 +65,6 @@ Route::get('comityfill/filldata', [ComityController::class, 'filldata']);
 Route::get('jobsfill/filldata', [JobsController::class, 'filldata']);
 Route::get('supervisorsfill/filldata', [SupervisorsController::class, 'filldata']);
 Route::get('positionsfill/filldata', [PositionsController::class, 'filldata']);
+Route::get('vacationsfill/filldata', [VacationsController::class, 'filldata']);
+Route::get('thanksfill/filldata', [ThanksController::class, 'filldata']);
+Route::get('activityfill/filldata', [ActivityController::class, 'filldata']);

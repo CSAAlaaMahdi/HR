@@ -111,10 +111,10 @@
              request()->routeIs('comity.index') ||
             request()->routeIs('jobs.index')||
             request()->routeIs('supervisors.index')||
-            request()->routeIs('positions.index')
-            // request()->routeIs('bondsSetting.index') ||
-            // request()->routeIs('BillsSetting.index')
-            // request()->routeIs('groupsnames.index')
+            request()->routeIs('positions.index')||
+            request()->routeIs('vacations.index') ||
+            request()->routeIs('thanks.index') ||
+            request()->routeIs('activity.index')
             ? 'menu-open'
             : 'menu-close' }} ">
         <a href="#"
@@ -122,10 +122,10 @@
                 request()->routeIs('comity.index')  ||
                 request()->routeIs('jobs.index')||
                 request()->routeIs('supervisors.index')||
-                request()->routeIs('positions.index')
-                // request()->routeIs('bondsSetting.index') ||
-                // request()->routeIs('BillsSetting.index')
-                // request()->routeIs('groupsnames.index')
+                request()->routeIs('positions.index')||
+                request()->routeIs('vacations.index') ||
+                request()->routeIs('thanks.index') ||
+                request()->routeIs('activity.index')
                 ? 'active'
                 : '' }}">
             <img src="{{ url('assets/img/navbar/icons8_settings_64px.png') }}" alt=""
@@ -206,7 +206,48 @@
                     @endif
                 </a>
             </li>
-
+            <li class="nav-item" id="Login_Vacations">
+                <a href="{{ route('vacations.index') }}"
+                    class="nav-link {{ request()->routeIs('vacations.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('vacations.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_Traveler_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الاجازات </p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_Traveler_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الاجازات </p>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item" id="Login_Thanks">
+                <a href="{{ route('thanks.index') }}"
+                    class="nav-link {{ request()->routeIs('thanks.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('thanks.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_salute_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">التشكرات </p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_salute_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">التشكرات </p>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item" id="Login_Activity">
+                <a href="{{ route('activity.index') }}"
+                    class="nav-link {{ request()->routeIs('activity.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('activity.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_crowd_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الانشطة والفعاليات </p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_crowd_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">الانشطة والفعاليات </p>
+                    @endif
+                </a>
+            </li>
 
         </ul>
     </li>

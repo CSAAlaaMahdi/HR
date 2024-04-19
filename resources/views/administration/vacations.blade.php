@@ -8,12 +8,12 @@
                     <div class="card-header" style="background-color: #343A40">
 
                         <div id="btnNewAdd" style="float: right"></div>
-                        <h4 style="color: white;float: right;margin-right: 35%">المناصب</h4>
+                        <h4 style="color: white;float: right;margin-right: 35%">الاجازات</h4>
 
                     </div>
                     <div class="card-body">
 
-                        <div class="datagrid" id="Positionsdatagrid">
+                        <div class="datagrid" id="Vacationsdatagrid">
 
                         </div>
                         <div id="pagerContainer"></div>
@@ -25,10 +25,10 @@
                 </div>
             </div>
             <div class="col-md-12 mt-5">
-                <div class="card Positionsaction" id="Positionsaction">
+                <div class="card Vacationsaction" id="Vacationsaction">
                     <div class="card-header " style="background-color: #343A40">
                         <div id="danger-contained" style="float:left"></div>
-                        <h4 style="color: white;" id="card_Positionstitle" class="card_Positionstitle"> </h4>
+                        <h4 style="color: white;" id="card_Vacationstitle" class="card_Vacationstitle"> </h4>
 
                     </div>
                     <div class="card-body">
@@ -36,26 +36,49 @@
 
                             @csrf
                             <div class="col-md-4">
-                                <div class="dx-fieldset" id="Positions-container" hidden>
+                                <div class="dx-fieldset" id="Vacations-container" hidden>
                                     <div class="dx-field">
-                                        <div class="dx-field-label">id </div>
+                                        <div class="dx-field-label">vcid </div>
                                         <div class="dx-field-value">
-                                            <div id="id"></div>
+                                            <div id="vcid"></div>
                                         </div>
-                                        <span id="error_id" class="text-danger"></span>
+                                        <span id="error_vcid" class="text-danger"></span>
                                     </div>
                                 </div>
 
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Vacations-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">الاسم  </div>
+                                        <div class="dx-field-label">الاسم </div>
                                         <div class="dx-field-value">
                                             <div id="eid"></div>
                                         </div>
                                         <span id="error_eid" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Vacations-container">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label">تاريخ الاجازة </div>
+                                        <div class="dx-field-value">
+                                            <div id="vdate"></div>
+                                        </div>
+                                        <span id="error_vdate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            
+
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="dx-fieldset" id="Vacations-container">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label">نوع الاجازة </div>
+                                        <div class="dx-field-value">
+                                            <div id="vtid"></div>
+                                        </div>
+                                        <span id="error_vtid" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="dx-fieldset" id="Vacations-container">
                                     <div class="dx-field">
                                         <div class="dx-field-label">رقم الكتاب   </div>
                                         <div class="dx-field-value">
@@ -64,63 +87,30 @@
                                         <span id="error_docno" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
-                                    <div class="dx-field">
-                                        <div class="dx-field-label"> الى تاريخ  </div>
-                                        <div class="dx-field-value">
-                                            <div id="dateto"></div>
-                                        </div>
-                                        <span id="error_dateto" class="text-danger"></span>
-                                    </div>
-                                </div>
 
 
                             </div>
+
                             <div class="col-md-4">
-                                <div class="dx-fieldset" id="Positions-container">
+
+                                <div class="dx-fieldset" id="Vacations-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">المنصب </div>
+                                        <div class="dx-field-label"> عدد الايام  </div>
                                         <div class="dx-field-value">
-                                            <div id="ptypeid"></div>
+                                            <div id="nodays"></div>
                                         </div>
-                                        <span id="error_ptypeid" class="text-danger"></span>
+                                        <span id="error_nodays" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Vacations-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">تاريخ الكتاب  </div>
+                                        <div class="dx-field-label"> تاريخ الكتاب   </div>
                                         <div class="dx-field-value">
                                             <div id="docdate"></div>
                                         </div>
                                         <span id="error_docdate" class="text-danger"></span>
                                     </div>
                                 </div>
-
-
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <div class="dx-fieldset" id="Positions-container">
-                                    <div class="dx-field">
-                                        <div class="dx-field-label"> المكان  </div>
-                                        <div class="dx-field-value">
-                                            <div id="pname"></div>
-                                        </div>
-                                        <span id="error_pname" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="dx-fieldset" id="Positions-container">
-                                    <div class="dx-field">
-                                        <div class="dx-field-label"> من تاريخ  </div>
-                                        <div class="dx-field-value">
-                                            <div id="datefrom" class="text-danger"></span>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
                           
 
 
@@ -130,7 +120,7 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
 
-                            <div class="dx-fieldset" id="Positions-container">
+                            <div class="dx-fieldset" id="Vacations-container">
                                 <div class="dx-field">
                                     <div class="dx-field-label">نسخة مصورة  </div>
                                     <div class="dx-field-value">
@@ -153,11 +143,11 @@
 
 
         </div>
-        <script type="text/javascript" src="{{ url('assets/js/pro_js/Positions.js') }}"></script>
+        <script type="text/javascript" src="{{ url('assets/js/pro_js/Vacations.js') }}"></script>
 
 
 
         <script>
-            $("#Positionsaction").hide();
+            $("#Vacationsaction").hide();
         </script>
     @endSection()

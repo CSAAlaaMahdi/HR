@@ -8,12 +8,12 @@
                     <div class="card-header" style="background-color: #343A40">
 
                         <div id="btnNewAdd" style="float: right"></div>
-                        <h4 style="color: white;float: right;margin-right: 35%">المناصب</h4>
+                        <h4 style="color: white;float: right;margin-right: 35%">التشكرات</h4>
 
                     </div>
                     <div class="card-body">
 
-                        <div class="datagrid" id="Positionsdatagrid">
+                        <div class="datagrid" id="Thanksdatagrid">
 
                         </div>
                         <div id="pagerContainer"></div>
@@ -25,10 +25,10 @@
                 </div>
             </div>
             <div class="col-md-12 mt-5">
-                <div class="card Positionsaction" id="Positionsaction">
+                <div class="card Thanksaction" id="Thanksaction">
                     <div class="card-header " style="background-color: #343A40">
                         <div id="danger-contained" style="float:left"></div>
-                        <h4 style="color: white;" id="card_Positionstitle" class="card_Positionstitle"> </h4>
+                        <h4 style="color: white;" id="card_Thankstitle" class="card_Thankstitle"> </h4>
 
                     </div>
                     <div class="card-body">
@@ -36,7 +36,7 @@
 
                             @csrf
                             <div class="col-md-4">
-                                <div class="dx-fieldset" id="Positions-container" hidden>
+                                <div class="dx-fieldset" id="Thanks-container" hidden>
                                     <div class="dx-field">
                                         <div class="dx-field-label">id </div>
                                         <div class="dx-field-value">
@@ -46,49 +46,40 @@
                                     </div>
                                 </div>
 
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Thanks-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">الاسم  </div>
+                                        <div class="dx-field-label">الاسم </div>
                                         <div class="dx-field-value">
                                             <div id="eid"></div>
                                         </div>
                                         <span id="error_eid" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Thanks-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">رقم الكتاب   </div>
+                                        <div class="dx-field-label">رقم الكتاب </div>
                                         <div class="dx-field-value">
                                             <div id="docno"></div>
                                         </div>
                                         <span id="error_docno" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
-                                    <div class="dx-field">
-                                        <div class="dx-field-label"> الى تاريخ  </div>
-                                        <div class="dx-field-value">
-                                            <div id="dateto"></div>
-                                        </div>
-                                        <span id="error_dateto" class="text-danger"></span>
-                                    </div>
-                                </div>
 
 
                             </div>
                             <div class="col-md-4">
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Thanks-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">المنصب </div>
+                                        <div class="dx-field-label"> نوع كتاب الشكر </div>
                                         <div class="dx-field-value">
-                                            <div id="ptypeid"></div>
+                                            <div id="ttype"></div>
                                         </div>
-                                        <span id="error_ptypeid" class="text-danger"></span>
+                                        <span id="error_ttype" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Thanks-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">تاريخ الكتاب  </div>
+                                        <div class="dx-field-label">تاريخ الكتاب </div>
                                         <div class="dx-field-value">
                                             <div id="docdate"></div>
                                         </div>
@@ -101,50 +92,62 @@
 
                             <div class="col-md-4">
 
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Thanks-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label"> المكان  </div>
+                                        <div class="dx-field-label"> السبب </div>
                                         <div class="dx-field-value">
-                                            <div id="pname"></div>
+                                            <div id="reason"></div>
                                         </div>
-                                        <span id="error_pname" class="text-danger"></span>
+                                        <span id="error_reason" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+
+                                <div class="dx-fieldset" id="Thanks-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label"> من تاريخ  </div>
+                                        <div class="dx-field-label">ملاحظات </div>
                                         <div class="dx-field-value">
-                                            <div id="datefrom" class="text-danger"></span>
+                                            <div id="notes"></div>
+                                        </div>
+                                        <span id="error_notes" class="text-danger"></span>
                                     </div>
                                 </div>
 
 
                             </div>
 
-                          
-
-
                         </div>
-                       
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
 
-                            <div class="dx-fieldset" id="Positions-container">
-                                <div class="dx-field">
-                                    <div class="dx-field-label">نسخة مصورة  </div>
-                                    <div class="dx-field-value">
-                                        <div id="filepath"></div>
+                            <div class="col-md-4">
+
+                                <div class="dx-fieldset" id="Thanks-container">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label">نسخة مصورة </div>
+                                        <div class="dx-field-value">
+                                            <div id="filepath"></div>
+                                        </div>
+                                        <span id="error_filepath" class="text-danger"></span>
                                     </div>
-                                    <span id="error_filepath" class="text-danger"></span>
                                 </div>
+
+
+
+
                             </div>
-
-
                         </div>
+
+                        <hr>
+                        <div id="btnSave" style="float:right;margin-right:25px"></div>
                     </div>
-                    <hr>
-                    <div id="btnSave" style="float:right;margin-right:25px"></div>
                 </div>
 
 
@@ -153,11 +156,11 @@
 
 
         </div>
-        <script type="text/javascript" src="{{ url('assets/js/pro_js/Positions.js') }}"></script>
+        <script type="text/javascript" src="{{ url('assets/js/pro_js/Thanks.js') }}"></script>
 
 
 
         <script>
-            $("#Positionsaction").hide();
+            $("#Thanksaction").hide();
         </script>
     @endSection()

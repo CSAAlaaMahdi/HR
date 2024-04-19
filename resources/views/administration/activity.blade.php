@@ -8,12 +8,12 @@
                     <div class="card-header" style="background-color: #343A40">
 
                         <div id="btnNewAdd" style="float: right"></div>
-                        <h4 style="color: white;float: right;margin-right: 35%">المناصب</h4>
+                        <h4 style="color: white;float: right;margin-right: 35%">الانشطة والفعاليات</h4>
 
                     </div>
                     <div class="card-body">
 
-                        <div class="datagrid" id="Positionsdatagrid">
+                        <div class="datagrid" id="Activitydatagrid">
 
                         </div>
                         <div id="pagerContainer"></div>
@@ -25,10 +25,10 @@
                 </div>
             </div>
             <div class="col-md-12 mt-5">
-                <div class="card Positionsaction" id="Positionsaction">
+                <div class="card Activityaction" id="Activityaction">
                     <div class="card-header " style="background-color: #343A40">
                         <div id="danger-contained" style="float:left"></div>
-                        <h4 style="color: white;" id="card_Positionstitle" class="card_Positionstitle"> </h4>
+                        <h4 style="color: white;" id="card_Activitytitle" class="card_Activitytitle"> </h4>
 
                     </div>
                     <div class="card-body">
@@ -36,63 +36,55 @@
 
                             @csrf
                             <div class="col-md-4">
-                                <div class="dx-fieldset" id="Positions-container" hidden>
+                                <div class="dx-fieldset" id="Activity-container" hidden>
                                     <div class="dx-field">
-                                        <div class="dx-field-label">id </div>
+                                        <div class="dx-field-label">aid </div>
                                         <div class="dx-field-value">
-                                            <div id="id"></div>
+                                            <div id="aid"></div>
                                         </div>
-                                        <span id="error_id" class="text-danger"></span>
+                                        <span id="error_aid" class="text-danger"></span>
                                     </div>
                                 </div>
 
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Activity-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">الاسم  </div>
+                                        <div class="dx-field-label">اسم النشاط </div>
                                         <div class="dx-field-value">
-                                            <div id="eid"></div>
+                                            <div id="act_id"></div>
                                         </div>
-                                        <span id="error_eid" class="text-danger"></span>
+                                        <span id="error_act_id" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Activity-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">رقم الكتاب   </div>
+                                        <div class="dx-field-label">عدد الايام  </div>
                                         <div class="dx-field-value">
-                                            <div id="docno"></div>
+                                            <div id="NoDays"></div>
                                         </div>
-                                        <span id="error_docno" class="text-danger"></span>
+                                        <span id="error_NoDays" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
-                                    <div class="dx-field">
-                                        <div class="dx-field-label"> الى تاريخ  </div>
-                                        <div class="dx-field-value">
-                                            <div id="dateto"></div>
-                                        </div>
-                                        <span id="error_dateto" class="text-danger"></span>
-                                    </div>
-                                </div>
+                            
 
 
                             </div>
                             <div class="col-md-4">
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Activity-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">المنصب </div>
+                                        <div class="dx-field-label">العنوان  </div>
                                         <div class="dx-field-value">
-                                            <div id="ptypeid"></div>
+                                            <div id="Aname"></div>
                                         </div>
-                                        <span id="error_ptypeid" class="text-danger"></span>
+                                        <span id="error_Aname" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Activity-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">تاريخ الكتاب  </div>
+                                        <div class="dx-field-label">تاريخ الانعقاد    </div>
                                         <div class="dx-field-value">
-                                            <div id="docdate"></div>
+                                            <div id="ActDate"></div>
                                         </div>
-                                        <span id="error_docdate" class="text-danger"></span>
+                                        <span id="error_ActDate" class="text-danger"></span>
                                     </div>
                                 </div>
 
@@ -101,26 +93,24 @@
 
                             <div class="col-md-4">
 
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Activity-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label"> المكان  </div>
+                                        <div class="dx-field-label"> مكان الانعقاد   </div>
                                         <div class="dx-field-value">
-                                            <div id="pname"></div>
+                                            <div id="Place"></div>
                                         </div>
-                                        <span id="error_pname" class="text-danger"></span>
+                                        <span id="error_Place" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="dx-fieldset" id="Positions-container">
+                                <div class="dx-fieldset" id="Activity-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label"> من تاريخ  </div>
+                                        <div class="dx-field-label"> عدد المشاركين </div>
                                         <div class="dx-field-value">
-                                            <div id="datefrom" class="text-danger"></span>
+                                            <div id="Participants"></div>
+                                        </div>
+                                        <span id="error_Participants" class="text-danger"></span>
                                     </div>
                                 </div>
-
-
-                            </div>
-
                           
 
 
@@ -128,9 +118,21 @@
                        
                     </div>
                     <div class="col-md-12">
+                        
+                        <div class="dx-fieldset" id="Activity-container">
+                            <div class="dx-field">
+                                <div class="dx-field-label">ملاحظات   </div>
+                                <div class="dx-field-value">
+                                    <div id="Notes"></div>
+                                </div>
+                                <span id="error_Notes" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="col-md-4">
 
-                            <div class="dx-fieldset" id="Positions-container">
+                            <div class="dx-fieldset" id="Activity-container">
                                 <div class="dx-field">
                                     <div class="dx-field-label">نسخة مصورة  </div>
                                     <div class="dx-field-value">
@@ -153,11 +155,11 @@
 
 
         </div>
-        <script type="text/javascript" src="{{ url('assets/js/pro_js/Positions.js') }}"></script>
+        <script type="text/javascript" src="{{ url('assets/js/pro_js/Activity.js') }}"></script>
 
 
 
         <script>
-            $("#Positionsaction").hide();
+            $("#Activityaction").hide();
         </script>
     @endSection()
