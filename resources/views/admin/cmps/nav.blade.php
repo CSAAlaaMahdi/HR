@@ -114,7 +114,8 @@
             request()->routeIs('positions.index')||
             request()->routeIs('vacations.index') ||
             request()->routeIs('thanks.index') ||
-            request()->routeIs('activity.index')
+            request()->routeIs('activity.index') ||
+            request()->routeIs('researches.index') 
             ? 'menu-open'
             : 'menu-close' }} ">
         <a href="#"
@@ -125,7 +126,8 @@
                 request()->routeIs('positions.index')||
                 request()->routeIs('vacations.index') ||
                 request()->routeIs('thanks.index') ||
-                request()->routeIs('activity.index')
+                request()->routeIs('activity.index') ||
+                request()->routeIs('researches.index') 
                 ? 'active'
                 : '' }}">
             <img src="{{ url('assets/img/navbar/icons8_settings_64px.png') }}" alt=""
@@ -245,6 +247,20 @@
                         <img src="{{ url('assets/img/navbar/icons8_crowd_64px.png') }}" alt=""
                             style="width: 32px; height: 32px;">
                         <p style="margin-right:10px">الانشطة والفعاليات </p>
+                    @endif
+                </a>
+            </li>
+            <li class="nav-item" id="Login_Researches">
+                <a href="{{ route('researches.index') }}"
+                    class="nav-link {{ request()->routeIs('researches.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('researches.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_reading_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;">
+                        <p style="margin-right:10px"> البحوث والنشر </p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_reading_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;">
+                        <p style="margin-right:10px">البحوث والنشر </p>
                     @endif
                 </a>
             </li>
