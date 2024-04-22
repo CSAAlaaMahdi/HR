@@ -115,9 +115,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
-                <img src="{{ url('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">الموارد البشرية </span>
+                <img src="{{ url('assets/img/navbar/icons8_circled_h_64px.png') }}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8;margin-right:20px">
+                <span class="brand-text font-weight-light" id="titlefont">الموارد البشرية </span>
             </a>
 
             <div class="sidebar">
