@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\DashboardMain;
+use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\CertificationsController;
+use App\Http\Controllers\ChildrenController;
 use App\Http\Controllers\ComityController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\JobsController;
@@ -58,6 +60,8 @@ Route::resources([
     'thanks' => ThanksController::class,
     'activity' => ActivityController::class,
     'researches' => ResearchesController::class,
+    'children' => ChildrenController::class,
+    'articles' => ArticlesController::class,
 
 ]);
 Route::get('usersfill/filldata', [UsersController::class, 'filldata']);
@@ -71,3 +75,5 @@ Route::get('vacationsfill/filldata', [VacationsController::class, 'filldata']);
 Route::get('thanksfill/filldata', [ThanksController::class, 'filldata']);
 Route::get('activityfill/filldata', [ActivityController::class, 'filldata']);
 Route::get('researchesfill/filldata', [ResearchesController::class, 'filldata']);
+Route::get('childrenfill/filldata', [ChildrenController::class, 'filldata']);
+Route::get('articlesfill/filldata', [ArticlesController::class, 'filldata']);

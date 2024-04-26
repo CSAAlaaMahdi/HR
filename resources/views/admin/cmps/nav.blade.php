@@ -138,13 +138,15 @@
         <li
             class="nav-item has-treeview {{ request()->routeIs('jobs.index') ||
             request()->routeIs('vacations.index') ||
-            request()->routeIs('thanks.index')
+            request()->routeIs('thanks.index')  ||
+            request()->routeIs('children.index')
                 ? 'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
                 class="nav-link {{ request()->routeIs('jobs.index') ||
                 request()->routeIs('vacations.index') ||
-                request()->routeIs('thanks.index')
+                request()->routeIs('thanks.index') ||
+                request()->routeIs('children.index')
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_management_64px.png') }}" alt=""
@@ -198,10 +200,10 @@
                         @endif
                     </a>
                 </li>
-                <li class="nav-item" id="Login_Thanks">
-                    <a href="{{ route('thanks.index') }}"
-                        class="nav-link {{ request()->routeIs('thanks.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('thanks.index'))
+                <li class="nav-item" id="Login_Children">
+                    <a href="{{ route('children.index') }}"
+                        class="nav-link {{ request()->routeIs('children.index') ? 'active' : '' }}">
+                        @if (request()->routeIs('children.index'))
                             <img src="{{ url('assets/img/navbar/icons8_full_family_64px_1.png') }}" alt=""
                                 style=" width: 32px; height: 32px;margin-right:15px">
                             <p style="margin-right:10px">الزوجية والاطفال </p>
@@ -249,7 +251,8 @@
             request()->routeIs('supervisors.index') ||
             request()->routeIs('positions.index') ||
             request()->routeIs('activity.index') ||
-            request()->routeIs('researches.index')
+            request()->routeIs('researches.index') ||
+            request()->routeIs('articles.index') 
                 ? 'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
@@ -258,7 +261,8 @@
                 request()->routeIs('supervisors.index') ||
                 request()->routeIs('positions.index') ||
                 request()->routeIs('activity.index') ||
-                request()->routeIs('researches.index')
+                request()->routeIs('researches.index') ||
+                request()->routeIs('articles.index')
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_book_and_pencil_64px.png') }}" alt=""
@@ -352,6 +356,20 @@
                             <img src="{{ url('assets/img/navbar/icons8_reading_64px.png') }}" alt=""
                                 style="width: 32px; height: 32px;margin-right:15px">
                             <p style="margin-right:10px">البحوث والنشر </p>
+                        @endif
+                    </a>
+                </li>
+                <li class="nav-item" id="Login_Articles">
+                    <a href="{{ route('articles.index') }}"
+                        class="nav-link {{ request()->routeIs('articles.index') ? 'active' : '' }}">
+                        @if (request()->routeIs('articles.index'))
+                            <img src="{{ url('assets/img/navbar/icons8_article_64px_1.png') }}" alt=""
+                                style=" width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px"> المقالات  </p>
+                        @else
+                            <img src="{{ url('assets/img/navbar/icons8_article_64px.png') }}" alt=""
+                                style="width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px"> المقالات </p>
                         @endif
                     </a>
                 </li>
