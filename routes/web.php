@@ -11,6 +11,7 @@ use App\Http\Controllers\ChildrenController;
 use App\Http\Controllers\ComityController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\ResearchesController;
 use App\Http\Controllers\SupervisorsController;
@@ -62,6 +63,8 @@ Route::resources([
     'researches' => ResearchesController::class,
     'children' => ChildrenController::class,
     'articles' => ArticlesController::class,
+    'places' => PlacesController::class,
+    
 
 ]);
 Route::get('usersfill/filldata', [UsersController::class, 'filldata']);
@@ -77,3 +80,4 @@ Route::get('activityfill/filldata', [ActivityController::class, 'filldata']);
 Route::get('researchesfill/filldata', [ResearchesController::class, 'filldata']);
 Route::get('childrenfill/filldata', [ChildrenController::class, 'filldata']);
 Route::get('articlesfill/filldata', [ArticlesController::class, 'filldata']);
+Route::get('placesfill/filldata', [PlacesController::class, 'filldata']);

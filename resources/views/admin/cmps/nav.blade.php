@@ -377,26 +377,26 @@
             </ul>
         </li>
         <li
-            class="nav-item has-treeview {{ request()->routeIs('users.index')
-                ? // request()->routeIs('permissions.index') ||
+            class="nav-item has-treeview {{ request()->routeIs('users.index') ||
+                 request()->routeIs('places.index') 
                 // request()->routeIs('frame.index') ||
                 // request()->routeIs('usersgroups.index') ||
                 // request()->routeIs('salesgroups.index') ||
                 // request()->routeIs('bondsSetting.index') ||
                 // request()->routeIs('BillsSetting.index')
                 // request()->routeIs('groupsnames.index')
-                'menu-open'
+               ? 'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
-                class="nav-link {{ request()->routeIs('users.index')
-                    ? // request()->routeIs('permissions.index') ||
+                class="nav-link {{ request()->routeIs('users.index')   ||
+                     request()->routeIs('places.index') 
                     // request()->routeIs('frame.index') ||
                     // request()->routeIs('usersgroups.index') ||
                     // request()->routeIs('salesgroups.index') ||
                     // request()->routeIs('bondsSetting.index') ||
                     // request()->routeIs('BillsSetting.index')
                     // request()->routeIs('groupsnames.index')
-                    'active'
+                   ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_warehouse_64px.png') }}" alt=""
                     style="width: 32px; height: 32px;">
@@ -406,6 +406,20 @@
                 </p>
             </a>
             <ul class="nav nav-treeview">
+                <li class="nav-item" id="Login_Places">
+                    <a href="{{ route('places.index') }}"
+                        class="nav-link {{ request()->routeIs('places.index') ? 'active' : '' }}">
+                        @if (request()->routeIs('places.index'))
+                            <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px_1.png') }}" alt=""
+                                style=" width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">شجرة المواقع </p>
+                        @else
+                            <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px.png') }}" alt=""
+                                style="width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">شجرة المواقع </p>
+                        @endif
+                    </a>
+                </li>
                 <li class="nav-item" id="Login_Users">
                     <a href="{{ route('users.index') }}"
                         class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">

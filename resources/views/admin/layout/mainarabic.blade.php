@@ -48,6 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Researches.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Children.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Articles.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Places.css') }}">
 
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>
@@ -69,6 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script type="text/javascript" src="{{ url('assets/js/Template/bootstrap-treeview.js') }}"></script>
 
 
+    
     <script type="text/javascript" src="{{ url('assets/dx/js/dx-diagram.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/dx/js/dx-gantt.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/dx/js/dx-quill.min.js') }}"></script>
