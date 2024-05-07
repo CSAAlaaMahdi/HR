@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\DashboardMain;
+use App\Http\Controllers\AdministrationOrdersController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\CertificationsController;
 use App\Http\Controllers\ChildrenController;
@@ -64,6 +65,7 @@ Route::resources([
     'children' => ChildrenController::class,
     'articles' => ArticlesController::class,
     'places' => PlacesController::class,
+    'administrationOrders' => AdministrationOrdersController::class,
     
 
 ]);
@@ -81,3 +83,5 @@ Route::get('researchesfill/filldata', [ResearchesController::class, 'filldata'])
 Route::get('childrenfill/filldata', [ChildrenController::class, 'filldata']);
 Route::get('articlesfill/filldata', [ArticlesController::class, 'filldata']);
 Route::get('placesfill/filldata', [PlacesController::class, 'filldata']);
+Route::get('administrationOrdersfill/filldata', [AdministrationOrdersController::class, 'filldata']);
+Route::post('administrationImageDelete/DeleteImage', [AdministrationOrdersController::class, 'DeleteImages']);

@@ -139,14 +139,16 @@
             class="nav-item has-treeview {{ request()->routeIs('jobs.index') ||
             request()->routeIs('vacations.index') ||
             request()->routeIs('thanks.index')  ||
-            request()->routeIs('children.index')
+            request()->routeIs('children.index') ||
+            request()->routeIs('administrationOrders.index') 
                 ? 'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
                 class="nav-link {{ request()->routeIs('jobs.index') ||
                 request()->routeIs('vacations.index') ||
                 request()->routeIs('thanks.index') ||
-                request()->routeIs('children.index')
+                request()->routeIs('children.index') ||
+                request()->routeIs('administrationOrders.index') 
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_management_64px.png') }}" alt=""
@@ -228,10 +230,10 @@
                         @endif
                     </a>
                 </li>
-                <li class="nav-item" id="Login_Thanks">
-                    <a href="{{ route('thanks.index') }}"
-                        class="nav-link {{ request()->routeIs('thanks.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('thanks.index'))
+                <li class="nav-item" id="Login_AdministrationOrders">
+                    <a href="{{ route('administrationOrders.index') }}"
+                        class="nav-link {{ request()->routeIs('administrationOrders.index') ? 'active' : '' }}">
+                        @if (request()->routeIs('administrationOrders.index'))
                             <img src="{{ url('assets/img/navbar/icons8_profile_64px_1.png') }}" alt=""
                                 style=" width: 32px; height: 32px;margin-right:15px">
                             <p style="margin-right:10px"> الاوامر  الادارية </p>
