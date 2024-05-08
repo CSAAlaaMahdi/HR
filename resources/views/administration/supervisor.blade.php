@@ -45,6 +45,15 @@
                                         <span id="error_id" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <div class="dx-fieldset" id="Supervisors-container" hidden>
+                                    <div class="dx-field">
+                                        <div class="dx-field-label">Guid </div>
+                                        <div class="dx-field-value">
+                                            <div id="Guid"></div>
+                                        </div>
+                                        <span id="error_Guid" class="text-danger"></span>
+                                    </div>
+                                </div>
 
                                 <div class="dx-fieldset" id="Supervisors-container">
                                     <div class="dx-field">
@@ -105,22 +114,30 @@
 
                             </div>
 
+                           
+
+
+                        </div>
+                        <div class="col-md-12">
                             <div class="col-md-4">
 
                                 <div class="dx-fieldset" id="Supervisors-container">
                                     <div class="dx-field">
                                         <div class="dx-field-label">نسخة مصورة  </div>
                                         <div class="dx-field-value">
-                                            <div id="filepath"></div>
+                                            <div id="FilePath"></div>
                                         </div>
-                                        <span id="error_filepath" class="text-danger"></span>
+                                        <span id="error_FilePath" class="text-danger"></span>
                                     </div>
                                 </div>
 
 
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div id="image-container">
 
-
+                            </div>
                         </div>
                         <hr>
                         <div id="btnSave" style="float:right;margin-right:25px"></div>

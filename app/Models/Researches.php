@@ -12,6 +12,7 @@ class Researches extends Model
     protected $primaryKey = 'rid';
     protected $keyType = 'integer';
     protected $fillable=[
+        'Guid',
         'Res_Type',
         'Title',
         'JournalName',
@@ -31,6 +32,7 @@ class Researches extends Model
         'DOI',
         'Rlink',
         'Extaut',
-        'filepath'
+        'filepath',
+        'UserID'
     ];
 }

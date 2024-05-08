@@ -3,6 +3,7 @@ Researches_filldata();
 
 function Researches_cleardata() {
     $("#rid").dxTextBox("instance").option("value", "");
+    $("#Guid").dxTextBox("instance").option("value", "");
     $("#ResType").dxSelectBox("instance").option("value", "");
     $("#Title").dxTextBox("instance").option("value", "");
     $("#JournalName").dxTextBox("instance").option("value", "");
@@ -22,6 +23,8 @@ function Researches_cleardata() {
     $("#DOI").dxTextBox("instance").option("value", "");
     $("#Rlink").dxTextBox("instance").option("value", "");
     $("#Extaut").dxTextBox("instance").option("value", "");
+    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#image-container").empty();
 
 }
 
@@ -51,30 +54,35 @@ function Researches_UpdateOrCreate() {
         month: "2-digit",
         day: "2-digit",
     }).format(selectedDate);
-    var data = {
-        rid: $("#rid").dxTextBox("instance").option("value"),
-        ResType: $("#ResType").dxSelectBox("instance").option("value"),
-        Title: $("#Title").dxTextBox("instance").option("value"),
-        JournalName: $("#JournalName").dxTextBox("instance").option("value"),
-        PubDate: PubDate,
-        JournalType: $("#JournalType").dxSelectBox("instance").option("value"),
-        Jpos: $("#Jpos").dxSelectBox("instance").option("value"),
-        Numb: $("#Numb").dxTextBox("instance").option("value"),
-        Page: $("#Page").dxTextBox("instance").option("value"),
-        Isconf: $("#Isconf").dxSelectBox("instance").option("value"),
-        ConfName: $("#ConfName").dxTextBox("instance").option("value"),
-        ConfPlace: $("#ConfPlace").dxTextBox("instance").option("value"),
-        Rtype: $("#Rtype").dxSelectBox("instance").option("value"),
-        CiteScor: $("#CiteScor").dxTextBox("instance").option("value"),
-        ImpactFactor: $("#ImpactFactor").dxTextBox("instance").option("value"),
-        JournalQuartile: $("#JournalQuartile").dxTextBox("instance").option("value"),
-        ISSN: $("#ISSN").dxTextBox("instance").option("value"),
-        DOI: $("#DOI").dxTextBox("instance").option("value"),
-        Rlink: $("#Rlink").dxTextBox("instance").option("value"),
-        Extaut: $("#Extaut").dxTextBox("instance").option("value"),
-     
 
-    };
+    var formData = new FormData();
+    formData.append('rid', $("#rid").dxTextBox("instance").option("value"));
+    formData.append('Guid', $("#Guid").dxTextBox("instance").option("value"));
+    formData.append('ResType', $("#ResType").dxSelectBox("instance").option("value"));
+    formData.append('Title', $("#Title").dxTextBox("instance").option("value"));
+    formData.append('JournalName', $("#JournalName").dxTextBox("instance").option("value"));
+    formData.append('PubDate', PubDate);
+    formData.append('JournalType', $("#JournalType").dxSelectBox("instance").option("value"));
+    formData.append('Jpos', $("#Jpos").dxSelectBox("instance").option("value"));
+    formData.append('Numb', $("#Numb").dxTextBox("instance").option("value"));
+    formData.append('Page', $("#Page").dxTextBox("instance").option("value"));
+    formData.append('Isconf', $("#Isconf").dxSelectBox("instance").option("value"));
+    formData.append('ConfName', $("#ConfName").dxTextBox("instance").option("value"));
+    formData.append('ConfPlace', $("#ConfPlace").dxTextBox("instance").option("value"));
+    formData.append('Rtype', $("#Rtype").dxSelectBox("instance").option("value"));
+    formData.append('CiteScor', $("#CiteScor").dxTextBox("instance").option("value"));
+    formData.append('ImpactFactor', $("#ImpactFactor").dxTextBox("instance").option("value"));
+    formData.append('JournalQuartile', $("#JournalQuartile").dxTextBox("instance").option("value"));
+    formData.append('ISSN', $("#ISSN").dxTextBox("instance").option("value"));
+    formData.append('DOI', $("#DOI").dxTextBox("instance").option("value"));
+    formData.append('Rlink', $("#Rlink").dxTextBox("instance").option("value"));
+    formData.append('Extaut', $("#Extaut").dxTextBox("instance").option("value"));
+    formData.append('DocTitle', $("#Title").dxTextBox("instance").option("value"));
+    const images = $("#FilePath").dxFileUploader("option", "value");
+    $.each(images, function(index, file) {
+        formData.append('image[]', file);
+    });
+
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -84,7 +92,9 @@ function Researches_UpdateOrCreate() {
     $.ajax({
         type: "POST",
         url: url,
-        data: data,
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
             DevExpress.ui.notify({
                 message: response.status,
@@ -140,6 +150,7 @@ function Researches_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser:{enabled:true},
                         columns: [
                             {
                                 dataField:"rid",
@@ -168,6 +179,7 @@ function Researches_fetch() {
                             {
                                 dataField: "ResType",
                                 caption: " نوع البحث",
+                                
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -277,8 +289,9 @@ function Researches_fetch() {
                                 },
                             },
                             {
-                                dataField: "filepath",
-                                caption: "نسخة  مصورة ",
+                                dataField: "Numb",
+                                caption: "Numb",
+                                visible:false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -294,6 +307,235 @@ function Researches_fetch() {
                                         .appendTo(container);
                                 },
                             },
+                            {
+                                dataField: "Page",
+                                caption: "عدد الصفحات",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "Isconf",
+                                caption: "Isconf",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "ConfName",
+                                caption: "ConfName",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "ConfPlace",
+                                caption: "ConfPlace",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "Rtype",
+                                caption: "Rtype",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "CiteScor",
+                                caption: "CiteScor",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "ImpactFactor",
+                                caption: "ImpactFactor",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "JournalQuartile",
+                                caption: "JournalQuartile",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "ISSN",
+                                caption: "ISSN",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "DOI",
+                                caption: "DOI",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "Rlink",
+                                caption: "رابط البحث",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "Extaut",
+                                caption: "Extaut",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                           
                             {
                                 caption: "الحدث",
                                 width: 200,
@@ -320,103 +562,172 @@ function Researches_fetch() {
                                                     $("#rid")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.rid,
+                                                            value: response.Researches.rid,
+                                                        });
+                                                        $("#Guid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Researches.Guid,
                                                         });
                                                     $("#ResType")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.ResType ,
+                                                            value:response.Researches.ResType ,
                                                         });
                                                     $("#Title")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.Title,
+                                                            value: response.Researches.Title,
                                                         });
                                                     $("#JournalName")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.JournalName,
+                                                            value: response.Researches.JournalName,
                                                         });
                                                   
                                                     $("#PubDate")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value: new Date(response.PubDate)
+                                                            value: new Date(response.Researches.PubDate)
                                                         });
                                                         $("#JournalType")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.JournalType
+                                                            value:response.Researches.JournalType
                                                         });
                                                         $("#Jpos")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.Jpos
+                                                            value:response.Researches.Jpos
                                                         });
                                                     $("#Numb")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Numb
+                                                            value:response.Researches.Numb
                                                         });
                                                         $("#Page")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Page
+                                                            value:response.Researches.Page
                                                         });
                                                         $("#Isconf")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.Isconf
+                                                            value:response.Researches.Isconf
                                                         });
                                                         $("#ConfName")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.confName
+                                                            value:response.Researches.confName
                                                         });
                                                         $("#ConfPlace")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.ConfPlace
+                                                            value:response.Researches.ConfPlace
                                                         });
                                                         $("#Rtype")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.Rtype
+                                                            value:response.Researches.Rtype
                                                         });
                                                         $("#CiteScor")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.CiteScor
+                                                            value:response.Researches.CiteScor
                                                         });
                                                         $("#ImpactFactor")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.ImpactFactor
+                                                            value:response.Researches.ImpactFactor
                                                         });
                                                         $("#JournalQuartile")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.JournalQuartile
+                                                            value:response.Researches.JournalQuartile
                                                         });
                                                         $("#ISSN")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.ISSN
+                                                            value:response.Researches.ISSN
                                                         });
                                                         $("#DOI")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.DOI
+                                                            value:response.Researches.DOI
                                                         });
                                                         $("#Rlink")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Rlink
+                                                            value:response.Researches.Rlink
                                                         });
                                                         $("#Extaut")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Extaut
+                                                            value:response.Researches.Extaut
+                                                        });
+                                                        $('#image-container').empty();
+                                                        let images = [];
+                                                        $.each(response.Attachments, function(index, file) {
+                                                            images.push(file['FilePath']);
+
+                                                            $('#image-container').append(
+                                                                '<div class="image-preview">' +
+                                                                '<button class="delete-image">حذف الكتاب</button>' +
+                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                '</div>'
+                                                            );
+                                                        });
+                                                          // Delete Image
+                                                        $('#image-container').on('click', '.delete-image', function() {
+                                                            var index = $(this).closest('.image-preview').index();
+
+                                                            if(index >=0 && index < images.length){
+
+                                                                var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                var id = $('#rid').dxTextBox("instance").option("value");
+                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                // Remove the image from the images array
+                                                                images.splice(index, 1);
+
+                                                                // Remove the image preview from the view
+                                                                $(this).closest('.image-preview').remove();
+
+                                                                // Send an AJAX request to delete the image from the server
+                                                                $.ajaxSetup({
+                                                                    headers: {
+                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                    },
+                                                                });
+                                                                $.ajax({
+                                                                    url: 'researchesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                    method: 'POST',
+                                                                    data: { imageName: imageName, rid:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                    success: function(data) {
+                                                                        DevExpress.ui.notify({
+                                                                            message:
+                                                                                data.status,
+                                                                            position: {
+                                                                                my: "top left",
+                                                                                at: "top left",
+                                                                            },
+                                                                            type: "error",
+                                                                            width: "300",
+                                                                            height: "150",
+                                                                            hideAfter: 2000,
+                                                                        });
+                                                                    },
+                                                                    error: function(xhr, status, error) {
+                                                                        // Handle error response (e.g., display error message)
+                                                                    }
+                                                                });
+                                                                }else{
+                                                                    console.error('Invalid index:', index);
+                                                                }
+
+
+
                                                         });
 
                                                     var displaycard =
@@ -702,7 +1013,7 @@ $(document).ready(function () {
             var displaycard = document.getElementById("Researchesaction");
             if (displaycard.style.display == "block") {
                 document.getElementById("card_Researchestitle").innerText = "";
-                // Researches_cleardata();
+                Researches_cleardata();
                 // Researches_setStCode();
                 displaycard.style.display = "none";
                 document.getElementById("firstCard").scrollIntoView();
@@ -761,6 +1072,12 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(() => {
         $("#rid").dxTextBox({
+            placeholder: "",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#Guid").dxTextBox({
             placeholder: "",
             inputAttr: { style:"font-size:13px", },
         });
@@ -871,13 +1188,80 @@ $(document).ready(function () {
             inputAttr: {  style:"font-size:13px",},
         });
     });
-    $('#filepath').dxFileUploader({
-        selectButtonText: 'تحميل نسخة من الكتاب',
-        labelText: '',
-        accept: 'image/*',
-        uploadMode: 'useForm',
-        inputAttr: { 'aria-label': 'Select Photo' },
-      });
+    $(() =>{
+        let images = [];
+        $('#FilePath').dxFileUploader({
+            multiple: true,
+            selectButtonText: 'تحميل نسخة من الكتاب',
+            accept: 'image/*',
+            uploadMode: 'useForm',
+            onValueChanged: function(e) {
+                 images = e.value;
+                if (images.length > 0) {
+                    // $('#image-container').empty();
+                    $.each(images, function(index, file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
+                            $('#image-container').append(
+                                '<div class="image-preview">' +
+                                '<button class="delete-image">حذف الصورة</button>' +
+                                '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
+                                '</div>'
+                            );
+                            // saveImageToServer();
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+        });
+
+        // Delete Image
+        $('#image-container').on('click', '.delete-image', function() {
+            var index = $(this).closest('.image-preview').index();
+
+            if(index >=0 && index < images.length){
+                var imageName = images[index].name; // Get the filename of the image to delete
+
+
+            var id = $('#rid').dxTextBox("instance").option("value");
+            // Remove the image from the images array
+            images.splice(index, 1);
+
+            // Remove the image preview from the view
+            $(this).closest('.image-preview').remove();
+
+            // Send an AJAX request to delete the image from the server
+            $.ajax({
+                url: 'certificationsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                method: 'POST',
+                data: { imageName: imageName, rid:id }, // Send the filename of the image to delete
+                success: function(response) {
+                    DevExpress.ui.notify({
+                        message: response.status,
+                        position: {
+                        my: 'top left',
+                        at: 'top left'
+                        },
+                        type:'danger',
+                        width: '300',
+                        height:'150',
+                        hideAfter: 2000
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response (e.g., display error message)
+                }
+            });
+            }else{
+                console.error('Invalid index:', index);
+            }
+
+
+
+        });
+    })
     
 });
 //

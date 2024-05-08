@@ -4,12 +4,15 @@ Job_filldata();
 function Job_cleardata() {
     $("#jid").dxTextBox("instance").option("value", "");
     $("#eid").dxDropDownBox("instance").option("value", null);
+    $('#Guid').dxTextBox("instance").option("value","");
     $("#jtitle").dxSelectBox("instance").option("value", "");
     $("#jdegree").dxTextBox("instance").option("value", "");
     $("#jstage").dxTextBox("instance").option("value", "");
     $("#getdate").dxDateBox("instance").option("value", "");
     $("#docno").dxTextBox("instance").option("value", "");
     $("#docdate").dxDateBox("instance").option("value", "");
+    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#image-containter").empty();
 
 }
 
@@ -33,18 +36,35 @@ function Job_chechdata() {
 
 function Job_UpdateOrCreate() {
     var url = "jobs";
-    var data = {
-        jid: $("#jid").dxTextBox("instance").option("value"),
-        eid: $("#eid").dxDropDownBox("instance").option("value"),
-        jtitle: $("#jtitle").dxSelectBox("instance").option("value"),
-        jdegree: $("#jdegree").dxTextBox("instance").option("value"),
-        jstage: $("#jstage").dxTextBox("instance").option("value"),
-        getdate: $("#getdate").dxDateBox("instance").option("value"),
-        docno: $("#docno").dxTextBox("instance").option("value"),
-        docdate: $("#docdate").dxDateBox("instance").option("value"),
-     
+    var selectedDate = $("#docdate").dxDateBox("instance").option("value");
+    var docdate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    }).format(selectedDate);
+    var selectedDate = $("#getdate").dxDateBox("instance").option("value");
+    var getdate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    }).format(selectedDate);
+  
+    var formData = new FormData();
 
-    };
+    formData.append('jid', $("#jid").dxTextBox("instance").option("value"));
+    formData.append('Guid', $("#Guid").dxTextBox("instance").option("value"));
+    formData.append('eid', $("#eid").dxDropDownBox("instance").option("value"));
+    formData.append('jtitle', $("#jtitle").dxSelectBox("instance").option("value"));
+    formData.append('jdegree', $("#jdegree").dxTextBox("instance").option("value"));
+    formData.append('jstage', $("#jstage").dxTextBox("instance").option("value"));
+    formData.append('getdate', getdate);
+    formData.append('docno', $("#docno").dxTextBox("instance").option("value"));
+    formData.append('docdate', docdate);
+    formData.append('DocTitle', $("#jtitle").dxSelectBox("instance").option("value"));
+    const images = $("#FilePath").dxFileUploader("option", "value");
+    $.each(images, function(index, file) {
+        formData.append('image[]', file);
+    });
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -54,7 +74,9 @@ function Job_UpdateOrCreate() {
     $.ajax({
         type: "POST",
         url: url,
-        data: data,
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
             DevExpress.ui.notify({
                 message: response.status,
@@ -110,6 +132,7 @@ function Job_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser:{enabled:true},
                         columns: [
                             {
                                 dataField:"jid",
@@ -211,8 +234,47 @@ function Job_fetch() {
                                 },
                             },
                             {
-                                dataField: "filepath",
-                                caption: "نسخة  مصورة ",
+                                dataField: "getdate",
+                                caption: "تاريخ الحصول",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "docno",
+                                caption: " رقم الكتاب ",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "docdate",
+                                caption: "تارخ الكتاب   ",
+                                visible:false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -254,45 +316,115 @@ function Job_fetch() {
                                                     $("#jid")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.jid,
+                                                            value: response.Job.jid,
                                                         });
+                                                        $("#Guid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Job.Guid,
+                                                        });
+                                                    $("#eid")
                                                     $("#eid")
                                                         .dxDropDownBox("instance")
                                                         .option({
-                                                            value:Number(response.eid) ,
+                                                            value:Number(response.Job.eid) ,
                                                         });
                                                     $("#jtitle")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value: response.jtitle,
+                                                            value: response.Job.jtitle,
                                                         });
                                                     $("#jdegree")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.jdegree,
+                                                            value: response.Job.jdegree,
                                                         });
                                                   
                                                     $("#jstage")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.jstage
+                                                            value:response.Job.jstage
                                                         });
                                                         $("#getdate")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value:response.getdate
+                                                            value:new Date(response.Job.getdate)
                                                         });
                                                         $("#docno")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.docno
+                                                            value:response.Job.docno
                                                         });
                                                     $("#docdate")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value:response.docdate
+                                                            value:new Date(response.Job.docdate)
                                                         });
                                                      
+                                                        $('#image-container').empty();
+                                                        let images = [];
+                                                        $.each(response.Attachments, function(index, file) {
+                                                            images.push(file['FilePath']);
+
+                                                            $('#image-container').append(
+                                                                '<div class="image-preview">' +
+                                                                '<button class="delete-image">حذف الكتاب</button>' +
+                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                '</div>'
+                                                            );
+                                                        });
+                                                          // Delete Image
+                                                        $('#image-container').on('click', '.delete-image', function() {
+                                                            var index = $(this).closest('.image-preview').index();
+
+                                                            if(index >=0 && index < images.length){
+
+                                                                var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                var id = $('#jid').dxTextBox("instance").option("value");
+                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                // Remove the image from the images array
+                                                                images.splice(index, 1);
+
+                                                                // Remove the image preview from the view
+                                                                $(this).closest('.image-preview').remove();
+
+                                                                // Send an AJAX request to delete the image from the server
+                                                                $.ajaxSetup({
+                                                                    headers: {
+                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                    },
+                                                                });
+                                                                $.ajax({
+                                                                    url: 'jobsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                    method: 'POST',
+                                                                    data: { imageName: imageName, jid:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                    success: function(data) {
+                                                                        DevExpress.ui.notify({
+                                                                            message:
+                                                                                data.status,
+                                                                            position: {
+                                                                                my: "top left",
+                                                                                at: "top left",
+                                                                            },
+                                                                            type: "error",
+                                                                            width: "300",
+                                                                            height: "150",
+                                                                            hideAfter: 2000,
+                                                                        });
+                                                                    },
+                                                                    error: function(xhr, status, error) {
+                                                                        // Handle error response (e.g., display error message)
+                                                                    }
+                                                                });
+                                                                }else{
+                                                                    console.error('Invalid index:', index);
+                                                                }
+
+
+
+                                                        });
 
                                                     var displaycard =
                                                         document.getElementById(
@@ -591,6 +723,12 @@ $(document).ready(function () {
         });
     });
     $(() => {
+        $("#Guid").dxTextBox({
+            placeholder: "",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
         $("#docno").dxTextBox({
             placeholder: "",
             inputAttr: {  style:"font-size:13px", },
@@ -621,13 +759,80 @@ $(document).ready(function () {
             
         });
     });
-    $('#filepath').dxFileUploader({
-        selectButtonText: 'تحميل نسخة من الكتاب',
-        labelText: '',
-        accept: 'image/*',
-        uploadMode: 'useForm',
-        inputAttr: { 'aria-label': 'Select Photo' },
-      });
+    $(() =>{
+        let images = [];
+        $('#FilePath').dxFileUploader({
+            multiple: true,
+            selectButtonText: 'تحميل نسخة من الكتاب',
+            accept: 'image/*',
+            uploadMode: 'useForm',
+            onValueChanged: function(e) {
+                 images = e.value;
+                if (images.length > 0) {
+                    // $('#image-container').empty();
+                    $.each(images, function(index, file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
+                            $('#image-container').append(
+                                '<div class="image-preview">' +
+                                '<button class="delete-image">حذف الصورة</button>' +
+                                '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
+                                '</div>'
+                            );
+                            // saveImageToServer();
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+        });
+
+        // Delete Image
+        $('#image-container').on('click', '.delete-image', function() {
+            var index = $(this).closest('.image-preview').index();
+
+            if(index >=0 && index < images.length){
+                var imageName = images[index].name; // Get the filename of the image to delete
+
+
+            var id = $('#jid').dxTextBox("instance").option("value");
+            // Remove the image from the images array
+            images.splice(index, 1);
+
+            // Remove the image preview from the view
+            $(this).closest('.image-preview').remove();
+
+            // Send an AJAX request to delete the image from the server
+            $.ajax({
+                url: 'jobsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                method: 'POST',
+                data: { imageName: imageName, jid:id }, // Send the filename of the image to delete
+                success: function(response) {
+                    DevExpress.ui.notify({
+                        message: response.status,
+                        position: {
+                        my: 'top left',
+                        at: 'top left'
+                        },
+                        type:'danger',
+                        width: '300',
+                        height:'150',
+                        hideAfter: 2000
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response (e.g., display error message)
+                }
+            });
+            }else{
+                console.error('Invalid index:', index);
+            }
+
+
+
+        });
+    })
     
 });
 //

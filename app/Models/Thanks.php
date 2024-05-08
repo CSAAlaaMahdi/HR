@@ -16,12 +16,14 @@ class Thanks extends Model
     protected $table='thanks_tb';
     protected $fillable = [
         'eid',
+        'Guid',
         'ttype',
         'reason',
         'docno',
         'docdate',
         'notes',
-        'filepath'
+        'filepath',
+        'UserID',
 
     ];
 

@@ -129,6 +129,7 @@ function AdministrationOrders_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser:{enabled:true},
                         columns: [
                             {
                                 dataField:"id",
@@ -233,6 +234,7 @@ function AdministrationOrders_fetch() {
                             {
                                 dataField: "FromDir",
                                 caption: "جهة الاصدار ",
+                                visible:false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -251,6 +253,7 @@ function AdministrationOrders_fetch() {
                             {
                                 dataField: "Notes",
                                 caption: "ملاحظات",
+                                visible:false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -761,6 +764,7 @@ $(document).ready(function () {
         let images = [];
         $('#FilePath').dxFileUploader({
             multiple: true,
+            selectButtonText: 'تحميل نسخة من الكتاب',
             accept: 'image/*',
             uploadMode: 'useForm',
             onValueChanged: function(e) {

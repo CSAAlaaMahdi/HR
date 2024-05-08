@@ -3,11 +3,14 @@ Articles_filldata();
 
 function Articles_cleardata() {
     $("#id").dxTextBox("instance").option("value", "");
+    $("#Guid").dxTextBox("instance").option("value", "");
     $("#did").dxDropDownBox("instance").option("value", null);
     $("#article_title").dxTextBox("instance").option("value", "");
     $("#nof_aut").dxTextBox("instance").option("value", "");
     $("#pub_date").dxDateBox("instance").option("value", "");
     $("#Alink").dxTextBox("instance").option("value", "");
+    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#image-containter").empty();
 
 }
 
@@ -30,16 +33,20 @@ function Articles_UpdateOrCreate() {
         month: "2-digit",
         day: "2-digit",
     }).format(selectedDate);
-    var data = {
-        id: $("#id").dxTextBox("instance").option("value"),
-        did: $("#did").dxDropDownBox("instance").option("value"),
-        article_title: $("#article_title").dxTextBox("instance").option("value"),
-        nof_aut: $("#nof_aut").dxTextBox("instance").option("value"),
-        pub_date: pub_date,
-        Alink: $("#Alink").dxTextBox("instance").option("value"),
 
-
-    };
+    var formData = new FormData();
+    formData.append('id', $("#id").dxTextBox("instance").option("value"));
+    formData.append('Guid', $("#Guid").dxTextBox("instance").option("value"));
+    formData.append('did', $("#did").dxDropDownBox("instance").option("value"));
+    formData.append('article_title', $("#article_title").dxTextBox("instance").option("value"));
+    formData.append('nof_aut', $("#nof_aut").dxTextBox("instance").option("value"));
+    formData.append('Alink', $("#Alink").dxTextBox("instance").option("value"));
+    formData.append('pub_date', pub_date);
+    formData.append('DocTitle', $("#article_title").dxTextBox("instance").option("value"));
+    const images = $("#FilePath").dxFileUploader("option", "value");
+    $.each(images, function(index, file) {
+        formData.append('image[]', file);
+    });
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -49,7 +56,9 @@ function Articles_UpdateOrCreate() {
     $.ajax({
         type: "POST",
         url: url,
-        data: data,
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
             DevExpress.ui.notify({
                 message: response.status,
@@ -105,6 +114,7 @@ function Articles_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser:{enabled:true},
                         columns: [
                             {
                                 dataField:"id",
@@ -223,24 +233,7 @@ function Articles_fetch() {
                                         .appendTo(container);
                                 },
                             },
-                            {
-                                dataField: "filepath",
-                                caption: "نسخة مصورة ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
-                            },
+                            
                             {
                                 caption: "الحدث",
                                 width: 200,
@@ -266,35 +259,104 @@ function Articles_fetch() {
                                                     $("#id")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.id,
+                                                            value: response.Articles.id,
+                                                        });
+                                                        $("#Guid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Articles.Guid,
                                                         });
                                                     $("#did")
                                                         .dxDropDownBox("instance")
                                                         .option({
-                                                            value: Number(response.did),
+                                                            value: Number(response.Articles.did),
                                                         });
                                                     $("#article_title")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.article_title,
+                                                            value: response.Articles.article_title,
                                                         });
                                                     $("#nof_aut")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.nof_aut,
+                                                            value: response.Articles.nof_aut,
                                                         });
 
                                                         $("#pub_date")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value:new Date(response.pub_date)
+                                                            value:new Date(response.Articles.pub_date)
                                                         });
                                                         $("#Alink")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            Date:response.Alink
+                                                            Date:response.Articles.Alink
                                                         });
 
+                                                        $('#image-container').empty();
+                                                        let images = [];
+                                                        $.each(response.Attachments, function(index, file) {
+                                                            images.push(file['FilePath']);
+
+                                                            $('#image-container').append(
+                                                                '<div class="image-preview">' +
+                                                                '<button class="delete-image">حذف الكتاب</button>' +
+                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                '</div>'
+                                                            );
+                                                        });
+                                                          // Delete Image
+                                                        $('#image-container').on('click', '.delete-image', function() {
+                                                            var index = $(this).closest('.image-preview').index();
+
+                                                            if(index >=0 && index < images.length){
+
+                                                                var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                var id = $('#id').dxTextBox("instance").option("value");
+                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                // Remove the image from the images array
+                                                                images.splice(index, 1);
+
+                                                                // Remove the image preview from the view
+                                                                $(this).closest('.image-preview').remove();
+
+                                                                // Send an AJAX request to delete the image from the server
+                                                                $.ajaxSetup({
+                                                                    headers: {
+                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                    },
+                                                                });
+                                                                $.ajax({
+                                                                    url: 'articlesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                    method: 'POST',
+                                                                    data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                    success: function(data) {
+                                                                        DevExpress.ui.notify({
+                                                                            message:
+                                                                                data.status,
+                                                                            position: {
+                                                                                my: "top left",
+                                                                                at: "top left",
+                                                                            },
+                                                                            type: "error",
+                                                                            width: "300",
+                                                                            height: "150",
+                                                                            hideAfter: 2000,
+                                                                        });
+                                                                    },
+                                                                    error: function(xhr, status, error) {
+                                                                        // Handle error response (e.g., display error message)
+                                                                    }
+                                                                });
+                                                                }else{
+                                                                    console.error('Invalid index:', index);
+                                                                }
+
+
+
+                                                        });
 
                                                     var displaycard =
                                                         document.getElementById(
@@ -499,7 +561,7 @@ $(document).ready(function () {
             var displaycard = document.getElementById("Articlesaction");
             if (displaycard.style.display == "block") {
                 document.getElementById("card_Articlestitle").innerText = "";
-                // Articles_cleardata();
+                Articles_cleardata();
                 // Articles_setStCode();
                 displaycard.style.display = "none";
                 document.getElementById("firstCard").scrollIntoView();
@@ -563,6 +625,12 @@ $(document).ready(function () {
         });
     });
     $(() => {
+        $("#Guid").dxTextBox({
+            placeholder: "",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
         $("#article_title").dxTextBox({
             placeholder: "",
             inputAttr: { style:"font-size:13px", },
@@ -601,13 +669,80 @@ $(document).ready(function () {
         });
     });
 
-    $('#filepath').dxFileUploader({
-        selectButtonText: 'تحميل نسخة من الكتاب',
-        labelText: '',
-        accept: 'image/*',
-        uploadMode: 'useForm',
-        inputAttr: { 'aria-label': 'Select Photo' },
-      });
+    $(() =>{
+        let images = [];
+        $('#FilePath').dxFileUploader({
+            multiple: true,
+            selectButtonText: 'تحميل نسخة من الكتاب',
+            accept: 'image/*',
+            uploadMode: 'useForm',
+            onValueChanged: function(e) {
+                 images = e.value;
+                if (images.length > 0) {
+                    // $('#image-container').empty();
+                    $.each(images, function(index, file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
+                            $('#image-container').append(
+                                '<div class="image-preview">' +
+                                '<button class="delete-image">حذف الصورة</button>' +
+                                '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
+                                '</div>'
+                            );
+                            // saveImageToServer();
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+        });
+
+        // Delete Image
+        $('#image-container').on('click', '.delete-image', function() {
+            var index = $(this).closest('.image-preview').index();
+
+            if(index >=0 && index < images.length){
+                var imageName = images[index].name; // Get the filename of the image to delete
+
+
+            var id = $('#id').dxTextBox("instance").option("value");
+            // Remove the image from the images array
+            images.splice(index, 1);
+
+            // Remove the image preview from the view
+            $(this).closest('.image-preview').remove();
+
+            // Send an AJAX request to delete the image from the server
+            $.ajax({
+                url: 'articlesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                method: 'POST',
+                data: { imageName: imageName, id:id }, // Send the filename of the image to delete
+                success: function(response) {
+                    DevExpress.ui.notify({
+                        message: response.status,
+                        position: {
+                        my: 'top left',
+                        at: 'top left'
+                        },
+                        type:'danger',
+                        width: '300',
+                        height:'150',
+                        hideAfter: 2000
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response (e.g., display error message)
+                }
+            });
+            }else{
+                console.error('Invalid index:', index);
+            }
+
+
+
+        });
+    })
      
 });
 //

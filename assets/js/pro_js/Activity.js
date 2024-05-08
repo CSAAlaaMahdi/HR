@@ -3,12 +3,15 @@ Activity_filldata();
 
 function Activity_cleardata() {
     $("#aid").dxTextBox("instance").option("value", "");
+    $("#Guid").dxTextBox("instance").option("value", "");
     $("#act_id").dxSelectBox("instance").option("value", "");
     $("#Aname").dxTextBox("instance").option("value", "");
     $("#Place").dxTextBox("instance").option("value", "");
     $("#ActDate").dxDateBox("instance").option("value", "");
     $("#Participants").dxTextBox("instance").option("value", "");
     $("#NoDays").dxTextBox("instance").option("value", "");
+    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#image-container").empty();
 
 }
 
@@ -31,18 +34,23 @@ function Activity_UpdateOrCreate() {
         month: "2-digit",
         day: "2-digit",
     }).format(selectedDate);
-    var data = {
-        aid: $("#aid").dxTextBox("instance").option("value"),
-        act_id: $("#act_id").dxSelectBox("instance").option("value"),
-        Aname: $("#Aname").dxTextBox("instance").option("value"),
-        Place: $("#Place").dxTextBox("instance").option("value"),
-        NoDays: $("#NoDays").dxTextBox("instance").option("value"),
-        Participants: $("#Participants").dxTextBox("instance").option("value"),
-        Notes: $("#Notes").dxTextArea("instance").option("value"),
-        ActDate: ActDate,
 
+    var formData = new FormData();
+    formData.append('aid', $("#aid").dxTextBox("instance").option("value"));
+    formData.append('Guid', $("#Guid").dxTextBox("instance").option("value"));
+    formData.append('act_id', $("#act_id").dxSelectBox("instance").option("value"));
+    formData.append('Aname', $("#Aname").dxTextBox("instance").option("value"));
+    formData.append('Place', $("#Place").dxTextBox("instance").option("value"));
+    formData.append('Participants', $("#Participants").dxTextBox("instance").option("value"));
+    formData.append('NoDays', $("#NoDays").dxTextBox("instance").option("value"));
+    formData.append('Notes', $("#Notes").dxTextArea("instance").option("value"));
+    formData.append('ActDate', ActDate);
+    formData.append('DocTitle', $("#act_id").dxSelectBox("instance").option("value"));
+    const images = $("#FilePath").dxFileUploader("option", "value");
+    $.each(images, function(index, file) {
+        formData.append('image[]', file);
+    });
 
-    };
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -52,7 +60,9 @@ function Activity_UpdateOrCreate() {
     $.ajax({
         type: "POST",
         url: url,
-        data: data,
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
             DevExpress.ui.notify({
                 message: response.status,
@@ -108,6 +118,7 @@ function Activity_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser:{enabled:true},
                         columns: [
                             {
                                 dataField:"aid",
@@ -175,6 +186,7 @@ function Activity_fetch() {
                             {
                                 dataField: "Place",
                                 caption: " مكان الانعقاد",
+                                visible:false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -227,8 +239,27 @@ function Activity_fetch() {
                                 },
                             },
                             {
-                                dataField: "filepath",
-                                caption: "نسخة مصورة ",
+                                dataField: "Participants",
+                                caption: " عدد المشاركين ",
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "Notes",
+                                caption: " ملاحظات  ",
+                                visible:false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -269,43 +300,113 @@ function Activity_fetch() {
                                                     $("#aid")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.aid,
+                                                            value: response.Activity.aid,
+                                                        });
+                                                        $("#Guid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Activity.Guid,
                                                         });
                                                     $("#act_id")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value: response.act_id,
+                                                            value: response.Activity.act_id,
                                                         });
                                                     $("#Aname")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.Aname,
+                                                            value: response.Activity.Aname,
                                                         });
 
                                                     $("#Place")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Place
+                                                            value:response.Activity.Place
                                                         });
                                                         $("#ActDate")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value:new Date(response.ActDate)
+                                                            value:new Date(response.Activity.ActDate)
                                                         });
                                                         $("#NoDays")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.NoDays
+                                                            value:response.Activity.NoDays
                                                         });
                                                         $("#Participants")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Participants
+                                                            value:response.Activity.Participants
                                                         });
                                                         $("#Notes")
                                                         .dxTextArea("instance")
                                                         .option({
-                                                            value:response.Notes
+                                                            value:response.Activity.Notes
+                                                        });
+
+                                                        $('#image-container').empty();
+                                                        let images = [];
+                                                        $.each(response.Attachments, function(index, file) {
+                                                            images.push(file['FilePath']);
+
+                                                            $('#image-container').append(
+                                                                '<div class="image-preview">' +
+                                                                '<button class="delete-image">حذف الكتاب</button>' +
+                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                '</div>'
+                                                            );
+                                                        });
+                                                          // Delete Image
+                                                        $('#image-container').on('click', '.delete-image', function() {
+                                                            var index = $(this).closest('.image-preview').index();
+
+                                                            if(index >=0 && index < images.length){
+
+                                                                var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                var id = $('#aid').dxTextBox("instance").option("value");
+                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                // Remove the image from the images array
+                                                                images.splice(index, 1);
+
+                                                                // Remove the image preview from the view
+                                                                $(this).closest('.image-preview').remove();
+
+                                                                // Send an AJAX request to delete the image from the server
+                                                                $.ajaxSetup({
+                                                                    headers: {
+                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                    },
+                                                                });
+                                                                $.ajax({
+                                                                    url: 'activityDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                    method: 'POST',
+                                                                    data: { imageName: imageName, aid:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                    success: function(data) {
+                                                                        DevExpress.ui.notify({
+                                                                            message:
+                                                                                data.status,
+                                                                            position: {
+                                                                                my: "top left",
+                                                                                at: "top left",
+                                                                            },
+                                                                            type: "error",
+                                                                            width: "300",
+                                                                            height: "150",
+                                                                            hideAfter: 2000,
+                                                                        });
+                                                                    },
+                                                                    error: function(xhr, status, error) {
+                                                                        // Handle error response (e.g., display error message)
+                                                                    }
+                                                                });
+                                                                }else{
+                                                                    console.error('Invalid index:', index);
+                                                                }
+
+
+
                                                         });
 
                                                     var displaycard =
@@ -531,6 +632,12 @@ $(document).ready(function () {
         });
     });
     $(() => {
+        $("#Guid").dxTextBox({
+            placeholder: "",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
         $("#Aname").dxTextBox({
             placeholder: "",
             inputAttr: { style:"font-size:13px", },
@@ -587,13 +694,80 @@ $(document).ready(function () {
         });
     });
 
-    $('#filepath').dxFileUploader({
-        selectButtonText: 'تحميل نسخة من الكتاب',
-        labelText: '',
-        accept: 'image/*',
-        uploadMode: 'useForm',
-        inputAttr: { 'aria-label': 'Select Photo' },
-      });
+    $(() =>{
+        let images = [];
+        $('#FilePath').dxFileUploader({
+            multiple: true,
+            selectButtonText: 'تحميل نسخة من الكتاب',
+            accept: 'image/*',
+            uploadMode: 'useForm',
+            onValueChanged: function(e) {
+                 images = e.value;
+                if (images.length > 0) {
+                    // $('#image-container').empty();
+                    $.each(images, function(index, file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
+                            $('#image-container').append(
+                                '<div class="image-preview">' +
+                                '<button class="delete-image">حذف الصورة</button>' +
+                                '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
+                                '</div>'
+                            );
+                            // saveImageToServer();
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+        });
+
+        // Delete Image
+        $('#image-container').on('click', '.delete-image', function() {
+            var index = $(this).closest('.image-preview').index();
+
+            if(index >=0 && index < images.length){
+                var imageName = images[index].name; // Get the filename of the image to delete
+
+
+            var id = $('#act_id').dxTextBox("instance").option("value");
+            // Remove the image from the images array
+            images.splice(index, 1);
+
+            // Remove the image preview from the view
+            $(this).closest('.image-preview').remove();
+
+            // Send an AJAX request to delete the image from the server
+            $.ajax({
+                url: 'activityDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                method: 'POST',
+                data: { imageName: imageName, act_id:id }, // Send the filename of the image to delete
+                success: function(response) {
+                    DevExpress.ui.notify({
+                        message: response.status,
+                        position: {
+                        my: 'top left',
+                        at: 'top left'
+                        },
+                        type:'danger',
+                        width: '300',
+                        height:'150',
+                        hideAfter: 2000
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response (e.g., display error message)
+                }
+            });
+            }else{
+                console.error('Invalid index:', index);
+            }
+
+
+
+        });
+    })
 
 });
 //

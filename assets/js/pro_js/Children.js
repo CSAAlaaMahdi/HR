@@ -9,6 +9,7 @@ function Children_cleardata() {
     $("#chname").dxTextBox("instance").option("value", "");
     $("#csid").dxSelectBox("instance").option("value", "");
     $("#chdob").dxDateBox("instance").option("value", "");
+    $("#FilePath").dxFileUploader("instance").option("value","");
     $("#image-container").empty();
 
 }
@@ -60,7 +61,7 @@ function Children_UpdateOrCreate() {
     $.each(images, function(index, file) {
         formData.append('image[]', file);
     });
-
+    
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -124,10 +125,12 @@ function Children_fetch() {
                         groupPanel: { visible: true },
                         grouping: {
                             autoExpandAll: false,
+                            
                         },
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser: { enabled: true },
                         columns: [
                             {
                                 dataField:"id",
@@ -269,7 +272,7 @@ function Children_fetch() {
                                                 url: "children/show",
                                                 data: data,
                                                 success: function (response) {
-                                                    console.log(response);
+                                                    
                                                     $("#id")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -737,6 +740,7 @@ $(document).ready(function () {
         let images = [];
         $('#FilePath').dxFileUploader({
             multiple: true,
+            selectButtonText: 'تحميل نسخة من الكتاب',
             accept: 'image/*',
             uploadMode: 'useForm',
             onValueChanged: function(e) {

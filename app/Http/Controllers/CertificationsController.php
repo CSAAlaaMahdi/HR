@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachments;
 use App\Models\Depts;
 use App\Models\Certifications;
 use App\Models\Employees;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class CertificationsController extends Controller
 {
@@ -36,26 +39,104 @@ class CertificationsController extends Controller
     public function store(Request $request)
     {
         $cid = $request->post('cid');
-        $Certification = Certifications::updateOrCreate(
-            [
-                'cid' => $cid,
-            ],
-            [
-                'eid' => $request->post('eid'),
-                'certification' => $request->post('certification'),
-                'college' => $request->post('college'),
-                'university' => $request->post('university'),
-                'country' => $request->post('country'),
-                'cyears' => $request->post('cyears'),
-                'gspetailest' => $request->post('gspetailest'),
-                'sspetailest' => $request->post('sspetailest'),
-                'cer_no' => $request->post('cer_no'),
-                'cer_date' => $request->post('cer_date'),
-                'equivlent_no' => $request->post('equivlent_no'),
-                'equivlent_date' => $request->post('equivlent_date'),
-    
-            ]
-        );
+        $Guid = $request->post('Guid');
+        if ($Guid == 'null' || $Guid == '' || empty($Guid)) {
+            $Guid = strtoupper(Uuid::uuid4()->toString());
+        }
+        $UserID = session('id');
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            foreach ($images as $image) {
+
+                $imageName =  $image->getClientOriginalName();
+                if ($cid != "") {
+                    $checkImage = Attachments::where([
+                        ['ParentGuid', $Guid],
+                        ['FilePath', $imageName]
+                    ])->count('id');
+                    if ($checkImage > 0) {
+                    } else {
+                        $uploadPath = 'assets/img/administrationImage';
+                        $newImageName = Str::random(20) . '.' . $imageName;
+                        $image->move($uploadPath, $newImageName);
+                        $Attachments = Attachments::updateOrCreate(
+                            [
+                                'ParentGuid' => $Guid,
+                                'DocTitle' => $request->post('DocTitle'),
+                                'FilePath' => $newImageName,
+                                'UserID' => $UserID,
+
+                            ]
+
+                        );
+
+                    }
+                } else {
+                    $uploadPath = 'assets/img/administrationImage';
+                    $newImageName = Str::random(20) . '.' . $imageName;
+                    $image->move($uploadPath, $newImageName);
+                    $Attachments = Attachments::updateOrCreate(
+                        [
+                            'ParentGuid' => $Guid,
+                            'DocTitle' => $request->post('DocTitle'),
+                            'FilePath' => $newImageName,
+                            'UserID' => $UserID,
+
+
+                        ]
+
+                    );
+                }
+            }
+            $Certification = Certifications::updateOrCreate(
+                [
+                    'cid' => $cid,
+                ],
+                [
+                    'eid' => $request->post('eid'),
+                    'Guid' => $Guid,
+                    'certification' => $request->post('certification'),
+                    'college' => $request->post('college'),
+                    'university' => $request->post('university'),
+                    'country' => $request->post('country'),
+                    'cyears' => $request->post('cyears'),
+                    'gspetailest' => $request->post('gspetailest'),
+                    'sspetailest' => $request->post('sspetailest'),
+                    'cer_no' => $request->post('cer_no'),
+                    'cer_date' => $request->post('cer_date'),
+                    'equivlent_no' => $request->post('equivlent_no'),
+                    'equivlent_date' => $request->post('equivlent_date'),
+                    'UserID' => $UserID
+        
+                ]
+            );
+
+        } else {
+           
+            $Certification = Certifications::updateOrCreate(
+                [
+                    'cid' => $cid,
+                ],
+                [
+                    'eid' => $request->post('eid'),
+                    'Guid' => $Guid,
+                    'certification' => $request->post('certification'),
+                    'college' => $request->post('college'),
+                    'university' => $request->post('university'),
+                    'country' => $request->post('country'),
+                    'cyears' => $request->post('cyears'),
+                    'gspetailest' => $request->post('gspetailest'),
+                    'sspetailest' => $request->post('sspetailest'),
+                    'cer_no' => $request->post('cer_no'),
+                    'cer_date' => $request->post('cer_date'),
+                    'equivlent_no' => $request->post('equivlent_no'),
+                    'equivlent_date' => $request->post('equivlent_date'),
+                    'UserID' => $UserID
+        
+                ]
+            );
+        }
+        
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -64,8 +145,13 @@ class CertificationsController extends Controller
     {
         $id = $request->input('cid');
         $Certification = Certifications::find($id);
+        $Attachments = Attachments::where('ParentGuid', $Certification->Guid)->get();
 
-        return response()->json($Certification);
+        $data = [
+            'Certification' => $Certification,
+            'Attachments' => $Attachments
+        ];
+        return response()->json($data);
     }
 
 
@@ -84,6 +170,8 @@ class CertificationsController extends Controller
     public function destroy(Request $request)
     {
         $cid = $request->post('cid');
+        $Certification = Certifications::find($cid);
+        Attachments::where('ParentGuid', $Certification->Guid)->delete();
         Certifications::find($cid)->delete();
         return response()->json(['status' => 'تم حذف البيانات بنجاح']);
     }
@@ -144,5 +232,22 @@ class CertificationsController extends Controller
 
         ];
         return response()->json($data);
+    }
+
+    public function DeleteImages(Request $request)
+    {
+        $id = $request->input('id');
+        $Guid = $request->input('Guid');
+        $imageName = $request->input('imageName');
+
+        $deleteImage = Attachments::where([['ParentGuid', $Guid], ['FilePath', $imageName]])->delete();
+        if ($deleteImage) {
+            $uploadPath = 'assets/img/administrationImage';
+            $filePath = $uploadPath . '/' . $imageName;
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+            return response()->json(['status' => 'تم حذف الكتاب بنجاح']);
+        }
     }
 }

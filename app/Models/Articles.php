@@ -16,11 +16,13 @@ class Articles extends Model
     protected $table='article_tb';
     protected $fillable = [
         'did',
+        'Guid',
         'article_title',
         'nof_aut',
         'pub_date',
         'Alink',
-        'filepath'
+        'filepath',
+        'UserID'
 
     ];
 

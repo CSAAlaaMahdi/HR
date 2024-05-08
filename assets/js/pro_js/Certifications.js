@@ -4,6 +4,7 @@ Certifications_filldata();
 function Certifications_cleardata() {
     $("#cid").dxTextBox("instance").option("value", "");
     $("#eid").dxDropDownBox("instance").option("value", null);
+    $("#Guid").dxTextBox("instance").option("value","");
     $("#cyears").dxTextBox("instance").option("value", "");
     $("#cer_no").dxTextBox("instance").option("value", "");
     $("#equivlent_no").dxTextBox("instance").option("value", "");
@@ -15,6 +16,8 @@ function Certifications_cleardata() {
     $("#sspetailest").dxSelectBox("instance").option("value", "");
     $("#cerdate").dxDateBox("instance").option("value", "");
     $("#equivlent_date").dxDateBox("instance").option("value", "");
+    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#image-container").empty();
 }
 
 function Certifications_chechdata() {
@@ -30,22 +33,40 @@ function Certifications_chechdata() {
 
 function Certifications_UpdateOrCreate() {
     var url = "certifications";
-    var data = {
-        cid: $("#cid").dxTextBox("instance").option("value"),
-        eid: $("#eid").dxDropDownBox("instance").option("value"),
-        certification: $("#certification").dxSelectBox("instance").option("value"),
-        college: $("#college").dxSelectBox("instance").option("value"),
-        university: $("#university").dxSelectBox("instance").option("value"),
-        country: $("#country").dxSelectBox("instance").option("value"),
-        cyears: $("#cyears").dxTextBox("instance").option("value"),
-        gspetailest: $("#gspetailest").dxSelectBox("instance").option("value"),
-        sspetailest: $("#sspetailest").dxSelectBox("instance").option("value"),
-        cer_no: $("#cer_no").dxTextBox("instance").option("value"),
-        equivlent_no: $("#equivlent_no").dxTextBox("instance").option("value"),
-        cerdate: $("#cerdate").dxDateBox("instance").option("value"),
-        equivlent_date: $("#equivlent_date").dxDateBox("instance").option("value"),
+    var selectedDate = $("#cerdate").dxDateBox("instance").option("value");
+    var cerdate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    }).format(selectedDate); 
+    var selectedDate = $("#equivlent_date").dxDateBox("instance").option("value");
+    var equivlent_date = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    }).format(selectedDate);
 
-    };
+    var formData = new FormData();
+
+    formData.append('cid', $("#cid").dxTextBox("instance").option("value"));
+    formData.append('Guid', $("#Guid").dxTextBox("instance").option("value"));
+    formData.append('eid', $("#eid").dxDropDownBox("instance").option("value"));
+    formData.append('certification', $("#certification").dxSelectBox("instance").option("value"));
+    formData.append('college', $("#college").dxSelectBox("instance").option("value"));
+    formData.append('university', $("#university").dxSelectBox("instance").option("value"));
+    formData.append('country', $("#country").dxSelectBox("instance").option("value"));
+    formData.append('cyears', $("#cyears").dxTextBox("instance").option("value"));
+    formData.append('gspetailest', $("#gspetailest").dxSelectBox("instance").option("value"));
+    formData.append('sspetailest', $("#sspetailest").dxSelectBox("instance").option("value"));
+    formData.append('cer_no', $("#cer_no").dxTextBox("instance").option("value"));
+    formData.append('equivlent_no', $("#equivlent_no").dxTextBox("instance").option("value"));
+    formData.append('cerdate', cerdate);
+    formData.append('equivlent_date', equivlent_date);
+    formData.append('DocTitle', $("#certification").dxSelectBox("instance").option("value"));
+    const images = $("#FilePath").dxFileUploader("option", "value");
+    $.each(images, function(index, file) {
+        formData.append('image[]', file);
+    });
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -55,7 +76,9 @@ function Certifications_UpdateOrCreate() {
     $.ajax({
         type: "POST",
         url: url,
-        data: data,
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
             DevExpress.ui.notify({
                 message: response.status,
@@ -111,6 +134,7 @@ function Certifications_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser:{enabled : true},
                         columns: [
                             {
                                 dataField:"cid",
@@ -212,6 +236,155 @@ function Certifications_fetch() {
                                 },
                             },
                             {
+                                dataField: "country",
+                                caption: "البلد ",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "cyears",
+                                caption: "السنة ",
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "gspetailest",
+                                caption: "الاختصاص العام ",
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "sspetailest",
+                                caption: "الاختصاص الدقيق ",
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "cer_no",
+                                caption: "رقم الشهادة ",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "cerdate",
+                                caption: "تاريخ الشهادة ",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "equivlent_no",
+                                caption: "رقم المعادلة ",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "equivlent_date",
+                                caption: "تاريخ المعادلة ",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
                                 caption: "الحدث",
                                 width: 200,
                                 cellTemplate: function (container, options) {
@@ -233,73 +406,144 @@ function Certifications_fetch() {
                                                 url: "certifications/show",
                                                 data: data,
                                                 success: function (response) {
-                                                    console.log(response);
+                                                    
                                                     $("#cid")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.cid,
+                                                            value: response.Certification.cid,
+                                                        });
+                                                        $("#Guid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Certification.cid,
                                                         });
                                                     $("#cyears")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.cyears,
+                                                            value: response.Certification.cyears,
                                                         });
                                                     $("#cer_no")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.cer_no,
+                                                            value: response.Certification.cer_no,
                                                         });
                                                     $("#equivlent_no")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.equivlent_no,
+                                                            value: response.Certification.equivlent_no,
                                                         });
                                                   
                                                     $("#certification")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.certification
+                                                            value:response.Certification.certification
                                                         });
                                                         $("#college")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.college
+                                                            value:response.Certification.college
                                                         });
                                                         $("#university")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.university
+                                                            value:response.Certification.university
                                                         });
                                                     $("#eid")
                                                         .dxDropDownBox("instance")
                                                         .option({
-                                                            value:Number(response.eid)
+                                                            value:Number(response.Certification.eid)
                                                         });
                                                         $("#country")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.country
+                                                            value:response.Certification.country
                                                         });
                                                         $("#gspetailest")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.gspetailest
+                                                            value:response.Certification.gspetailest
                                                         });
                                                         $("#sspetailest")
                                                         .dxSelectBox("instance")
                                                         .option({
-                                                            value:response.sspetailest
+                                                            value:response.Certification.sspetailest
                                                         });
                                                         $("#cerdate")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value:response.cerdate
+                                                            value:new Date(response.Certification.cerdate)
                                                         });
                                                         $("#equivlent_date")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value:response.equivlent_date
+                                                            value:new Date(response.Certification.equivlent_date)
                                                         });
+
+                                                        $('#image-container').empty();
+                                                        let images = [];
+                                                        $.each(response.Attachments, function(index, file) {
+                                                            images.push(file['FilePath']);
+
+                                                            $('#image-container').append(
+                                                                '<div class="image-preview">' +
+                                                                '<button class="delete-image">حذف الكتاب</button>' +
+                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                '</div>'
+                                                            );
+                                                        });
+                                                          // Delete Image
+                                                        $('#image-container').on('click', '.delete-image', function() {
+                                                            var index = $(this).closest('.image-preview').index();
+
+                                                            if(index >=0 && index < images.length){
+
+                                                                var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                var id = $('#cid').dxTextBox("instance").option("value");
+                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                // Remove the image from the images array
+                                                                images.splice(index, 1);
+
+                                                                // Remove the image preview from the view
+                                                                $(this).closest('.image-preview').remove();
+
+                                                                // Send an AJAX request to delete the image from the server
+                                                                $.ajaxSetup({
+                                                                    headers: {
+                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                    },
+                                                                });
+                                                                $.ajax({
+                                                                    url: 'certificationsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                    method: 'POST',
+                                                                    data: { imageName: imageName, cid:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                    success: function(data) {
+                                                                        DevExpress.ui.notify({
+                                                                            message:
+                                                                                data.status,
+                                                                            position: {
+                                                                                my: "top left",
+                                                                                at: "top left",
+                                                                            },
+                                                                            type: "error",
+                                                                            width: "300",
+                                                                            height: "150",
+                                                                            hideAfter: 2000,
+                                                                        });
+                                                                    },
+                                                                    error: function(xhr, status, error) {
+                                                                        // Handle error response (e.g., display error message)
+                                                                    }
+                                                                });
+                                                                }else{
+                                                                    console.error('Invalid index:', index);
+                                                                }
+
+
+
+                                                        });
+
 
                                                     var displaycard =
                                                         document.getElementById(
@@ -674,7 +918,7 @@ $(document).ready(function () {
             var displaycard = document.getElementById("Certificationsaction");
             if (displaycard.style.display == "block") {
                 document.getElementById("card_Certificationstitle").innerText = "";
-                // Certifications_cleardata();
+                Certifications_cleardata();
                 // Certifications_setStCode();
                 displaycard.style.display = "none";
                 document.getElementById("firstCard").scrollIntoView();
@@ -738,6 +982,12 @@ $(document).ready(function () {
         });
     });
     $(() => {
+        $("#Guid").dxTextBox({
+            placeholder: "",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
         $("#cyears").dxTextBox({
             placeholder: "",
             inputAttr: {  style:"font-size:13px", },
@@ -768,6 +1018,79 @@ $(document).ready(function () {
             
         });
     });
-    
+    $(() =>{
+        let images = [];
+        $('#FilePath').dxFileUploader({
+            multiple: true,
+            selectButtonText: 'تحميل نسخة من الكتاب',
+            accept: 'image/*',
+            uploadMode: 'useForm',
+            onValueChanged: function(e) {
+                 images = e.value;
+                if (images.length > 0) {
+                    // $('#image-container').empty();
+                    $.each(images, function(index, file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
+                            $('#image-container').append(
+                                '<div class="image-preview">' +
+                                '<button class="delete-image">حذف الصورة</button>' +
+                                '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
+                                '</div>'
+                            );
+                            // saveImageToServer();
+                        }
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
+        });
+
+        // Delete Image
+        $('#image-container').on('click', '.delete-image', function() {
+            var index = $(this).closest('.image-preview').index();
+
+            if(index >=0 && index < images.length){
+                var imageName = images[index].name; // Get the filename of the image to delete
+
+
+            var id = $('#cid').dxTextBox("instance").option("value");
+            // Remove the image from the images array
+            images.splice(index, 1);
+
+            // Remove the image preview from the view
+            $(this).closest('.image-preview').remove();
+
+            // Send an AJAX request to delete the image from the server
+            $.ajax({
+                url: 'certificationsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                method: 'POST',
+                data: { imageName: imageName, cid:id }, // Send the filename of the image to delete
+                success: function(response) {
+                    DevExpress.ui.notify({
+                        message: response.status,
+                        position: {
+                        my: 'top left',
+                        at: 'top left'
+                        },
+                        type:'danger',
+                        width: '300',
+                        height:'150',
+                        hideAfter: 2000
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response (e.g., display error message)
+                }
+            });
+            }else{
+                console.error('Invalid index:', index);
+            }
+
+
+
+        });
+    })
 });
 //

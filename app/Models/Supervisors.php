@@ -16,11 +16,13 @@ class Supervisors extends Model
     protected $table='supervisor_tb';
     protected $fillable = [
         'eid',
+        'Guid',
         'sdeg',
         'sname',
         'docno',
         'docdate',
-        'filepath'
+        'filepath',
+        'UserID'
 
     ];
 

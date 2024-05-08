@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attachments;
 use App\Models\Supervisors;
 use App\Models\Employees;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\File;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 class SupervisorsController extends Controller
 {
 
@@ -35,20 +37,92 @@ class SupervisorsController extends Controller
     public function store(Request $request)
     {
         $id = $request->post('id');
-        $Supervisors = Supervisors::updateOrCreate(
-            [
-                'id' => $id,
-            ],
-            [
-                'eid' => $request->post('eid'),
-                'sdeg' => $request->post('sdeg'),
-                'sname' => $request->post('sname'),
-                'docno' => $request->post('docno'),
-                'docdate' => $request->post('docdate'),
+        $Guid = $request->post('Guid');
+        if ($Guid == 'null' || $Guid == '' || empty($Guid)) {
+            $Guid = strtoupper(Uuid::uuid4()->toString());
+        }
+        $UserID = session('id');
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            foreach ($images as $image) {
+
+                $imageName =  $image->getClientOriginalName();
+                if ($id != "") {
+                    $checkImage = Attachments::where([
+                        ['ParentGuid', $Guid],
+                        ['FilePath', $imageName]
+                    ])->count('id');
+                    if ($checkImage > 0) {
+                    } else {
+                        $uploadPath = 'assets/img/administrationImage';
+                        $newImageName = Str::random(20) . '.' . $imageName;
+                        $image->move($uploadPath, $newImageName);
+                        $Attachments = Attachments::updateOrCreate(
+                            [
+                                'ParentGuid' => $Guid,
+                                'DocTitle' => $request->post('DocTitle'),
+                                'FilePath' => $newImageName,
+                                'UserID' => $UserID,
+
+                            ]
+
+                        );
+
+                    }
+                } else {
+                    $uploadPath = 'assets/img/administrationImage';
+                    $newImageName = Str::random(20) . '.' . $imageName;
+                    $image->move($uploadPath, $newImageName);
+                    $Attachments = Attachments::updateOrCreate(
+                        [
+                            'ParentGuid' => $Guid,
+                            'DocTitle' => $request->post('DocTitle'),
+                            'FilePath' => $newImageName,
+                            'UserID' => $UserID,
 
 
-            ]
-        );
+                        ]
+
+                    );
+                }
+            }
+            $Supervisors = Supervisors::updateOrCreate(
+                [
+                    'id' => $id,
+                ],
+                [
+                    'eid' => $request->post('eid'),
+                    'Guid' => $Guid,
+                    'sdeg' => $request->post('sdeg'),
+                    'sname' => $request->post('sname'),
+                    'docno' => $request->post('docno'),
+                    'docdate' => $request->post('docdate'),
+                    'UserID' => $UserID
+    
+    
+                ]
+            );
+
+        } else {
+           
+            $Supervisors = Supervisors::updateOrCreate(
+                [
+                    'id' => $id,
+                ],
+                [
+                    'eid' => $request->post('eid'),
+                    'Guid' => $Guid,
+                    'sdeg' => $request->post('sdeg'),
+                    'sname' => $request->post('sname'),
+                    'docno' => $request->post('docno'),
+                    'docdate' => $request->post('docdate'),
+                    'UserID' => $UserID
+    
+    
+                ]
+            );
+        }
+       
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -57,8 +131,13 @@ class SupervisorsController extends Controller
     {
         $id = $request->input('id');
         $Supervisors = Supervisors::find($id);
+        $Attachments = Attachments::where('ParentGuid', $Supervisors->Guid)->get();
 
-        return response()->json($Supervisors);
+        $data = [
+            'Supervisors' => $Supervisors,
+            'Attachments' => $Attachments
+        ];
+        return response()->json($data);
     }
 
 
@@ -76,6 +155,8 @@ class SupervisorsController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->post('id');
+        $Supervisors = Supervisors::find($id);
+        Attachments::where('ParentGuid', $Supervisors->Guid)->delete();
         Supervisors::find($id)->delete();
         return response()->json(['status' => 'تم حذف البيانات بنجاح']);
     }
@@ -100,5 +181,21 @@ class SupervisorsController extends Controller
 
         ];
         return response()->json($data);
+    }
+    public function DeleteImages(Request $request)
+    {
+        $id = $request->input('id');
+        $Guid = $request->input('Guid');
+        $imageName = $request->input('imageName');
+
+        $deleteImage = Attachments::where([['ParentGuid', $Guid], ['FilePath', $imageName]])->delete();
+        if ($deleteImage) {
+            $uploadPath = 'assets/img/administrationImage';
+            $filePath = $uploadPath . '/' . $imageName;
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+            return response()->json(['status' => 'تم حذف الكتاب بنجاح']);
+        }
     }
 }

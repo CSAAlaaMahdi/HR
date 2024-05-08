@@ -16,13 +16,15 @@ class Positions extends Model
     protected $table='emp_poss';
     protected $fillable = [
         'eid',
+        'Guid',
         'ptypeid',
         'pname',
         'docno',
         'docdate',
         'datefrom',
         'dateto',
-        'filepath'
+        'filepath',
+        'UserID'
 
     ];
 

@@ -216,7 +216,7 @@
                         @endif
                     </a>
                 </li>
-                <li class="nav-item" id="Login_Thanks">
+                {{-- <li class="nav-item" id="Login_Thanks">
                     <a href="{{ route('thanks.index') }}"
                         class="nav-link {{ request()->routeIs('thanks.index') ? 'active' : '' }}">
                         @if (request()->routeIs('thanks.index'))
@@ -229,7 +229,7 @@
                             <p style="margin-right:10px"> الهويات </p>
                         @endif
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item" id="Login_AdministrationOrders">
                     <a href="{{ route('administrationOrders.index') }}"
                         class="nav-link {{ request()->routeIs('administrationOrders.index') ? 'active' : '' }}">
@@ -378,7 +378,7 @@
 
             </ul>
         </li>
-        <li
+        {{-- <li
             class="nav-item has-treeview {{ request()->routeIs('users.index') ||
                  request()->routeIs('places.index') 
                 // request()->routeIs('frame.index') ||
@@ -481,7 +481,7 @@
 
 
             </ul>
-        </li>
+        </li> --}}
 
     </ul>
 </nav>

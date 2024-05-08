@@ -15,11 +15,13 @@ class Comity extends Model
      */
     protected $table='comity_tb';
     protected $fillable = [
+        'Guid',
         'ctype',
         'docno',
         'docdate',
         'notes',
-        'filepath'
+        'filepath',
+        'UserID',
 
     ];
 

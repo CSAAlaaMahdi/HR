@@ -496,7 +496,7 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane mt-3" id="EmpCertification">
+                    {{-- <div class="tab-pane mt-3" id="EmpCertification">
                         <div class="row border g-0 rounded shadow-sm">
                             <div class="col p-4">
 
@@ -1220,7 +1220,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
                 </div>

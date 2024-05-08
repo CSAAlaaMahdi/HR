@@ -13,6 +13,7 @@ class Certifications extends Model
     protected $keyType = 'integer';
     protected $fillable=[
         'eid',
+        'Guid',
         'certification',
         'college',
         'university',
@@ -25,6 +26,7 @@ class Certifications extends Model
         'equivlent_no',
         'equivlent_date',
         'filepath',
+        'UserID',
         
 
         

@@ -13,12 +13,14 @@ class Jobs extends Model
     protected $keyType = 'integer';
     protected $fillable=[
         'eid',
+        'Guid',
         'jtitle',
         'jdegree',
         'jstage',
         'getdate',
         'docno',
         'docdate',
-        'filepath'
+        'filepath',
+        'UserID'
     ];
 }

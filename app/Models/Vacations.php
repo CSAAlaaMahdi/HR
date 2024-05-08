@@ -18,12 +18,15 @@ class Vacations extends Model
     protected $keyType = 'integer';
     protected $fillable = [
         'eid',
+        'Guid',
         'vtid',
         'vdate',
         'nodays',
         'docno',
         'docdate',
-        'filepath'
+        'filepath',
+        'UserID',
+
 
     ];
 

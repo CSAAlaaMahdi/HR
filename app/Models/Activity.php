@@ -17,6 +17,7 @@ class Activity extends Model
     protected $primaryKey = 'aid';
     protected $keyType = 'integer';
     protected $fillable = [
+        'Guid',
         'act_id',
         'Aname',
         'Place',
@@ -24,7 +25,8 @@ class Activity extends Model
         'NoDays',
         'Participants',
         'Notes',
-        'filepath'
+        'filepath',
+        'UserID'
 
     ];
 
