@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdministrationOrders extends Model
+class Attachments extends Model
 {
 
 
@@ -13,16 +13,12 @@ class AdministrationOrders extends Model
      *
      * @var array<int, string>
      */
-    protected $table='Tb_AdministrationOrders';
+    protected $table='Tb_Attachments';
     protected $fillable = [
-        'eid',
-        'Guid',
-        'Title',
-        'DocNumber',
-        'DocDate',
-        'FromDir',
-        'Notes',
-        'FilePath'
+        'ParentGuid',
+        'DocTitle',
+        'FilePath',
+        'UserID',
 
     ];
 

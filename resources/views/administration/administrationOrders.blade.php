@@ -33,7 +33,7 @@
 
                     </div>
                     <div class="card-body">
-                        
+
                         <div class="row ">
 
                             @csrf
@@ -47,7 +47,15 @@
                                         <span id="error_id" class="text-danger"></span>
                                     </div>
                                 </div>
-
+                                <div class="dx-fieldset" id="AdministrationOrders-container" hidden>
+                                    <div class="dx-field">
+                                        <div class="dx-field-label">Guid </div>
+                                        <div class="dx-field-value">
+                                            <div id="Guid"></div>
+                                        </div>
+                                        <span id="error_Guid" class="text-danger"></span>
+                                    </div>
+                                </div>
                                 <div class="dx-fieldset" id="AdministrationOrders-container">
                                     <div class="dx-field">
                                         <div class="dx-field-label">الاسم </div>

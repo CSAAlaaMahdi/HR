@@ -16,6 +16,7 @@ class Children extends Model
     protected $table='children_tb';
     protected $fillable = [
         'eid',
+        'Guid',
         'chname',
         'chsex',
         'chdob',
@@ -24,6 +25,6 @@ class Children extends Model
 
     ];
 
- 
+
 
 }
