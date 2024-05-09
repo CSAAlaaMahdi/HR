@@ -189,9 +189,9 @@
                                                 <div class="dx-field">
                                                     <div class="dx-field-label"> عنوان السكن</div>
                                                     <div class="dx-field-value">
-                                                        <div id="addres"></div>
+                                                        <div id="address"></div>
                                                     </div>
-                                                    <span id="error_addres" class="text-danger"></span>
+                                                    <span id="error_address" class="text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="dx-fieldset" id="Emp-container">

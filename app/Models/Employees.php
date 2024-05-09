@@ -23,7 +23,7 @@ class Employees extends Model
         'mobile',
         'email',
         'governorate',
-        'addres',
+        'address',
         'bplace',
         'dob',
         'bloodtype',

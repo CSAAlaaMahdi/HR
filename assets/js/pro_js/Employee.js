@@ -12,7 +12,7 @@ function Employee_cleardata() {
     $("#surname").dxTextBox("instance").option("value", "");
     $("#fullname").dxTextBox("instance").option("value", "");
     $("#mothername").dxTextBox("instance").option("value", "");
-    $("#addres").dxTextBox("instance").option("value", "");
+    $("#address").dxTextBox("instance").option("value", "");
     $("#wifename").dxTextBox("instance").option("value", "");
     $("#email").dxTextBox("instance").option("value", "");
     $("#mobile").dxTextBox("instance").option("value", "");
@@ -171,7 +171,7 @@ function Employee_UpdateOrCreate() {
     formData.append('email', $("#email").dxTextBox("instance").option("value"));
     formData.append('mobile', $("#mobile").dxTextBox("instance").option("value"));
     formData.append('idno', $("#idno").dxTextBox("instance").option("value"));
-    formData.append('idcerno', $("#mobile").idcerno("instance").option("value"));
+    formData.append('idcerno', $("#idcerno").dxTextBox("instance").option("value"));
     formData.append('homeid', $("#homeid").dxTextBox("instance").option("value"));
     formData.append('rationo', $("#rationo").dxTextBox("instance").option("value"));
     formData.append('notes', $("#notes").dxTextArea("instance").option("value"));
@@ -199,16 +199,12 @@ function Employee_UpdateOrCreate() {
             return 1;
         }else return 0;
     })());
-
-
-
-
-
-    formData.append('DocTitle', $("#ttype").dxSelectBox("instance").option("value"));
+    formData.append('DocTitle', $("#fullname").dxTextBox("instance").option("value"));
     const images = $("#FilePath").dxFileUploader("option", "value");
     $.each(images, function(index, file) {
         formData.append('image[]', file);
     });
+
 
     $.ajaxSetup({
         headers: {
@@ -730,7 +726,7 @@ function Employee_filldata() {
                                                 $("#surname").dxTextBox("instance").option("value",response.Emp.surname);
                                                 $("#fullname").dxTextBox("instance").option("value",response.Emp.fullname);
                                                 $("#mothername").dxTextBox("instance").option("value",response.Emp.mothername);
-                                                $("#addres").dxTextBox("instance").option("value",response.Emp.addres);
+                                                $("#address").dxTextBox("instance").option("value",response.Emp.address);
                                                 $("#wifename").dxTextBox("instance").option("value",response.Emp.wifename);
                                                 $("#email").dxTextBox("instance").option("value",response.Emp.email);
                                                 $("#mobile").dxTextBox("instance").option("value",response.Emp.mobile);
@@ -767,11 +763,11 @@ function Employee_filldata() {
                                                 $.each(response.Attachments, function(index, file) {
                                                     images.push(file['FilePath']);
 
-                                                    $('#image-container').append(
+                                                    $('#EmpImage').append(
                                                         '<div class="image-preview">' +
                                                         '<button class="delete-image">حذف الكتاب</button>' +
-                                                        '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
-                                                        '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                        '<img src="assets/img/employeesImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                        '<a href="assets/img/employeesImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
                                                         '</div>'
                                                     );
                                                 });
@@ -1003,7 +999,7 @@ $(document).ready(function () {
         });
     });
     $(() => {
-        $("#addres").dxTextBox({
+        $("#address").dxTextBox({
             placeholder: "",
             inputAttr: {
                  style:"font-size:13px",
@@ -1125,7 +1121,7 @@ $(document).ready(function () {
                         var reader = new FileReader();
                         reader.onload = function(e) {
                             // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
-                            $('#image-container').append(
+                            $('#EmpImage').append(
                                 '<div class="image-preview">' +
                                 '<button class="delete-image">حذف الصورة</button>' +
                                 '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
