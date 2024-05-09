@@ -12,6 +12,7 @@ class Employees extends Model
     protected $primaryKey = 'eid';
     protected $keyType = 'integer';
     protected $fillable=[
+        'Guid',
         'firstname',
         'secondname',
         'thirdname',
@@ -49,6 +50,8 @@ class Employees extends Model
         'genralspt',
         'spacifspt',
         'active',
-        
+        'UserID',
+        'FilePath',
+
     ];
 }

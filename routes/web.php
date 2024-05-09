@@ -40,7 +40,7 @@ Route::get('/login/checking', [LoginController::class, 'checking']);
 
 Route::controller(Admin::class)->group(function () {
     Route::get('/dashboard', 'index')->name('home.index');
-    
+
 
 });
 Route::controller(DashboardMain::class)->group(function () {
@@ -66,7 +66,7 @@ Route::resources([
     'articles' => ArticlesController::class,
     'places' => PlacesController::class,
     'administrationOrders' => AdministrationOrdersController::class,
-    
+
 
 ]);
 Route::get('usersfill/filldata', [UsersController::class, 'filldata']);
@@ -96,3 +96,4 @@ Route::post('positionsDelete/DeleteImage', [PositionsController::class, 'DeleteI
 Route::post('activityDelete/DeleteImage', [ActivityController::class, 'DeleteImages']);
 Route::post('articlesDelete/DeleteImage', [ArticlesController::class, 'DeleteImages']);
 Route::post('researchesDelete/DeleteImage', [ResearchesController::class, 'DeleteImages']);
+Route::post('employeesDelete/DeleteImage', [EmployeesController::class, 'DeleteImages']);

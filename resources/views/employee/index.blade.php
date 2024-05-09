@@ -29,7 +29,9 @@
 
                     </div>
 
+
                 </div>
+
 
 
 
@@ -84,6 +86,15 @@
                                                         <div id="eid"></div>
                                                     </div>
                                                     <span id="error_eid" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="dx-fieldset" id="Emp-container" hidden>
+                                                <div class="dx-field">
+                                                    <div class="dx-field-label">Guid</div>
+                                                    <div class="dx-field-value">
+                                                        <div id="Guid"></div>
+                                                    </div>
+                                                    <span id="error_Guid" class="text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="dx-fieldset" id="Emp-container">
@@ -269,7 +280,7 @@
 
                                 </div>
 
-                                <hr>
+                                <hr style="background-color: orangered">
                                 <div class="col-md-12 row flex">
                                     <div class="col-md-4">
                                         <div class="form-group ">
@@ -367,7 +378,7 @@
 
                                     </div>
                                 </div>
-                                <hr>
+                                <hr style="background-color: orangered">
                                 <div class="col-md-12 row felx">
                                     <div class="col-md-4">
                                         <div class="form-group ">
@@ -473,7 +484,7 @@
 
                                     </div>
                                 </div>
-                                <hr>
+                                <hr style="background-color: orangered">
                                 <div class="col-md-12 row flex">
                                     <div class="col-md-12">
                                         <div class="dx-fieldset" id="Emp-container">
@@ -486,13 +497,24 @@
                                             </div>
                                           </div>
                                     </div>
-                                    
+
                                 </div>
-                                <hr>
+                                <div class="col-md-12">
+                                    <div class="dx-fieldset" id="Emp-container" style="justify-content: center;align-content: center;align-items: center">
+                                        <div class="dx-field">
+                                            <div class="dx-field-label">صورة شخصية </div>
+                                            <div class="dx-field-value">
+                                                <div id="FilePath"></div>
+                                            </div>
+                                            <span id="error_FilePath" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="background-color: orangered">
                             <div id="btnNewAddEmp"></div>
                             <div id="btnSaveEmp"></div>
                             </div>
-                            
+
                         </div>
                     </div>
 

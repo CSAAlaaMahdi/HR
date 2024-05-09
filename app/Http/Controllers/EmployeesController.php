@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AttachmentsEmp;
 use App\Models\Depts;
 use App\Models\Employees;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class EmployeesController extends Controller
 {
@@ -34,49 +37,150 @@ class EmployeesController extends Controller
     public function store(Request $request)
     {
         $empid = $request->post('eid');
-        $Employee = Employees::updateOrCreate(
-            [
-                'eid' => $empid,
-            ],
-            [
-                'firstname' => $request->post('firstname'),
-                'secondname' => $request->post('secondname'),
-                'thirdname' => $request->post('thirdname'),
-                'forthname' => $request->post('forthname'),
-                'surname' => $request->post('surname'),
-                'fullname' => $request->post('fullname'),
-                'mothername' => $request->post('mothername'),
-                'address' => $request->post('address'),
-                'wifename' => $request->post('wifename'),
-                'email' => $request->post('email'),
-                'mobile' => $request->post('mobile'),
-                'idno' => $request->post('idno'),
-                'idcerno' => $request->post('idcerno'),
-                'homeid' => $request->post('homeid'),
-                'rationo' => $request->post('rationo'),
-                'notes' => $request->post('notes'),
-                'dob' => $request->post('dob'),
-                'iddate' => $request->post('iddate'),
-                'idcerdate' => $request->post('idcerdate'),
-                'homedate' => $request->post('homedate'),
-                'hiredate' => $request->post('hiredate'),
-                'rehiredate' => $request->post('rehiredate'),
-                'moh_wdate' => $request->post('moh_wdate'),
-                'bplace' => $request->post('bplace'),
-                'governorate' => $request->post('governorate'),
-                'MaritalStatus' => $request->post('MaritalStatus'),
-                'wifejob' => $request->post('wifejob'),
-                'issueplace' => $request->post('issueplace'),
-                'jclass' => $request->post('jclass'),
-                'jcategory' => $request->post('jcategory'),
-                'genralspt' => $request->post('genralspt'),
-                'spacifspt' => $request->post('spacifspt'),
-                'deptid' => $request->post('deptid'),
-                'bloodtype' => $request->post('bloodtype'),
-                'gender' => $request->post('gender'),
-                'active' => $request->post('active'),
-            ]
-        );
+        $Guid = $request->post('Guid');
+        if ($Guid == 'null' || $Guid == '' || empty($Guid)) {
+            $Guid = strtoupper(Uuid::uuid4()->toString());
+        }
+        $UserID = session('id');
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            foreach ($images as $image) {
+
+                $imageName =  $image->getClientOriginalName();
+                if ($empid != "") {
+                    $checkImage = AttachmentsEmp::where([
+                        ['ParentGuid', $Guid],
+                        ['FilePath', $imageName]
+                    ])->count('id');
+                    if ($checkImage > 0) {
+                    } else {
+                        $uploadPath = 'assets/img/employeesImage';
+                        $newImageName = Str::random(20) . '.' . $imageName;
+                        $image->move($uploadPath, $newImageName);
+                        $AttachmentsEmp = AttachmentsEmp::updateOrCreate(
+                            [
+                                'ParentGuid' => $Guid,
+                                'DocTitle' => $request->post('DocTitle'),
+                                'FilePath' => $newImageName,
+                                'UserID' => $UserID,
+
+                            ]
+
+                        );
+
+                    }
+                } else {
+                    $uploadPath = 'assets/img/employeesImage';
+                    $newImageName = Str::random(20) . '.' . $imageName;
+                    $image->move($uploadPath, $newImageName);
+                    $AttachmentsEmp = AttachmentsEmp::updateOrCreate(
+                        [
+                            'ParentGuid' => $Guid,
+                            'DocTitle' => $request->post('DocTitle'),
+                            'FilePath' => $newImageName,
+                            'UserID' => $UserID,
+
+
+                        ]
+
+                    );
+                }
+            }
+            $Employee = Employees::updateOrCreate(
+                [
+                    'eid' => $empid,
+                ],
+                [
+                    'Guid'  => $Guid,
+                    'firstname' => $request->post('firstname'),
+                    'secondname' => $request->post('secondname'),
+                    'thirdname' => $request->post('thirdname'),
+                    'forthname' => $request->post('forthname'),
+                    'surname' => $request->post('surname'),
+                    'fullname' => $request->post('fullname'),
+                    'mothername' => $request->post('mothername'),
+                    'address' => $request->post('address'),
+                    'wifename' => $request->post('wifename'),
+                    'email' => $request->post('email'),
+                    'mobile' => $request->post('mobile'),
+                    'idno' => $request->post('idno'),
+                    'idcerno' => $request->post('idcerno'),
+                    'homeid' => $request->post('homeid'),
+                    'rationo' => $request->post('rationo'),
+                    'notes' => $request->post('notes'),
+                    'dob' => $request->post('dob'),
+                    'iddate' => $request->post('iddate'),
+                    'idcerdate' => $request->post('idcerdate'),
+                    'homedate' => $request->post('homedate'),
+                    'hiredate' => $request->post('hiredate'),
+                    'rehiredate' => $request->post('rehiredate'),
+                    'moh_wdate' => $request->post('moh_wdate'),
+                    'bplace' => $request->post('bplace'),
+                    'governorate' => $request->post('governorate'),
+                    'MaritalStatus' => $request->post('MaritalStatus'),
+                    'wifejob' => $request->post('wifejob'),
+                    'issueplace' => $request->post('issueplace'),
+                    'jclass' => $request->post('jclass'),
+                    'jcategory' => $request->post('jcategory'),
+                    'genralspt' => $request->post('genralspt'),
+                    'spacifspt' => $request->post('spacifspt'),
+                    'deptid' => $request->post('deptid'),
+                    'bloodtype' => $request->post('bloodtype'),
+                    'gender' => $request->post('gender'),
+                    'active' => $request->post('active'),
+                    'UserID' => $UserID,
+                ]
+            );
+
+        } else {
+
+            $Employee = Employees::updateOrCreate(
+                [
+                    'eid' => $empid,
+                ],
+                [
+                    'Guid'  => $Guid,
+                    'firstname' => $request->post('firstname'),
+                    'secondname' => $request->post('secondname'),
+                    'thirdname' => $request->post('thirdname'),
+                    'forthname' => $request->post('forthname'),
+                    'surname' => $request->post('surname'),
+                    'fullname' => $request->post('fullname'),
+                    'mothername' => $request->post('mothername'),
+                    'address' => $request->post('address'),
+                    'wifename' => $request->post('wifename'),
+                    'email' => $request->post('email'),
+                    'mobile' => $request->post('mobile'),
+                    'idno' => $request->post('idno'),
+                    'idcerno' => $request->post('idcerno'),
+                    'homeid' => $request->post('homeid'),
+                    'rationo' => $request->post('rationo'),
+                    'notes' => $request->post('notes'),
+                    'dob' => $request->post('dob'),
+                    'iddate' => $request->post('iddate'),
+                    'idcerdate' => $request->post('idcerdate'),
+                    'homedate' => $request->post('homedate'),
+                    'hiredate' => $request->post('hiredate'),
+                    'rehiredate' => $request->post('rehiredate'),
+                    'moh_wdate' => $request->post('moh_wdate'),
+                    'bplace' => $request->post('bplace'),
+                    'governorate' => $request->post('governorate'),
+                    'MaritalStatus' => $request->post('MaritalStatus'),
+                    'wifejob' => $request->post('wifejob'),
+                    'issueplace' => $request->post('issueplace'),
+                    'jclass' => $request->post('jclass'),
+                    'jcategory' => $request->post('jcategory'),
+                    'genralspt' => $request->post('genralspt'),
+                    'spacifspt' => $request->post('spacifspt'),
+                    'deptid' => $request->post('deptid'),
+                    'bloodtype' => $request->post('bloodtype'),
+                    'gender' => $request->post('gender'),
+                    'active' => $request->post('active'),
+                    'UserID' => $UserID,
+                ]
+            );
+        }
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -85,9 +189,11 @@ class EmployeesController extends Controller
     {
         $id = $request->input('eid');
         $Emp = Employees::find($id);
+        $Attachments = AttachmentsEmp::where('ParentGuid', $Emp->Guid)->get();
         $data = [
             'Emp' => $Emp,
             'Dept' => Depts::find($Emp->deptid),
+            'Attachments' => $Attachments
 
         ];
         return response()->json($data);
@@ -102,15 +208,7 @@ class EmployeesController extends Controller
 
     public function update(Request $request)
     {
-        // $Guid = $request->post('Ui_Guid');
-        // $data = User::find($Guid);
-        // $data->Ui_Name = $request->post('Ui_Name');
-        // $data->Ui_Piece = $request->post('Ui_Piece');
-        // $data->Ui_PieceType = $request->post('Ui_PieceType');
-        // // $data->Ui_UserName = session('User');
-        // $data->update();
 
-        // return response()->json(['status' => 'تم تحديث البيانات بنجاح']);
     }
 
 
@@ -211,5 +309,22 @@ class EmployeesController extends Controller
             'getGender' => $getGender,
         ];
         return response()->json($data);
+    }
+
+    public function DeleteImages(Request $request)
+    {
+        $id = $request->input('id');
+        $Guid = $request->input('Guid');
+        $imageName = $request->input('imageName');
+
+        $deleteImage = AttachmentsEmp::where([['ParentGuid', $Guid], ['FilePath', $imageName]])->delete();
+        if ($deleteImage) {
+            $uploadPath = 'assets/img/employeesImage';
+            $filePath = $uploadPath . '/' . $imageName;
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+            return response()->json(['status' => 'تم حذف الكتاب بنجاح']);
+        }
     }
 }
