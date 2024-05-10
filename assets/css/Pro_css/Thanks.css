@@ -14,7 +14,34 @@
     width: 100%;
 
   }
+  .image-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
 
+.delete-image2 {
+    margin-bottom: 10px;
+    background-color: rgb(255, 117, 70);
+    height: 50px;
+    width: 150px;
+    color: rgb(21, 21, 21);
+    border-radius: 15px;
+    font-size: 16px;
+    border: none;
+    font: bold;
+}
+.delete-image {
+  margin-bottom: 10px;
+  background-color: rgb(255, 117, 70);
+  height: 40px;
+  width: 150px;
+  color: rgb(21, 21, 21);
+  border-radius: 15px;
+  font-size: 16px;
+  border: none;
+  font: bold;
+}
 
   .custom-header_Thanks {
     background-color: #343A40; /* Set your desired color here */

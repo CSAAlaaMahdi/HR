@@ -40,6 +40,7 @@ function Comity_UpdateOrCreate() {
     formData.append('ctype', $("#ctype").dxSelectBox("instance").option("value"));
     formData.append('docno', $("#docno").dxTextBox("instance").option("value"));
     formData.append('notes', $("#notes").dxTextArea("instance").option("value"));
+    formData.append('eid', $("#eid").dxDropDownBox("instance").option("value"));
     formData.append('docdate', docdate);
     formData.append('DocTitle', $("#ctype").dxSelectBox("instance").option("value"));
     const images = $("#FilePath").dxFileUploader("option", "value");
@@ -478,6 +479,66 @@ function Comity_filldata() {
                     });
                 });
               
+                $(() => {
+                    let dataGrid;
+                    $("#eid").dxDropDownBox({
+                        value: [],
+                        valueExpr: "eid",
+                        deferRendering: false,
+                        placeholder: "الاسم   ",
+                        inputAttr: {  style:"font-size:12px" },
+                        displayExpr(item) {
+                            return item && `${item.fullname} `;
+                        },
+                        showClearButton: true,
+                        dataSource: response.getEmployees,//makeAsyncDataSource('customer.json'),
+                        contentTemplate(e) {
+                            const value = e.component.option("value");
+                            const $dataGrid = $("<div>").dxDataGrid({
+                                dataSource: e.component.getDataSource(),
+                                columns: [
+                                    {
+                                        dataField:"fullname",
+                                        caption:"الاسم "
+
+                                    },
+                                
+                                ],
+                                hoverStateEnabled: true,
+                                paging: { enabled: true, pageSize: 10 },
+                                filterRow: { visible: true },
+                                scrolling: { mode: "virtual" },
+                                selection: { mode: "multiple" },
+                                selectedRowKeys: value,
+                                height: 300,
+                                onSelectionChanged(selectedItems) {
+                                    const keys = selectedItems.selectedRowKeys;
+                                    const hasSelection = keys.length;
+
+                                    e.component.option(
+                                        "value",
+                                        hasSelection ? keys.map(key => key.eid) : null
+
+                                    );
+                                },
+
+
+                            });
+
+                            dataGrid = $dataGrid.dxDataGrid("instance");
+
+                            e.component.on("valueChanged", (args) => {
+                                dataGrid.selectRows(args.value.map(eid => ({ eid })), true);
+
+                                e.component.close();
+                            });
+
+                            return $dataGrid;
+                        },
+
+
+                    });
+                });
                
                
             },
@@ -536,6 +597,8 @@ $(document).ready(function () {
         icon: "check",
         width: 120,
         onClick() {
+           
+           
             Comity_chechdata();
             if(
                 error_ctype != ""
@@ -585,6 +648,17 @@ $(document).ready(function () {
             // value: longText,
             maxLength: 4000,
             label: "ملاحظات",
+        });
+    });
+    $(() => {
+        $("#ComityEmployees").dxTextArea({
+            // ...
+            minHeight: 50,
+            maxHeight: 500,
+            autoResizeEnabled: true,
+            // value: longText,
+            maxLength: 4000,
+            label: "اعضاء",
         });
     });
     $(() =>{

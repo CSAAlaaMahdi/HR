@@ -67,7 +67,6 @@ class EmployeesController extends Controller
                             ]
 
                         );
-
                     }
                 } else {
                     $uploadPath = 'assets/img/employeesImage';
@@ -131,7 +130,6 @@ class EmployeesController extends Controller
                     'UserID' => $UserID,
                 ]
             );
-
         } else {
 
             $Employee = Employees::updateOrCreate(
@@ -188,7 +186,17 @@ class EmployeesController extends Controller
     public function show(Request $request)
     {
         $id = $request->input('eid');
-        $Emp = Employees::find($id);
+        $Emp = Employees::with(
+            'EmpCertification.CerAttachments','EmpThanks.ThanksAttachments'
+
+            )->find($id);
+      
+       foreach ($Emp->EmpCertification as  $value) {
+         $value->eid = $Emp->fullname;
+       }
+       foreach ($Emp->EmpThanks as  $value) {
+        $value->eid = $Emp->fullname;
+      }
         $Attachments = AttachmentsEmp::where('ParentGuid', $Emp->Guid)->get();
         $data = [
             'Emp' => $Emp,
@@ -208,7 +216,6 @@ class EmployeesController extends Controller
 
     public function update(Request $request)
     {
-
     }
 
 

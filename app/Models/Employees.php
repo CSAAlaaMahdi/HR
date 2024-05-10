@@ -54,4 +54,15 @@ class Employees extends Model
         'FilePath',
 
     ];
+
+    public function EmpCertification()
+    {
+        return $this->hasMany(Certifications::class,'eid');
+    }
+    public function EmpThanks()
+    {
+        return $this->hasMany(Thanks::class,'eid');
+    }
+
+
 }

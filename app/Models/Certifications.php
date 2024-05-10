@@ -31,4 +31,9 @@ class Certifications extends Model
 
         
     ];
+
+    public function CerAttachments()
+    {
+        return $this->hasMany(Attachments::class,'ParentGuid','Guid');
+    }
 }

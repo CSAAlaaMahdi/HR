@@ -111,6 +111,28 @@
                            
                         </div>
                         <div class="col-md-12">
+                            <div class="dx-fieldset" id="Comity-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label">اعضاء اللجنة</div>
+                                    <div class="dx-field-value">
+                                        <div id="eid"></div>
+                                    </div>
+                                    <span id="error_eid" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="dx-fieldset" id="Comity-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label">اعضاء اللجنة  </div>
+                                    <div class="dx-field-value">
+                                        <div id="ComityEmployees"></div>
+                                    </div>
+                                    <span id="error_ComityEmployees" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
                             <div class="col-md-4">
 
                                 <div class="dx-fieldset" id="Comity-container">
@@ -128,7 +150,7 @@
                         </div>
                         <hr>
                         <div class="col-md-12">
-                            <div id="image-container">
+                            <div id="image-container" class="row">
 
                             </div>
                         </div>

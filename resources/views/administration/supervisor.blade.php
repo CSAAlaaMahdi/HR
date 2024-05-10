@@ -135,7 +135,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div id="image-container">
+                            <div id="image-container" class="row">
 
                             </div>
                         </div>

@@ -41,7 +41,7 @@
                     </li>
                     <li class="nav-item"><a href="#EmpCertification" class="nav-link" data-bs-toggle="tab">الشهادات</a>
                     </li>
-                    <li class="nav-item"><a href="#EmpGroups" class="nav-link " data-bs-toggle="tab">اللجان</a></li>
+                    {{-- <li class="nav-item"><a href="#EmpGroups" class="nav-link " data-bs-toggle="tab">اللجان</a></li> --}}
                     <li class="nav-item"><a href="#EmpThanks" class="nav-link " data-bs-toggle="tab"> التشكرات</a>
                     </li>
                     <li class="nav-item"><a href="#EmpVacations" class="nav-link " data-bs-toggle="tab">الاجازات </a>
@@ -489,18 +489,19 @@
                                     <div class="col-md-12">
                                         <div class="dx-fieldset" id="Emp-container">
                                             <div class="dx-field">
-                                              {{-- <div class="dx-field-label">ملاحظات</div> --}}
-                                              <div class="dx-field-value">
-                                                <div id="notes"></div>
-                                              </div>
-                                              <span id="error_notes" class="text-danger"></span>
+                                                {{-- <div class="dx-field-label">ملاحظات</div> --}}
+                                                <div class="dx-field-value">
+                                                    <div id="notes"></div>
+                                                </div>
+                                                <span id="error_notes" class="text-danger"></span>
                                             </div>
-                                          </div>
+                                        </div>
                                     </div>
 
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="dx-fieldset" id="Emp-container" style="justify-content: center;align-content: center;align-items: center">
+                                    <div class="dx-fieldset" id="Emp-container"
+                                        style="justify-content: center;align-content: center;align-items: center">
                                         <div class="dx-field">
                                             <div class="dx-field-label">صورة شخصية </div>
                                             <div class="dx-field-value">
@@ -511,86 +512,201 @@
                                     </div>
                                 </div>
                                 <hr style="background-color: orangered">
-                            <div id="btnNewAddEmp"></div>
-                            <div id="btnSaveEmp"></div>
+                                <div id="btnNewAddEmp"></div>
+                                <div id="btnSaveEmp"></div>
                             </div>
 
                         </div>
                     </div>
 
-                    {{-- <div class="tab-pane mt-3" id="EmpCertification">
+                    <div class="tab-pane mt-3" id="EmpCertification">
                         <div class="row border g-0 rounded shadow-sm">
                             <div class="col p-4">
 
-                                <div class="col-md-14 mt-1 row flex">
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpCertification" id="EmpCertification">
+                                        <div class="card-header" style="background-color: #283741;text-align: center">
+                                                <h4 style="color: white;" id="card_EmpCertificationtitle" class="card_EmpCertificationtitle">الشهادات  </h4> 
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpCertificationsdatagrid">
 
-                                    <div class="col-md-4">
-                                        <div class="form-group ">
-
-                                            <div class="dx-fieldset" id="Item-container">
-                                                <div class="dx-field">
-                                                    <div class="dx-field-label">الوحدة</div>
-                                                    <div class="dx-field-value">
-                                                        <div id="IT_ItemUnit"></div>
-                                                    </div>
-                                                    <span id="error_IT_ItemUnit" class="text-danger"></span>
-                                                </div>
                                             </div>
-                                            <div class="dx-fieldset" id="Item-container">
-                                                <div class="dx-field">
-                                                    <div class="dx-field-label">الوحدة2</div>
-                                                    <div class="dx-field-value">
-                                                        <div id="IT_ItemUnit2"></div>
-                                                    </div>
-                                                    <span id="error_IT_ItemUnit2" class="text-danger"></span>
-                                                </div>
-                                            </div>
-                                            <div class="dx-fieldset" id="Item-container">
-                                                <div class="dx-field">
-                                                    <div class="dx-field-label">التعادل</div>
-                                                    <div class="dx-field-value">
-                                                        <div id="IT_Factory2"></div>
-                                                    </div>
-                                                    <span id="error_IT_Factory2" class="text-danger"></span>
-                                                </div>
-                                            </div>
-                                            <div class="dx-fieldset" id="Item-container">
-                                                <div class="dx-field">
-                                                    <div class="dx-field-label">الوحدة3</div>
-                                                    <div class="dx-field-value">
-                                                        <div id="IT_ItemUnit3"></div>
-                                                    </div>
-                                                    <span id="error_IT_ItemUnit3" class="text-danger"></span>
-                                                </div>
-                                            </div>
-                                            <div class="dx-fieldset" id="Item-container">
-                                                <div class="dx-field">
-                                                    <div class="dx-field-label">التعادل</div>
-                                                    <div class="dx-field-value">
-                                                        <div id="IT_Factory3"></div>
-                                                    </div>
-                                                    <span id="error_IT_Factory3" class="text-danger"></span>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group ">
-                                            <div class="dx-fieldset" id="ItemRadio-container">
-                                                <div class="dx-field">
-                                                    <div class="dx-field-label"> افتراضي</div>
-                                                    <div class="dx-field-value">
-                                                        <div id="IT_GroupButtons"></div>
-                                                    </div>
-                                                    <span id="error_IT_GroupButtons" class="text-danger"></span>
-                                                </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpCertificationsaction" id="EmpCertificationsaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="Empdanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpCertificationstitle" class="card_EmpCertificationstitle"> </h4>
+                        
                                             </div>
-
+                                            <div class="card-body">
+                                                <div class="row ">
+                        
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Certification-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">cid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCercid"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">Guid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCerGuid"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                        
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الاسم </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCereid"></div>
+                                                                </div>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الجامعة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCeruniversity"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الاختصاص العام </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCergspetailest"></div>
+                                                                </div>
+                                                             
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الشهادة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCercerdate"></div>
+                                                                </div>
+                                                             
+                                                            </div>
+                                                        </div>
+                        
+                                                    </div>
+                        
+                        
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الشهادة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCercertification"></div>
+                                                                </div>
+                                                      
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الدولة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCercountry"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الاختصاص الدقيق </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCersspetailest"></div>
+                                                                </div>
+                                                          
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">رقم شهادة المعادلة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCerequivlent_no"></div>
+                                                                </div>
+                                                      
+                                                            </div>
+                                                        </div>
+                        
+                        
+                                                    </div>
+                        
+                        
+                        
+                        
+                                                    <div class="col-md-4">
+                        
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الكلية </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCercollege"></div>
+                                                                </div>
+                                                       
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">السنة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCercyears"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">رقم الشهادة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCercer_no"></div>
+                                                                </div>
+                                                           
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Certification-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ شهادة المعادلة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpCerequivlent_date"></div>
+                                                                </div>
+                                                           
+                                                            </div>
+                                                        </div>
+                        
+                                                    </div>
+                        
+                                                    <hr>
+                                                    
+                                                </div>
+                                              
+                                                <div class="col-md-12">
+                                                    <div id="image-container" class="row">
+                                                        
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
                                         </div>
+                        
+                        
+                        
                                     </div>
-
+                                    
 
                                 </div>
 
@@ -598,651 +714,153 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane mt-3" id="EmpGroups">
-                        <div class="row border g-0 rounded shadow-sm">
-                            <div class="col p-4">
-                                <div class="col-md-12 mt-1 row flex">
-
-                                    <div class="col-md-4">
-                                        <p id="UnitTitle">الوحدة الاولى</p>
-
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">عادي</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Normal_1_1"></div>
-                                                </div>
-                                                <span id="error_IT_Normal_1_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">متوسط</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Mid_1_1"></div>
-                                                </div>
-                                                <span id="error_IT_Mid_1_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">جيد</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Good_1_1"></div>
-                                                </div>
-                                                <span id="error_IT_Good_1_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">جيد جدا</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_VeryGood_1_1"></div>
-                                                </div>
-                                                <span id="error_IT_VeryGood_1_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">ممتاز</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Excellent_1_1"></div>
-                                                </div>
-                                                <span id="error_IT_Excellent_1_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">فوق الامتياز</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Supper_1_1"></div>
-                                                </div>
-                                                <span id="error_IT_Supper_1_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">العملة</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_CurrencyGuid"></div>
-                                                </div>
-                                                <span id="error_IT_CurrencyGuid" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">اخر شراء</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_LastPrice"></div>
-                                                </div>
-                                                <span id="error_IT_LastPrice" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">المتوسط</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Average"></div>
-                                                </div>
-                                                <span id="error_IT_Average" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <p id="UnitTitle">الوجدة الثانية</p>
-
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">عادي</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Normal_2_1"></div>
-                                                </div>
-                                                <span id="error_IT_Normal_2_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">متوسط</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Mid_2_1"></div>
-                                                </div>
-                                                <span id="error_IT_Mid_2_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">جيد</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Good_2_1"></div>
-                                                </div>
-                                                <span id="error_IT_Good_2_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">جيد جدا</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_VeryGood_2_1"></div>
-                                                </div>
-                                                <span id="error_IT_VeryGood_2_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">امتياز</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Excellent_2_1"></div>
-                                                </div>
-                                                <span id="error_IT_Excellent_2_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">فوق الامتياز</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Supper_2_1"></div>
-                                                </div>
-                                                <span id="error_IT_Supper_2_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">العملة</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_CurrencyGuid2"></div>
-                                                </div>
-                                                <span id="error_IT_CurrencyGuid2" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">اخر شراء</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_LastPrice2"></div>
-                                                </div>
-                                                <span id="error_IT_LastPrice2" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">متوسط</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Average2"></div>
-                                                </div>
-                                                <span id="error_IT_Average2" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <p id="UnitTitle">
-                                            الوحدة الثالثة</p>
-
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">عادي</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Normal_3_1"></div>
-                                                </div>
-                                                <span id="error_IT_Normal_3_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">متوسط</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Mid_3_1"></div>
-                                                </div>
-                                                <span id="error_IT_Mid_3_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">جيد</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Good_3_1"></div>
-                                                </div>
-                                                <span id="error_IT_Good_3_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">جيد جدا</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_VeryGood_3_1"></div>
-                                                </div>
-                                                <span id="error_IT_VeryGood_3_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">امتياز</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Excellent_3_1"></div>
-                                                </div>
-                                                <span id="error_IT_Excellent_3_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">فوق الامتياز</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Supper_3_1"></div>
-                                                </div>
-                                                <span id="error_IT_Supper_3_1" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">العملة</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_CurrencyGuid3"></div>
-                                                </div>
-                                                <span id="error_IT_CurrencyGuid3" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">اخر شراء</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_LastPrice3"></div>
-                                                </div>
-                                                <span id="error_IT_LastPrice3" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                        <div class="dx-fieldset" id="ITPrices-container">
-                                            <div class="dx-field">
-                                                <div class="dx-field-label">متوسط</div>
-                                                <div class="dx-field-value">
-                                                    <div id="IT_Average3"></div>
-                                                </div>
-                                                <span id="error_IT_Average3" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="tab-pane mt-3" id="EmpThanks">
                         <div class="row border g-0 rounded shadow-sm">
                             <div class="col p-4">
-                                <div class="col-md-12 mt-2">
-                                    <div class="card " id="secondCard">
-                                        <div class="card-header" style="background-color: #343A40">
 
-
-
-                                            <h4 style="color: white;">الحركة المخزنية</h4>
-
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpThansk" id="EmpThansk">
+                                        <div class="card-header" style="background-color: #283741;text-align: center">
+                                                <h4 style="color: white;" id="EmpThankstitle" class="EmpThankstitle">التشكرات  </h4> 
                                         </div>
                                         <div class="card-body">
-
-                                            <div class="StoresDataGrid" id="StoresDataGrid">
-
-                                            </div>
-                                            <div id="pagerContainer"></div>
-                                            <div id="context-menu">
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mt-5">
-                                    <div class="card Storesaction" id="Storesaction">
-                                        <div class="card-header " style="background-color: #343A40">
-                                            <div id="btnCloseStores" style="float:left"></div>
-                                            <h4 style="color: white;" id="card_Storestitle" class="card_Storestitle">
-                                            </h4>
-
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row ">
-
-                                                @csrf
-                                                <div class="col-md-6">
-                                                    <div class="form-group ">
-                                                        <div class="ms-12 row pt-3">
-
-
-                                                        </div>
-                                                        <div class="dx-fieldset" id="Stores-container" hidden>
-                                                            <div class="dx-field">
-                                                                <div class="dx-field-label">IT2 ID</div>
-                                                                <div class="dx-field-value">
-                                                                    <div id="IT2_ID"></div>
-                                                                </div>
-                                                                <span id="error_IT2_ID" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dx-fieldset" id="StoresToggle-container">
-                                                            <div class="dx-field">
-                                                                <div class="dx-field-label">الحالة</div>
-                                                                <div class="dx-field-value">
-                                                                    <div id="IT2_State"></div>
-                                                                </div>
-                                                                <span id="error_IT2_State" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dx-fieldset" id="Stores-container">
-                                                            <div class="dx-field">
-                                                                <div class="dx-field-label">الموقع</div>
-                                                                <div class="dx-field-value">
-                                                                    <div id="IT2_ItemPosition"></div>
-                                                                </div>
-                                                                <span id="error_IT2_ItemPosition"
-                                                                    class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <hr>
-                                                        <div id="btnSaveStores" style="float:right"></div>
-
-                                                    </div>
-                                                </div>
-
+                                            <div class="datagrid" id="EmpThanksdatagrid">
 
                                             </div>
                                         </div>
                                     </div>
-
-
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane mt-3" id="EmpVacations">
-                        <div class="row border g-0 rounded shadow-sm">
-                            <div class="col p-4">
-                                <div class="col-md-12 mt-2">
-                                    <div class="card " id="FourthCard">
-                                        <div class="card-header" style="background-color: #343A40">
-
-
-                                            <div id="btnAddModels" style="float:left"></div>
-                                            <h4 style="color: white;">الطراز</h4>
-
-                                        </div>
-                                        <div class="card-body">
-
-                                            <div class="ModelsDataGrid" id="ModelsDataGrid">
-
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpThanksaction" id="EmpThanksaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="EmpThanskdanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpThankstitle" class="card_EmpThankstitle"> </h4>
+                        
                                             </div>
-                                            <div id="pagerContainerModel"></div>
-
-                                            <div id="context-menuModel">
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mt-5">
-                                    <div class="card Modelsaction" id="Modelsaction">
-                                        <div class="card-header " style="background-color: #343A40">
-                                            <div id="btnCloseModels" style="float:left"></div>
-                                            <h4 style="color: white;" id="card_Modelstitle" class="card_Modelstitle">
-                                            </h4>
-
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row ">
-
-                                                @csrf
-                                                <div class="col-md-6">
-                                                    <div class="form-group ">
-                                                        <div class="ms-12 row pt-3">
-                                                        </div>
-                                                        <div class="dx-fieldset" id="Models-container" hidden>
+                                            <div class="card-body">
+                                                <div class="row ">
+                        
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Thanks-container" hidden>
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">IT4 ID</div>
+                                                                <div class="dx-field-label">id </div>
                                                                 <div class="dx-field-value">
-                                                                    <div id="IT4_ID"></div>
+                                                                    <div id="EmpThanksid"></div>
                                                                 </div>
-                                                                <span id="error_IT4_ID" class="text-danger"></span>
+                                                               
                                                             </div>
                                                         </div>
-                                                        <div class="dx-fieldset" id="Models-container" hidden>
+                                                        <div class="dx-fieldset" id="Thanks-container" hidden>
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">IT4 FK ID</div>
+                                                                <div class="dx-field-label">Guid </div>
                                                                 <div class="dx-field-value">
-                                                                    <div id="IT4_FK_IT"></div>
+                                                                    <div id="EmpThanksGuid"></div>
                                                                 </div>
-                                                                <span id="error_IT4_FK_IT" class="text-danger"></span>
+                                                             
                                                             </div>
                                                         </div>
-                                                        <div class="dx-fieldset" id="Models-container">
+                        
+                                                        <div class="dx-fieldset" id="Thanks-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">تاريخ الانتاج</div>
+                                                                <div class="dx-field-label">الاسم </div>
                                                                 <div class="dx-field-value">
-                                                                    <div id="IT4_DateRange"></div>
+                                                                    <div id="EmpThankseid"></div>
                                                                 </div>
-                                                                <span id="error_IT4_DateRange" class="text-danger"></span>
+                                                               
                                                             </div>
                                                         </div>
-                                                        <div class="dx-fieldset" id="Models-container">
+                                                        <div class="dx-fieldset" id="Thanks-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">طراز</div>
+                                                                <div class="dx-field-label">رقم الكتاب </div>
                                                                 <div class="dx-field-value">
-                                                                    <div id="IT4_Model"></div>
+                                                                    <div id="EmpThanksdocno"></div>
                                                                 </div>
-                                                                <span id="error_IT4_Model" class="text-danger"></span>
+                                                         
                                                             </div>
                                                         </div>
-                                                        <div class="dx-fieldset" id="Models-container">
+                        
+                        
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Thanks-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">خيارات الفريم</div>
+                                                                <div class="dx-field-label"> نوع كتاب الشكر </div>
                                                                 <div class="dx-field-value">
-                                                                    <div id="IT4_FramesOptions"></div>
+                                                                    <div id="EmpThanksttype"></div>
                                                                 </div>
-                                                                <span id="error_IT4_FramesOptions"
-                                                                    class="text-danger"></span>
+                                                             
                                                             </div>
                                                         </div>
-
-                                                        <hr>
-                                                        <div id="btnSaveModels" style="float:right"></div>
-
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-
-
-                            </div>
-
-
-
-                            <div class="col-md-12 mt-5">
-                                <div class="card ItemFifthaction" id="ItemFifthaction">
-                                    <div class="card-header " style="background-color: #343A40">
-                                        <div id="btnCloseItemFifth" style="float:left"></div>
-                                        <h4 style="color: white;" id="card_ItemFifthtitle" class="card_ItemFifthtitle">
-                                        </h4>
-
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row ">
-                                            @csrf
-                                            <div class="col-md-6">
-                                                <div class="form-group ">
-                                                    <div class="ms-12 row pt-3">
-                                                    </div>
-                                                    <div class="dx-fieldset" id="ItemFifth-container" hidden>
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">IT5 ID</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="IT5_ID"></div>
+                                                        <div class="dx-fieldset" id="Thanks-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpThanksdocdate"></div>
+                                                                </div>
+                                                       
                                                             </div>
-                                                            <span id="error_IT5_ID" class="text-danger"></span>
                                                         </div>
+                        
+                        
                                                     </div>
-                                                    <div class="dx-fieldset" id="ItemFifth-container" hidden>
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">IT4 FK ID4</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="IT5_FK_IT4"></div>
+                        
+                                                    <div class="col-md-4">
+                        
+                                                        <div class="dx-fieldset" id="Thanks-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> السبب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpThanksreason"></div>
+                                                                </div>
+                                                          
                                                             </div>
-                                                            <span id="error_IT5_FK_IT4" class="text-danger"></span>
                                                         </div>
+                        
+                        
                                                     </div>
-                                                    <div class="dx-fieldset" id="ItemFifth-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">تاريخ الطراز</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="IT5_ModelDate"></div>
-                                                            </div>
-                                                            <span id="error_IT5_ModelDate" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dx-fieldset" id="ItemFifth-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">الطراز المطابق</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="IT5_MatchingModels"></div>
-                                                            </div>
-                                                            <span id="error_IT5_MatchingModels"
-                                                                class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dx-fieldset" id="ItemFifth-container">
-                                                        <div class="dx-field">
-                                                            <div class="dx-field-label">تفاصيل الطراز</div>
-                                                            <div class="dx-field-value">
-                                                                <div id="IT5_ModelOptions"></div>
-                                                            </div>
-                                                            <span id="error_IT5_ModelOptions" class="text-danger"></span>
-                                                        </div>
-                                                    </div>
-
+                        
                                                     <hr>
-                                                    <div id="btnSaveItemFifth" style="float:right"></div>
-
+                                                    
                                                 </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="tab-pane mt-3" id="EmpPromotions">
-                        <div class="row border g-0 rounded shadow-sm">
-                            <div class="col p-4">
-                                <div class="col-md-12 mt-2">
-                                    <div class="card " id="FifthCard">
-                                        <div class="card-header" style="background-color: #343A40">
-
-
-                                            <div id="btnAddBarcode" style="float:left"></div>
-                                            <h4 style="color: white;">الباركودات</h4>
-
-                                        </div>
-                                        <div class="card-body">
-
-                                            <div class="ItemsBarcodeDataGrid" id="ItemsBarcodeDataGrid">
-
-                                            </div>
-                                            <div id="pagerContainerItemsBarcode"></div>
-
-                                            <div id="context-menuItemsBarcode">
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mt-5">
-                                    <div class="card ItemsBarcodeaction" id="ItemsBarcodeaction">
-                                        <div class="card-header " style="background-color: #343A40">
-                                            <div id="btnCloseItemsBarcode" style="float:left"></div>
-                                            <h4 style="color: white;" id="card_ItemsBarcodetitle"
-                                                class="card_ItemsBarcodetitle">
-                                            </h4>
-
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row ">
-
-                                                @csrf
-                                                <div class="col-md-6">
-                                                    <div class="form-group ">
-                                                        <div class="ms-12 row pt-3">
-                                                        </div>
-                                                        <div class="dx-fieldset" id="ItemsBarcode-container" hidden>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-12">
+                        
+                                                        <div class="dx-fieldset" id="Thanks-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">ITB_ID</div>
+                                                                <div class="dx-field-label">ملاحظات </div>
                                                                 <div class="dx-field-value">
-                                                                    <div id="ITB_ID"></div>
+                                                                    <div id="EmpThanksnotes"></div>
                                                                 </div>
-                                                                <span id="error_ITB_ID" class="text-danger"></span>
+                                                              
                                                             </div>
                                                         </div>
-                                                        <div class="dx-fieldset" id="ItemsBarcode-container" hidden>
-                                                            <div class="dx-field">
-                                                                <div class="dx-field-label">ITB KF </div>
-                                                                <div class="dx-field-value">
-                                                                    <div id="ITB_FK_IT"></div>
-                                                                </div>
-                                                                <span id="error_ITB_FK_IT" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dx-fieldset" id="ItemsBarcode-container">
-                                                            <div class="dx-field">
-                                                                <div class="dx-field-label"> الباركود</div>
-                                                                <div class="dx-field-value">
-                                                                    <div id="ITB_Barcode"></div>
-                                                                </div>
-                                                                <span id="error_ITB_Barcode" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <hr>
-                                                        <div id="btnSaveBarcode" style="float:right"></div>
-
+                        
+                        
+                                                    </div>
+                        
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div id="EmpThanksimage-container" class="row">
+                                                        
                                                     </div>
                                                 </div>
-
-
+                                               
                                             </div>
                                         </div>
+                        
+                        
+                        
                                     </div>
-
-
+                                    
 
                                 </div>
 
 
                             </div>
-
-
                         </div>
-                    </div> --}}
+                    </div>
+                  
+                  
 
 
                 </div>
@@ -1258,7 +876,10 @@
 
 
     </div>
+   
     <script type="text/javascript" src="{{ url('assets/js/pro_js/Employee.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ url('assets/js/pro_js/Certifications.js') }}"></script> --}}
+    
 
 
 
@@ -1266,6 +887,7 @@
 
 
     <script>
-        // $("#Employeeaction").hide();
+        $("#EmpCertificationsaction").hide();
+        $("#EmpThanksaction").hide();
     </script>
 @endSection()

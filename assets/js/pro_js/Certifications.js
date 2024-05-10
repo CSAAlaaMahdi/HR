@@ -1,4 +1,5 @@
 Certifications_fetch();
+intializeComponent();
 Certifications_filldata();
 
 function Certifications_cleardata() {
@@ -39,12 +40,12 @@ function Certifications_UpdateOrCreate() {
         month: "2-digit",
         day: "2-digit",
     }).format(selectedDate); 
-    var selectedDate = $("#equivlent_date").dxDateBox("instance").option("value");
+    var selectedDate2 = $("#equivlent_date").dxDateBox("instance").option("value");
     var equivlent_date = new Intl.DateTimeFormat("en-US", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
-    }).format(selectedDate);
+    }).format(selectedDate2);
 
     var formData = new FormData();
 
@@ -415,7 +416,7 @@ function Certifications_fetch() {
                                                         $("#Guid")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value: response.Certification.cid,
+                                                            value: response.Certification.Guid,
                                                         });
                                                     $("#cyears")
                                                         .dxTextBox("instance")
@@ -973,6 +974,7 @@ $(document).ready(function () {
 });
 // End Button Save
 
+function intializeComponent(){
 // Begin Create Components of Store Page
 $(document).ready(function () {
     $(() => {
@@ -1009,13 +1011,43 @@ $(document).ready(function () {
         });
     });
     $(() => {
+        const now = new Date();
         $("#cerdate").dxDateBox({
-            
+            label: "Date",
+            labelMode: "floating",
+            type: "date",
+            value: now,
+            dispalyFormat: "dd/MM/yyyy",
+            onValueChanged: function (e) {
+                var selectedDate = e.value;
+                var formattedDate = new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                }).format(selectedDate);
+
+            },
+
         });
     });
     $(() => {
+        const now = new Date();
         $("#equivlent_date").dxDateBox({
-            
+            label: "Date",
+            labelMode: "floating",
+            type: "date",
+            value: now,
+            dispalyFormat: "dd/MM/yyyy",
+            onValueChanged: function (e) {
+                var selectedDate = e.value;
+                var formattedDate = new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                }).format(selectedDate);
+
+            },
+
         });
     });
     $(() =>{
@@ -1094,3 +1126,5 @@ $(document).ready(function () {
     })
 });
 //
+}
+

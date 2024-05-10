@@ -69,7 +69,6 @@ class CertificationsController extends Controller
                             ]
 
                         );
-
                     }
                 } else {
                     $uploadPath = 'assets/img/administrationImage';
@@ -103,16 +102,15 @@ class CertificationsController extends Controller
                     'gspetailest' => $request->post('gspetailest'),
                     'sspetailest' => $request->post('sspetailest'),
                     'cer_no' => $request->post('cer_no'),
-                    'cer_date' => $request->post('cer_date'),
+                    'cerdate' => $request->post('cerdate'),
                     'equivlent_no' => $request->post('equivlent_no'),
                     'equivlent_date' => $request->post('equivlent_date'),
                     'UserID' => $UserID
-        
+
                 ]
             );
-
         } else {
-           
+
             $Certification = Certifications::updateOrCreate(
                 [
                     'cid' => $cid,
@@ -128,15 +126,15 @@ class CertificationsController extends Controller
                     'gspetailest' => $request->post('gspetailest'),
                     'sspetailest' => $request->post('sspetailest'),
                     'cer_no' => $request->post('cer_no'),
-                    'cer_date' => $request->post('cer_date'),
+                    'cerdate' => $request->post('cerdate'),
                     'equivlent_no' => $request->post('equivlent_no'),
                     'equivlent_date' => $request->post('equivlent_date'),
                     'UserID' => $UserID
-        
+
                 ]
             );
         }
-        
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -163,7 +161,6 @@ class CertificationsController extends Controller
 
     public function update(Request $request)
     {
-      
     }
 
 
@@ -215,7 +212,7 @@ class CertificationsController extends Controller
             ->distinct()
             ->orderBy('certification')
             ->get();
-            $getEmployees = Employees::select('eid', 'fullname')
+        $getEmployees = Employees::select('eid', 'fullname')
             ->whereNotNull('fullname')
             ->where('fullname', '<>', '')
             ->distinct()

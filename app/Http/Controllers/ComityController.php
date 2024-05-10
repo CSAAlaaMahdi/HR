@@ -36,6 +36,10 @@ class ComityController extends Controller
     {
         $id = $request->post('id');
         $Guid = $request->post('Guid');
+        $eid = $request->post('eid');
+        $eidArray = explode(',', $eid);
+        dd($eidArray);
+        
         if ($Guid == 'null' || $Guid == '' || empty($Guid)) {
             $Guid = strtoupper(Uuid::uuid4()->toString());
         }
@@ -65,7 +69,6 @@ class ComityController extends Controller
                             ]
 
                         );
-
                     }
                 } else {
                     $uploadPath = 'assets/img/administrationImage';
@@ -95,13 +98,12 @@ class ComityController extends Controller
                     'docdate' => $request->post('docdate'),
                     'notes' => $request->post('notes'),
                     'UserID' => $UserID,
-           
-        
+
+
                 ]
             );
-
         } else {
-           
+
             $Comity = Comity::updateOrCreate(
                 [
                     'id' => $id,
@@ -113,12 +115,12 @@ class ComityController extends Controller
                     'docdate' => $request->post('docdate'),
                     'notes' => $request->post('notes'),
                     'UserID' => $UserID,
-           
-        
+
+
                 ]
             );
         }
-        
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -145,7 +147,6 @@ class ComityController extends Controller
 
     public function update(Request $request)
     {
-      
     }
 
 
@@ -167,9 +168,15 @@ class ComityController extends Controller
             ->distinct()
             ->orderBy('ctype')
             ->get();
-       
+        $getEmployees = Employees::select('eid', 'fullname')
+            ->whereNotNull('fullname')
+            ->where('fullname', '<>', '')
+            ->distinct()
+            ->orderBy('fullname')
+            ->get();
         $data = [
             'getComity' => $getComity,
+            'getEmployees' => $getEmployees,
 
 
         ];
