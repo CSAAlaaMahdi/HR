@@ -23,4 +23,9 @@ class Jobs extends Model
         'filepath',
         'UserID'
     ];
+
+    public function JobsAttachments()
+    {
+        return $this->hasMany(Attachments::class,'ParentGuid','Guid');
+    }
 }

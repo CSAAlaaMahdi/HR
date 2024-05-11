@@ -187,16 +187,31 @@ class EmployeesController extends Controller
     {
         $id = $request->input('eid');
         $Emp = Employees::with(
-            'EmpCertification.CerAttachments','EmpThanks.ThanksAttachments'
+            'EmpCertification.CerAttachments','EmpThanks.ThanksAttachments',
+            'EmpVacations.VacAttachments','EmpJobs.JobsAttachments',
+            'EmpPositions.PositionsAttachments','EmpSupervisors.SupervisorsAttachments',
 
             )->find($id);
-      
+
        foreach ($Emp->EmpCertification as  $value) {
          $value->eid = $Emp->fullname;
        }
        foreach ($Emp->EmpThanks as  $value) {
         $value->eid = $Emp->fullname;
       }
+      foreach ($Emp->EmpVacations as  $value) {
+        $value->eid = $Emp->fullname;
+      }
+      foreach ($Emp->EmpJobs as  $value) {
+        $value->eid = $Emp->fullname;
+      }
+      foreach ($Emp->EmpPositions as  $value) {
+        $value->eid = $Emp->fullname;
+      }
+      foreach ($Emp->EmpSupervisors as  $value) {
+        $value->eid = $Emp->fullname;
+      }
+      
         $Attachments = AttachmentsEmp::where('ParentGuid', $Emp->Guid)->get();
         $data = [
             'Emp' => $Emp,

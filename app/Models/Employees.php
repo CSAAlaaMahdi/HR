@@ -63,6 +63,20 @@ class Employees extends Model
     {
         return $this->hasMany(Thanks::class,'eid');
     }
-
-
+    public function EmpVacations()
+    {
+        return $this->hasMany(Vacations::class,'eid');
+    }
+    public function EmpJobs()
+    {
+        return $this->hasMany(Jobs::class,'eid');
+    }
+    public function EmpPositions()
+    {
+        return $this->hasMany(Positions::class,'eid');
+    }
+    public function EmpSupervisors()
+    {
+        return $this->hasMany(Supervisors::class,'eid');
+    }
 }

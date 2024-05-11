@@ -26,20 +26,9 @@ class Supervisors extends Model
 
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    // protected $hidden = [
-    //     'U_Password',
-
-    // ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    public function SupervisorsAttachments()
+    {
+        return $this->hasMany(Attachments::class,'ParentGuid','Guid');
+    }
 
 }

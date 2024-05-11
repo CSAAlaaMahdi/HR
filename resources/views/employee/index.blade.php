@@ -41,32 +41,19 @@
                     </li>
                     <li class="nav-item"><a href="#EmpCertification" class="nav-link" data-bs-toggle="tab">الشهادات</a>
                     </li>
-                    {{-- <li class="nav-item"><a href="#EmpGroups" class="nav-link " data-bs-toggle="tab">اللجان</a></li> --}}
                     <li class="nav-item"><a href="#EmpThanks" class="nav-link " data-bs-toggle="tab"> التشكرات</a>
                     </li>
                     <li class="nav-item"><a href="#EmpVacations" class="nav-link " data-bs-toggle="tab">الاجازات </a>
                     </li>
-                    <li class="nav-item"><a href="#EmpPromotions" class="nav-link " data-bs-toggle="tab">الترفيعات </a>
+                    <li class="nav-item"><a href="#EmpJobs" class="nav-link " data-bs-toggle="tab">الترفيعات </a>
                     </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">المناصب </a>
+                    <li class="nav-item"><a href="#EmpPositions" class="nav-link " data-bs-toggle="tab">مناصب وترقيات </a>
                     </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">الايفادات </a>
-                    </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">حركة الملاك </a>
-                    </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">الفعاليات </a>
-                    </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">الابحاث </a>
-                    </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">الاشراف </a>
-                    </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">الترقيات </a>
+                    <li class="nav-item"><a href="#EmpSupervisors" class="nav-link " data-bs-toggle="tab">الاشراف </a>
                     </li>
                     <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">الكتب والمقالات </a>
                     </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">تقارير واحصائيات
-                        </a>
-                    </li>
+
 
                 </ul>
                 <div class="tab-content ">
@@ -526,7 +513,8 @@
                                 <div class="col-md-12 mt-1">
                                     <div class="card EmpCertification" id="EmpCertification">
                                         <div class="card-header" style="background-color: #283741;text-align: center">
-                                                <h4 style="color: white;" id="card_EmpCertificationtitle" class="card_EmpCertificationtitle">الشهادات  </h4> 
+                                            <h4 style="color: white;" id="card_EmpCertificationtitle"
+                                                class="card_EmpCertificationtitle">الشهادات </h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="datagrid" id="EmpCertificationsdatagrid">
@@ -538,12 +526,13 @@
                                         <div class="card EmpCertificationsaction" id="EmpCertificationsaction">
                                             <div class="card-header " style="background-color: #343A40">
                                                 <div id="Empdanger-contained" style="float:left"></div>
-                                                <h4 style="color: white;" id="card_EmpCertificationstitle" class="card_EmpCertificationstitle"> </h4>
-                        
+                                                <h4 style="color: white;" id="card_EmpCertificationstitle"
+                                                    class="card_EmpCertificationstitle"> </h4>
+
                                             </div>
                                             <div class="card-body">
                                                 <div class="row ">
-                        
+
                                                     @csrf
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Certification-container" hidden>
@@ -552,7 +541,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCercid"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container" hidden>
@@ -561,17 +550,17 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCerGuid"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
-                        
+
                                                         <div class="dx-fieldset" id="Certification-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label">الاسم </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCereid"></div>
                                                                 </div>
-                                                               
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -580,7 +569,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCeruniversity"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -589,7 +578,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCergspetailest"></div>
                                                                 </div>
-                                                             
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -598,13 +587,13 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCercerdate"></div>
                                                                 </div>
-                                                             
+
                                                             </div>
                                                         </div>
-                        
+
                                                     </div>
-                        
-                        
+
+
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Certification-container">
                                                             <div class="dx-field">
@@ -612,7 +601,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCercertification"></div>
                                                                 </div>
-                                                      
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -621,7 +610,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCercountry"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -630,7 +619,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCersspetailest"></div>
                                                                 </div>
-                                                          
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -639,25 +628,25 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCerequivlent_no"></div>
                                                                 </div>
-                                                      
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
-                        
-                        
-                        
+
+
+
+
                                                     <div class="col-md-4">
-                        
+
                                                         <div class="dx-fieldset" id="Certification-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label">الكلية </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCercollege"></div>
                                                                 </div>
-                                                       
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -666,7 +655,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCercyears"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -675,7 +664,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCercer_no"></div>
                                                                 </div>
-                                                           
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Certification-container">
@@ -684,29 +673,29 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpCerequivlent_date"></div>
                                                                 </div>
-                                                           
+
                                                             </div>
                                                         </div>
-                        
+
                                                     </div>
-                        
+
                                                     <hr>
-                                                    
+
                                                 </div>
-                                              
+
                                                 <div class="col-md-12">
                                                     <div id="image-container" class="row">
-                                                        
+
                                                     </div>
                                                 </div>
-                                               
+
                                             </div>
                                         </div>
-                        
-                        
-                        
+
+
+
                                     </div>
-                                    
+
 
                                 </div>
 
@@ -721,7 +710,8 @@
                                 <div class="col-md-12 mt-1">
                                     <div class="card EmpThansk" id="EmpThansk">
                                         <div class="card-header" style="background-color: #283741;text-align: center">
-                                                <h4 style="color: white;" id="EmpThankstitle" class="EmpThankstitle">التشكرات  </h4> 
+                                            <h4 style="color: white;" id="EmpThankstitle" class="EmpThankstitle">التشكرات
+                                            </h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="datagrid" id="EmpThanksdatagrid">
@@ -733,12 +723,13 @@
                                         <div class="card EmpThanksaction" id="EmpThanksaction">
                                             <div class="card-header " style="background-color: #343A40">
                                                 <div id="EmpThanskdanger-contained" style="float:left"></div>
-                                                <h4 style="color: white;" id="card_EmpThankstitle" class="card_EmpThankstitle"> </h4>
-                        
+                                                <h4 style="color: white;" id="card_EmpThankstitle"
+                                                    class="card_EmpThankstitle"> </h4>
+
                                             </div>
                                             <div class="card-body">
                                                 <div class="row ">
-                        
+
                                                     @csrf
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Thanks-container" hidden>
@@ -747,7 +738,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThanksid"></div>
                                                                 </div>
-                                                               
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Thanks-container" hidden>
@@ -756,17 +747,17 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThanksGuid"></div>
                                                                 </div>
-                                                             
+
                                                             </div>
                                                         </div>
-                        
+
                                                         <div class="dx-fieldset" id="Thanks-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label">الاسم </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThankseid"></div>
                                                                 </div>
-                                                               
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Thanks-container">
@@ -775,11 +766,11 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThanksdocno"></div>
                                                                 </div>
-                                                         
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Thanks-container">
@@ -788,7 +779,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThanksttype"></div>
                                                                 </div>
-                                                             
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Thanks-container">
@@ -797,61 +788,61 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThanksdocdate"></div>
                                                                 </div>
-                                                       
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
+
                                                     <div class="col-md-4">
-                        
+
                                                         <div class="dx-fieldset" id="Thanks-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label"> السبب </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThanksreason"></div>
                                                                 </div>
-                                                          
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
+
                                                     <hr>
-                                                    
+
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="col-md-12">
-                        
+
                                                         <div class="dx-fieldset" id="Thanks-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label">ملاحظات </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpThanksnotes"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
+
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div id="EmpThanksimage-container" class="row">
-                                                        
+
                                                     </div>
                                                 </div>
-                                               
+
                                             </div>
                                         </div>
-                        
-                        
-                        
+
+
+
                                     </div>
-                                    
+
 
                                 </div>
 
@@ -859,27 +850,601 @@
                             </div>
                         </div>
                     </div>
-                  
-                  
+
+                    <div class="tab-pane mt-3" id="EmpVacations">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpVacations" id="EmpVacations">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpVacationstitle" class="EmpVacationstitle">
+                                                الاجازات </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpVacationsdatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpVacationsaction" id="EmpVacationsaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="EmpVacationsdanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpVacationstitle"
+                                                    class="card_EmpVacationstitle"> </h4>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row ">
+
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Vacations-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">id </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationsvcid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Vacations-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">Guid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationsGuid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="dx-fieldset" id="Vacations-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الاسم </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationseid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Vacations-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">عدد الايام </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationsnodays"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Vacations-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">نوع الاجازة</div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationsvtid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Vacations-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">رقم الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationsdocno"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-4">
+
+                                                        <div class="dx-fieldset" id="Vacations-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> تاريخ الاجازة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationsvdate"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Vacations-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpVacationsdocdate"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <hr>
+
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div id="EmpVacationsimage-container" class="row">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane mt-3" id="EmpJobs">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpJobs" id="EmpJobs">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpJobstitle" class="EmpJobstitle">الاجازات
+                                            </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpJobsdatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpJobsaction" id="EmpJobsaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="EmpJobsdanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpJobstitle"
+                                                    class="card_EmpJobstitle"> </h4>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row ">
+
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Job-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">jid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsjid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Job-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">Guid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsGuid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Job-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الاسم </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobseid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Job-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">المرحلة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsjstage"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Job-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsdocdate"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Job-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">العنوان الوظيفي </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsjtitle"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Job-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الحصول على الدرجة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsgetdate"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-4">
+
+                                                        <div class="dx-fieldset" id="Job-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الدرجة </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsjdegree"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Job-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">رقم الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpJobsdocno"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <hr>
+
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div id="EmpJobsimage-container" class="row">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane mt-3" id="EmpPositions">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpPositions" id="EmpPositions">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpPositionstitle" class="EmpPositionstitle">
+                                                المناصب والترقيات </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpPositionsdatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpPositionsaction" id="EmpPositionsaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="EmpPositionsdanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpPositionstitle"
+                                                    class="card_EmpPositionstitle"> </h4>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row ">
+
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Positions-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">id </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionsid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Positions-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">Guid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionsGuid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="dx-fieldset" id="Positions-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الاسم </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionseid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Positions-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">رقم الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionsdocno"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Positions-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> الى تاريخ </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionsdateto"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Positions-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">المنصب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionsptypeid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Positions-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionsdocdate"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-4">
+
+                                                        <div class="dx-fieldset" id="Positions-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> المكان </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionspname"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Positions-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> من تاريخ </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpPositionsdatefrom" class="text-danger">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                            <hr>
+
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div id="EmpPositionsimage-container" class="row">
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+                    <div class="tab-pane mt-3" id="EmpSupervisors">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpSupervisors" id="EmpSupervisors">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpSupervisorstitle"
+                                                class="EmpSupervisorstitle">الاشراف</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpSupervisorsdatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpSupervisorsaction" id="EmpSupervisorsaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="EmpSupervisorsdanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpSupervisorstitle"
+                                                    class="card_EmpSupervisorstitle"> </h4>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row ">
+
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Supervisors-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">id </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpSupervisorsid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Supervisors-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">Guid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpSupervisorsGuid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="dx-fieldset" id="Supervisors-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">اسم المشرف </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpSupervisorseid"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Supervisors-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">رقم الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpSupervisorsdocno"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Supervisors-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الدرجة او الشهادة
+                                                                </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpSupervisorssdeg"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Supervisors-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الكتاب </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpSupervisorsdocdate"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-md-4">
+
+                                                        <div class="dx-fieldset" id="Supervisors-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> الاسماء </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpSupervisorssname"></div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <hr>
+
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div id="EmpSupervisorsimage-container" class="row">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
 
 
 
-
-
-
             </div>
         </div>
-
-
-
     </div>
-   
+
     <script type="text/javascript" src="{{ url('assets/js/pro_js/Employee.js') }}"></script>
     {{-- <script type="text/javascript" src="{{ url('assets/js/pro_js/Certifications.js') }}"></script> --}}
-    
+
 
 
 
@@ -889,5 +1454,9 @@
     <script>
         $("#EmpCertificationsaction").hide();
         $("#EmpThanksaction").hide();
+        $("#EmpVacationsaction").hide();
+        $("#EmpJobsaction").hide();
+        $("#EmpPositionsaction").hide();
+        $("#EmpSupervisorsaction").hide();
     </script>
 @endSection()

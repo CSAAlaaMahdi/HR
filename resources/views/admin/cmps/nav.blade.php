@@ -140,7 +140,7 @@
             request()->routeIs('vacations.index') ||
             request()->routeIs('thanks.index')  ||
             request()->routeIs('children.index') ||
-            request()->routeIs('administrationOrders.index') 
+            request()->routeIs('administrationOrders.index')
                 ? 'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
@@ -148,7 +148,7 @@
                 request()->routeIs('vacations.index') ||
                 request()->routeIs('thanks.index') ||
                 request()->routeIs('children.index') ||
-                request()->routeIs('administrationOrders.index') 
+                request()->routeIs('administrationOrders.index')
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_management_64px.png') }}" alt=""
@@ -166,11 +166,11 @@
                         @if (request()->routeIs('jobs.index'))
                             <img src="{{ url('assets/img/navbar/icons8_businessman_64px_1.png') }}" alt=""
                                 style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">العناوين الوظيفية</p>
+                            <p style="margin-right:10px">الترفيعات </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_businessman_64px.png') }}" alt=""
                                 style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">العناوين الوظيفية</p>
+                            <p style="margin-right:10px">الترفيعات </p>
                         @endif
                     </a>
                 </li>
@@ -254,7 +254,7 @@
             request()->routeIs('positions.index') ||
             request()->routeIs('activity.index') ||
             request()->routeIs('researches.index') ||
-            request()->routeIs('articles.index') 
+            request()->routeIs('articles.index')
                 ? 'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
@@ -380,7 +380,7 @@
         </li>
         {{-- <li
             class="nav-item has-treeview {{ request()->routeIs('users.index') ||
-                 request()->routeIs('places.index') 
+                 request()->routeIs('places.index')
                 // request()->routeIs('frame.index') ||
                 // request()->routeIs('usersgroups.index') ||
                 // request()->routeIs('salesgroups.index') ||
@@ -391,7 +391,7 @@
                 : 'menu-close' }} ">
             <a href="#"
                 class="nav-link {{ request()->routeIs('users.index')   ||
-                     request()->routeIs('places.index') 
+                     request()->routeIs('places.index')
                     // request()->routeIs('frame.index') ||
                     // request()->routeIs('usersgroups.index') ||
                     // request()->routeIs('salesgroups.index') ||
