@@ -190,6 +190,7 @@ class EmployeesController extends Controller
             'EmpCertification.CerAttachments','EmpThanks.ThanksAttachments',
             'EmpVacations.VacAttachments','EmpJobs.JobsAttachments',
             'EmpPositions.PositionsAttachments','EmpSupervisors.SupervisorsAttachments',
+            'EmpArticles.ArticlesAttachments','EmpChildren.ChildrenAttachments'
 
             )->find($id);
 
@@ -209,6 +210,12 @@ class EmployeesController extends Controller
         $value->eid = $Emp->fullname;
       }
       foreach ($Emp->EmpSupervisors as  $value) {
+        $value->eid = $Emp->fullname;
+      }
+      foreach ($Emp->EmpArticles as  $value) {
+        $value->did = $Emp->fullname;
+      }
+      foreach ($Emp->EmpChildren as  $value) {
         $value->eid = $Emp->fullname;
       }
       

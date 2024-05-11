@@ -6,6 +6,8 @@ EmpVacationsComponent();
 EmpJobsComponent();
 EmpPositionsComponent();
 EmpSupervisorsComponent();
+EmpArticlesComponent();
+EmpChildrenComponent();
 
 function Employee_cleardata() {
     $("#SearchEmp").dxDropDownBox("instance").option("value",null);
@@ -2592,6 +2594,503 @@ function Employee_filldata() {
 
                                                 //#endregion
 
+                                                //#region Emp Articles
+                                                $(function () {
+                                                    const dataGrid = $("#EmpArticlesdatagrid").dxDataGrid({
+                                                        dataSource: response.Emp.emp_articles,
+                                                        keyExpr: "id",
+                                                        paging: {
+                                                            enabled: true,
+                                                            pageSize: 5, // Number of records per page
+                                                            pageIndex: 0, // Initially show the first page
+                                                        },
+                                                        pager: {
+                                                            showPageSizeSelector: true,
+                                                            showInfo: true,
+                                                            allowedPageSizes: [10, 25, 50, 100, "all"],
+                                                            showNavigationButtons: true,
+                                                        },
+                                                        remoteOperations: false,
+                                                        searchPanel: {
+                                                            visible: true,
+                                                            highlightCaseSensitive: true,
+                                                            width: 300,
+                                                        },
+                                                        focusedRowEnabled: true,
+                                                        filterRow: { visible: true },
+                                                        groupPanel: { visible: true },
+                                                        grouping: {
+                                                            autoExpandAll: false,
+                                                        },
+                                                        allowColumnReordering: true,
+                                                        rowAlternationEnabled: true,
+                                                        showBorders: true,
+                                                        columnChooser:{enabled : true},
+                                                        columns: [
+                                                            {
+                                                                dataField:"id",
+                                                                caption:"ت",
+                                                                visible:false,
+                                
+                                                            },
+                                                            {
+                                                                caption: "#",
+                                                                width: 100,
+                                                                cellTemplate: function (container, options) {
+                                                                    var imageUrl = 'assets/img/navbar/icons8_article_64px.png' ;
+                                
+                                                                    // Concatenate the base URL with the image filename
+                                                                    // var imageUrl = baseUrl + imageName;
+                                
+                                                                    var image = $("<img>")
+                                                                        .attr("src", imageUrl)
+                                                                        .css({
+                                                                            width: "40px",
+                                                                            height: "40px",
+                                                                        });
+                                                                    $(container).append(image);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "did",
+                                                                caption: " الاسم",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "article_title",
+                                                                caption: " عنوان المقال",
+                                                                alignment: "right",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "nof_aut",
+                                                                caption: "عددا لمشتركين  ",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "pub_date",
+                                                                caption: "تاريخ النشر   ",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "Alink",
+                                                                caption: "الرابط",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                            },
+                                                            {
+                                                                caption: "الحدث",
+                                                                width: 200,
+                                                                cellTemplate: function (container, options) {
+                                                                    var row = options.row.data;
+                                                                    var link1 = $("<div>").css({
+                                                                        "background-color": "##64DDBB",
+                                                                    });
+                                                                    link1.dxButton({
+                                                                        stylingMode: "contained",
+                                                                        type: "normal",
+                                                                        icon: "edit",
+                                                                        onClick() {
+                                                                            EmpPositionsClear();
+                                                                            var rowData = options.data;
+                                                                            const rowIndex = options.row.rowIndex;
+                                                                            let data = {
+                                                                                id: rowData.id,
+                                                                            };
+
+                                                                            $("#EmpArticlesid").dxTextBox("instance").option("value",rowData.id);
+                                                                            $("#EmpArticlesGuid").dxTextBox("instance").option("value",rowData.Guid);
+                                                                            $("#EmpArticlesdid").dxTextBox("instance").option("value",rowData.did);
+                                                                            $("#EmpArticlesarticle_title").dxTextBox("instance").option("value",rowData.article_title);
+                                                                            $("#EmpArticlesnof_aut").dxTextBox("instance").option("value",rowData.nof_aut);
+                                                                            $("#EmpArticlespub_date").dxTextBox("instance").option("value",rowData.pub_date);
+                                                                            $("#EmpArticlesAlink").dxTextBox("instance").option("value",rowData.Alink);
+
+                                                                            $('#EmpArticlesimage-container').empty();
+                                                                            let images = [];
+                                                                            $.each(response.Emp.emp_articles[rowIndex].articles_attachments, function(index, file) {
+                                                                                images.push(file['FilePath']);
+
+                                                                                $('#EmpArticlesimage-container').append(
+                                                                                    '<div class="image-preview">' +
+                                                                                    '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                                    '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                                    '</div>'
+                                                                                );
+                                                                            });
+
+
+
+                                                                                    var displaycard =
+                                                                                        document.getElementById(
+                                                                                            "EmpArticlesaction"
+                                                                                        );
+                                                                                    if (
+                                                                                        displaycard.style
+                                                                                            .display == "none"
+                                                                                    ) {
+                                                                                        document.getElementById(
+                                                                                            "card_EmpArticlestitle"
+                                                                                        ).innerText =
+                                                                                            rowData.did;
+                                                                                        displaycard.style.display =
+                                                                                            "block";
+                                                                                        document
+                                                                                            .getElementById(
+                                                                                                "card_EmpArticlestitle"
+                                                                                            )
+                                                                                            .scrollIntoView();
+                                                                                    } else {
+                                                                                        displaycard.style.display =
+                                                                                            "none";
+                                                                                        document.getElementById(
+                                                                                            "card_EmpArticlestitle"
+                                                                                        ).innerText = "";
+                                                                                        displaycard.style.display =
+                                                                                            "block";
+                                                                                        document.getElementById(
+                                                                                            "card_EmpArticlestitle"
+                                                                                        ).innerText =
+                                                                                            rowData.did;
+                                                                                        document
+                                                                                            .getElementById(
+                                                                                                "card_EmpArticlestitle"
+                                                                                            )
+                                                                                            .scrollIntoView();
+                                                                                    }
+                                                                            //     },
+                                                                        },
+                                                                    });
+
+                                                                    $(container).append(link1);
+                                                                },
+                                                            },
+                                                        ],
+                                                        onContentReady: function (e) {
+                                                            // Add custom class to the header panel
+                                                            e.element
+                                                                .find(".dx-datagrid-headers")
+                                                                .addClass("custom-header_Thanks");
+                                                        },
+                                                    });
+                                                });
+                                                //#endregion
+                                            
+                                                //#region Emp Family...
+                                                $(function () {
+                                                    const dataGrid = $("#EmpChildrendatagrid").dxDataGrid({
+                                                        dataSource: response.Emp.emp_children,
+                                                        keyExpr: "id",
+                                                        paging: {
+                                                            enabled: true,
+                                                            pageSize: 5, // Number of records per page
+                                                            pageIndex: 0, // Initially show the first page
+                                                        },
+                                                        pager: {
+                                                            showPageSizeSelector: true,
+                                                            showInfo: true,
+                                                            allowedPageSizes: [10, 25, 50, 100, "all"],
+                                                            showNavigationButtons: true,
+                                                        },
+                                                        remoteOperations: false,
+                                                        searchPanel: {
+                                                            visible: true,
+                                                            highlightCaseSensitive: true,
+                                                            width: 300,
+                                                        },
+                                                        focusedRowEnabled: true,
+                                                        filterRow: { visible: true },
+                                                        groupPanel: { visible: true },
+                                                        grouping: {
+                                                            autoExpandAll: false,
+                                                        },
+                                                        allowColumnReordering: true,
+                                                        rowAlternationEnabled: true,
+                                                        showBorders: true,
+                                                        columnChooser:{enabled : true},
+                                                        columns: [
+                                                            {
+                                                                dataField:"id",
+                                                                caption:"ت",
+                                                                visible:false,
+                                
+                                                            },
+                                                            {
+                                                                caption: "#",
+                                                                width: 100,
+                                                                cellTemplate: function (container, options) {
+                                                                    var imageUrl = 'assets/img/navbar/icons8_children_64px.png' ;
+                                
+                                                                    // Concatenate the base URL with the image filename
+                                                                    // var imageUrl = baseUrl + imageName;
+                                
+                                                                    var image = $("<img>")
+                                                                        .attr("src", imageUrl)
+                                                                        .css({
+                                                                            width: "40px",
+                                                                            height: "40px",
+                                                                        });
+                                                                    $(container).append(image);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "eid",
+                                                                caption: " اسم الموظف",
+                                                                visible:false,
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "chname",
+                                                                caption: " الاسم",
+                                                                alignment: "right",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "chsex",
+                                                                caption: "الجنس",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "csid",
+                                                                caption: "المهنة",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "chdob",
+                                                                caption: " تاريخ الولادة",
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                            },
+                                                            {
+                                                                caption: "الحدث",
+                                                                width: 200,
+                                                                cellTemplate: function (container, options) {
+                                                                    var row = options.row.data;
+                                                                    var link1 = $("<div>").css({
+                                                                        "background-color": "##64DDBB",
+                                                                    });
+                                                                    link1.dxButton({
+                                                                        stylingMode: "contained",
+                                                                        type: "normal",
+                                                                        icon: "edit",
+                                                                        onClick() {
+                                                                            EmpChildrenClear();
+                                                                            var rowData = options.data;
+                                                                            const rowIndex = options.row.rowIndex;
+                                                                            let data = {
+                                                                                id: rowData.id,
+                                                                            };
+
+                                                                            $("#EmpChildrenid").dxTextBox("instance").option("value",rowData.id);
+                                                                            $("#EmpChildrenGuid").dxTextBox("instance").option("value",rowData.Guid);
+                                                                            $("#EmpChildreneid").dxTextBox("instance").option("value",rowData.eid);
+                                                                            $("#EmpChildrenchname").dxTextBox("instance").option("value",rowData.chname);
+                                                                            $("#EmpChildrenchsex").dxTextBox("instance").option("value",rowData.chsex);
+                                                                            $("#EmpChildrenchdob").dxTextBox("instance").option("value",rowData.chdob);
+                                                                            $("#EmpChildrencsid").dxTextBox("instance").option("value",rowData.csid);
+
+                                                                            $('#EmpChildrenimage-container').empty();
+                                                                            let images = [];
+                                                                            $.each(response.Emp.emp_children[rowIndex].children_attachments, function(index, file) {
+                                                                                images.push(file['FilePath']);
+
+                                                                                $('#EmpChildrenimage-container').append(
+                                                                                    '<div class="image-preview">' +
+                                                                                    '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                                    '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                                    '</div>'
+                                                                                );
+                                                                            });
+
+
+
+                                                                                    var displaycard =
+                                                                                        document.getElementById(
+                                                                                            "EmpChildrenaction"
+                                                                                        );
+                                                                                    if (
+                                                                                        displaycard.style
+                                                                                            .display == "none"
+                                                                                    ) {
+                                                                                        document.getElementById(
+                                                                                            "card_EmpChildrentitle"
+                                                                                        ).innerText =
+                                                                                            rowData.eid;
+                                                                                        displaycard.style.display =
+                                                                                            "block";
+                                                                                        document
+                                                                                            .getElementById(
+                                                                                                "card_EmpChildrentitle"
+                                                                                            )
+                                                                                            .scrollIntoView();
+                                                                                    } else {
+                                                                                        displaycard.style.display =
+                                                                                            "none";
+                                                                                        document.getElementById(
+                                                                                            "card_EmpChildrentitle"
+                                                                                        ).innerText = "";
+                                                                                        displaycard.style.display =
+                                                                                            "block";
+                                                                                        document.getElementById(
+                                                                                            "card_EmpChildrentitle"
+                                                                                        ).innerText =
+                                                                                            rowData.eid;
+                                                                                        document
+                                                                                            .getElementById(
+                                                                                                "card_EmpChildrentitle"
+                                                                                            )
+                                                                                            .scrollIntoView();
+                                                                                    }
+                                                                            //     },
+                                                                        },
+                                                                    });
+
+                                                                    $(container).append(link1);
+                                                                },
+                                                            },
+                                                        ],
+                                                        onContentReady: function (e) {
+                                                            // Add custom class to the header panel
+                                                            e.element
+                                                                .find(".dx-datagrid-headers")
+                                                                .addClass("custom-header_Thanks");
+                                                        },
+                                                    });
+                                                });
+
+                                                //#endregion
                                             }
                                         });
                                     },
@@ -3547,5 +4046,153 @@ function EmpSupervisorsClear(){
     $("#EmpSupervisorssname").dxTextBox("instance").option("value","");
     $("#EmpSupervisorsdocno").dxTextBox("instance").option("value","");
     $("#EmpSupervisorsdocdate").dxTextBox("instance").option("value","");
+
+}
+
+function EmpArticlesComponent(){
+    $(() =>{
+        $("#EmpArticlesdanger-contained").dxButton({
+            stylingMode: "contained",
+            text: "اغلاق",
+            type: "danger",
+            icon: "close",
+            width: 120,
+            onClick() {
+                var displaycard = document.getElementById("EmpArticlesaction");
+                if (displaycard.style.display == "block") {
+                    document.getElementById("card_EmpArticlestitle").innerText = "";
+                    EmpArticlesClear();
+                    displaycard.style.display = "none";
+                    document.getElementById("EmpArticles").scrollIntoView();
+                }
+            },
+        });
+    })
+    $(() => {
+        $("#EmpArticlesid").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpArticlesGuid").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpArticlesdid").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpArticlesarticle_title").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpArticlesnof_aut").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpArticlespub_date").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpArticlesAlink").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+
+}
+function EmpArticlesClear(){
+    $("#EmpArticlesid").dxTextBox("instance").option("value","");
+    $("#EmpArticlesGuid").dxTextBox("instance").option("value","");
+    $("#EmpArticlesdid").dxTextBox("instance").option("value","");
+    $("#EmpArticlesarticle_title").dxTextBox("instance").option("value","");
+    $("#EmpArticlesnof_aut").dxTextBox("instance").option("value","");
+    $("#EmpArticlespub_date").dxTextBox("instance").option("value","");
+    $("#EmpArticlesAlink").dxTextBox("instance").option("value","");
+
+}
+
+function EmpChildrenComponent(){
+    $(() =>{
+        $("#EmpChildrendanger-contained").dxButton({
+            stylingMode: "contained",
+            text: "اغلاق",
+            type: "danger",
+            icon: "close",
+            width: 120,
+            onClick() {
+                var displaycard = document.getElementById("EmpChildrenaction");
+                if (displaycard.style.display == "block") {
+                    document.getElementById("card_EmpChildrentitle").innerText = "";
+                    EmpChildrenClear();
+                    displaycard.style.display = "none";
+                    document.getElementById("EmpChildren").scrollIntoView();
+                }
+            },
+        });
+    })
+    $(() => {
+        $("#EmpChildrenid").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpChildrenGuid").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpChildreneid").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpChildrenchname").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpChildrenchsex").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpChildrenchdob").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+    $(() => {
+        $("#EmpChildrencsid").dxTextBox({
+            placeholder: " ",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
+
+}
+function EmpChildrenClear(){
+    $("#EmpChildrenid").dxTextBox("instance").option("value","");
+    $("#EmpChildrenGuid").dxTextBox("instance").option("value","");
+    $("#EmpChildreneid").dxTextBox("instance").option("value","");
+    $("#EmpChildrenchname").dxTextBox("instance").option("value","");
+    $("#EmpChildrenchsex").dxTextBox("instance").option("value","");
+    $("#EmpChildrenchdob").dxTextBox("instance").option("value","");
+    $("#EmpChildrencsid").dxTextBox("instance").option("value","");
 
 }

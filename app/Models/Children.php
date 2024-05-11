@@ -24,7 +24,10 @@ class Children extends Model
         'filepath'
 
     ];
-
+    public function ChildrenAttachments()
+    {
+        return $this->hasMany(Attachments::class,'ParentGuid','Guid');
+    }
 
 
 }

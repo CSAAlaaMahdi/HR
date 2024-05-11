@@ -51,7 +51,9 @@
                     </li>
                     <li class="nav-item"><a href="#EmpSupervisors" class="nav-link " data-bs-toggle="tab">الاشراف </a>
                     </li>
-                    <li class="nav-item"><a href="#itemsBarcode" class="nav-link " data-bs-toggle="tab">الكتب والمقالات </a>
+                    <li class="nav-item"><a href="#EmpArticles" class="nav-link " data-bs-toggle="tab">الكتب والمقالات </a>
+                    </li>
+                    <li class="nav-item"><a href="#EmpChildren" class="nav-link " data-bs-toggle="tab">الاطفال</a>
                     </li>
 
 
@@ -1433,7 +1435,272 @@
                         </div>
                     </div>
 
+                    <div class="tab-pane mt-3" id="EmpArticles">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
 
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpArticles" id="EmpArticles">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpArticlestitle"
+                                                class="EmpArticlestitle">المقالات</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpArticlesdatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpArticlesaction" id="EmpArticlesaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="EmpArticlesdanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpArticlestitle"
+                                                    class="card_EmpArticlestitle"> </h4>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row ">
+
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Articles-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">id </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpArticlesid"></div>
+                                                                </div>
+                                                           
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Articles-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">Guid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpArticlesGuid"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                        
+                                                        <div class="dx-fieldset" id="Articles-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الاسم </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpArticlesdid"></div>
+                                                                </div>
+                                                           
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Articles-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ النشر  </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpArticlespub_date"></div>
+                                                                </div>
+                                                             
+                                                            </div>
+                                                        </div>
+                        
+                        
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Articles-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> عنوان المقال   </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpArticlesarticle_title"></div>
+                                                                </div>
+                                                           
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Articles-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">الرابط  </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpArticlesAlink"></div>
+                                                                </div>
+                                                           
+                                                            </div>
+                                                        </div>
+                        
+                        
+                                                    </div>
+                        
+                                                    <div class="col-md-4">
+                        
+                                                        <div class="dx-fieldset" id="Articles-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> عدد المشاركين </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpArticlesnof_aut"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                        
+                        
+                                                    </div>
+                        
+
+                                                    <hr>
+
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div id="EmpArticlesimage-container" class="row">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane mt-3" id="EmpChildren">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpChildren" id="EmpChildren">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpChildrentitle"
+                                                class="EmpChildrentitle">الاطفال</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpChildrendatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-5">
+                                        <div class="card EmpChildrenaction" id="EmpChildrenaction">
+                                            <div class="card-header " style="background-color: #343A40">
+                                                <div id="EmpChildrendanger-contained" style="float:left"></div>
+                                                <h4 style="color: white;" id="card_EmpChildrentitle"
+                                                    class="card_EmpChildrentitle"> </h4>
+
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row ">
+
+                                                    @csrf
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Children-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">id </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpChildrenid"></div>
+                                                                </div>
+                                                         
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Children-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">Guid </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpChildrenGuid"></div>
+                                                                </div>
+                                                              
+                                                            </div>
+                                                        </div>
+                        
+                                                        <div class="dx-fieldset" id="Children-container" hidden>
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">اسم الموظف </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpChildreneid"></div>
+                                                                </div>
+                                                             
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Children-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">تاريخ الولادة  </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpChildrenchdob"></div>
+                                                                </div>
+                                                          
+                                                            </div>
+                                                        </div>
+                        
+                        
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="dx-fieldset" id="Children-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> الاسم   </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpChildrenchname"></div>
+                                                                </div>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="dx-fieldset" id="Children-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label">المهنة  </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpChildrencsid"></div>
+                                                                </div>
+                                                        
+                                                            </div>
+                                                        </div>
+                        
+                        
+                                                    </div>
+                        
+                                                    <div class="col-md-4">
+                        
+                                                        <div class="dx-fieldset" id="Children-container">
+                                                            <div class="dx-field">
+                                                                <div class="dx-field-label"> الجنس </div>
+                                                                <div class="dx-field-value">
+                                                                    <div id="EmpChildrenchsex"></div>
+                                                                </div>
+                                                         
+                                                            </div>
+                                                        </div>
+                        
+                        
+                                                    </div>
+                        
+                        
+
+                                                    <hr>
+
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div id="EmpChildrenimage-container" class="row">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -1458,5 +1725,7 @@
         $("#EmpJobsaction").hide();
         $("#EmpPositionsaction").hide();
         $("#EmpSupervisorsaction").hide();
+        $("#EmpArticlesaction").hide();
+        $("#EmpChildrenaction").hide();
     </script>
 @endSection()

@@ -79,4 +79,12 @@ class Employees extends Model
     {
         return $this->hasMany(Supervisors::class,'eid');
     }
+    public function EmpArticles()
+    {
+        return $this->hasMany(Articles::class,'did');
+    }
+    public function EmpChildren()
+    {
+        return $this->hasMany(Children::class,'eid');
+    }
 }
