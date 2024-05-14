@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comity extends Model
+class EmployeeComity extends Model
 {
 
 
@@ -13,19 +13,11 @@ class Comity extends Model
      *
      * @var array<int, string>
      */
-    protected $table='comity_tb';
+    protected $table='emp_comity';
     protected $fillable = [
-        'id',
-        'Guid',
-        'ctype',
-        'docno',
-        'docdate',
-        'notes',
-        'filepath',
-        'UserID',
+     'id','cid','eid','UserID',
 
     ];
-
 
 
 }

@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="card-body">
-                        
+
                         <div class="datagrid" id="Comitydatagrid">
 
                         </div>
@@ -64,7 +64,7 @@
                                         <span id="error_ctype" class="text-danger"></span>
                                     </div>
                                 </div>
-                               
+
 
                             </div>
                             <div class="col-md-4">
@@ -77,7 +77,7 @@
                                         <span id="error_docno" class="text-danger"></span>
                                     </div>
                                 </div>
-                               
+
 
 
                             </div>
@@ -93,7 +93,7 @@
                                         <span id="error_docdate" class="text-danger"></span>
                                     </div>
                                 </div>
-                               
+
 
                             </div>
                             <div class="col-md-12">
@@ -107,13 +107,13 @@
                                     </div>
                                 </div>
                             </div>
-                                                       
-                           
+
+
                         </div>
                         <div class="col-md-12">
                             <div class="dx-fieldset" id="Comity-container">
                                 <div class="dx-field">
-                                    <div class="dx-field-label">اعضاء اللجنة</div>
+                                    <div class="dx-field-label">اضافة اعضاء اللجنة</div>
                                     <div class="dx-field-value">
                                         <div id="eid"></div>
                                     </div>
@@ -144,7 +144,7 @@
                                         <span id="error_FilePath" class="text-danger"></span>
                                     </div>
                                 </div>
-                               
+
 
                             </div>
                         </div>

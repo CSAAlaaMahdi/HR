@@ -1000,7 +1000,7 @@
                                 <div class="col-md-12 mt-1">
                                     <div class="card EmpJobs" id="EmpJobs">
                                         <div class="card-header" style="background-color:#283741;text-align: center">
-                                            <h4 style="color: white;" id="EmpJobstitle" class="EmpJobstitle">الاجازات
+                                            <h4 style="color: white;" id="EmpJobstitle" class="EmpJobstitle">الترفيعات
                                             </h4>
                                         </div>
                                         <div class="card-body">
@@ -1470,7 +1470,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesid"></div>
                                                                 </div>
-                                                           
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Articles-container" hidden>
@@ -1479,17 +1479,17 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesGuid"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
-                        
+
                                                         <div class="dx-fieldset" id="Articles-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label">الاسم </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesdid"></div>
                                                                 </div>
-                                                           
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Articles-container">
@@ -1498,11 +1498,11 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlespub_date"></div>
                                                                 </div>
-                                                             
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Articles-container">
@@ -1511,7 +1511,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesarticle_title"></div>
                                                                 </div>
-                                                           
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Articles-container">
@@ -1520,28 +1520,28 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesAlink"></div>
                                                                 </div>
-                                                           
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
+
                                                     <div class="col-md-4">
-                        
+
                                                         <div class="dx-fieldset" id="Articles-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label"> عدد المشاركين </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesnof_aut"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
+
 
                                                     <hr>
 
@@ -1603,7 +1603,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrenid"></div>
                                                                 </div>
-                                                         
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Children-container" hidden>
@@ -1612,17 +1612,17 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrenGuid"></div>
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
-                        
+
                                                         <div class="dx-fieldset" id="Children-container" hidden>
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label">اسم الموظف </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildreneid"></div>
                                                                 </div>
-                                                             
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Children-container">
@@ -1631,11 +1631,11 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrenchdob"></div>
                                                                 </div>
-                                                          
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Children-container">
@@ -1644,7 +1644,7 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrenchname"></div>
                                                                 </div>
-                                                               
+
                                                             </div>
                                                         </div>
                                                         <div class="dx-fieldset" id="Children-container">
@@ -1653,29 +1653,29 @@
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrencsid"></div>
                                                                 </div>
-                                                        
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
+
                                                     <div class="col-md-4">
-                        
+
                                                         <div class="dx-fieldset" id="Children-container">
                                                             <div class="dx-field">
                                                                 <div class="dx-field-label"> الجنس </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrenchsex"></div>
                                                                 </div>
-                                                         
+
                                                             </div>
                                                         </div>
-                        
-                        
+
+
                                                     </div>
-                        
-                        
+
+
 
                                                     <hr>
 

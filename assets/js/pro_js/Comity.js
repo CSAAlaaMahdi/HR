@@ -10,7 +10,7 @@ function Comity_cleardata() {
     $("#notes").dxTextArea("instance").option("value", "");
     $("#FilePath").dxFileUploader("instance").option("value","");
     $("#image-container").empty();
-   
+
 }
 
 function Comity_chechdata() {
@@ -21,7 +21,7 @@ function Comity_chechdata() {
         error_ctype = "";
         $("#error_ctype").text(error_ctype);
     }
-   
+
 }
 
 function Comity_UpdateOrCreate() {
@@ -128,10 +128,10 @@ function Comity_fetch() {
                                 width: 100,
                                 cellTemplate: function (container, options) {
                                     var imageUrl = 'assets/img/navbar/icons8_collaboration_64px.png' ;
-                            
+
                                     // Concatenate the base URL with the image filename
                                     // var imageUrl = baseUrl + imageName;
-                            
+
                                     var image = $("<img>")
                                         .attr("src", imageUrl)
                                         .css({
@@ -177,7 +177,7 @@ function Comity_fetch() {
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
-                                    
+
                                 },
                             },
                             {
@@ -265,12 +265,30 @@ function Comity_fetch() {
                                                         .option({
                                                             value: new Date(response.Comity.docdate)
                                                         });
-                                                  
+
                                                     $("#notes")
                                                         .dxTextArea("instance")
                                                         .option({
                                                             value:response.Comity.notes
                                                         });
+                                                    let eidValue = [];
+                                                    let eidValueName = [];
+                                                    $.each(response.EmpComity, function (index, value) {
+                                                        eidValue.push(Number(value['eid']));
+                                                        eidValueName.push(value['EmpName']);
+                                                    });
+                                                    $("#eid")
+                                                    .dxDropDownBox("instance")
+                                                    .option({
+                                                        value: eidValue
+                                                    });
+                                                    let eidValueNameString = eidValueName.join('\n');
+                                                    $("#ComityEmployees").dxTextArea('instance').option(
+                                                        {
+                                                            value:eidValueNameString
+                                                        }
+                                                    )
+
                                                         $('#image-container').empty();
                                                         let images = [];
                                                         $.each(response.Attachments, function(index, file) {
@@ -465,7 +483,7 @@ function Comity_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     ctype: data.text
                                 };
@@ -473,12 +491,12 @@ function Comity_filldata() {
                                 response.getComity.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
-              
+
                 $(() => {
                     let dataGrid;
                     $("#eid").dxDropDownBox({
@@ -502,7 +520,7 @@ function Comity_filldata() {
                                         caption:"الاسم "
 
                                     },
-                                
+
                                 ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10 },
@@ -528,7 +546,15 @@ function Comity_filldata() {
                             dataGrid = $dataGrid.dxDataGrid("instance");
 
                             e.component.on("valueChanged", (args) => {
-                                dataGrid.selectRows(args.value.map(eid => ({ eid })), true);
+                                if(Array.isArray(args.value)) {
+                                    dataGrid.selectRows(args.value.map(eid => ({ eid })), true);
+                                } else if (args.value) {
+                                    // If it's not an array but has a value, create an array with that value
+                                    dataGrid.selectRows([{ eid: args.value }], true);
+                                } else {
+                                    // If it's null or undefined, clear the selection
+                                    dataGrid.clearSelection();
+                                }
 
                                 e.component.close();
                             });
@@ -539,8 +565,8 @@ function Comity_filldata() {
 
                     });
                 });
-               
-               
+
+
             },
         });
     });
@@ -578,11 +604,11 @@ $(document).ready(function () {
                 Comity_cleardata();
                 // Comity_setStCode();
                 displaycard.style.display = "none";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("btnSave").scrollIntoView();
             }else{
                 document.getElementById("card_Comitytitle").innerText ="اضافة لجنة";
                 displaycard.style.display = "block";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("btnSave").scrollIntoView();
 
             }
         },
@@ -597,8 +623,8 @@ $(document).ready(function () {
         icon: "check",
         width: 120,
         onClick() {
-           
-           
+
+
             Comity_chechdata();
             if(
                 error_ctype != ""
@@ -633,10 +659,10 @@ $(document).ready(function () {
             inputAttr: {  style:"font-size:13px", },
         });
     });
-    
+
     $(() => {
         $("#docdate").dxDateBox({
-            
+
         });
     });
     $(() => {
@@ -735,6 +761,6 @@ $(document).ready(function () {
 
         });
     })
-    
+
 });
 //
