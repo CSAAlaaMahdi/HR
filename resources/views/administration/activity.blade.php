@@ -139,6 +139,50 @@
                         </div>
                     </div>
                     <div class="col-md-12">
+                        <div class="dx-fieldset" id="Comity-container">
+                            <div class="dx-field">
+                                <div class="dx-field-label">(القاء) اضافة اسماء المشاركين</div>
+                                <div class="dx-field-value">
+                                    <div id="eid"></div>
+                                </div>
+                                <span id="error_eid" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="dx-fieldset" id="Comity-container">
+                            <div class="dx-field">
+                                <div class="dx-field-label"> الاسماء  </div>
+                                <div class="dx-field-value">
+                                    <div id="EmpNames"></div>
+                                </div>
+                                <span id="error_EmpNames" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="dx-fieldset" id="Comity-container">
+                            <div class="dx-field">
+                                <div class="dx-field-label"> اضافة اسماء الحضور</div>
+                                <div class="dx-field-value">
+                                    <div id="eid2"></div>
+                                </div>
+                                <span id="error_eid2" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="dx-fieldset" id="Comity-container">
+                            <div class="dx-field">
+                                <div class="dx-field-label">  الحضور  </div>
+                                <div class="dx-field-value">
+                                    <div id="EmpNames2"></div>
+                                </div>
+                                <span id="error_EmpNames2" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="col-md-4">
 
                             <div class="dx-fieldset" id="Activity-container">

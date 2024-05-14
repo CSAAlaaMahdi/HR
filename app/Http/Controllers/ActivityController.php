@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Attachments;
 use App\Models\Employees;
+use App\Models\EmployeesActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -37,16 +38,260 @@ class ActivityController extends Controller
     {
         $aid = $request->post('aid');
         $Guid = $request->post('Guid');
+        $eid = $request->post('eid');
+        $eidArray = explode(',', $eid);
+        $eid2 = $request->post('eid2');
+        $eidArray2 = explode(',', $eid2);
         if ($Guid == 'null' || $Guid == '' || empty($Guid)) {
             $Guid = strtoupper(Uuid::uuid4()->toString());
         }
         $UserID = session('id');
-        if ($request->hasFile('image')) {
-            $images = $request->file('image');
-            foreach ($images as $image) {
 
-                $imageName =  $image->getClientOriginalName();
-                if ($aid != "") {
+        if ($aid != "") {
+            if ($request->hasFile('image')) {
+                $images = $request->file('image');
+                foreach ($images as $image) {
+                    $imageName = $image->getClientOriginalName();
+                    $checkImage = Attachments::where([
+                        ['ParentGuid', $Guid],
+                        ['FilePath', $imageName]
+                    ])->count('id');
+                    if ($checkImage > 0) {
+                    } else {
+                        $uploadPath = 'assets/img/administrationImage';
+                        $newImageName = Str::random(20) . '.' . $imageName;
+                        $image->move($uploadPath, $newImageName);
+                        $Attachments = Attachments::updateOrCreate(
+                            [
+                                'ParentGuid' => $Guid,
+                                'DocTitle' => $request->post('DocTitle'),
+                                'FilePath' => $newImageName,
+                                'UserID' => $UserID,
+
+                            ]
+
+                        );
+                        if (count($eidArray) > 0) {
+                            $getEmpActivity = EmployeesActivity::Where('aid', '=', $aid)->get() != null ? EmployeesActivity::Where('aid', '=', $aid)->get() : null;
+                            if ($getEmpActivity != null) {
+                                EmployeesActivity::where('aid', '=', $aid)->delete();
+                                foreach ($eidArray as $value) {
+
+                                    $EmpActivity = EmployeesActivity::updateOrCreate(
+                                        [
+                                            'eaid' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                        ],
+                                        [
+                                            'aid' => $aid,
+                                            'eid' => $value,
+                                            'atype' => 'القاء',
+                                            'UserID' => $UserID
+                                        ]
+                                    );
+                                }
+                            } else {
+                                foreach ($eidArray as $value) {
+
+                                    $EmpActivity = EmployeesActivity::updateOrCreate(
+                                        [
+                                            'id' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                        ],
+                                        [
+                                            'aid' => $aid,
+                                            'eid' => $value,
+                                            'atype' => 'القاء',
+                                            'UserID' => $UserID
+                                        ]
+                                    );
+                                }
+                            }
+                        }
+                        if (count($eidArray2) > 0) {
+                            $getEmpActivity = EmployeesActivity::Where('aid', '=', $aid)->get() != null ? EmployeesActivity::Where('aid', '=', $aid)->get() : null;
+                            if ($getEmpActivity != null) {
+                                EmployeesActivity::where('aid', '=', $aid)->delete();
+                                foreach ($eidArray2 as $value2) {
+
+                                    $EmpActivity = EmployeesActivity::updateOrCreate(
+                                        [
+                                            'eaid' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                        ],
+                                        [
+                                            'aid' => $aid,
+                                            'eid' => $value2,
+                                            'atype' => 'حضور',
+                                            'UserID' => $UserID
+                                        ]
+                                    );
+                                }
+                            } else {
+                                foreach ($eidArray2 as $value2) {
+
+                                    $EmpActivity = EmployeesActivity::updateOrCreate(
+                                        [
+                                            'id' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                        ],
+                                        [
+                                            'aid' => $aid,
+                                            'eid' => $value2,
+                                            'atype' => 'حضور',
+                                            'UserID' => $UserID
+                                        ]
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (count($eidArray) > 0) {
+                    $getEmpActivity = EmployeesActivity::Where([['aid', $aid], ['atype', '=', 'القاء']])->get() != null ? EmployeesActivity::Where([['aid', $aid], ['atype', '=', 'القاء']])->get() : null;
+                    if ($getEmpActivity != null) {
+                        EmployeesActivity::where([['aid', $aid], ['atype', '=', 'القاء']])->delete();
+                        foreach ($eidArray as $value) {
+
+                            $EmpActivity = EmployeesActivity::updateOrCreate(
+                                [
+                                    'eaid' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                ],
+                                [
+                                    'aid' => $aid,
+                                    'eid' => $value,
+                                    'atype' => 'القاء',
+                                    'UserID' => $UserID
+                                ]
+                            );
+                        }
+                    } else {
+                        foreach ($eidArray as $value) {
+
+                            $EmpActivity = EmployeesActivity::updateOrCreate(
+                                [
+                                    'eaid' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                ],
+                                [
+                                    'aid' => $aid,
+                                    'eid' => $value,
+                                    'atype' => 'القاء',
+                                    'UserID' => $UserID
+                                ]
+                            );
+                        }
+                    }
+                }
+                if (count($eidArray2) > 0) {
+                    $getEmpActivity = EmployeesActivity::Where([['aid', $aid], ['atype', '=', 'حضور']])->get() != null ? EmployeesActivity::Where([['aid', $aid], ['atype', '=', 'حضور']])->get() : null;
+                    if ($getEmpActivity != null) {
+                        EmployeesActivity::where([['aid', $aid], ['atype', '=', 'حضور']])->delete();
+                        foreach ($eidArray2 as $value2) {
+
+                            $EmpActivity = EmployeesActivity::updateOrCreate(
+                                [
+                                    'eaid' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                ],
+                                [
+                                    'aid' => $aid,
+                                    'eid' => $value2,
+                                    'atype' => 'حضور',
+                                    'UserID' => $UserID
+                                ]
+                            );
+                        }
+                    } else {
+                        foreach ($eidArray2 as $value2) {
+
+                            $EmpActivity = EmployeesActivity::updateOrCreate(
+                                [
+                                    'id' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1,
+                                ],
+                                [
+                                    'aid' => $aid,
+                                    'eid' => $value2,
+                                    'atype' => 'حضور',
+                                    'UserID' => $UserID
+                                ]
+                            );
+                        }
+                    }
+                }
+            }
+            $Activity = Activity::updateOrCreate(
+                [
+                    'aid' => $aid,
+                ],
+                [
+                    'Guid' => $Guid,
+                    'act_id' => $request->post('act_id'),
+                    'Aname' => $request->post('Aname'),
+                    'Place' => $request->post('Place'),
+                    'ActDate' => $request->post('ActDate'),
+                    'NoDays' => $request->post('NoDays'),
+                    'Participants' => $request->post('Participants'),
+                    'Notes' => $request->post('Notes'),
+                    'UserID' => $UserID,
+
+
+                ]
+            );
+        } else {
+            $newID = Activity::max('aid') > 0 ? Activity::max('aid') + 1 : 1;
+
+            $Activity = Activity::updateOrCreate(
+                [
+                    'aid' => $newID,
+                ],
+                [
+                    'Guid' => $Guid,
+                    'act_id' => $request->post('act_id'),
+                    'Aname' => $request->post('Aname'),
+                    'Place' => $request->post('Place'),
+                    'ActDate' => $request->post('ActDate'),
+                    'NoDays' => $request->post('NoDays'),
+                    'Participants' => $request->post('Participants'),
+                    'Notes' => $request->post('Notes'),
+                    'UserID' => $UserID,
+
+
+                ]
+            );
+            if ($Activity) {
+                if (count($eidArray) > 0) {
+                    foreach ($eidArray as $value) {
+
+                        $EmpActivity = EmployeesActivity::updateOrCreate(
+                            [
+                                'eaid' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1
+                            ],
+                            [
+                                'aid' => $newID,
+                                'eid' => $value,
+                                'atype' => 'القاء',
+                                'UserID' => $UserID
+                            ]
+                        );
+                    }
+                }
+                if (count($eidArray2) > 0) {
+                    foreach ($eidArray2 as $value2) {
+
+                        $EmpActivity = EmployeesActivity::updateOrCreate(
+                            [
+                                'eaid' => EmployeesActivity::max('eaid') > 0 ? EmployeesActivity::max('eaid') + 1 : 1
+                            ],
+                            [
+                                'aid' => $newID,
+                                'eid' => $value2,
+                                'atype' => 'حضور',
+                                'UserID' => $UserID
+                            ]
+                        );
+                    }
+                }
+            }
+            if ($request->hasFile('image')) {
+                $images = $request->file('image');
+                foreach ($images as $image) {
+                    $imageName = $image->getClientOriginalName();
                     $checkImage = Attachments::where([
                         ['ParentGuid', $Guid],
                         ['FilePath', $imageName]
@@ -67,62 +312,93 @@ class ActivityController extends Controller
 
                         );
                     }
-                } else {
-                    $uploadPath = 'assets/img/administrationImage';
-                    $newImageName = Str::random(20) . '.' . $imageName;
-                    $image->move($uploadPath, $newImageName);
-                    $Attachments = Attachments::updateOrCreate(
-                        [
-                            'ParentGuid' => $Guid,
-                            'DocTitle' => $request->post('DocTitle'),
-                            'FilePath' => $newImageName,
-                            'UserID' => $UserID,
-
-
-                        ]
-
-                    );
                 }
             }
-            $Job = Activity::updateOrCreate(
-                [
-                    'aid' => $aid,
-                ],
-                [
-                    'Guid' => $Guid,
-                    'act_id' => $request->post('act_id'),
-                    'Aname' => $request->post('Aname'),
-                    'Place' => $request->post('Place'),
-                    'ActDate' => $request->post('ActDate'),
-                    'NoDays' => $request->post('NoDays'),
-                    'Participants' => $request->post('Participants'),
-                    'Notes' => $request->post('Notes'),
-                    'UserID' => $UserID,
-
-
-                ]
-            );
-        } else {
-
-            $Job = Activity::updateOrCreate(
-                [
-                    'aid' => $aid,
-                ],
-                [
-                    'Guid' => $Guid,
-                    'act_id' => $request->post('act_id'),
-                    'Aname' => $request->post('Aname'),
-                    'Place' => $request->post('Place'),
-                    'ActDate' => $request->post('ActDate'),
-                    'NoDays' => $request->post('NoDays'),
-                    'Participants' => $request->post('Participants'),
-                    'Notes' => $request->post('Notes'),
-                    'UserID' => $UserID,
-
-
-                ]
-            );
         }
+
+
+        // if ($request->hasFile('image')) {
+        //     $images = $request->file('image');
+        //     foreach ($images as $image) {
+
+        //         $imageName =  $image->getClientOriginalName();
+        //         if ($aid != "") {
+        //             $checkImage = Attachments::where([
+        //                 ['ParentGuid', $Guid],
+        //                 ['FilePath', $imageName]
+        //             ])->count('id');
+        //             if ($checkImage > 0) {
+        //             } else {
+        //                 $uploadPath = 'assets/img/administrationImage';
+        //                 $newImageName = Str::random(20) . '.' . $imageName;
+        //                 $image->move($uploadPath, $newImageName);
+        //                 $Attachments = Attachments::updateOrCreate(
+        //                     [
+        //                         'ParentGuid' => $Guid,
+        //                         'DocTitle' => $request->post('DocTitle'),
+        //                         'FilePath' => $newImageName,
+        //                         'UserID' => $UserID,
+
+        //                     ]
+
+        //                 );
+        //             }
+        //         } else {
+        //             $uploadPath = 'assets/img/administrationImage';
+        //             $newImageName = Str::random(20) . '.' . $imageName;
+        //             $image->move($uploadPath, $newImageName);
+        //             $Attachments = Attachments::updateOrCreate(
+        //                 [
+        //                     'ParentGuid' => $Guid,
+        //                     'DocTitle' => $request->post('DocTitle'),
+        //                     'FilePath' => $newImageName,
+        //                     'UserID' => $UserID,
+
+
+        //                 ]
+
+        //             );
+        //         }
+        //     }
+        //     $Job = Activity::updateOrCreate(
+        //         [
+        //             'aid' => $aid,
+        //         ],
+        //         [
+        //             'Guid' => $Guid,
+        //             'act_id' => $request->post('act_id'),
+        //             'Aname' => $request->post('Aname'),
+        //             'Place' => $request->post('Place'),
+        //             'ActDate' => $request->post('ActDate'),
+        //             'NoDays' => $request->post('NoDays'),
+        //             'Participants' => $request->post('Participants'),
+        //             'Notes' => $request->post('Notes'),
+        //             'UserID' => $UserID,
+
+
+        //         ]
+        //     );
+        // } else {
+
+        //     $Job = Activity::updateOrCreate(
+        //         [
+        //             'aid' => $aid,
+        //         ],
+        //         [
+        //             'Guid' => $Guid,
+        //             'act_id' => $request->post('act_id'),
+        //             'Aname' => $request->post('Aname'),
+        //             'Place' => $request->post('Place'),
+        //             'ActDate' => $request->post('ActDate'),
+        //             'NoDays' => $request->post('NoDays'),
+        //             'Participants' => $request->post('Participants'),
+        //             'Notes' => $request->post('Notes'),
+        //             'UserID' => $UserID,
+
+
+        //         ]
+        //     );
+        // }
 
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
@@ -133,10 +409,26 @@ class ActivityController extends Controller
         $aid = $request->input('aid');
         $Activity = Activity::find($aid);
         $Attachments = Attachments::where('ParentGuid', $Activity->Guid)->get();
+        $EmpActivity = EmployeesActivity::where([['aid', $aid], ['atype', '=', 'القاء']])->get();
+        $EmpActivity2 = EmployeesActivity::where([['aid', $aid], ['atype', '=', 'القاء']])->get()
+            ->map(function ($item) {
+                $item['eid'] = Employees::find($item['eid'])->fullname;
+                return $item;
+            });
+        $EmpActivity3 = EmployeesActivity::where([['aid', $aid], ['atype', '=', 'حضور']])->get();
+        $EmpActivity4 = EmployeesActivity::where([['aid', $aid], ['atype', '=', 'حضور']])->get()
+            ->map(function ($item) {
+                $item['eid'] = Employees::find($item['eid'])->fullname;
+                return $item;
+            });
 
         $data = [
             'Activity' => $Activity,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'EmpActivity' => $EmpActivity,
+            'EmpActivity2' => $EmpActivity2,
+            'EmpActivity3' => $EmpActivity3,
+            'EmpActivity4' => $EmpActivity4,
         ];
         return response()->json($data);
     }
@@ -172,8 +464,15 @@ class ActivityController extends Controller
             ->distinct()
             ->orderBy('act_id')
             ->get();
+        $getEmployees = Employees::select('eid', 'fullname')
+            ->whereNotNull('fullname')
+            ->where('fullname', '<>', '')
+            ->distinct()
+            ->orderBy('fullname')
+            ->get();
         $data = [
             'getAct_ID' => $getAct_ID,
+            'getEmployees' => $getEmployees,
 
 
         ];

@@ -116,6 +116,24 @@ function Comity_fetch() {
                         rowAlternationEnabled: true,
                         showBorders: true,
                         columnChooser: {enabled: true},
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: false,
+                          },
+                          onExporting(e) {
+                            const workbook = new ExcelJS.Workbook();
+                            const worksheet = workbook.addWorksheet('Employees');
+
+                            DevExpress.excelExporter.exportDataGrid({
+                              component: e.component,
+                              worksheet,
+                              autoFilterEnabled: true,
+                            }).then(() => {
+                              workbook.xlsx.writeBuffer().then((buffer) => {
+                                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                              });
+                            });
+                          },
                         columns: [
                             {
                                 dataField:"id",
@@ -239,7 +257,7 @@ function Comity_fetch() {
                                                 url: "comity/show",
                                                 data: data,
                                                 success: function (response) {
-                                                    console.log(response);
+                                                    
                                                     $("#id")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -275,7 +293,9 @@ function Comity_fetch() {
                                                     let eidValueName = [];
                                                     $.each(response.EmpComity, function (index, value) {
                                                         eidValue.push(Number(value['eid']));
-                                                        eidValueName.push(value['EmpName']);
+                                                    });
+                                                    $.each(response.EmpComity2, function (index, value2) {
+                                                        eidValueName.push(value2['eid']);
                                                     });
                                                     $("#eid")
                                                     .dxDropDownBox("instance")

@@ -133,6 +133,24 @@ function Positions_fetch() {
                         rowAlternationEnabled: true,
                         showBorders: true,
                         columnChooser:{enabled:true},
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: false,
+                          },
+                          onExporting(e) {
+                            const workbook = new ExcelJS.Workbook();
+                            const worksheet = workbook.addWorksheet('Employees');
+
+                            DevExpress.excelExporter.exportDataGrid({
+                              component: e.component,
+                              worksheet,
+                              autoFilterEnabled: true,
+                            }).then(() => {
+                              workbook.xlsx.writeBuffer().then((buffer) => {
+                                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                              });
+                            });
+                          },
                         columns: [
                             {
                                 dataField:"id",
@@ -535,7 +553,7 @@ function Positions_filldata() {
             success: function (response) {
                 $(() => {
                     $('#ptypeid').dxSelectBox({
-                        dataSource: response.getPTypeID,
+                        dataSource: response.getPType,
                         inputAttr: {style:"font-size:13px", },
                         placeholder:"  المنصب",
                         searchEnabled:true,
@@ -556,7 +574,7 @@ function Positions_filldata() {
                                     ptypeid: data.text
                                 };
 
-                                response.getPTypeID.push(newItem);
+                                response.getPType.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
 

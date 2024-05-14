@@ -130,6 +130,24 @@ function AdministrationOrders_fetch() {
                         rowAlternationEnabled: true,
                         showBorders: true,
                         columnChooser:{enabled:true},
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: false,
+                          },
+                          onExporting(e) {
+                            const workbook = new ExcelJS.Workbook();
+                            const worksheet = workbook.addWorksheet('Employees');
+
+                            DevExpress.excelExporter.exportDataGrid({
+                              component: e.component,
+                              worksheet,
+                              autoFilterEnabled: true,
+                            }).then(() => {
+                              workbook.xlsx.writeBuffer().then((buffer) => {
+                                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                              });
+                            });
+                          },
                         columns: [
                             {
                                 dataField:"id",

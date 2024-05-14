@@ -84,7 +84,8 @@ class ComityController extends Controller
                                         ],
                                         [
                                             'cid' => $id,
-                                            'eid' => $value
+                                            'eid' => $value,
+                                            'UserID' => $UserID
                                         ]
                                     );
                                 }
@@ -97,7 +98,8 @@ class ComityController extends Controller
                                         ],
                                         [
                                             'cid' => $id,
-                                            'eid' => $value
+                                            'eid' => $value,
+                                            'UserID' => $UserID
                                         ]
                                     );
                                 }
@@ -119,7 +121,8 @@ class ComityController extends Controller
                                 ],
                                 [
                                     'cid' => $id,
-                                    'eid' => $value
+                                    'eid' => $value,
+                                    'UserID' => $UserID
                                 ]
                             );
                         }
@@ -132,7 +135,8 @@ class ComityController extends Controller
                                 ],
                                 [
                                     'cid' => $id,
-                                    'eid' => $value
+                                    'eid' => $value,
+                                    'UserID' => $UserID
                                 ]
                             );
                         }
@@ -182,6 +186,7 @@ class ComityController extends Controller
                             [
                                 'cid' => $newID,
                                 'eid' => $value,
+                                'UserID' => $UserID
                             ]
                         );
                     }
@@ -216,83 +221,7 @@ class ComityController extends Controller
             }
         }
 
-        // if ($request->hasFile('image')) {
-        //     $images = $request->file('image');
-        //     foreach ($images as $image) {
-
-        //         $imageName =  $image->getClientOriginalName();
-        //         if ($id != "") {
-        //             $checkImage = Attachments::where([
-        //                 ['ParentGuid', $Guid],
-        //                 ['FilePath', $imageName]
-        //             ])->count('id');
-        //             if ($checkImage > 0) {
-        //             } else {
-        //                 $uploadPath = 'assets/img/administrationImage';
-        //                 $newImageName = Str::random(20) . '.' . $imageName;
-        //                 $image->move($uploadPath, $newImageName);
-        //                 $Attachments = Attachments::updateOrCreate(
-        //                     [
-        //                         'ParentGuid' => $Guid,
-        //                         'DocTitle' => $request->post('DocTitle'),
-        //                         'FilePath' => $newImageName,
-        //                         'UserID' => $UserID,
-
-        //                     ]
-
-        //                 );
-        //             }
-        //         } else {
-        //             $uploadPath = 'assets/img/administrationImage';
-        //             $newImageName = Str::random(20) . '.' . $imageName;
-        //             $image->move($uploadPath, $newImageName);
-        //             $Attachments = Attachments::updateOrCreate(
-        //                 [
-        //                     'ParentGuid' => $Guid,
-        //                     'DocTitle' => $request->post('DocTitle'),
-        //                     'FilePath' => $newImageName,
-        //                     'UserID' => $UserID,
-
-
-        //                 ]
-
-        //             );
-        //         }
-        //     }
-        //     $Comity = Comity::updateOrCreate(
-        //         [
-        //             'id' => $id,
-        //         ],
-        //         [
-        //             'Guid' => $Guid,
-        //             'ctype' => $request->post('ctype'),
-        //             'docno' => $request->post('docno'),
-        //             'docdate' => $request->post('docdate'),
-        //             'notes' => $request->post('notes'),
-        //             'UserID' => $UserID,
-
-
-        //         ]
-        //     );
-        // } else {
-
-        //     $Comity = Comity::updateOrCreate(
-        //         [
-        //             'id' => $id,
-        //         ],
-        //         [
-        //             'Guid' => $Guid,
-        //             'ctype' => $request->post('ctype'),
-        //             'docno' => $request->post('docno'),
-        //             'docdate' => $request->post('docdate'),
-        //             'notes' => $request->post('notes'),
-        //             'UserID' => $UserID,
-
-
-        //         ]
-        //     );
-        // }
-
+      
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -302,14 +231,18 @@ class ComityController extends Controller
         $id = $request->input('id');
         $Comity = Comity::find($id);
         $Attachments = Attachments::where('ParentGuid', $Comity->Guid)->get();
-        $EmpComity = EmployeeComity::addSelect(['EmpName' => Employees::selectRaw('MAX(fullname)')
-                ->whereColumn('eid','=','eid')])
-           -> where('cid',$id)->get();
+        $EmpComity = EmployeeComity:: where('cid',$id)->get();
+        $EmpComity2 = EmployeeComity:: where('cid',$id)->get()
+                    ->map(function($item){
+                        $item['eid'] = Employees::find($item['eid'])->fullname;
+                        return $item;
+                    });
 
         $data = [
             'Comity' => $Comity,
             'Attachments' => $Attachments,
             'EmpComity' => $EmpComity,
+            'EmpComity2' => $EmpComity2,
         ];
         return response()->json($data);
     }

@@ -44,13 +44,15 @@ function Activity_UpdateOrCreate() {
     formData.append('Participants', $("#Participants").dxTextBox("instance").option("value"));
     formData.append('NoDays', $("#NoDays").dxTextBox("instance").option("value"));
     formData.append('Notes', $("#Notes").dxTextArea("instance").option("value"));
+    formData.append('eid', $("#eid").dxDropDownBox("instance").option("value"));
+    formData.append('eid2', $("#eid2").dxDropDownBox("instance").option("value"));
     formData.append('ActDate', ActDate);
     formData.append('DocTitle', $("#act_id").dxSelectBox("instance").option("value"));
     const images = $("#FilePath").dxFileUploader("option", "value");
     $.each(images, function(index, file) {
         formData.append('image[]', file);
     });
-
+    console.log(formData);
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -119,6 +121,24 @@ function Activity_fetch() {
                         rowAlternationEnabled: true,
                         showBorders: true,
                         columnChooser:{enabled:true},
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: false,
+                          },
+                          onExporting(e) {
+                            const workbook = new ExcelJS.Workbook();
+                            const worksheet = workbook.addWorksheet('Employees');
+
+                            DevExpress.excelExporter.exportDataGrid({
+                              component: e.component,
+                              worksheet,
+                              autoFilterEnabled: true,
+                            }).then(() => {
+                              workbook.xlsx.writeBuffer().then((buffer) => {
+                                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                              });
+                            });
+                          },
                         columns: [
                             {
                                 dataField:"aid",
@@ -344,6 +364,47 @@ function Activity_fetch() {
                                                             value:response.Activity.Notes
                                                         });
 
+                                                        let eidValue = [];
+                                                        let eidValueName = [];
+                                                       
+                                                        $.each(response.EmpActivity, function (index, value) {
+                                                            eidValue.push(Number(value['eid']));
+                                                        });
+                                                        $.each(response.EmpActivity2, function (index, value2) {
+                                                            eidValueName.push(value2['eid']);
+                                                        });
+                                                        $("#eid")
+                                                        .dxDropDownBox("instance")
+                                                        .option({
+                                                            value: eidValue
+                                                        });
+                                                        let eidValueNameString = eidValueName.join('\n');
+                                                        $("#EmpNames").dxTextArea('instance').option(
+                                                            {
+                                                                value:eidValueNameString
+                                                            }
+                                                        )
+                                                        let eidValue2 = [];
+                                                        let eidValueName2 = [];
+                                                        $.each(response.EmpActivity3, function (index, value) {
+                                                            eidValue2.push(Number(value['eid']));
+                                                        });
+                                                        $.each(response.EmpActivity4, function (index, value2) {
+                                                            eidValueName2.push(value2['eid']);
+                                                        });
+                                                        $("#eid2")
+                                                        .dxDropDownBox("instance")
+                                                        .option({
+                                                            value: eidValue2
+                                                        });
+                                                        let eidValueNameString2 = eidValueName2.join('\n');
+                                                        $("#EmpNames2").dxTextArea('instance').option(
+                                                            {
+                                                                value:eidValueNameString2
+                                                            }
+                                                        )
+
+
                                                         $('#image-container').empty();
                                                         let images = [];
                                                         $.each(response.Attachments, function(index, file) {
@@ -551,6 +612,142 @@ function Activity_filldata() {
 
                     });
                 });
+                $(() => {
+                    let dataGrid;
+                    $("#eid").dxDropDownBox({
+                        value: [],
+                        valueExpr: "eid",
+                        deferRendering: false,
+                        placeholder: "الاسم   ",
+                        inputAttr: {  style:"font-size:12px" },
+                        displayExpr(item) {
+                            return item && `${item.fullname} `;
+                        },
+                        showClearButton: true,
+                        dataSource: response.getEmployees,//makeAsyncDataSource('customer.json'),
+                        contentTemplate(e) {
+                            const value = e.component.option("value");
+                            const $dataGrid = $("<div>").dxDataGrid({
+                                dataSource: e.component.getDataSource(),
+                                columns: [
+                                    {
+                                        dataField:"fullname",
+                                        caption:"الاسم "
+
+                                    },
+
+                                ],
+                                hoverStateEnabled: true,
+                                paging: { enabled: true, pageSize: 10 },
+                                filterRow: { visible: true },
+                                scrolling: { mode: "virtual" },
+                                selection: { mode: "multiple" },
+                                selectedRowKeys: value,
+                                height: 300,
+                                onSelectionChanged(selectedItems) {
+                                    const keys = selectedItems.selectedRowKeys;
+                                    const hasSelection = keys.length;
+
+                                    e.component.option(
+                                        "value",
+                                        hasSelection ? keys.map(key => key.eid) : null
+
+                                    );
+                                },
+
+
+                            });
+
+                            dataGrid = $dataGrid.dxDataGrid("instance");
+
+                            e.component.on("valueChanged", (args) => {
+                                if(Array.isArray(args.value)) {
+                                    dataGrid.selectRows(args.value.map(eid => ({ eid })), true);
+                                } else if (args.value) {
+                                    // If it's not an array but has a value, create an array with that value
+                                    dataGrid.selectRows([{ eid: args.value }], true);
+                                } else {
+                                    // If it's null or undefined, clear the selection
+                                    dataGrid.clearSelection();
+                                }
+
+                                e.component.close();
+                            });
+
+                            return $dataGrid;
+                        },
+
+
+                    });
+                });
+                $(() => {
+                    let dataGrid;
+                    $("#eid2").dxDropDownBox({
+                        value: [],
+                        valueExpr: "eid",
+                        deferRendering: false,
+                        placeholder: "الاسم   ",
+                        inputAttr: {  style:"font-size:12px" },
+                        displayExpr(item) {
+                            return item && `${item.fullname} `;
+                        },
+                        showClearButton: true,
+                        dataSource: response.getEmployees,//makeAsyncDataSource('customer.json'),
+                        contentTemplate(e) {
+                            const value = e.component.option("value");
+                            const $dataGrid = $("<div>").dxDataGrid({
+                                dataSource: e.component.getDataSource(),
+                                columns: [
+                                    {
+                                        dataField:"fullname",
+                                        caption:"الاسم "
+
+                                    },
+
+                                ],
+                                hoverStateEnabled: true,
+                                paging: { enabled: true, pageSize: 10 },
+                                filterRow: { visible: true },
+                                scrolling: { mode: "virtual" },
+                                selection: { mode: "multiple" },
+                                selectedRowKeys: value,
+                                height: 300,
+                                onSelectionChanged(selectedItems) {
+                                    const keys = selectedItems.selectedRowKeys;
+                                    const hasSelection = keys.length;
+
+                                    e.component.option(
+                                        "value",
+                                        hasSelection ? keys.map(key => key.eid) : null
+
+                                    );
+                                },
+
+
+                            });
+
+                            dataGrid = $dataGrid.dxDataGrid("instance");
+
+                            e.component.on("valueChanged", (args) => {
+                                if(Array.isArray(args.value)) {
+                                    dataGrid.selectRows(args.value.map(eid => ({ eid })), true);
+                                } else if (args.value) {
+                                    // If it's not an array but has a value, create an array with that value
+                                    dataGrid.selectRows([{ eid: args.value }], true);
+                                } else {
+                                    // If it's null or undefined, clear the selection
+                                    dataGrid.clearSelection();
+                                }
+
+                                e.component.close();
+                            });
+
+                            return $dataGrid;
+                        },
+
+
+                    });
+                });
             
 
             },
@@ -691,6 +888,28 @@ $(document).ready(function () {
             // value: longText,
             maxLength: 4000,
             label: "ملاحظات",
+        });
+    });
+    $(() => {
+        $("#EmpNames").dxTextArea({
+            // ...
+            minHeight: 50,
+            maxHeight: 500,
+            autoResizeEnabled: true,
+            // value: longText,
+            maxLength: 4000,
+            label: "اسماء ",
+        });
+    });
+    $(() => {
+        $("#EmpNames2").dxTextArea({
+            // ...
+            minHeight: 50,
+            maxHeight: 500,
+            autoResizeEnabled: true,
+            // value: longText,
+            maxLength: 4000,
+            label: "اسماء الحضور",
         });
     });
 
