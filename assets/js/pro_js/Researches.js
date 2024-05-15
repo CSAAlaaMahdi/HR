@@ -43,7 +43,7 @@ function Researches_chechdata() {
         error_Title = "";
         $("#error_Title").text(error_Title);
     }
-   
+
 }
 
 function Researches_UpdateOrCreate() {
@@ -181,10 +181,10 @@ function Researches_fetch() {
                                 width: 100,
                                 cellTemplate: function (container, options) {
                                     var imageUrl = 'assets/img/navbar/icons8_reading_64px.png' ;
-                            
+
                                     // Concatenate the base URL with the image filename
                                     // var imageUrl = baseUrl + imageName;
-                            
+
                                     var image = $("<img>")
                                         .attr("src", imageUrl)
                                         .css({
@@ -197,7 +197,7 @@ function Researches_fetch() {
                             {
                                 dataField: "ResType",
                                 caption: " نوع البحث",
-                                
+
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -231,7 +231,7 @@ function Researches_fetch() {
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
-                                    
+
                                 },
                             },
                             {
@@ -553,7 +553,7 @@ function Researches_fetch() {
                                         .appendTo(container);
                                 },
                             },
-                           
+
                             {
                                 caption: "الحدث",
                                 width: 200,
@@ -576,7 +576,7 @@ function Researches_fetch() {
                                                 url: "researches/show",
                                                 data: data,
                                                 success: function (response) {
-                                                   
+
                                                     $("#rid")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -602,7 +602,7 @@ function Researches_fetch() {
                                                         .option({
                                                             value: response.Researches.JournalName,
                                                         });
-                                                  
+
                                                     $("#PubDate")
                                                         .dxDateBox("instance")
                                                         .option({
@@ -878,7 +878,7 @@ function Researches_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     ResType: data.text
                                 };
@@ -886,9 +886,9 @@ function Researches_filldata() {
                                 response.getResType.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -909,7 +909,7 @@ function Researches_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     JournalType: data.text
                                 };
@@ -917,9 +917,9 @@ function Researches_filldata() {
                                 response.getJournalType.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -940,7 +940,7 @@ function Researches_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     Jpos: data.text
                                 };
@@ -948,9 +948,9 @@ function Researches_filldata() {
                                 response.getJpos.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -971,7 +971,7 @@ function Researches_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     Isconf: data.text
                                 };
@@ -979,9 +979,9 @@ function Researches_filldata() {
                                 response.getIsconf.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -1002,7 +1002,7 @@ function Researches_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     Rtype: data.text
                                 };
@@ -1010,12 +1010,12 @@ function Researches_filldata() {
                                 response.getRtype.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
-              
+
             },
         });
     });
@@ -1053,11 +1053,11 @@ $(document).ready(function () {
                 Researches_cleardata();
                 // Researches_setStCode();
                 displaycard.style.display = "none";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("card_Researchestitle").scrollIntoView();
             }else{
                 document.getElementById("card_Researchestitle").innerText ="اضافة  بحث";
                 displaycard.style.display = "block";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("card_Researchestitle").scrollIntoView();
 
             }
         },
@@ -1280,6 +1280,6 @@ $(document).ready(function () {
 
         });
     })
-    
+
 });
 //

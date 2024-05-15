@@ -31,7 +31,7 @@ function Job_chechdata() {
         error_jtitle = "";
         $("#error_jtitle").text(error_jtitle);
     }
-   
+
 }
 
 function Job_UpdateOrCreate() {
@@ -48,7 +48,7 @@ function Job_UpdateOrCreate() {
         month: "2-digit",
         day: "2-digit",
     }).format(selectedDate);
-  
+
     var formData = new FormData();
 
     formData.append('jid', $("#jid").dxTextBox("instance").option("value"));
@@ -163,10 +163,10 @@ function Job_fetch() {
                                 width: 100,
                                 cellTemplate: function (container, options) {
                                     var imageUrl = 'assets/img/navbar/icons8_businessman_64px.png' ;
-                            
+
                                     // Concatenate the base URL with the image filename
                                     // var imageUrl = baseUrl + imageName;
-                            
+
                                     var image = $("<img>")
                                         .attr("src", imageUrl)
                                         .css({
@@ -212,7 +212,7 @@ function Job_fetch() {
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
-                                    
+
                                 },
                             },
                             {
@@ -330,7 +330,7 @@ function Job_fetch() {
                                                 url: "jobs/show",
                                                 data: data,
                                                 success: function (response) {
-                                                   
+
                                                     $("#jid")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -357,7 +357,7 @@ function Job_fetch() {
                                                         .option({
                                                             value: response.Job.jdegree,
                                                         });
-                                                  
+
                                                     $("#jstage")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -378,7 +378,7 @@ function Job_fetch() {
                                                         .option({
                                                             value:new Date(response.Job.docdate)
                                                         });
-                                                     
+
                                                         $('#image-container').empty();
                                                         let images = [];
                                                         $.each(response.Attachments, function(index, file) {
@@ -555,7 +555,7 @@ function Job_filldata() {
             type: "GET",
             url: url + "filldata",
             success: function (response) {
-                
+
                 $(() => {
                     $('#jtitle').dxSelectBox({
                         dataSource: response.getJobTitle,
@@ -574,7 +574,7 @@ function Job_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     jtitle: data.text
                                 };
@@ -582,12 +582,12 @@ function Job_filldata() {
                                 response.getJobTitle.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
-             
+
                 $(() => {
                     let dataGrid;
                     $("#eid").dxDropDownBox({
@@ -625,7 +625,7 @@ function Job_filldata() {
                                         },
 
                                     },
-                                
+
                                 ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10 },
@@ -699,11 +699,11 @@ $(document).ready(function () {
                 Job_cleardata();
                 // Job_setStCode();
                 displaycard.style.display = "none";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("card_Jobtitle").scrollIntoView();
             }else{
                 document.getElementById("card_Jobtitle").innerText ="اضافة عنوان وظيفي";
                 displaycard.style.display = "block";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("card_Jobtitle").scrollIntoView();
 
             }
         },
@@ -769,12 +769,12 @@ $(document).ready(function () {
     });
     $(() => {
         $("#docdate").dxDateBox({
-            
+
         });
     });
     $(() => {
         $("#getdate").dxDateBox({
-            
+
         });
     });
     $(() =>{
@@ -851,6 +851,6 @@ $(document).ready(function () {
 
         });
     })
-    
+
 });
 //

@@ -29,7 +29,7 @@ function Certifications_chechdata() {
         error_eid = "";
         $("#error_eid").text(error_eid);
     }
-   
+
 }
 
 function Certifications_UpdateOrCreate() {
@@ -39,7 +39,7 @@ function Certifications_UpdateOrCreate() {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
-    }).format(selectedDate); 
+    }).format(selectedDate);
     var selectedDate2 = $("#equivlent_date").dxDateBox("instance").option("value");
     var equivlent_date = new Intl.DateTimeFormat("en-US", {
         year: "numeric",
@@ -166,10 +166,10 @@ function Certifications_fetch() {
                                 width: 100,
                                 cellTemplate: function (container, options) {
                                     var imageUrl = 'assets/img/navbar/icons8_certificate_64px.png' ;
-                            
+
                                     // Concatenate the base URL with the image filename
                                     // var imageUrl = baseUrl + imageName;
-                            
+
                                     var image = $("<img>")
                                         .attr("src", imageUrl)
                                         .css({
@@ -215,7 +215,7 @@ function Certifications_fetch() {
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
-                                    
+
                                 },
                             },
                             {
@@ -425,7 +425,7 @@ function Certifications_fetch() {
                                                 url: "certifications/show",
                                                 data: data,
                                                 success: function (response) {
-                                                    
+
                                                     $("#cid")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -451,7 +451,7 @@ function Certifications_fetch() {
                                                         .option({
                                                             value: response.Certification.equivlent_no,
                                                         });
-                                                  
+
                                                     $("#certification")
                                                         .dxSelectBox("instance")
                                                         .option({
@@ -675,7 +675,7 @@ function Certifications_filldata() {
             type: "GET",
             url: url + "filldata",
             success: function (response) {
-                
+
                 $(() => {
                     $('#certification').dxSelectBox({
                         dataSource: response.getCertification,
@@ -694,7 +694,7 @@ function Certifications_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     certification: data.text
                                 };
@@ -702,9 +702,9 @@ function Certifications_filldata() {
                                 response.getCertification.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -725,7 +725,7 @@ function Certifications_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     college: data.text
                                 };
@@ -733,9 +733,9 @@ function Certifications_filldata() {
                                 response.getCollege.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -756,7 +756,7 @@ function Certifications_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     university: data.text
                                 };
@@ -764,9 +764,9 @@ function Certifications_filldata() {
                                 response.getUniversity.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -787,7 +787,7 @@ function Certifications_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     country: data.text
                                 };
@@ -795,9 +795,9 @@ function Certifications_filldata() {
                                 response.getCountry.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -818,7 +818,7 @@ function Certifications_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     gspetailest: data.text
                                 };
@@ -826,9 +826,9 @@ function Certifications_filldata() {
                                 response.getGspetailest.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -849,7 +849,7 @@ function Certifications_filldata() {
                                     data.customItem = null;
                                     return;
                                 }
-                            
+
                                 const newItem = {
                                     sspetailest: data.text
                                 };
@@ -857,9 +857,9 @@ function Certifications_filldata() {
                                 response.getSspetailest.push(newItem);
                                 data.component.option("value",newItem);
                                 data.customItem = newItem;
-                                
+
                         },
-                        
+
                     });
                 });
                 $(() => {
@@ -885,7 +885,7 @@ function Certifications_filldata() {
                                         caption:"الاسم "
 
                                     },
-                                
+
                                 ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10 },
@@ -959,11 +959,11 @@ $(document).ready(function () {
                 Certifications_cleardata();
                 // Certifications_setStCode();
                 displaycard.style.display = "none";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("card_Certificationstitle").scrollIntoView();
             }else{
                 document.getElementById("card_Certificationstitle").innerText ="اضافة شهادة";
                 displaycard.style.display = "block";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("card_Certificationstitle").scrollIntoView();
 
             }
         },
