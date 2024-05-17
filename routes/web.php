@@ -10,6 +10,8 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\CertificationsController;
 use App\Http\Controllers\ChildrenController;
 use App\Http\Controllers\ComityController;
+use App\Http\Controllers\DisapearController;
+use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\PlacesController;
@@ -66,6 +68,8 @@ Route::resources([
     'articles' => ArticlesController::class,
     'places' => PlacesController::class,
     'administrationOrders' => AdministrationOrdersController::class,
+    'disapear' => DisapearController::class,
+    'dispatch' => DispatchController::class,
 
 
 ]);
@@ -83,6 +87,8 @@ Route::get('researchesfill/filldata', [ResearchesController::class, 'filldata'])
 Route::get('childrenfill/filldata', [ChildrenController::class, 'filldata']);
 Route::get('articlesfill/filldata', [ArticlesController::class, 'filldata']);
 Route::get('placesfill/filldata', [PlacesController::class, 'filldata']);
+Route::get('disapearfill/filldata', [DisapearController::class, 'filldata']);
+Route::get('dispatchfill/filldata', [DispatchController::class, 'filldata']);
 Route::get('administrationOrdersfill/filldata', [AdministrationOrdersController::class, 'filldata']);
 Route::post('administrationImageDelete/DeleteImage', [AdministrationOrdersController::class, 'DeleteImages']);
 Route::post('childrenDelete/DeleteImage', [ChildrenController::class, 'DeleteImages']);
@@ -97,3 +103,5 @@ Route::post('activityDelete/DeleteImage', [ActivityController::class, 'DeleteIma
 Route::post('articlesDelete/DeleteImage', [ArticlesController::class, 'DeleteImages']);
 Route::post('researchesDelete/DeleteImage', [ResearchesController::class, 'DeleteImages']);
 Route::post('employeesDelete/DeleteImage', [EmployeesController::class, 'DeleteImages']);
+Route::post('disapearDelete/DeleteImage', [DisapearController::class, 'DeleteImages']);
+Route::post('dispatchDelete/DeleteImage', [DispatchController::class, 'DeleteImages']);

@@ -140,7 +140,9 @@
             request()->routeIs('vacations.index') ||
             request()->routeIs('thanks.index')  ||
             request()->routeIs('children.index') ||
-            request()->routeIs('administrationOrders.index')
+            request()->routeIs('administrationOrders.index') ||
+            request()->routeIs('disapear.index') ||
+            request()->routeIs('dispatch.index')
                 ? 'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
@@ -148,7 +150,9 @@
                 request()->routeIs('vacations.index') ||
                 request()->routeIs('thanks.index') ||
                 request()->routeIs('children.index') ||
-                request()->routeIs('administrationOrders.index')
+                request()->routeIs('administrationOrders.index') ||
+                request()->routeIs('disapear.index') ||
+                request()->routeIs('dispatch.index')
                     ? 'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_management_64px.png') }}" alt=""
@@ -241,6 +245,34 @@
                             <img src="{{ url('assets/img/navbar/icons8_profile_64px.png') }}" alt=""
                                 style="width: 32px; height: 32px;margin-right:15px">
                             <p style="margin-right:10px"> الاوامر  الادارية </p>
+                        @endif
+                    </a>
+                </li>
+                <li class="nav-item" id="Login_Disapear">
+                    <a href="{{ route('disapear.index') }}"
+                        class="nav-link {{ request()->routeIs('disapear.index') ? 'active' : '' }}">
+                        @if (request()->routeIs('disapear.index'))
+                            <img src="{{ url('assets/img/navbar/icons8_leaving_queue_64px_1.png') }}" alt=""
+                                style=" width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">  حركة  الملاك  </p>
+                        @else
+                            <img src="{{ url('assets/img/navbar/icons8_leaving_queue_64px.png') }}" alt=""
+                                style="width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">  حركة  الملاك  </p>
+                        @endif
+                    </a>
+                </li>
+                <li class="nav-item" id="Login_Dispatch">
+                    <a href="{{ route('dispatch.index') }}"
+                        class="nav-link {{ request()->routeIs('dispatch.index') ? 'active' : '' }}">
+                        @if (request()->routeIs('dispatch.index'))
+                            <img src="{{ url('assets/img/navbar/icons8_Airplane_Take_Off_64px_1.png') }}" alt=""
+                                style=" width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">  الايفادات    </p>
+                        @else
+                            <img src="{{ url('assets/img/navbar/icons8_Airplane_Take_Off_64px.png') }}" alt=""
+                                style="width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">  الايفادات    </p>
                         @endif
                     </a>
                 </li>

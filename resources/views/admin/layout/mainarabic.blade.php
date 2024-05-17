@@ -50,6 +50,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Articles.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Places.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/AdministrationOrders.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Disapear.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Dispatch.css') }}">
 
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>
