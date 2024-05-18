@@ -26,7 +26,7 @@ function Users_chechdata() {
         error_username = "";
         $("#error_username").text(error_username);
     }
-    if ($.trim($("#pwd").dxDropDownBox("instance").option('value')).length == 0) {
+    if ($.trim($("#pwd").dxTextBox("instance").option('value')).length == 0) {
         error_pwd = " مطلوب";
         $("#error_pwd").text(error_pwd);
     } else {
@@ -218,7 +218,7 @@ function Users_fetch() {
                                                         .option({
                                                             value: response.pwd,
                                                         });
-                                                  
+
                                                     $("#ulvl")
                                                         .dxTextBox("instance")
                                                         .option({

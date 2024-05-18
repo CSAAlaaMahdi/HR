@@ -29,20 +29,9 @@ class User2 extends Authenticatable
         'teachno',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    // protected $hidden = [
-    //     'U_Password',
-
+    // protected $casts = [
+    //     'pwd'=> 'hashed',
     // ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
 
 }
