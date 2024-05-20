@@ -1,32 +1,33 @@
-UsersGroups_fetch();
-// UsersGroups_filldata();
+UserGroupPermissions_fetch();
+UserGroupPermissions_filldata();
 
-function UsersGroups_cleardata() {
-    $("#UG_Guid").dxTextBox("instance").option("value", "");
-    $("#UG_Name").dxTextBox("instance").option("value", "");
-    $("#UG_State").dxSwitch("instance").option("value", false);
+function UserGroupPermissions_cleardata() {
+    $("#id").dxTextBox("instance").option("value", "");
+    $("#GroupName").dxSelectBox("instance").option("value", "");
+    $("#Status").dxSwitch("instance").option("value", false);
 }
 //Begin CRUD Function...
-function UsersGroups_chechdata() {
+function UserGroupPermissions_chechdata() {
     if (
-        $.trim($("#UG_Name").dxTextBox("instance").option("value")).length == 0
+        $.trim($("#GroupName").dxSelectBox("instance").option("value")).length == 0
     ) {
-        error_UG_Name = "مطلوب";
-        $("#error_UG_Name").text(error_UG_Name);
+        error_GroupName = "مطلوب";
+        $("#error_GroupName").text(error_GroupName);
     } else {
-        error_UG_Name = "";
-        $("#error_UG_Name").text(error_UG_Name);
+        error_GroupName = "";
+        $("#error_GroupName").text(error_GroupName);
     }
+    
 }
 
-function UsersGroups_UpdateOrCreate() {
-    var url = "usersgroups";
+function UserGroupPermissions_UpdateOrCreate() {
+    var url = "userGroupPermissions";
 
     var data = {
-        UG_Name: $("#UG_Name").dxTextBox("instance").option("value"),
-        UG_Guid: $("#UG_Guid").dxTextBox("instance").option("value"),
-        UG_State: (function () {
-            if ($("#UG_State").dxSwitch("instance").option("value")) {
+        id: $("#id").dxTextBox("instance").option("value"),
+        GroupName: $("#GroupName").dxSelectBox("instance").option("value"),
+        Status: (function () {
+            if ($("#Status").dxSwitch("instance").option("value")) {
                 return 1;
             } else return 0;
         })(),
@@ -53,23 +54,23 @@ function UsersGroups_UpdateOrCreate() {
                 height: "150",
                 hideAfter: 2000,
             });
-            UsersGroups_cleardata();
-            UsersGroups_fetch();
+            UserGroupPermissions_cleardata();
+            UserGroupPermissions_fetch();
         },
     });
 }
 
-function UsersGroups_fetch() {
+function UserGroupPermissions_fetch() {
     $(document).ready(function () {
-        var url = "usersgroups/";
+        var url = "userGroupPermissions/";
         $.ajax({
             type: "GET",
             url: url + "create",
             success: function (response) {
                 $(function () {
-                    const dataGrid = $("#UsersGroupsdatagrid").dxDataGrid({
-                        dataSource: response.getUsersGroups,
-                        keyExpr: "UG_Guid",
+                    const dataGrid = $("#UserGroupPermissionsdatagrid").dxDataGrid({
+                        dataSource: response.getUserGroupPermissions,
+                        keyExpr: "id",
                         paging: {
                             enabled: true,
                             pageSize: 5, // Number of records per page
@@ -96,14 +97,15 @@ function UsersGroups_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
+                        columnChooser:{enabled:true},
                         columns: [
                             {
-                                dataField: "UG_Guid",
+                                dataField: "id",
                                 caption: "التسلسل",
                                 visible: false,
                             },
                             {
-                                dataField: "UG_Name",
+                                dataField: "GroupName",
                                 caption: "اسم المجموعة",
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
@@ -121,7 +123,7 @@ function UsersGroups_fetch() {
                                 // groupIndex: 0,
                             },
                             {
-                                dataField: "UG_State",
+                                dataField: "Status",
                                 caption: "الحالة",
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
@@ -170,31 +172,31 @@ function UsersGroups_fetch() {
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
-                                                UG_Guid: rowData.UG_Guid,
+                                                id: rowData.id,
                                             };
 
                                             $.ajax({
                                                 type: "GET",
-                                                url: "usersgroups/show",
+                                                url: "userGroupPermissions/show",
                                                 data: data,
 
                                                 success: function (response) {
                                                     console.log(response);
-                                                    $("#UG_Guid")
+                                                    $("#id")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.UG_Guid
+                                                            value:response.id
                                                         });
-                                                    $("#UG_Name")
-                                                        .dxTextBox("instance")
+                                                    $("#GroupName")
+                                                        .dxSelectBox("instance")
                                                         .option({
-                                                            value: response.UG_Name,
+                                                            value: response.GroupName,
                                                         });
                                                     if (
                                                         response
-                                                            .UG_State === "1"
+                                                            .Status === "1"
                                                     ) {
-                                                        $("#UG_State")
+                                                        $("#Status")
                                                             .dxSwitch(
                                                                 "instance"
                                                             )
@@ -202,7 +204,7 @@ function UsersGroups_fetch() {
                                                                 value: true,
                                                             });
                                                     } else {
-                                                        $("#UG_State")
+                                                        $("#Status")
                                                             .dxSwitch(
                                                                 "instance"
                                                             )
@@ -213,38 +215,38 @@ function UsersGroups_fetch() {
 
                                                     var displaycard =
                                                         document.getElementById(
-                                                            "UsersGroupsaction"
+                                                            "UserGroupPermissionsaction"
                                                         );
                                                     if (
                                                         displaycard.style
                                                             .display == "none"
                                                     ) {
                                                         document.getElementById(
-                                                            "card_UsersGroupstitle"
+                                                            "card_UserGroupPermissionstitle"
                                                         ).innerText =
                                                             "تحديث البيانات";
                                                         displaycard.style.display =
                                                             "block";
                                                         document
                                                             .getElementById(
-                                                                "card_UsersGroupstitle"
+                                                                "card_UserGroupPermissionstitle"
                                                             )
                                                             .scrollIntoView();
                                                     } else {
                                                         displaycard.style.display =
                                                             "none";
                                                         document.getElementById(
-                                                            "card_UsersGroupstitle"
+                                                            "card_UserGroupPermissionstitle"
                                                         ).innerText = "";
                                                         displaycard.style.display =
                                                             "block";
                                                         document.getElementById(
-                                                            "card_UsersGroupstitle"
+                                                            "card_UserGroupPermissionstitle"
                                                         ).innerText =
                                                             "تحديث البيانات";
                                                         document
                                                             .getElementById(
-                                                                "card_UsersGroupstitle"
+                                                                "card_UserGroupPermissionstitle"
                                                             )
                                                             .scrollIntoView();
                                                     }
@@ -263,7 +265,7 @@ function UsersGroups_fetch() {
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
-                                                UG_Guid: rowData.UG_Guid,
+                                                id: rowData.id,
                                             };
                                             $.ajaxSetup({
                                                 headers: {
@@ -272,7 +274,7 @@ function UsersGroups_fetch() {
                                             });
                                             $.ajax({
                                                 type: "DELETE",
-                                                url: "usersgroups/destroy",
+                                                url: "userGroupPermissions/destroy",
                                                 data: data,
                                                 success: function (response) {
                                                     DevExpress.ui.notify({
@@ -286,7 +288,7 @@ function UsersGroups_fetch() {
                                                         height: "150",
                                                         hideAfter: 2000,
                                                     });
-                                                    UsersGroups_fetch();
+                                                    UserGroupPermissions_fetch();
                                                 },
                                             });
                                         },
@@ -300,10 +302,54 @@ function UsersGroups_fetch() {
                             // Add custom class to the header panel
                             e.element
                                 .find(".dx-datagrid-headers")
-                                .addClass("custom-header_UsersGroups");
+                                .addClass("custom-header_UserGroupPermissions");
                         },
                     });
                 });
+            },
+        });
+    });
+}
+function UserGroupPermissions_filldata() {
+    var url = "userGroupPermissionsfill/";
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: url + "filldata",
+            success: function (response) {
+                $(() => {
+                    $('#GroupName').dxSelectBox({
+                        dataSource: response.getUserGroupPermissions,
+                        inputAttr: {style:"font-size:13px", },
+                        placeholder:"اسم المجموعة",
+                        searchEnabled:true,
+                        displayExpr: 'GroupName',
+                        valueExpr: 'GroupName',
+                        searchMode: "contains",
+                        acceptCustomValue: true,
+                        dropDownOptions: {
+                            height: 400
+                        },
+                        onCustomItemCreating(data) {
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
+
+                                const newItem = {
+                                    GroupName: data.text
+                                };
+
+                                response.getUserGroupPermissions.push(newItem);
+                                data.component.option("value",newItem);
+                                data.customItem = newItem;
+
+                        },
+
+                    });
+                });
+              
+
             },
         });
     });
@@ -318,11 +364,11 @@ $(document).ready(function () {
         type: "danger",
         width: 120,
         onClick() {
-            var displaycard = document.getElementById("UsersGroupsaction");
+            var displaycard = document.getElementById("UserGroupPermissionsaction");
             if (displaycard.style.display == "block") {
-                document.getElementById("card_UsersGroupstitle").innerText = "";
-                UsersGroups_cleardata();
-                // UsersGroups_setStCode();
+                document.getElementById("card_UserGroupPermissionstitle").innerText = "";
+                UserGroupPermissions_cleardata();
+                
                 displaycard.style.display = "none";
                 document.getElementById("firstCard").scrollIntoView();
             }
@@ -339,45 +385,45 @@ $(document).ready(function () {
         icon: "check",
         width: 120,
         onClick() {
-            UsersGroups_chechdata();
-            if (error_UG_Name == null || error_UG_Name == "") {
-                UsersGroups_UpdateOrCreate();
-            } else {
-                console.log(error_UG_Name);
+            UserGroupPermissions_chechdata();
+            if (error_GroupName != "") {
                 return false;
+            } else {
+              
+                UserGroupPermissions_UpdateOrCreate();
             }
         },
     });
 });
 $(document).ready(function () {
-    $("#btnAddNew").dxButton({
+    $("#btnNewAdd").dxButton({
         stylingMode: "contained",
         text: "اضافة",
         type: "success",
         icon: "plus",
         width: 120,
         onClick() {
-            var displaycard = document.getElementById("UsersGroupsaction");
+            var displaycard = document.getElementById("UserGroupPermissionsaction");
             if (displaycard.style.display == "none") {
-                document.getElementById("card_UsersGroupstitle").innerText =
+                document.getElementById("card_UserGroupPermissionstitle").innerText =
                     "اضافة مجموعة";
 
-                UsersGroups_cleardata();
-                // UsersGroups_setStCode();
+                UserGroupPermissions_cleardata();
+                // UserGroupPermissions_setStCode();
                 displaycard.style.display = "block";
                 document
-                    .getElementById("card_UsersGroupstitle")
+                    .getElementById("card_UserGroupPermissionstitle")
                     .scrollIntoView();
             } else {
                 displaycard.style.display = "none";
-                document.getElementById("card_UsersGroupstitle").innerText = "";
-                UsersGroups_cleardata();
-                // UsersGroups_setStCode();
+                document.getElementById("card_UserGroupPermissionstitle").innerText = "";
+                UserGroupPermissions_cleardata();
+                // UserGroupPermissions_setStCode();
                 displaycard.style.display = "block";
-                document.getElementById("card_UsersGroupstitle").innerText =
+                document.getElementById("card_UserGroupPermissionstitle").innerText =
                     "اضافة مجموعة";
                 document
-                    .getElementById("card_UsersGroupstitle")
+                    .getElementById("card_UserGroupPermissionstitle")
                     .scrollIntoView();
             }
         },
@@ -388,26 +434,15 @@ $(document).ready(function () {
 // Begin Create Components of Store Page
 $(document).ready(function () {
     $(() => {
-        $("#UG_Guid").dxTextBox({
+        $("#id").dxTextBox({
             placeholder: "",
-            inputAttr: { "aria-label": "Guid" },
+            inputAttr: { "aria-label": "id" },
         });
     });
-    $(() => {
-        $("#UG_Name").dxTextBox({
-            placeholder: "ادخل اسم المجموعة",
-            inputAttr: { "aria-label": "UG_Name" },
-        });
-    });
-    $(() => {
-        $("#UG_RowID").dxTextBox({
-            placeholder: "التسلسل ",
-            inputAttr: { "aria-label": "RowID" },
-        });
-    });
+   
 
     $(() => {
-        $("#UG_State").dxSwitch({});
+        $("#Status").dxSwitch({});
     });
 });
 // End Components.

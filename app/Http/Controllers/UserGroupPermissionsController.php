@@ -2,31 +2,34 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Attachments;
 use App\Models\UserGroupPermissions;
-use App\Models\UserPermissions;
+use App\Models\Employees;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
-class UserPermissionsController extends Controller
+class UserGroupPermissionsController extends Controller
 {
 
     public function index()
     {
         if (session()->has('User')) {
-            return view('users.userPermissions');
+            return view('administration.userGroupPermissions');
         }
     }
 
 
     public function create(Request $request)
     {
-        $getData = UserPermissions::orderBy('id')->get()
+        $getData = UserGroupPermissions::orderBy('id')->get()
             ->map(function($item){
-                $item['GroupID'] = UserGroupPermissions::find($item['GroupID'])->GroupName;
+                $item['Status'] = $item['Status'] > 0 ? 'نشطة':'غير نشطة';
                 return $item;
             });
         $data = [
-            'getUserPermissions' => $getData,
+            'getUserGroupPermissions' => $getData,
         ];
         return response()->json($data);
     }
@@ -36,18 +39,15 @@ class UserPermissionsController extends Controller
     {
         $id = $request->post('id');
         $UserID = session('id');
-        $UserPermissions = UserPermissions::updateOrCreate(
+        $UserGroupPermissions = UserGroupPermissions::updateOrCreate(
             [
                 'id' => $id,
             ],
             [
-                'GroupID' => $request->post('GroupID'),
-                'FromName' => $request->post('FromName'),
-                'OptionAdd' => $request->post('OptionAdd'),
-                'OptionEdit' => $request->post('OptionEdit'),
-                'OptionDel' => $request->post('OptionDel'),
-                'ReadOnly' => $request->post('ReadOnly'),
+                'GroupName' => $request->post('GroupName'),
+                'Status' => $request->post('Status'),
                 'UserID' => $UserID,
+
 
             ]
         );
@@ -59,9 +59,9 @@ class UserPermissionsController extends Controller
     public function show(Request $request)
     {
         $id = $request->input('id');
-        $UserPermissions = UserPermissions::find($id);
+        $UserGroupPermissions = UserGroupPermissions::find($id);
         $data = [
-            'UserPermissions' => $UserPermissions,
+            'UserGroupPermissions' => $UserGroupPermissions,
         ];
         return response()->json($data);
     }
@@ -81,25 +81,23 @@ class UserPermissionsController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->post('id');
-        UserPermissions::find($id)->delete();
+        UserGroupPermissions::find($id)->delete();
         return response()->json(['status' => 'تم حذف البيانات بنجاح']);
     }
 
     public function filldata()
     {
 
-        $getFromsNames = UserPermissions::select('FormName')
-            ->whereNotNull('FormName')
-            ->where('FormName', '<>', '')
+        $getUserGroupPermissions = UserGroupPermissions::select('GroupName')
+            ->whereNotNull('GroupName')
+            ->where('GroupName', '<>', '')
             ->distinct()
-            ->orderBy('FormName')
+            ->orderBy('GroupName')
             ->get();
-        $getUserGroup = UserGroupPermissions::orderBy('id')->get();
 
 
         $data = [
-            'getFromsNames' => $getFromsNames,
-            'getUserGroups'  => $getUserGroup,
+            'getUserGroupPermissions' => $getUserGroupPermissions,
 
         ];
         return response()->json($data);

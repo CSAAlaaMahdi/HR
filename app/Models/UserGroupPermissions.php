@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserPermissions extends Model
+class UserGroupPermissions extends Model
 {
 
 
@@ -13,14 +13,10 @@ class UserPermissions extends Model
      *
      * @var array<int, string>
      */
-    protected $table='userPermissions_tb';
+    protected $table='userGroupPermissions_tb';
     protected $fillable = [
-        'GroupID',
-        'FormName',
-        'OptionAdd',
-        'OptionEdit',
-        'OptionDel',
-        'ReadOnly',
+        'GroupName',
+        'Status',
         'UserID',
 
 

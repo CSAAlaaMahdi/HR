@@ -19,6 +19,8 @@ use App\Http\Controllers\PositionsController;
 use App\Http\Controllers\ResearchesController;
 use App\Http\Controllers\SupervisorsController;
 use App\Http\Controllers\ThanksController;
+use App\Http\Controllers\UserGroupPermissionsController;
+use App\Http\Controllers\UserPermissionsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VacationsController;
 
@@ -70,6 +72,8 @@ Route::resources([
     'administrationOrders' => AdministrationOrdersController::class,
     'disapear' => DisapearController::class,
     'dispatch' => DispatchController::class,
+    'userGroupPermissions' => UserGroupPermissionsController::class,
+    'userPermissions'  => UserPermissionsController::class,
 
 
 ]);
@@ -90,6 +94,8 @@ Route::get('placesfill/filldata', [PlacesController::class, 'filldata']);
 Route::get('disapearfill/filldata', [DisapearController::class, 'filldata']);
 Route::get('dispatchfill/filldata', [DispatchController::class, 'filldata']);
 Route::get('administrationOrdersfill/filldata', [AdministrationOrdersController::class, 'filldata']);
+Route::get('userGroupPermissionsfill/filldata', [UserGroupPermissionsController::class, 'filldata']);
+Route::get('userPermissionsfill/filldata', [UserPermissionsController::class, 'filldata']);
 Route::post('administrationImageDelete/DeleteImage', [AdministrationOrdersController::class, 'DeleteImages']);
 Route::post('childrenDelete/DeleteImage', [ChildrenController::class, 'DeleteImages']);
 Route::post('thanksDelete/DeleteImage', [ThanksController::class, 'DeleteImages']);

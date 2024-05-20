@@ -626,6 +626,7 @@ function Thanks_filldata() {
         });
     });
 }
+
 $(document).ready(function () {
     $("#danger-contained").dxButton({
         stylingMode: "contained",
