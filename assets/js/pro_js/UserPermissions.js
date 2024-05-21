@@ -28,6 +28,7 @@ function UserPermissions_UpdateOrCreate() {
         id: $("#id").dxTextBox("instance").option("value"),
         GroupID: $("#GroupID").dxDropDownBox("instance").option("value"),
 
+
     };
     $.ajaxSetup({
         headers: {
@@ -271,7 +272,7 @@ function UserPermissions_fetch() {
                                 .addClass("custom-header_UserPermissions");
                         },
                     });
-
+                    
                     const dataGrid2 = $("#UserPermissionsdatagrid2").dxDataGrid({
                         dataSource: response.getUserPermissions2,
                         keyExpr: "id",
@@ -354,80 +355,35 @@ function UserPermissions_fetch() {
                             {
                                 dataField: "OptionAdd",
                                 caption: "اضافة ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "16px";
-
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
-                                // groupIndex: 0,
+                                dataType:"boolean",
+                                editorType:"dxCheckBox",
+                                                              
                             },
                             {
                                 dataField: "OptionEdit",
                                 caption: "تعديل ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "16px";
-
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
-                                // groupIndex: 0,
+                                dataType:"boolean",
+                                editorType:"dxCheckBox",
+                               
                             },
                             {
                                 dataField: "OptionDel",
                                 caption: "حذف ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "16px";
-
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
-                                // groupIndex: 0,
+                                dataType:"boolean",
+                                editorType:"dxCheckBox",
                             },
                             {
                                 dataField: "ReadOnly",
                                 caption: "قراءة فقط ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "16px";
-
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
-                                // groupIndex: 0,
+                                dataType:"boolean",
+                                editorType:"dxCheckBox",
                             },
 
 
                         ],
                         onContentReady: function (e) {
                             // Add custom class to the header panel
+                            
                             e.element
                                 .find(".dx-datagrid-headers")
                                 .addClass("custom-header_UserPermissions2");
@@ -561,7 +517,7 @@ $(document).ready(function () {
             if (error_GroupID != "") {
                 return false;
             } else {
-
+                
                 UserPermissions_UpdateOrCreate();
             }
         },
@@ -591,18 +547,19 @@ $(document).ready(function () {
                         for (let i = 0; i < 20; i++) {
                             newData.push({
                                 id: i + 1,
-                                GroupName: forms[i+1].GroupID, // Example static value
-                                FormName: forms[i+1].FormName, // Example static value
-                                OptionAdd: false, // Example default value
-                                OptionEdit: false, // Example default value
-                                OptionDel: false, // Example default value
-                                ReadOnly: true // Example default value
+                                GroupName: forms[i].GroupID,
+                                FormName: forms[i].FormName, 
+                                OptionAdd: true, 
+                                OptionEdit: false, 
+                                OptionDel: true, 
+                                ReadOnly: true 
                             });
                         }
 
                         $('#UserPermissionsdatagrid2').dxDataGrid("instance").option({
                             dataSource:newData
                         })
+                        
                     }
                 });
 
