@@ -27,6 +27,7 @@ function UserPermissions_UpdateOrCreate() {
     var data = {
         id: $("#id").dxTextBox("instance").option("value"),
         GroupID: $("#GroupID").dxDropDownBox("instance").option("value"),
+        PermissionsBody : $("#UserPermissionsdatagrid2").dxDataGrid("instance").option("dataSource"),
 
 
     };
@@ -337,6 +338,7 @@ function UserPermissions_fetch() {
                             {
                                 dataField: "FormName",
                                 caption: "اسم النموذج",
+                               
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -353,10 +355,19 @@ function UserPermissions_fetch() {
                                 // groupIndex: 0,
                             },
                             {
+                                dataField: "Enable",
+                                caption: "تمكين ",
+                                dataType:"boolean",
+                                editorType:"dxCheckBox",
+                                width:125
+                                                              
+                            },
+                            {
                                 dataField: "OptionAdd",
                                 caption: "اضافة ",
                                 dataType:"boolean",
                                 editorType:"dxCheckBox",
+                                width:125
                                                               
                             },
                             {
@@ -364,6 +375,7 @@ function UserPermissions_fetch() {
                                 caption: "تعديل ",
                                 dataType:"boolean",
                                 editorType:"dxCheckBox",
+                                width:125
                                
                             },
                             {
@@ -371,12 +383,14 @@ function UserPermissions_fetch() {
                                 caption: "حذف ",
                                 dataType:"boolean",
                                 editorType:"dxCheckBox",
+                                width:125
                             },
                             {
                                 dataField: "ReadOnly",
                                 caption: "قراءة فقط ",
                                 dataType:"boolean",
                                 editorType:"dxCheckBox",
+                                width:125
                             },
 
 
@@ -542,24 +556,26 @@ $(document).ready(function () {
                     data:{GroupID:GroupID},
                     success: function (response) {
                        let forms = response.GetForms;
-                       console.log(forms[0].GroupID)
+                       
                         let newData = [];
                         for (let i = 0; i < 20; i++) {
                             newData.push({
                                 id: i + 1,
                                 GroupName: forms[i].GroupID,
                                 FormName: forms[i].FormName, 
+                                Enable:true,
                                 OptionAdd: true, 
-                                OptionEdit: false, 
+                                OptionEdit: true, 
                                 OptionDel: true, 
-                                ReadOnly: true 
+                                ReadOnly: false 
                             });
                         }
 
                         $('#UserPermissionsdatagrid2').dxDataGrid("instance").option({
                             dataSource:newData
                         })
-                        
+                        let data =  $('#UserPermissionsdatagrid2').dxDataGrid("instance").option("dataSource")
+                        console.log(data);
                     }
                 });
 

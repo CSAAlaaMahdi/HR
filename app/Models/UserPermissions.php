@@ -17,6 +17,7 @@ class UserPermissions extends Model
     protected $fillable = [
         'GroupID',
         'FormName',
+        'Enable',
         'OptionAdd',
         'OptionEdit',
         'OptionDel',

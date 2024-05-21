@@ -20,7 +20,9 @@ class UserPermissionsController extends Controller
 
     public function create(Request $request)
     {
-        $getData = UserPermissions::orderBy('id')->get()
+        $getData = UserPermissions::select('GroupID')
+            ->groupBy('GroupID')
+            ->get()
             ->map(function($item){
                 $item['GroupID'] = UserGroupPermissions::find($item['GroupID'])->GroupName;
                 return $item;
@@ -34,23 +36,30 @@ class UserPermissionsController extends Controller
 
     public function store(Request $request)
     {
-        $id = $request->post('id');
+        
         $UserID = session('id');
-        $UserPermissions = UserPermissions::updateOrCreate(
-            [
-                'id' => $id,
-            ],
-            [
-                'GroupID' => $request->post('GroupID'),
-                'FromName' => $request->post('FromName'),
-                'OptionAdd' => $request->post('OptionAdd'),
-                'OptionEdit' => $request->post('OptionEdit'),
-                'OptionDel' => $request->post('OptionDel'),
-                'ReadOnly' => $request->post('ReadOnly'),
-                'UserID' => $UserID,
-
-            ]
-        );
+        $PermissionsBody = $request->post('PermissionsBody');
+        
+        foreach ($PermissionsBody as $value) {
+            
+            $UserPermissions = UserPermissions::updateOrCreate(
+                [
+                    'id' => $value['id'],
+                ],
+                [
+                    'GroupID' => $value['GroupName'],
+                    'FormName' =>$value['FormName'],
+                    'Enable' => $value['Enable'],
+                    'OptionAdd' => $value['OptionAdd'],
+                    'OptionEdit' => $value['OptionEdit'],
+                    'OptionDel' =>$value['OptionDel'],
+                    'ReadOnly' => $value['ReadOnly'],
+                    'UserID' => $UserID,
+    
+                ]
+            );
+        }
+        
 
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
