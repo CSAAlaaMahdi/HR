@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Forms;
 use App\Models\UserGroupPermissions;
 use App\Models\UserPermissions;
 use Illuminate\Http\Request;
@@ -51,7 +51,7 @@ class UserPermissionsController extends Controller
 
             ]
         );
-        
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -104,6 +104,19 @@ class UserPermissionsController extends Controller
         ];
         return response()->json($data);
     }
+    public function GetForms(Request $request)
+    {
+        $GroupID = (int)$request->input('GroupID');
+        $GetForms = Forms::all();
+        $GetForms = $GetForms->map(function ($form) use( $GroupID) {
+            $form->GroupID = $GroupID ;
+            return $form;
+        });
+        $data = [
+            'GetForms' => $GetForms,
+        ];
+        return response()->json($data);
+    }
 
-  
+
 }

@@ -5,7 +5,7 @@ function UserPermissions_cleardata() {
     $("#id").dxTextBox("instance").option("value", "");
     $("#GroupID").dxDropDownBox("instance").option("value", null);
     $("#UserPermissionsdatagrid2").dxDataGrid("instance").option("dataSource","");
-    
+
 }
 //Begin CRUD Function...
 function UserPermissions_chechdata() {
@@ -18,7 +18,7 @@ function UserPermissions_chechdata() {
         error_GroupID = "";
         $("#error_GroupID").text(error_GroupID);
     }
-    
+
 }
 
 function UserPermissions_UpdateOrCreate() {
@@ -27,7 +27,7 @@ function UserPermissions_UpdateOrCreate() {
     var data = {
         id: $("#id").dxTextBox("instance").option("value"),
         GroupID: $("#GroupID").dxDropDownBox("instance").option("value"),
-        
+
     };
     $.ajaxSetup({
         headers: {
@@ -119,38 +119,7 @@ function UserPermissions_fetch() {
                                 },
                                 // groupIndex: 0,
                             },
-                            {
-                                dataField: "Status",
-                                caption: "الحالة",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    if (cellValue === "غير نشطة") {
-                                        var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
-                                        let fontColor = "red";
-                                        $("<div>")
-                                            .css({
-                                                "font-size": fontSize,
-                                                "font-weight": fontWeight,
-                                                color: fontColor,
-                                            })
-                                            .text(cellValue)
-                                            .appendTo(container);
-                                    } else {
-                                        var fontWeight = "450"; // Set the desired font weight
-                                        let fontSize = "16px";
-                                        let fontColor = "green";
-                                        $("<div>")
-                                            .css({
-                                                "font-size": fontSize,
-                                                "font-weight": fontWeight,
-                                                color: fontColor,
-                                            })
-                                            .text(cellValue)
-                                            .appendTo(container);
-                                    }
-                                },
-                            },
+
 
                             {
                                 caption: "الحدث",
@@ -174,7 +143,7 @@ function UserPermissions_fetch() {
 
                                             $.ajax({
                                                 type: "GET",
-                                                url: "UserPermissions/show",
+                                                url: "userPermissions/show",
                                                 data: data,
 
                                                 success: function (response) {
@@ -455,7 +424,7 @@ function UserPermissions_fetch() {
                                 // groupIndex: 0,
                             },
 
-                          
+
                         ],
                         onContentReady: function (e) {
                             // Add custom class to the header panel
@@ -571,7 +540,7 @@ $(document).ready(function () {
             if (displaycard.style.display == "block") {
                 document.getElementById("card_UserPermissionstitle").innerText = "";
                 UserPermissions_cleardata();
-                
+
                 displaycard.style.display = "none";
                 document.getElementById("firstCard").scrollIntoView();
             }
@@ -592,7 +561,7 @@ $(document).ready(function () {
             if (error_GroupID != "") {
                 return false;
             } else {
-              
+
                 UserPermissions_UpdateOrCreate();
             }
         },
@@ -606,9 +575,41 @@ $(document).ready(function () {
         icon: "check",
         width: 200,
         onClick() {
-           
+
             let GroupID = $("#GroupID").dxDropDownBox("instance").option("value");
-            
+            let permissoins = $('#UserPermissionsdatagrid2').dxDataGrid("instance").option("dataSource");
+            if(permissoins.length == 0){
+
+                $.ajax({
+                    type: "GET",
+                    url: "userPermissionsGet/GetForms",
+                    data:{GroupID:GroupID},
+                    success: function (response) {
+                       let forms = response.GetForms;
+                       console.log(forms[0].GroupID)
+                        let newData = [];
+                        for (let i = 0; i < 20; i++) {
+                            newData.push({
+                                id: i + 1,
+                                GroupName: forms[i+1].GroupID, // Example static value
+                                FormName: forms[i+1].FormName, // Example static value
+                                OptionAdd: false, // Example default value
+                                OptionEdit: false, // Example default value
+                                OptionDel: false, // Example default value
+                                ReadOnly: true // Example default value
+                            });
+                        }
+
+                        $('#UserPermissionsdatagrid2').dxDataGrid("instance").option({
+                            dataSource:newData
+                        })
+                    }
+                });
+
+            }else{
+
+            }
+
         },
         elementAttr:{
             style: 'background-color: #3498db; color: #ffffff;margin-right: 15px;width:200px;'
@@ -659,8 +660,8 @@ $(document).ready(function () {
             inputAttr: { "aria-label": "id" },
         });
     });
-   
 
- 
+
+
 });
 // End Components.

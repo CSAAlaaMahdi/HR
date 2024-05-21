@@ -6,7 +6,7 @@
                 <div class="card " id="firstCard">
                     <div class="card-header" style="background-color: #343A40">
                         <div id="btnNewAdd" style="float: right"></div>
-                        <h4 style="color: white;float: right;margin-right: 40%">المستخدمون</h4>
+                        <h4 style="color: white;float: right;margin-right: 40%">صلاحيات المجموعة</h4>
 
                     </div>
                     <div class="card-body">
@@ -57,12 +57,12 @@
                                         <span id="error_GroupID" class="text-danger"></span>
                                     </div>
                                 </div>
-                               
+
                                 <div id="btnAddPermissions" style="float:right"></div>
                                 <hr style="background-color: orangered">
-                              
-                              
-                               
+
+
+
 
                             </div>
                         </div>
@@ -71,12 +71,12 @@
 
                           </div>
                         </div>
-                        
+
                         <div class="col-md-12 pt-5">
                           <hr style="background-color: orangered">
                           <div id="btnSave" style="float:right"></div>
                         </div>
-                       
+
 
                     </div>
                 </div>

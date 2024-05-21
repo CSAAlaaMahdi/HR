@@ -96,6 +96,7 @@ Route::get('dispatchfill/filldata', [DispatchController::class, 'filldata']);
 Route::get('administrationOrdersfill/filldata', [AdministrationOrdersController::class, 'filldata']);
 Route::get('userGroupPermissionsfill/filldata', [UserGroupPermissionsController::class, 'filldata']);
 Route::get('userPermissionsfill/filldata', [UserPermissionsController::class, 'filldata']);
+Route::get('userPermissionsGet/GetForms', [UserPermissionsController::class, 'GetForms']);
 Route::post('administrationImageDelete/DeleteImage', [AdministrationOrdersController::class, 'DeleteImages']);
 Route::post('childrenDelete/DeleteImage', [ChildrenController::class, 'DeleteImages']);
 Route::post('thanksDelete/DeleteImage', [ThanksController::class, 'DeleteImages']);
