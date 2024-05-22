@@ -66,10 +66,11 @@ function UserPermissions_fetch() {
             type: "GET",
             url: url + "create",
             success: function (response) {
+
                 $(function () {
                     const dataGrid = $("#UserPermissionsdatagrid").dxDataGrid({
                         dataSource: response.getUserPermissions,
-                        keyExpr: "id",
+                        keyExpr: "GroupID",
                         paging: {
                             enabled: true,
                             pageSize: 5, // Number of records per page
@@ -99,7 +100,7 @@ function UserPermissions_fetch() {
                         columnChooser:{enabled:true},
                         columns: [
                             {
-                                dataField: "id",
+                                dataField: "GroupID",
                                 caption: "التسلسل",
                                 visible: false,
                             },
@@ -140,7 +141,7 @@ function UserPermissions_fetch() {
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
-                                                id: rowData.id,
+                                                GroupID: rowData.GroupID,
                                             };
 
                                             $.ajax({
@@ -150,42 +151,20 @@ function UserPermissions_fetch() {
 
                                                 success: function (response) {
                                                     console.log(response);
-                                                    $("#id")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value:response.id
-                                                        });
-                                                    $("#GroupName")
-                                                        .dxSelectBox("instance")
-                                                        .option({
-                                                            value: response.GroupName,
-                                                        });
-                                                    if (
-                                                        response
-                                                            .Status === "1"
-                                                    ) {
-                                                        $("#Status")
-                                                            .dxSwitch(
-                                                                "instance"
-                                                            )
-                                                            .option({
-                                                                value: true,
-                                                            });
-                                                    } else {
-                                                        $("#Status")
-                                                            .dxSwitch(
-                                                                "instance"
-                                                            )
-                                                            .option({
-                                                                value: false,
-                                                            });
-                                                    }
+                                                   $("#GroupID")
+                                                    .dxDropDownBox("instance")
+                                                    .option("value",Number(response.UserPermissions[0].GroupID))
+                                                    $("#UserPermissionsdatagrid2")
+                                                        .dxDataGrid("instance")
+                                                        .option("dataSource",response.UserPermissions);
 
-                                                    var displaycard =
+
+                                                        var displaycard =
                                                         document.getElementById(
                                                             "UserPermissionsaction"
                                                         );
-                                                    if (
+
+                                                        if (
                                                         displaycard.style
                                                             .display == "none"
                                                     ) {
@@ -242,7 +221,7 @@ function UserPermissions_fetch() {
                                             });
                                             $.ajax({
                                                 type: "DELETE",
-                                                url: "UserPermissions/destroy",
+                                                url: "userPermissions/destroy",
                                                 data: data,
                                                 success: function (response) {
                                                     DevExpress.ui.notify({
@@ -273,7 +252,7 @@ function UserPermissions_fetch() {
                                 .addClass("custom-header_UserPermissions");
                         },
                     });
-                    
+
                     const dataGrid2 = $("#UserPermissionsdatagrid2").dxDataGrid({
                         dataSource: response.getUserPermissions2,
                         keyExpr: "id",
@@ -317,7 +296,7 @@ function UserPermissions_fetch() {
                                 visible: false,
                             },
                             {
-                                dataField: "GroupName",
+                                dataField: "GroupID",
                                 caption: "اسم المجموعة",
                                 visible:false,
                                 cellTemplate: function (container, options) {
@@ -338,7 +317,7 @@ function UserPermissions_fetch() {
                             {
                                 dataField: "FormName",
                                 caption: "اسم النموذج",
-                               
+
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -360,7 +339,7 @@ function UserPermissions_fetch() {
                                 dataType:"boolean",
                                 editorType:"dxCheckBox",
                                 width:125
-                                                              
+
                             },
                             {
                                 dataField: "OptionAdd",
@@ -368,7 +347,7 @@ function UserPermissions_fetch() {
                                 dataType:"boolean",
                                 editorType:"dxCheckBox",
                                 width:125
-                                                              
+
                             },
                             {
                                 dataField: "OptionEdit",
@@ -376,7 +355,7 @@ function UserPermissions_fetch() {
                                 dataType:"boolean",
                                 editorType:"dxCheckBox",
                                 width:125
-                               
+
                             },
                             {
                                 dataField: "OptionDel",
@@ -397,7 +376,7 @@ function UserPermissions_fetch() {
                         ],
                         onContentReady: function (e) {
                             // Add custom class to the header panel
-                            
+
                             e.element
                                 .find(".dx-datagrid-headers")
                                 .addClass("custom-header_UserPermissions2");
@@ -531,7 +510,8 @@ $(document).ready(function () {
             if (error_GroupID != "") {
                 return false;
             } else {
-                
+                // let data =  $('#UserPermissionsdatagrid2').dxDataGrid("instance").option("dataSource")
+                // console.log(data);
                 UserPermissions_UpdateOrCreate();
             }
         },
@@ -555,32 +535,73 @@ $(document).ready(function () {
                     url: "userPermissionsGet/GetForms",
                     data:{GroupID:GroupID},
                     success: function (response) {
-                       let forms = response.GetForms;
-                       
+
+                        let forms = response.GetForms;
                         let newData = [];
-                        for (let i = 0; i < 20; i++) {
-                            newData.push({
-                                id: i + 1,
-                                GroupName: forms[i].GroupID,
-                                FormName: forms[i].FormName, 
-                                Enable:true,
-                                OptionAdd: true, 
-                                OptionEdit: true, 
-                                OptionDel: true, 
-                                ReadOnly: false 
-                            });
-                        }
+                        if(response.GetPermissionsCount > 0)
+                            {
+                                newData = response.GetPermissions
+                            }
+                            else{
+                                for (let i = 0; i < forms.length; i++) {
+                                    newData.push({
+                                        id: i + 1,
+                                        GroupID: forms[i].GroupID,
+                                        FormName: forms[i].FormName,
+                                        Enable:true,
+                                        OptionAdd: true,
+                                        OptionEdit: true,
+                                        OptionDel: true,
+                                        ReadOnly: false
+                                    });
+                                }
+                            }
+
+
 
                         $('#UserPermissionsdatagrid2').dxDataGrid("instance").option({
                             dataSource:newData
                         })
-                        let data =  $('#UserPermissionsdatagrid2').dxDataGrid("instance").option("dataSource")
-                        console.log(data);
+
                     }
                 });
 
             }else{
+                $.ajax({
+                    type: "GET",
+                    url: "userPermissionsGet/GetForms",
+                    data:{GroupID:GroupID},
+                    success: function (response) {
 
+                        let forms = response.GetForms;
+                        let newData = [];
+                        if(response.GetPermissionsCount > 0)
+                            {
+                                newData = response.GetPermissions
+                            }
+                            else{
+                                for (let i = 0; i < forms.length; i++) {
+                                    newData.push({
+                                        id: i + 1,
+                                        GroupID: forms[i].GroupID,
+                                        FormName: forms[i].FormName,
+                                        Enable:true,
+                                        OptionAdd: true,
+                                        OptionEdit: true,
+                                        OptionDel: true,
+                                        ReadOnly: false
+                                    });
+                                }
+                            }
+
+
+
+                        $('#UserPermissionsdatagrid2').dxDataGrid("instance").option({
+                            dataSource:newData
+                        })
+
+                    }
+                });
             }
 
         },

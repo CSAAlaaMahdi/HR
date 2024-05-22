@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Forms;
 use App\Models\UserGroupPermissions;
 use App\Models\UserPermissions;
+use Faker\Core\Number;
 use Illuminate\Http\Request;
 
 class UserPermissionsController extends Controller
@@ -23,8 +24,8 @@ class UserPermissionsController extends Controller
         $getData = UserPermissions::select('GroupID')
             ->groupBy('GroupID')
             ->get()
-            ->map(function($item){
-                $item['GroupID'] = UserGroupPermissions::find($item['GroupID'])->GroupName;
+            ->map(function ($item) {
+                $item->GroupName = UserGroupPermissions::find($item['GroupID'])->GroupName;
                 return $item;
             });
         $data = [
@@ -36,30 +37,56 @@ class UserPermissionsController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $UserID = session('id');
         $PermissionsBody = $request->post('PermissionsBody');
-        
-        foreach ($PermissionsBody as $value) {
-            
-            $UserPermissions = UserPermissions::updateOrCreate(
-                [
-                    'id' => $value['id'],
-                ],
-                [
-                    'GroupID' => $value['GroupName'],
-                    'FormName' =>$value['FormName'],
-                    'Enable' => $value['Enable'],
-                    'OptionAdd' => $value['OptionAdd'],
-                    'OptionEdit' => $value['OptionEdit'],
-                    'OptionDel' =>$value['OptionDel'],
-                    'ReadOnly' => $value['ReadOnly'],
-                    'UserID' => $UserID,
-    
-                ]
-            );
+        $getGroup = UserPermissions::where('GroupID', $PermissionsBody[0]['GroupID'])->get();
+        if ($getGroup->count() === 0) {
+            foreach ($PermissionsBody as $value) {
+
+                $UserPermissions = UserPermissions::updateOrCreate(
+                    [
+                        'id' => $value['id'],
+                    ],
+                    [
+                        'GroupID' => $value['GroupID'],
+                        'FormName' => $value['FormName'],
+                        'Enable' => $value['Enable'],
+                        'OptionAdd' => $value['OptionAdd'],
+                        'OptionEdit' => $value['OptionEdit'],
+                        'OptionDel' => $value['OptionDel'],
+                        'ReadOnly' => $value['ReadOnly'],
+                        'UserID' => $UserID,
+
+                    ]
+                );
+            }
+        } else {
+
+            foreach ($PermissionsBody as $value) {
+
+                $UserPermissions = UserPermissions::updateOrCreate(
+                    [
+                        'id' => $value['id'],
+                    ],
+                    [
+                        'GroupID' => $value['GroupID'],
+                        'FormName' => $value['FormName'],
+                        'Enable' => $value['Enable'],
+                        'OptionAdd' => $value['OptionAdd'],
+                        'OptionEdit' => $value['OptionEdit'],
+                        'OptionDel' => $value['OptionDel'],
+                        'ReadOnly' => $value['ReadOnly'],
+                        'UserID' => $UserID,
+
+                    ]
+                );
+            }
         }
-        
+
+
+
+
 
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
@@ -67,8 +94,14 @@ class UserPermissionsController extends Controller
 
     public function show(Request $request)
     {
-        $id = $request->input('id');
-        $UserPermissions = UserPermissions::find($id);
+        $GroupID = $request->input('GroupID');
+        $UserPermissions = UserPermissions::where('GroupID', '=', $GroupID)->get();
+        foreach ($UserPermissions as  $value) {
+            $value['OptionAdd'] = $value['OptionAdd'] === '1' ? true : false;
+            $value['OptionEdit'] = $value['OptionEdit'] === '1' ? true : false;
+            $value['OptionDel'] = $value['OptionDel'] === '1' ? true : false;
+            $value['ReadOnly'] = $value['ReadOnly'] === '1' ? true : false;
+        }
         $data = [
             'UserPermissions' => $UserPermissions,
         ];
@@ -117,15 +150,22 @@ class UserPermissionsController extends Controller
     {
         $GroupID = (int)$request->input('GroupID');
         $GetForms = Forms::all();
-        $GetForms = $GetForms->map(function ($form) use( $GroupID) {
-            $form->GroupID = $GroupID ;
+        $GetForms = $GetForms->map(function ($form) use ($GroupID) {
+            $form->GroupID = $GroupID;
             return $form;
         });
+        $getUserPermissions = UserPermissions::where('GroupID', $GroupID)->get();
+        foreach ($getUserPermissions as  $value) {
+            $value['OptionAdd'] = $value['OptionAdd'] === '1' ? true : false;
+            $value['OptionEdit'] = $value['OptionEdit'] === '1' ? true : false;
+            $value['OptionDel'] = $value['OptionDel'] === '1' ? true : false;
+            $value['ReadOnly'] = $value['ReadOnly'] === '1' ? true : false;
+        }
         $data = [
             'GetForms' => $GetForms,
+            'GetPermissionsCount' => $getUserPermissions->count(),
+            'GetPermissions' => $getUserPermissions,
         ];
         return response()->json($data);
     }
-
-
 }
