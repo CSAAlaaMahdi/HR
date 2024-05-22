@@ -5,10 +5,10 @@ function Users_cleardata() {
     $("#loginname").dxTextBox("instance").option("value", "");
     $("#username").dxTextBox("instance").option("value", "");
     $("#pwd").dxTextBox("instance").option("value", "");
-    $("#ulvl").dxTextBox("instance").option("value", "");
+    // $("#ulvl").dxTextBox("instance").option("value", "");
     $("#deptid").dxDropDownBox("instance").option("value", null);
-    $("#UserPassW").dxTextBox("instance").option("value", "");
-    $("#teachno").dxTextBox("instance").option("value", "");
+    // $("#UserPassW").dxTextBox("instance").option("value", "");
+    $("#GroupID").dxDropDownBox("instance").option("value", null);
 }
 
 function Users_chechdata() {
@@ -42,9 +42,9 @@ function Users_UpdateOrCreate() {
         loginname: $("#loginname").dxTextBox("instance").option("value"),
         username: $("#username").dxTextBox("instance").option("value"),
         pwd: $("#pwd").dxTextBox("instance").option("value"),
-        ulvl: $("#ulvl").dxTextBox("instance").option("value"),
-        UserPassW: $("#UserPassW").dxTextBox("instance").option("value"),
-        teachno: $("#teachno").dxTextBox("instance").option("value"),
+        // ulvl: $("#ulvl").dxTextBox("instance").option("value"),
+        // UserPassW: $("#UserPassW").dxTextBox("instance").option("value"),
+        GroupID: $("#GroupID").dxDropDownBox("instance").option("value"),
         deptid: $("#deptid").dxDropDownBox("instance").option("value"),
 
     };
@@ -159,6 +159,25 @@ function Users_fetch() {
                                 },
                             },
                             {
+                                dataField: "GroupID",
+                                caption: " اسم المجموعة",
+                                alignment: "right",
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "12px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
                                 dataField: "deptid",
                                 caption: "القسم ",
                                 cellTemplate: function (container, options) {
@@ -219,20 +238,20 @@ function Users_fetch() {
                                                             value: response.pwd,
                                                         });
 
-                                                    $("#ulvl")
-                                                        .dxTextBox("instance")
+                                                    // $("#ulvl")
+                                                    //     .dxTextBox("instance")
+                                                    //     .option({
+                                                    //         value:response.ulvl
+                                                    //     });
+                                                    //     $("#UserPassW")
+                                                    //     .dxTextBox("instance")
+                                                    //     .option({
+                                                    //         value:response.UserPassW
+                                                    //     });
+                                                        $("#GroupID")
+                                                        .dxDropDownBox("instance")
                                                         .option({
-                                                            value:response.ulvl
-                                                        });
-                                                        $("#UserPassW")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value:response.UserPassW
-                                                        });
-                                                        $("#teachno")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value:response.teachno
+                                                            value:Number(response.GroupID)
                                                         });
                                                     $("#deptid")
                                                         .dxDropDownBox("instance")
@@ -359,7 +378,7 @@ function Users_filldata() {
                         value: 0,
                         valueExpr: "deptid",
                         deferRendering: false,
-                        placeholder: "اختر المجموعة",
+                        placeholder: "اختر القسم",
                         inputAttr: { "aria-label": "deptname",style:"font-size:14px",  },
                         displayExpr(item) {
                             return item && `${item.deptname}`;
@@ -405,6 +424,75 @@ function Users_filldata() {
                                     e.component.option(
                                         "value",
                                         hasSelection ? keys[0].deptid : 0
+
+                                    );
+                                },
+                            });
+
+                            dataGrid = $dataGrid.dxDataGrid("instance");
+
+                            e.component.on("valueChanged", (args) => {
+                                dataGrid.selectRows(args.value, true);
+                                e.component.close();
+                            });
+
+                            return $dataGrid;
+                        },
+
+                    });
+                });
+                $(() => {
+
+                    $("#GroupID").dxDropDownBox({
+                        value: null,
+                        valueExpr: "id",
+                        deferRendering: false,
+                        placeholder: "اختر المجموعة",
+                        inputAttr: { "aria-label": "deptname",style:"font-size:14px",  },
+                        displayExpr(item) {
+                            return item && `${item.GroupName}`;
+                        },
+                        showClearButton: true,
+                        dataSource: response.getGroups,//makeAsyncDataSource('customer.json'),
+                        contentTemplate(e) {
+                            const value = e.component.option("value");
+                            const $dataGrid = $("<div>").dxDataGrid({
+                                dataSource: e.component.getDataSource(),
+                                columns: [
+                                    {
+                                        dataField:"GroupName",
+                                        caption : "اسم المجموعة",
+                                        cellTemplate: function (container, options) {
+                                            var cellValue = options.value;
+                                            var fontWeight = "450"; // Set the desired font weight
+                                            let fontSize = "12px";
+                                            let fontColor = "#2F4F4F";
+                                            $("<div>")
+                                                .css({
+                                                    "font-size": fontSize,
+                                                    "font-weight": fontWeight,
+                                                    color: fontColor,
+                                                })
+                                                .text(cellValue)
+                                                .appendTo(container);
+                                        },
+                                    },
+
+                                ],
+                                hoverStateEnabled: true,
+                                paging: { enabled: true, pageSize: 10},
+                                filterRow: { visible: true },
+                                scrolling: { mode: "virtual" },
+                                selection: { mode: "single" },
+                                selectedRowKeys: value,
+                                height: 300,
+                                onSelectionChanged(selectedItems) {
+                                    const keys = selectedItems.selectedRowKeys;
+                                    const hasSelection = keys.length;
+
+                                    e.component.option(
+                                        "value",
+                                        hasSelection ? keys[0].id : 0
 
                                     );
                                 },
@@ -526,23 +614,18 @@ $(document).ready(function () {
         });
     });
 
-    $(() => {
-        $("#ulvl").dxTextBox({
-            placeholder: "مستوى المستخدم ",
-            inputAttr: { "aria-label": "Piece Type",style:"font-size:14px", },
-        });
-    });
-    $(() => {
-        $("#teachno").dxTextBox({
-            placeholder: "مستوى  ",
-            inputAttr: { "aria-label": "Piece Type" ,style:"font-size:14px",},
-        });
-    });
-    $(() => {
-        $("#UserPassW").dxTextBox({
-            placeholder: "  ",
-            inputAttr: { "aria-label": "Piece Type" ,style:"font-size:14px",},
-        });
-    });
+    // $(() => {
+    //     $("#ulvl").dxTextBox({
+    //         placeholder: "مستوى المستخدم ",
+    //         inputAttr: { "aria-label": "Piece Type",style:"font-size:14px", },
+    //     });
+    // });
+   
+    // $(() => {
+    //     $("#UserPassW").dxTextBox({
+    //         placeholder: "  ",
+    //         inputAttr: { "aria-label": "Piece Type" ,style:"font-size:14px",},
+    //     });
+    // });
 });
 //

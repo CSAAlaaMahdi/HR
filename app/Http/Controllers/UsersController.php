@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Depts;
 use App\Models\User2;
+use App\Models\UserGroupPermissions;
 use Illuminate\Http\Request;
 
 
@@ -23,6 +24,7 @@ class UsersController extends Controller
     {
         $getData = User2::orderBy('userid')->get()->map(function ($item) {
             $item['deptid'] = Depts::find($item['deptid'])->deptname;
+            $item['GroupID'] = UserGroupPermissions::find($item['GroupID']) != null? UserGroupPermissions::find($item['GroupID'])->GroupName : null ;
             return $item;
         });
         $data = [
@@ -90,9 +92,11 @@ class UsersController extends Controller
     {
 
         $getDepts = Depts::all();
+        $getGroups = UserGroupPermissions::all();
 
         $data = [
             'getDepts' => $getDepts,
+            'getGroups' => $getGroups,
         ];
         return response()->json($data);
     }

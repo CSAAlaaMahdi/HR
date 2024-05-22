@@ -76,7 +76,7 @@
                                       <span id="error_pwd" class="text-danger"></span>
                                     </div>
                                   </div>
-                                  <div class="dx-fieldset" id="Users-container">
+                                  {{-- <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
                                       <div class="dx-field-label">المستوى </div>
                                       <div class="dx-field-value">
@@ -84,7 +84,7 @@
                                       </div>
                                       <span id="error_ulvl" class="text-danger"></span>
                                     </div>
-                                  </div>
+                                  </div> --}}
                                   <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
                                       <div class="dx-field-label">القسم </div>
@@ -94,7 +94,7 @@
                                       <span id="error_deptid" class="text-danger"></span>
                                     </div>
                                   </div>
-                                  <div class="dx-fieldset" id="Users-container">
+                                  {{-- <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
                                       <div class="dx-field-label">userPassW  </div>
                                       <div class="dx-field-value">
@@ -102,14 +102,14 @@
                                       </div>
                                       <span id="error_UserPassW" class="text-danger"></span>
                                     </div>
-                                  </div>
+                                  </div> --}}
                                   <div class="dx-fieldset" id="Users-container">
                                     <div class="dx-field">
-                                      <div class="dx-field-label">teachno  </div>
+                                      <div class="dx-field-label">المجموعة  </div>
                                       <div class="dx-field-value">
-                                        <div id="teachno"></div>
+                                        <div id="GroupID"></div>
                                       </div>
-                                      <span id="error_teachno" class="text-danger"></span>
+                                      <span id="error_GroupID" class="text-danger"></span>
                                     </div>
                                   </div>
                                   <hr>

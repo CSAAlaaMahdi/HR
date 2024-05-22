@@ -214,7 +214,6 @@
         <script type="text/javascript" src="{{ url('assets/js/pro_js/Activity.js') }}"></script>
 
 
-
         <script>
             $("#Activityaction").hide();
         </script>

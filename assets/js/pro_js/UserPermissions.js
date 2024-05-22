@@ -150,7 +150,7 @@ function UserPermissions_fetch() {
                                                 data: data,
 
                                                 success: function (response) {
-                                                    console.log(response);
+                                                  
                                                    $("#GroupID")
                                                     .dxDropDownBox("instance")
                                                     .option("value",Number(response.UserPermissions[0].GroupID))

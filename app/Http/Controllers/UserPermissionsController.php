@@ -101,6 +101,7 @@ class UserPermissionsController extends Controller
             $value['OptionEdit'] = $value['OptionEdit'] === '1' ? true : false;
             $value['OptionDel'] = $value['OptionDel'] === '1' ? true : false;
             $value['ReadOnly'] = $value['ReadOnly'] === '1' ? true : false;
+            $value['Enable'] = $value['Enable'] === '1' ? true : false;
         }
         $data = [
             'UserPermissions' => $UserPermissions,

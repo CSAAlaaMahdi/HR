@@ -23,10 +23,10 @@ class User2 extends Authenticatable
         'loginname',
         'username',
         'pwd',
-        'ulvl',
+        // 'ulvl',
         'deptid',
-        'userPassW',
-        'teachno',
+        // 'userPassW',
+        'GroupID',
     ];
 
     // protected $casts = [

@@ -1,12 +1,17 @@
+#Users-container > .dx-field {
+  display: flex;
+  flex-direction: column; /* Set the flex direction to column */
+  align-items: flex-end; /* Align items to the start of the flex container */
+}
 #Users-container > .dx-field > .dx-field-label {
-    width: 25%;
+    width: 100%;
     font-size: 0.8rem;
     color: rgb(43, 43, 43);
     font-weight: bold;
   }
 
   #Users-container > .dx-field > .dx-field-value {
-    width: 75%;
+    width: 100%;
     
   }
 

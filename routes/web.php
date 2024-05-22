@@ -47,12 +47,7 @@ Route::controller(Admin::class)->group(function () {
 
 
 });
-Route::controller(DashboardMain::class)->group(function () {
-    Route::get('/dashboardmain', 'index')->name('main.index');
-    Route::get('dashboardmain/cardsdata', 'cardsData')->name('main.cardsdata');
 
-
-});
 // Route::get('/dashboard', [\App\Http\Controllers\Admin\Admin::class, 'index'])->name('home.index');
 Route::resources([
     'users' => UsersController::class,
@@ -112,3 +107,7 @@ Route::post('researchesDelete/DeleteImage', [ResearchesController::class, 'Delet
 Route::post('employeesDelete/DeleteImage', [EmployeesController::class, 'DeleteImages']);
 Route::post('disapearDelete/DeleteImage', [DisapearController::class, 'DeleteImages']);
 Route::post('dispatchDelete/DeleteImage', [DispatchController::class, 'DeleteImages']);
+
+
+Route::get('dashboardmainfill/filldata', [DashboardMain::class, 'filldata']);
+Route::get('dashboardmainPermissions/Permissions', [DashboardMain::class, 'getPermissions']);

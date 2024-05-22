@@ -4,7 +4,7 @@
         style="margin-right: 20px" >
     </div>
     <div class="info">
-        <a href="#" class="d-block" id="titlefont">علاء مهدي</a>
+        <a href="#" class="loginname" id="titlefont">  </a>
     </div>
 </div>
 
@@ -120,7 +120,7 @@
 
             </ul>
         </li>
-        <li class="nav-item {{ request()->routeIs('employees.index') }}">
+        <li class="nav-item {{ request()->routeIs('employees.index') }}" id="Login_Employees">
             <a href="{{ route('employees.index') }}"
                 class="nav-link {{ request()->routeIs('employees.index') ? 'active' : '' }}">
                 @if (request()->routeIs('employees.index'))
@@ -517,3 +517,5 @@
 
     </ul>
 </nav>
+
+<script type="text/javascript" src="{{ url('assets/js/pro_js/Main.js') }}"></script>
