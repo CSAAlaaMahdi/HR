@@ -55,6 +55,10 @@
                     </li>
                     <li class="nav-item"><a href="#EmpChildren" class="nav-link " data-bs-toggle="tab">الاطفال</a>
                     </li>
+                    <li class="nav-item"><a href="#EmpActivity" class="nav-link " data-bs-toggle="tab">الانشطة </a>
+                    </li>
+                    <li class="nav-item"><a href="#EmpComity" class="nav-link " data-bs-toggle="tab">اللجان </a>
+                    </li>
 
 
                 </ul>
@@ -1693,6 +1697,57 @@
 
 
                                     </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane mt-3" id="EmpActivity">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpActivity" id="EmpActivity">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpActivitytitle"
+                                                class="EmpActivitytitle">الانشطة والفعاليات</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpActivitydatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane mt-3" id="EmpComity">
+                        <div class="row border g-0 rounded shadow-sm">
+                            <div class="col p-4">
+
+                                <div class="col-md-12 mt-1">
+                                    <div class="card EmpComity" id="EmpComity">
+                                        <div class="card-header" style="background-color:#283741;text-align: center">
+                                            <h4 style="color: white;" id="EmpComitytitle"
+                                                class="EmpComitytitle">اللجان </h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="datagrid" id="EmpComitydatagrid">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
 
 
                                 </div>

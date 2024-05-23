@@ -19,5 +19,8 @@ class EmployeesActivity extends Model
 
     ];
 
-
+    public function GetActivity()
+    {
+        return $this->hasMany(Activity::class,'aid','aid');
+    }
 }

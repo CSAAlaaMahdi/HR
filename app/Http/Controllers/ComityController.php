@@ -234,7 +234,7 @@ class ComityController extends Controller
         $EmpComity = EmployeeComity:: where('cid',$id)->get();
         $EmpComity2 = EmployeeComity:: where('cid',$id)->get()
                     ->map(function($item){
-                        $item['eid'] = Employees::find($item['eid'])->fullname;
+                        $item['eid'] =Employees::find($item['eid']) !=null? Employees::find($item['eid'])->fullname:"";
                         return $item;
                     });
 

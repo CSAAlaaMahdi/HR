@@ -3091,6 +3091,346 @@ function Employee_filldata() {
                                                 });
 
                                                 //#endregion
+                                           
+                                                //#region Emp Acitivity
+                                                $(function () {
+                                                    const dataGrid = $("#EmpActivitydatagrid").dxDataGrid({
+                                                        dataSource: response.EmpActivity,
+                                                        keyExpr: "eaid",
+                                                        paging: {
+                                                            enabled: true,
+                                                            pageSize: 5, // Number of records per page
+                                                            pageIndex: 0, // Initially show the first page
+                                                        },
+                                                        pager: {
+                                                            showPageSizeSelector: true,
+                                                            showInfo: true,
+                                                            allowedPageSizes: [10, 25, 50, 100, "all"],
+                                                            showNavigationButtons: true,
+                                                        },
+                                                        remoteOperations: false,
+                                                        searchPanel: {
+                                                            visible: true,
+                                                            highlightCaseSensitive: true,
+                                                            width: 300,
+                                                        },
+                                                        focusedRowEnabled: true,
+                                                        filterRow: { visible: true },
+                                                        groupPanel: { visible: true },
+                                                        grouping: {
+                                                            autoExpandAll: false,
+                                                        },
+                                                        allowColumnReordering: true,
+                                                        rowAlternationEnabled: true,
+                                                        showBorders: true,
+                                                        columnChooser:{enabled : true},
+                                                        columns: [
+                                                            {
+                                                                dataField:"eaid",
+                                                                caption:"ت",
+                                                                visible:false,
+                                
+                                                            },
+                                                            {
+                                                                caption: "#",
+                                                                width: 100,
+                                                                cellTemplate: function (container, options) {
+                                                                    var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png' ;
+                                
+                                                                    // Concatenate the base URL with the image filename
+                                                                    // var imageUrl = baseUrl + imageName;
+                                
+                                                                    var image = $("<img>")
+                                                                        .attr("src", imageUrl)
+                                                                        .css({
+                                                                            width: "40px",
+                                                                            height: "40px",
+                                                                        });
+                                                                    $(container).append(image);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "atype",
+                                                                caption: "الحالة",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "Type",
+                                                                caption: "النوع",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "Name",
+                                                                caption: "العنوان",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "Place",
+                                                                caption: "المكان",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "NoDays",
+                                                                caption: "عدد الايام",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "Participants",
+                                                                caption: "المشاركين",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                           
+                                                        ],
+                                                        onContentReady: function (e) {
+                                                            // Add custom class to the header panel
+                                                            e.element
+                                                                .find(".dx-datagrid-headers")
+                                                                .addClass("custom-header_EmpActivity");
+                                                        },
+                                                    });
+                                                });
+
+                                                //#endregion
+                                                
+                                                //#region Emp Comity
+                                                $(function () {
+                                                    const dataGrid = $("#EmpComitydatagrid").dxDataGrid({
+                                                        dataSource: response.EmpComity,
+                                                        keyExpr: "id",
+                                                        paging: {
+                                                            enabled: true,
+                                                            pageSize: 5, // Number of records per page
+                                                            pageIndex: 0, // Initially show the first page
+                                                        },
+                                                        pager: {
+                                                            showPageSizeSelector: true,
+                                                            showInfo: true,
+                                                            allowedPageSizes: [10, 25, 50, 100, "all"],
+                                                            showNavigationButtons: true,
+                                                        },
+                                                        remoteOperations: false,
+                                                        searchPanel: {
+                                                            visible: true,
+                                                            highlightCaseSensitive: true,
+                                                            width: 300,
+                                                        },
+                                                        focusedRowEnabled: true,
+                                                        filterRow: { visible: true },
+                                                        groupPanel: { visible: true },
+                                                        grouping: {
+                                                            autoExpandAll: false,
+                                                        },
+                                                        allowColumnReordering: true,
+                                                        rowAlternationEnabled: true,
+                                                        showBorders: true,
+                                                        columnChooser:{enabled : true},
+                                                        columns: [
+                                                            {
+                                                                dataField:"id",
+                                                                caption:"ت",
+                                                                visible:false,
+                                
+                                                            },
+                                                            {
+                                                                caption: "#",
+                                                                width: 100,
+                                                                cellTemplate: function (container, options) {
+                                                                    var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png' ;
+                                
+                                                                    // Concatenate the base URL with the image filename
+                                                                    // var imageUrl = baseUrl + imageName;
+                                
+                                                                    var image = $("<img>")
+                                                                        .attr("src", imageUrl)
+                                                                        .css({
+                                                                            width: "40px",
+                                                                            height: "40px",
+                                                                        });
+                                                                    $(container).append(image);
+                                                                },
+                                                            },
+                                                            {
+                                                                dataField: "ctype",
+                                                                caption: "اللجنة",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "docno",
+                                                                caption: "رقم الكتاب",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "docdate",
+                                                                caption: "تاريخ الكتاب",
+                                                                
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                            {
+                                                                dataField: "notes",
+                                                                caption: "ملاحظات",
+                                                                visible:false,
+                                                                cellTemplate: function (container, options) {
+                                                                    var cellValue = options.value;
+                                                                    var fontWeight = "450"; // Set the desired font weight
+                                                                    let fontSize = "13px";
+                                                                    let fontColor = "#2F4F4F";
+                                                                    $("<div>")
+                                                                        .css({
+                                                                            "font-size": fontSize,
+                                                                            "font-weight": fontWeight,
+                                                                            color: fontColor,
+                                                                        })
+                                                                        .text(cellValue)
+                                                                        .appendTo(container);
+                                                                },
+                                                                // groupIndex: 0,
+                                                            },
+                                                           
+                                                        ],
+                                                        onContentReady: function (e) {
+                                                            // Add custom class to the header panel
+                                                            e.element
+                                                                .find(".dx-datagrid-headers")
+                                                                .addClass("custom-header_EmpComity");
+                                                        },
+                                                    });
+                                                });
+
+                                                //#endregion
                                             }
                                         });
                                     },

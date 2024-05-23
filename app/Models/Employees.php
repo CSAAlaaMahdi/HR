@@ -87,4 +87,8 @@ class Employees extends Model
     {
         return $this->hasMany(Children::class,'eid');
     }
+    public function EmpActivity()
+    {
+        return $this->hasMany(EmployeesActivity::class,'eid');
+    }
 }
