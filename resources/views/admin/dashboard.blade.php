@@ -7,14 +7,14 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3 id="EmpCount">0</h3>
 
-                    <p>New Orders</p>
+                    <p id="titlefont"> عدد الموظفين</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer" id="titlefont">  الموظفين <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -83,6 +83,7 @@
 
     </div>
 
+    <script type="text/javascript" src="{{ url('assets/js/pro_js/Admin.js') }}"></script>
     <script>
 
 

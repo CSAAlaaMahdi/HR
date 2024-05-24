@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employees;
 use App\Models\User2;
 use App\Models\UserPermissions;
 use Illuminate\Http\Request;
@@ -52,14 +53,12 @@ class DashboardMain extends Controller
         ];
         return response()->json($data);
     }
-    // public function cardsData(Request $request)
+    // public function CardsData(Request $request)
     // {
     //     if ($request->id == 0) {
     //         $data = [
-    //             'employeescount' => collect(DB::select("SET NOCOUNT ON ; exec Sp_MechanismsAD_EmployeeCount"))->all(),
-    //             'carscount' => collect(DB::select("SET NOCOUNT ON ; exec Sp_MechanismsAD_DCS_CarsCount"))->all(),
-    //             'attendance' => collect(DB::select("SET NOCOUNT ON ; exec Sp_Attendance"))->all(),
-    //             'movementsanddispatches' => collect(DB::select("SET NOCOUNT ON ; exec Sp_DispatchesAndMovements"))->all(),
+    //             'Employees' => Employees::all(),
+               
     //         ];
 
 

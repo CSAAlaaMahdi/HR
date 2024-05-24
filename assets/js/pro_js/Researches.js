@@ -78,6 +78,7 @@ function Researches_UpdateOrCreate() {
     formData.append('Rlink', $("#Rlink").dxTextBox("instance").option("value"));
     formData.append('Extaut', $("#Extaut").dxTextBox("instance").option("value"));
     formData.append('DocTitle', $("#Title").dxTextBox("instance").option("value"));
+    formData.append('eid', $("#eid").dxDropDownBox("instance").option("value"));
     const images = $("#FilePath").dxFileUploader("option", "value");
     $.each(images, function(index, file) {
         formData.append('image[]', file);
@@ -576,7 +577,7 @@ function Researches_fetch() {
                                                 url: "researches/show",
                                                 data: data,
                                                 success: function (response) {
-
+                                                    console.log(response);
                                                     $("#rid")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -636,7 +637,7 @@ function Researches_fetch() {
                                                         $("#ConfName")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Researches.confName
+                                                            value:response.Researches.ConfName
                                                         });
                                                         $("#ConfPlace")
                                                         .dxTextBox("instance")
@@ -683,6 +684,28 @@ function Researches_fetch() {
                                                         .option({
                                                             value:response.Researches.Extaut
                                                         });
+                                                        let eidValue = [];
+                                                        let eidValueName = [];
+                                                       
+                                                        $.each(response.EmpResearch, function (index, value) {
+                                                            eidValue.push(Number(value['Eid']));
+                                                        });
+                                                        $.each(response.EmpResearch2, function (index, value2) {
+                                                            eidValueName.push(value2['Eid']);
+                                                        });
+                                                        $("#eid")
+                                                        .dxDropDownBox("instance")
+                                                        .option({
+                                                            value: eidValue
+                                                        });
+                                                        let eidValueNameString = eidValueName.join('\n');
+                                                        $("#EmpNames").dxTextArea('instance').option(
+                                                            {
+                                                                value:eidValueNameString
+                                                            }
+                                                        )
+
+
                                                         $('#image-container').empty();
                                                         let images = [];
                                                         $.each(response.Attachments, function(index, file) {
@@ -1016,6 +1039,75 @@ function Researches_filldata() {
                     });
                 });
 
+                $(() => {
+                    let dataGrid;
+                    $("#eid").dxDropDownBox({
+                        value: [],
+                        valueExpr: "eid",
+                        deferRendering: false,
+                        placeholder: "الاسم   ",
+                        inputAttr: {  style:"font-size:12px" },
+                        displayExpr(item) {
+                            return item && `${item.fullname} `;
+                        },
+                        showClearButton: true,
+                        dataSource: response.getEmployees,//makeAsyncDataSource('customer.json'),
+                        contentTemplate(e) {
+                            const value = e.component.option("value");
+                            const $dataGrid = $("<div>").dxDataGrid({
+                                dataSource: e.component.getDataSource(),
+                                columns: [
+                                    {
+                                        dataField:"fullname",
+                                        caption:"الاسم "
+
+                                    },
+
+                                ],
+                                hoverStateEnabled: true,
+                                paging: { enabled: true, pageSize: 10 },
+                                filterRow: { visible: true },
+                                scrolling: { mode: "virtual" },
+                                selection: { mode: "multiple" },
+                                selectedRowKeys: value,
+                                height: 300,
+                                onSelectionChanged(selectedItems) {
+                                    const keys = selectedItems.selectedRowKeys;
+                                    const hasSelection = keys.length;
+
+                                    e.component.option(
+                                        "value",
+                                        hasSelection ? keys.map(key => key.eid) : null
+
+                                    );
+                                },
+
+
+                            });
+
+                            dataGrid = $dataGrid.dxDataGrid("instance");
+
+                            e.component.on("valueChanged", (args) => {
+                                if(Array.isArray(args.value)) {
+                                    dataGrid.selectRows(args.value.map(eid => ({ eid })), true);
+                                } else if (args.value) {
+                                    // If it's not an array but has a value, create an array with that value
+                                    dataGrid.selectRows([{ eid: args.value }], true);
+                                } else {
+                                    // If it's null or undefined, clear the selection
+                                    dataGrid.clearSelection();
+                                }
+
+                                e.component.close();
+                            });
+
+                            return $dataGrid;
+                        },
+
+
+                    });
+                });
+
             },
         });
     });
@@ -1204,6 +1296,17 @@ $(document).ready(function () {
         $("#Extaut").dxTextBox({
             placeholder: " ",
             inputAttr: {  style:"font-size:13px",},
+        });
+    });
+    $(() => {
+        $("#EmpNames").dxTextArea({
+            // ...
+            minHeight: 50,
+            maxHeight: 500,
+            autoResizeEnabled: true,
+            // value: longText,
+            maxLength: 4000,
+            label: "الاسماء ",
         });
     });
     $(() =>{

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Attachments;
+use App\Models\EmployeeResearches;
 use App\Models\Researches;
 use App\Models\Employees;
 use Illuminate\Http\Request;
@@ -36,16 +37,18 @@ class ResearchesController extends Controller
     {
         $rid = $request->post('rid');
         $Guid = $request->post('Guid');
+        $eid = $request->post('eid');
+        $eidArray = explode(',', $eid);
         if ($Guid == 'null' || $Guid == '' || empty($Guid)) {
             $Guid = strtoupper(Uuid::uuid4()->toString());
         }
         $UserID = session('id');
-        if ($request->hasFile('image')) {
-            $images = $request->file('image');
-            foreach ($images as $image) {
-
-                $imageName =  $image->getClientOriginalName();
-                if ($rid != "") {
+       
+        if ($rid != "") {
+            if ($request->hasFile('image')) {
+                $images = $request->file('image');
+                foreach ($images as $image) {
+                    $imageName = $image->getClientOriginalName();
                     $checkImage = Attachments::where([
                         ['ParentGuid', $Guid],
                         ['FilePath', $imageName]
@@ -65,31 +68,87 @@ class ResearchesController extends Controller
                             ]
 
                         );
+                        if (count($eidArray) > 0) {
+                            $getEmpResearch = EmployeeResearches::Where('Rid', '=', $rid)->get() != null ? EmployeeResearches::Where('Rid', '=', $rid)->get() : null;
+                            if ($getEmpResearch != null) {
+                                EmployeeResearches::where('Rid', '=', $rid)->delete();
+                                foreach ($eidArray as $value) {
 
+                                    $EmpResearch = EmployeeResearches::updateOrCreate(
+                                        [
+                                            'erid' => EmployeeResearches::max('erid') > 0 ? EmployeeResearches::max('erid') + 1 : 1,
+                                        ],
+                                        [
+                                            'Rid' => $rid,
+                                            'Eid' => $value,
+                                            'EmpSeq' => 1,
+                                            'UserID' => $UserID
+                                        ]
+                                    );
+                                }
+                            } else {
+                                foreach ($eidArray as $value) {
+
+                                    $EmpResearch = EmployeeResearches::updateOrCreate(
+                                        [
+                                            'erid' => EmployeeResearches::max('erid') > 0 ? EmployeeResearches::max('erid') + 1 : 1,
+                                        ],
+                                        [
+                                            'Rid' => $rid,
+                                            'Eid' => $value,
+                                            'EmpSeq' => 1,
+                                            'UserID' => $UserID
+                                        ]
+                                    );
+                                }
+                            }
+                        }
+                       
                     }
-                } else {
-                    $uploadPath = 'assets/img/administrationImage';
-                    $newImageName = Str::random(20) . '.' . $imageName;
-                    $image->move($uploadPath, $newImageName);
-                    $Attachments = Attachments::updateOrCreate(
-                        [
-                            'ParentGuid' => $Guid,
-                            'DocTitle' => $request->post('DocTitle'),
-                            'FilePath' => $newImageName,
-                            'UserID' => $UserID,
-
-
-                        ]
-
-                    );
                 }
+            } else {
+                if (count($eidArray) > 0) {
+                    $getEmpResearch = EmployeeResearches::Where([['Rid', $rid]])->get() != null ? EmployeeResearches::Where([['Rid', $rid]])->get() : null;
+                    if ($getEmpResearch != null) {
+                        EmployeeResearches::where([['Rid', $rid]])->delete();
+                        foreach ($eidArray as $value) {
+
+                            $EmpResearch = EmployeeResearches::updateOrCreate(
+                                [
+                                    'erid' => EmployeeResearches::max('erid') > 0 ? EmployeeResearches::max('erid') + 1 : 1,
+                                ],
+                                [
+                                    'Rid' => $rid,
+                                    'Eid' => $value,
+                                    'EmpSeq' => 1,
+                                    'UserID' => $UserID
+                                ]
+                            );
+                        }
+                    } else {
+                        foreach ($eidArray as $value) {
+
+                            $EmpResearch = EmployeeResearches::updateOrCreate(
+                                [
+                                    'erid' => EmployeeResearches::max('erid') > 0 ? EmployeeResearches::max('erid') + 1 : 1,
+                                ],
+                                [
+                                    'Rid' => $rid,
+                                    'Eid' => $value,
+                                    'EmpSeq' => 1,
+                                    'UserID' => $UserID
+                                ]
+                            );
+                        }
+                    }
+                }
+               
             }
             $Researches = Researches::updateOrCreate(
                 [
                     'rid' => $rid,
                 ],
                 [
-                    'Guid' => $Guid,
                     'ResType' => $request->post('ResType'),
                     'Title' => $request->post('Title'),
                     'JournalName' => $request->post('JournalName'),
@@ -109,20 +168,18 @@ class ResearchesController extends Controller
                     'DOI' => $request->post('DOI'),
                     'Rlink' => $request->post('Rlink'),
                     'Extaut' => $request->post('Extaut'),
-                    'UserID' => $UserID,
     
     
                 ]
             );
-
         } else {
-           
+            $newID = Researches::max('rid') > 0 ? Researches::max('rid') + 1 : 1;
+
             $Researches = Researches::updateOrCreate(
                 [
-                    'rid' => $rid,
+                    'rid' => $newID,
                 ],
                 [
-                    'Guid' => $Guid,
                     'ResType' => $request->post('ResType'),
                     'Title' => $request->post('Title'),
                     'JournalName' => $request->post('JournalName'),
@@ -142,40 +199,199 @@ class ResearchesController extends Controller
                     'DOI' => $request->post('DOI'),
                     'Rlink' => $request->post('Rlink'),
                     'Extaut' => $request->post('Extaut'),
-                    'UserID' => $UserID,
     
     
                 ]
             );
+            if ($Researches) {
+                if (count($eidArray) > 0) {
+                    foreach ($eidArray as $value) {
+
+                        $EmpResearch = EmployeeResearches::updateOrCreate(
+                            [
+                                'erid' => EmployeeResearches::max('erid') > 0 ? EmployeeResearches::max('erid') + 1 : 1,
+                            ],
+                            [
+                                'Rid' => $rid,
+                                'Eid' => $value,
+                                'EmpSeq' => 1,
+                                'UserID' => $UserID
+                            ]
+                        );
+                    }
+                }
+               
+            }
+            if ($request->hasFile('image')) {
+                $images = $request->file('image');
+                foreach ($images as $image) {
+                    $imageName = $image->getClientOriginalName();
+                    $checkImage = Attachments::where([
+                        ['ParentGuid', $Guid],
+                        ['FilePath', $imageName]
+                    ])->count('id');
+                    if ($checkImage > 0) {
+                    } else {
+                        $uploadPath = 'assets/img/administrationImage';
+                        $newImageName = Str::random(20) . '.' . $imageName;
+                        $image->move($uploadPath, $newImageName);
+                        $Attachments = Attachments::updateOrCreate(
+                            [
+                                'ParentGuid' => $Guid,
+                                'DocTitle' => $request->post('DocTitle'),
+                                'FilePath' => $newImageName,
+                                'UserID' => $UserID,
+
+                            ]
+
+                        );
+                    }
+                }
+            }
         }
-        $Researches = Researches::updateOrCreate(
-            [
-                'rid' => $rid,
-            ],
-            [
-                'ResType' => $request->post('ResType'),
-                'Title' => $request->post('Title'),
-                'JournalName' => $request->post('JournalName'),
-                'PubDate' => $request->post('PubDate'),
-                'JournalType' => $request->post('JournalType'),
-                'Jpos' => $request->post('Jpos'),
-                'Numb' => $request->post('Numb'),
-                'Page' => $request->post('Page'),
-                'Isconf' => $request->post('Isconf'),
-                'ConfName' => $request->post('ConfName'),
-                'ConfPlace' => $request->post('ConfPlace'),
-                'Rtype' => $request->post('Rtype'),
-                'CiteScor' => $request->post('CiteScor'),
-                'ImpactFactor' => $request->post('ImpactFactor'),
-                'JournalQuartile' => $request->post('JournalQuartile'),
-                'ISSN' => $request->post('ISSN'),
-                'DOI' => $request->post('DOI'),
-                'Rlink' => $request->post('Rlink'),
-                'Extaut' => $request->post('Extaut'),
+
+       
+       
+       
+       
+       
+       
+        // if ($request->hasFile('image')) {
+        //     $images = $request->file('image');
+        //     foreach ($images as $image) {
+
+        //         $imageName =  $image->getClientOriginalName();
+        //         if ($rid != "") {
+        //             $checkImage = Attachments::where([
+        //                 ['ParentGuid', $Guid],
+        //                 ['FilePath', $imageName]
+        //             ])->count('id');
+        //             if ($checkImage > 0) {
+        //             } else {
+        //                 $uploadPath = 'assets/img/administrationImage';
+        //                 $newImageName = Str::random(20) . '.' . $imageName;
+        //                 $image->move($uploadPath, $newImageName);
+        //                 $Attachments = Attachments::updateOrCreate(
+        //                     [
+        //                         'ParentGuid' => $Guid,
+        //                         'DocTitle' => $request->post('DocTitle'),
+        //                         'FilePath' => $newImageName,
+        //                         'UserID' => $UserID,
+
+        //                     ]
+
+        //                 );
+
+        //             }
+        //         } else {
+        //             $uploadPath = 'assets/img/administrationImage';
+        //             $newImageName = Str::random(20) . '.' . $imageName;
+        //             $image->move($uploadPath, $newImageName);
+        //             $Attachments = Attachments::updateOrCreate(
+        //                 [
+        //                     'ParentGuid' => $Guid,
+        //                     'DocTitle' => $request->post('DocTitle'),
+        //                     'FilePath' => $newImageName,
+        //                     'UserID' => $UserID,
 
 
-            ]
-        );
+        //                 ]
+
+        //             );
+        //         }
+        //     }
+        //     $Researches = Researches::updateOrCreate(
+        //         [
+        //             'rid' => $rid,
+        //         ],
+        //         [
+        //             'Guid' => $Guid,
+        //             'ResType' => $request->post('ResType'),
+        //             'Title' => $request->post('Title'),
+        //             'JournalName' => $request->post('JournalName'),
+        //             'PubDate' => $request->post('PubDate'),
+        //             'JournalType' => $request->post('JournalType'),
+        //             'Jpos' => $request->post('Jpos'),
+        //             'Numb' => $request->post('Numb'),
+        //             'Page' => $request->post('Page'),
+        //             'Isconf' => $request->post('Isconf'),
+        //             'ConfName' => $request->post('ConfName'),
+        //             'ConfPlace' => $request->post('ConfPlace'),
+        //             'Rtype' => $request->post('Rtype'),
+        //             'CiteScor' => $request->post('CiteScor'),
+        //             'ImpactFactor' => $request->post('ImpactFactor'),
+        //             'JournalQuartile' => $request->post('JournalQuartile'),
+        //             'ISSN' => $request->post('ISSN'),
+        //             'DOI' => $request->post('DOI'),
+        //             'Rlink' => $request->post('Rlink'),
+        //             'Extaut' => $request->post('Extaut'),
+        //             'UserID' => $UserID,
+    
+    
+        //         ]
+        //     );
+
+        // } else {
+           
+        //     $Researches = Researches::updateOrCreate(
+        //         [
+        //             'rid' => $rid,
+        //         ],
+        //         [
+        //             'Guid' => $Guid,
+        //             'ResType' => $request->post('ResType'),
+        //             'Title' => $request->post('Title'),
+        //             'JournalName' => $request->post('JournalName'),
+        //             'PubDate' => $request->post('PubDate'),
+        //             'JournalType' => $request->post('JournalType'),
+        //             'Jpos' => $request->post('Jpos'),
+        //             'Numb' => $request->post('Numb'),
+        //             'Page' => $request->post('Page'),
+        //             'Isconf' => $request->post('Isconf'),
+        //             'ConfName' => $request->post('ConfName'),
+        //             'ConfPlace' => $request->post('ConfPlace'),
+        //             'Rtype' => $request->post('Rtype'),
+        //             'CiteScor' => $request->post('CiteScor'),
+        //             'ImpactFactor' => $request->post('ImpactFactor'),
+        //             'JournalQuartile' => $request->post('JournalQuartile'),
+        //             'ISSN' => $request->post('ISSN'),
+        //             'DOI' => $request->post('DOI'),
+        //             'Rlink' => $request->post('Rlink'),
+        //             'Extaut' => $request->post('Extaut'),
+        //             'UserID' => $UserID,
+    
+    
+        //         ]
+        //     );
+        // }
+        // $Researches = Researches::updateOrCreate(
+        //     [
+        //         'rid' => $rid,
+        //     ],
+        //     [
+        //         'ResType' => $request->post('ResType'),
+        //         'Title' => $request->post('Title'),
+        //         'JournalName' => $request->post('JournalName'),
+        //         'PubDate' => $request->post('PubDate'),
+        //         'JournalType' => $request->post('JournalType'),
+        //         'Jpos' => $request->post('Jpos'),
+        //         'Numb' => $request->post('Numb'),
+        //         'Page' => $request->post('Page'),
+        //         'Isconf' => $request->post('Isconf'),
+        //         'ConfName' => $request->post('ConfName'),
+        //         'ConfPlace' => $request->post('ConfPlace'),
+        //         'Rtype' => $request->post('Rtype'),
+        //         'CiteScor' => $request->post('CiteScor'),
+        //         'ImpactFactor' => $request->post('ImpactFactor'),
+        //         'JournalQuartile' => $request->post('JournalQuartile'),
+        //         'ISSN' => $request->post('ISSN'),
+        //         'DOI' => $request->post('DOI'),
+        //         'Rlink' => $request->post('Rlink'),
+        //         'Extaut' => $request->post('Extaut'),
+
+
+        //     ]
+        // );
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -185,10 +401,17 @@ class ResearchesController extends Controller
         $rid = $request->input('rid');
         $Researches = Researches::find($rid);
         $Attachments = Attachments::where('ParentGuid', $Researches->Guid)->get();
-
+        $EmpResearch = EmployeeResearches::where([['Rid', $rid]])->get();
+        $EmpResearch2 = EmployeeResearches::where([['Rid', $rid]])->get()
+            ->map(function ($item) {
+                $item['Eid'] = Employees::find($item['Eid'])->fullname;
+                return $item;
+            });
         $data = [
             'Researches' => $Researches,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'EmpResearch' => $EmpResearch,
+            'EmpResearch2' => $EmpResearch2,
         ];
         return response()->json($data);
     }
@@ -247,12 +470,19 @@ class ResearchesController extends Controller
             ->distinct()
             ->orderBy('Rtype')
             ->get();
+            $getEmployees = Employees::select('eid', 'fullname')
+            ->whereNotNull('fullname')
+            ->where('fullname', '<>', '')
+            ->distinct()
+            ->orderBy('fullname')
+            ->get();
         $data = [
             'getResType' => $getResType,
             'getJournalType' => $getJournalType,
             'getJpos' => $getJpos,
             'getIsconf' => $getIsconf,
             'getRtype' => $getRtype,
+            'getEmployees' =>$getEmployees,
 
 
         ];

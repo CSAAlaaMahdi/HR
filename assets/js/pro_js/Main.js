@@ -216,3 +216,40 @@ function DashboardMain_FillData(){
         }
     });
 }
+
+// $(document).ready(function () {
+//     var lastid =0;
+//     var request=function()
+//     {
+//         requesting=true;
+//         $.ajaxSetup({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             }
+//         });
+
+//         $.ajax({
+//             type: "GET",
+//             url: 'dashboardmainCards/CardsData',
+//             data:{id:lastid},
+//             success: function (response) {
+
+//                 console.log(response);
+//                 // $('#PatientCount').text(response.PatientCount);
+//                 // $('#PatientDates').text(response.PatientDates);
+//                 // $('#UsersCount').text(response.UsersCount);
+//                 // $('#DaysOfAccount').text(response.DifferenceInDays);
+//                 // $('#PurchasesSum').text(response.Purchases);
+//                 // $('#IncomeSum').text(response.Income);
+//                 // $('#DebitSum').text(response.Debit);
+//                 // $('#CreditSum').text(response.Credit);
+               
+
+//             }
+//         });
+//     };
+
+//         setInterval(request,4000);
+
+
+// });

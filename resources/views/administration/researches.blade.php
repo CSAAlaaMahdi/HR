@@ -57,7 +57,7 @@
 
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">نوع البحث  </div>
+                                        <div class="dx-field-label">نوع البحث </div>
                                         <div class="dx-field-value">
                                             <div id="ResType"></div>
                                         </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">تاريخ النشر   </div>
+                                        <div class="dx-field-label">تاريخ النشر </div>
                                         <div class="dx-field-value">
                                             <div id="PubDate"></div>
                                         </div>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">Numb    </div>
+                                        <div class="dx-field-label">Numb </div>
                                         <div class="dx-field-value">
                                             <div id="Numb"></div>
                                         </div>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">confName    </div>
+                                        <div class="dx-field-label">confName </div>
                                         <div class="dx-field-value">
                                             <div id="ConfName"></div>
                                         </div>
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">CiteScor    </div>
+                                        <div class="dx-field-label">CiteScor </div>
                                         <div class="dx-field-value">
                                             <div id="CiteScor"></div>
                                         </div>
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">ISSN    </div>
+                                        <div class="dx-field-label">ISSN </div>
                                         <div class="dx-field-value">
                                             <div id="ISSN"></div>
                                         </div>
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">Extaut    </div>
+                                        <div class="dx-field-label">Extaut </div>
                                         <div class="dx-field-value">
                                             <div id="Extaut"></div>
                                         </div>
@@ -123,7 +123,7 @@
                             <div class="col-md-4">
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">عنوان البحث  </div>
+                                        <div class="dx-field-label">عنوان البحث </div>
                                         <div class="dx-field-value">
                                             <div id="Title"></div>
                                         </div>
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">نوع المجلة  </div>
+                                        <div class="dx-field-label">نوع المجلة </div>
                                         <div class="dx-field-value">
                                             <div id="JournalType"></div>
                                         </div>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">Page    </div>
+                                        <div class="dx-field-label">Page </div>
                                         <div class="dx-field-value">
                                             <div id="Page"></div>
                                         </div>
@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">ConfPlace    </div>
+                                        <div class="dx-field-label">ConfPlace </div>
                                         <div class="dx-field-value">
                                             <div id="ConfPlace"></div>
                                         </div>
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">ImpactFactor    </div>
+                                        <div class="dx-field-label">ImpactFactor </div>
                                         <div class="dx-field-value">
                                             <div id="ImpactFactor"></div>
                                         </div>
@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">DOI    </div>
+                                        <div class="dx-field-label">DOI </div>
                                         <div class="dx-field-value">
                                             <div id="DOI"></div>
                                         </div>
@@ -182,7 +182,7 @@
 
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">اسم المجلة  </div>
+                                        <div class="dx-field-label">اسم المجلة </div>
                                         <div class="dx-field-value">
                                             <div id="JournalName"></div>
                                         </div>
@@ -200,7 +200,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">Isconf    </div>
+                                        <div class="dx-field-label">Isconf </div>
                                         <div class="dx-field-value">
                                             <div id="Isconf"></div>
                                         </div>
@@ -209,7 +209,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">Rtype    </div>
+                                        <div class="dx-field-label">Rtype </div>
                                         <div class="dx-field-value">
                                             <div id="Rtype"></div>
                                         </div>
@@ -218,7 +218,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">JournalQuartile    </div>
+                                        <div class="dx-field-label">JournalQuartile </div>
                                         <div class="dx-field-value">
                                             <div id="JournalQuartile"></div>
                                         </div>
@@ -227,7 +227,7 @@
                                 </div>
                                 <div class="dx-fieldset" id="Researches-container">
                                     <div class="dx-field">
-                                        <div class="dx-field-label">رابط البحث    </div>
+                                        <div class="dx-field-label">رابط البحث </div>
                                         <div class="dx-field-value">
                                             <div id="Rlink"></div>
                                         </div>
@@ -236,46 +236,67 @@
                                 </div>
 
 
-                        </div>
-                       
-                    </div>
-                   
-                    <div class="col-md-12">
-                        <div class="col-md-4">
-
-                            <div class="dx-fieldset" id="Researches-container">
-                                <div class="dx-field">
-                                    <div class="dx-field-label">نسخة مصورة  </div>
-                                    <div class="dx-field-value">
-                                        <div id="FilePath"></div>
-                                    </div>
-                                    <span id="error_FilePath" class="text-danger"></span>
-                                </div>
                             </div>
 
+                        </div>
+                        <div class="col-md-12">
+                            <div class="dx-fieldset" id="Researches-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label">الاسماء  </div>
+                                    <div class="dx-field-value">
+                                        <div id="eid"></div>
+                                    </div>
+                                    <span id="error_eid" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="dx-fieldset" id="Researches-container">
+                                <div class="dx-field">
+                                    <div class="dx-field-label">الاسماء  </div>
+                                    <div class="dx-field-value">
+                                        <div id="EmpNames"></div>
+                                    </div>
+                                    <span id="error_EmpNames" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-4">
 
+                                <div class="dx-fieldset" id="Researches-container">
+                                    <div class="dx-field">
+                                        <div class="dx-field-label">نسخة مصورة </div>
+                                        <div class="dx-field-value">
+                                            <div id="FilePath"></div>
+                                        </div>
+                                        <span id="error_FilePath" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div id="image-container" class="row">
-                            
+                        <div class="col-md-12">
+                            <div id="image-container" class="row">
+
+                            </div>
                         </div>
+                        <hr>
+                        <div id="btnSave" style="float:right;margin-right:25px"></div>
                     </div>
-                    <hr>
-                    <div id="btnSave" style="float:right;margin-right:25px"></div>
+
+
+
                 </div>
 
 
-
             </div>
-
-
-        </div>
-        <script type="text/javascript" src="{{ url('assets/js/pro_js/Researches.js') }}"></script>
+            <script type="text/javascript" src="{{ url('assets/js/pro_js/Researches.js') }}"></script>
 
 
 
-        <script>
-            $("#Researchesaction").hide();
-        </script>
-    @endSection()
+            <script>
+                $("#Researchesaction").hide();
+            </script>
+        @endSection()
