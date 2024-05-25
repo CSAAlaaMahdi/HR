@@ -1,5 +1,5 @@
 @extends('admin.layout.mainarabic')
-@section('title', 'الرئيسية')
+{{-- @section('title', 'الرئيسية') --}}
 @section('content')
 
     <div class="row">
@@ -22,14 +22,14 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3 id="GetVacations">0</h3>
 
-                    <p>Bounce Rate</p>
+                    <p id="titlefont">الاجازات خلال السنة</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer" id="titlefont"> الاجازات <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -37,14 +37,14 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>44</h3>
+                    <h3 id="GetDispatches">0</h3>
 
-                    <p>User Registrations</p>
+                    <p id="titlefont"> الايفادات السنوية</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer" id="titlefont"> الايفادات <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -52,14 +52,14 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3 id="GetResearches">0</h3>
 
-                    <p>Unique Visitors</p>
+                    <p id="titlefont">البحوث المنشورة</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer" id="titlefont">البحوث <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -70,6 +70,14 @@
 
         <section class="col-lg-12 connectedSortable">
             <!-- Custom tabs (Charts with tabs)-->
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="datagrid pt-5" id="Certificationsdatagrid"></div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="datagrid pt-5" id="Certificationsdatagrid2"></div>
+                </div>
+            </div>
 
 
 

@@ -45,6 +45,7 @@ Route::get('/login/checking', [LoginController::class, 'checking']);
 Route::controller(Admin::class)->group(function () {
     Route::get('/dashboard', 'index')->name('home.index');
     Route::get('/dashboard/cardsdata', 'cardsData');
+    Route::get('/dashboard/Certifications', 'GetCertifications');
 
 
 });
@@ -113,3 +114,4 @@ Route::post('dispatchDelete/DeleteImage', [DispatchController::class, 'DeleteIma
 Route::get('dashboardmainfill/filldata', [DashboardMain::class, 'filldata']);
 Route::get('dashboardmainPermissions/Permissions', [DashboardMain::class, 'getPermissions']);
 Route::get('dashboardmainCards/CardsData', [DashboardMain::class, 'CardsData']);
+

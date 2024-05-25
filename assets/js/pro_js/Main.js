@@ -17,9 +17,9 @@ function GetPermission(){
                 $("#Login_Dashboard_Departments a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let UserValue = response.Permission.filter(function (item){
                 return item.FormName === 'المستخدمون';
             })
@@ -27,9 +27,9 @@ function GetPermission(){
                 $("#Login_Users a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let GroupsValue = response.Permission.filter(function (item){
                 return item.FormName === 'المجموعات';
             })
@@ -37,9 +37,9 @@ function GetPermission(){
                 $("#Login_UserGroupPermissions a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let UserPermissionsValue = response.Permission.filter(function (item){
                 return item.FormName === 'الصلاحيات';
             })
@@ -47,9 +47,9 @@ function GetPermission(){
                 $("#Login_UserPermissions a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let EmployeesValue = response.Permission.filter(function (item){
                 return item.FormName === 'الموظفين';
             })
@@ -57,9 +57,9 @@ function GetPermission(){
                 $("#Login_Employees a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let JobsValue = response.Permission.filter(function (item){
                 return item.FormName === 'الترفيعات';
             })
@@ -67,20 +67,20 @@ function GetPermission(){
                 $("#Login_Jobs a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let VacationsValue = response.Permission.filter(function (item){
                 return item.FormName === 'الاجازات';
             })
-            
+
             if (!VacationsValue[0]['Enable']) {
                 $("#Login_Vacations a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let ThanksValue = response.Permission.filter(function (item){
                 return item.FormName === 'التشكرات';
             })
@@ -88,9 +88,9 @@ function GetPermission(){
                 $("#Login_Thanks a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let ChildrenValue = response.Permission.filter(function (item){
                 return item.FormName === 'الزوجية والاطفال';
             })
@@ -98,9 +98,9 @@ function GetPermission(){
                 $("#Login_Children a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let AdministraionOrdersValue = response.Permission.filter(function (item){
                 return item.FormName === 'الاوامر الادارية';
             })
@@ -108,9 +108,9 @@ function GetPermission(){
                 $("#Login_AdministrationOrders a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let DispearValue = response.Permission.filter(function (item){
                 return item.FormName === 'حركة الملاك';
             })
@@ -118,9 +118,9 @@ function GetPermission(){
                 $("#Login_Disapear a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let DispatchValue = response.Permission.filter(function (item){
                 return item.FormName === 'الايفادات';
             })
@@ -128,9 +128,9 @@ function GetPermission(){
                 $("#Login_Dispatch a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let Certification = response.Permission.filter(function (item){
                 return item.FormName === 'الشهادات';
             })
@@ -138,9 +138,9 @@ function GetPermission(){
                 $("#Login_Certification a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let ComityValue = response.Permission.filter(function (item){
                 return item.FormName === 'اللجان';
             })
@@ -148,9 +148,9 @@ function GetPermission(){
                 $("#Login_Comity a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let Supervisor = response.Permission.filter(function (item){
                 return item.FormName === 'الاشراف';
             })
@@ -158,9 +158,9 @@ function GetPermission(){
                 $("#Login_Supervisor a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let PositionsValue = response.Permission.filter(function (item){
                 return item.FormName === 'المناصب';
             })
@@ -168,9 +168,9 @@ function GetPermission(){
                 $("#Login_Positions a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let ActivityValue = response.Permission.filter(function (item){
                 return item.FormName === 'الانشطة والفعاليات';
             })
@@ -178,9 +178,9 @@ function GetPermission(){
                 $("#Login_Activity a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let ResearchesValue = response.Permission.filter(function (item){
                 return item.FormName === 'البحوث والنشر';
             })
@@ -188,9 +188,9 @@ function GetPermission(){
                 $("#Login_Researches a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
+                });
+
+            }
             let Articles = response.Permission.filter(function (item){
                 return item.FormName === 'المقالات';
             })
@@ -198,10 +198,10 @@ function GetPermission(){
                 $("#Login_Articles a").click(function(e) {
                     e.preventDefault();
 
-                });  
-            
-            } 
-           
+                });
+
+            }
+
         }
     });
 }
@@ -211,7 +211,7 @@ function DashboardMain_FillData(){
         type: "GET",
         url: "dashboardmainfill/filldata",
         success: function (data) {
-           
+
            $(".loginname").text(data.User);
         }
     });
@@ -243,7 +243,7 @@ function DashboardMain_FillData(){
 //                 // $('#IncomeSum').text(response.Income);
 //                 // $('#DebitSum').text(response.Debit);
 //                 // $('#CreditSum').text(response.Credit);
-               
+
 
 //             }
 //         });
