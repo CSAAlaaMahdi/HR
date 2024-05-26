@@ -768,6 +768,7 @@ function Employee_filldata() {
                                                 $("#deptid").dxDropDownBox("instance").option("value",Number(response.Emp.deptid));
 
                                                 $('#EmpImage').empty();
+                                                $('#EmpImageDelete').empty();
                                                 let images = [];
                                                 $.each(response.Attachments, function(index, file) {
                                                     images.push(file['FilePath']);
@@ -781,12 +782,12 @@ function Employee_filldata() {
                                                     );
                                                     $('#EmpImageDelete').append(
                                                         '<div class="image-preview">' +
-                                                        '<button class="delete-image btn-danger">حذف الكتاب</button>' +
+                                                        '<button type="button" class="delete-imageEmp btn-outline-danger " id="titlefont"><i class="fa fa-trash"> حذف</i> </button>' +
                                                         '</div>'
                                                     );
                                                 });
                                                   // Delete Image
-                                                $('#EmpImageDelete').on('click', '.delete-image', function() {
+                                                $('#EmpImageDelete').on('click', '.delete-imageEmp', function() {
                                                     var index = $(this).closest('.image-preview').index();
 
                                                     if(index >=0 && index < images.length){
@@ -796,10 +797,10 @@ function Employee_filldata() {
                                                         var id = $('#eid').dxTextBox("instance").option("value");
                                                         let Guid = $("#Guid").dxTextBox("instance").option("value");
                                                         // Remove the image from the images array
-                                                        images.splice(index, 1);
+                                                        images.splice(index, 0);
 
                                                         // Remove the image preview from the view
-                                                        $(this).closest('.image-preview').remove();
+                                                        $('.image-preview').remove();
 
                                                         // Send an AJAX request to delete the image from the server
                                                         $.ajaxSetup({
@@ -3740,12 +3741,16 @@ $(document).ready(function () {
                         reader.onload = function(e) {
                             // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
                             $('#EmpImage').append(
-                                '<div class="image-preview">' +
-                                '<button class="delete-image">حذف الصورة</button>' +
+                                '<div class="image-preview">' +  
                                 '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
                                 '</div>'
                             );
-                            // saveImageToServer();
+                            $('#EmpImageDelete').append(
+                                '<div class="image-preview">' +
+                                '<button class="delete-imageEmp btn-danger"> <i class="fa fa-trash"> حذف</button>' +
+                                '</div>'
+                            );
+                           
                         }
                         reader.readAsDataURL(file);
                     });
@@ -3754,7 +3759,7 @@ $(document).ready(function () {
         });
 
         // Delete Image
-        $('#EmpImage').on('click', '.delete-image', function() {
+        $('#EmpImageDelete').on('click', '.delete-imageEmp', function() {
             var index = $(this).closest('.image-preview').index();
 
             if(index >=0 && index < images.length){

@@ -20,7 +20,7 @@
     align-items: center; 
 }
 
-.delete-image2 {
+/* .delete-image2 {
     margin-bottom: 10px;
     background-color: rgb(255, 117, 70);
     height: 50px;
@@ -41,7 +41,7 @@
   font-size: 16px;
   border: none;
   font: bold;
-}
+} */
 
   .custom-header_Thanks {
     background-color: #343A40; /* Set your desired color here */

@@ -384,7 +384,7 @@ function Disapear_fetch() {
 
                                                             $('#Disapearimage-container').append(
                                                                 '<div class="image-preview">' +
-                                                                '<button class="delete-image">حذف الكتاب</button>' +
+                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i> حذف الكتاب</button>' +
                                                                 '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
                                                                 '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
                                                                 '</div>'

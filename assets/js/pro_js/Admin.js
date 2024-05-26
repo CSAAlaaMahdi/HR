@@ -230,7 +230,7 @@ $(document).ready(function () {
                         caption: "#",
                         width: 100,
                         cellTemplate: function (container, options) {
-                            var imageUrl = 'assets/img/navbar/icons8_certificate_64px.png' ;
+                            var imageUrl = 'assets/img/navbar/icons8_People_64px.png' ;
 
                             // Concatenate the base URL with the image filename
                             // var imageUrl = baseUrl + imageName;

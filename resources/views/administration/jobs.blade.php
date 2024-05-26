@@ -8,7 +8,7 @@
                     <div class="card-header" style="background-color: #343A40">
 
                         <div id="btnNewAdd" style="float: right"></div>
-                        <h4 style="color: white;float: right;margin-right: 35%">العناوين  الوظيفية</h4>
+                        <h4 style="color: white;float: right;margin-right: 35%">الترفيعات  </h4>
 
                     </div>
                     <div class="card-body">

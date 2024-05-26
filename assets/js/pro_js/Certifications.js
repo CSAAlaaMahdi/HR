@@ -483,7 +483,7 @@ function Certifications_fetch() {
 
                                                             $('#image-container').append(
                                                                 '<div class="image-preview">' +
-                                                                '<button class="delete-image">حذف الكتاب</button>' +
+                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
                                                                 '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
                                                                 '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
                                                                 '</div>'
@@ -1063,7 +1063,7 @@ $(document).ready(function () {
                             // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
                             $('#image-container').append(
                                 '<div class="image-preview">' +
-                                '<button class="delete-image">حذف الصورة</button>' +
+                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الصورة</button>' +
                                 '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
                                 '</div>'
                             );
