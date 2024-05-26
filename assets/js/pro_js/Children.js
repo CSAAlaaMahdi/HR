@@ -61,7 +61,7 @@ function Children_UpdateOrCreate() {
     $.each(images, function(index, file) {
         formData.append('image[]', file);
     });
-    
+
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -125,7 +125,7 @@ function Children_fetch() {
                         groupPanel: { visible: true },
                         grouping: {
                             autoExpandAll: false,
-                            
+
                         },
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
@@ -252,20 +252,9 @@ function Children_fetch() {
                             {
                                 dataField: "chdob",
                                 caption: " تاريخ الولادة",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+
                             },
 
                             {
@@ -290,7 +279,7 @@ function Children_fetch() {
                                                 url: "children/show",
                                                 data: data,
                                                 success: function (response) {
-                                                    
+
                                                     $("#id")
                                                         .dxTextBox("instance")
                                                         .option({

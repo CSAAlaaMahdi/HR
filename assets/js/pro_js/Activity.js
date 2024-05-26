@@ -225,20 +225,8 @@ function Activity_fetch() {
                             {
                                 dataField: "ActDate",
                                 caption: " تاريخه ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType:"date",
+                                format: "yyyy-MM-dd",
                             },
                             {
                                 dataField: "NoDays",
@@ -366,7 +354,7 @@ function Activity_fetch() {
 
                                                         let eidValue = [];
                                                         let eidValueName = [];
-                                                       
+
                                                         $.each(response.EmpActivity, function (index, value) {
                                                             eidValue.push(Number(value['eid']));
                                                         });
@@ -748,7 +736,7 @@ function Activity_filldata() {
 
                     });
                 });
-            
+
 
             },
         });

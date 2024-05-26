@@ -552,7 +552,7 @@ $(document).ready(function () {
             }else{
                 document.getElementById("card_Userstitle").innerText ="اضافة مستخدم";
                 displaycard.style.display = "block";
-                document.getElementById("firstCard").scrollIntoView();
+                document.getElementById("card_Userstitle").scrollIntoView();
 
             }
         },
@@ -620,7 +620,7 @@ $(document).ready(function () {
     //         inputAttr: { "aria-label": "Piece Type",style:"font-size:14px", },
     //     });
     // });
-   
+
     // $(() => {
     //     $("#UserPassW").dxTextBox({
     //         placeholder: "  ",

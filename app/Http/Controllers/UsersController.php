@@ -6,8 +6,7 @@ use App\Models\Depts;
 use App\Models\User2;
 use App\Models\UserGroupPermissions;
 use Illuminate\Http\Request;
-
-
+use Ramsey\Uuid\Uuid;
 
 class UsersController extends Controller
 {
@@ -38,9 +37,9 @@ class UsersController extends Controller
     {
 
         $Guid = $request->post('userid');
-        if ($Guid == null || $Guid == "") {
-            $Guid = strtoupper(Uuid::uuid4()->toString());
-        }
+        // if ($Guid == null || $Guid == "") {
+        //     $Guid = strtoupper(Uuid::uuid4()->toString());
+        // }
         $User = User2::updateOrCreate(
             [
                 'userid' => $Guid,
@@ -50,9 +49,9 @@ class UsersController extends Controller
                 'username' => $request->post('username'),
                 'pwd' => $request->post('pwd'),
                 'deptid' => $request->post('deptid'),
-                'ulvl' => $request->post('ulvl'),
-                'UserPassW' => $request->post('UserPassW'),
-                'teachno' => $request->post('teachno'),
+                // 'ulvl' => $request->post('ulvl'),
+                // 'UserPassW' => $request->post('UserPassW'),
+                'GroupID' => $request->post('GroupID'),
 
 
             ]

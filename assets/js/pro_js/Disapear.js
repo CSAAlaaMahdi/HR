@@ -243,40 +243,18 @@ function Disapear_fetch() {
                             {
                                 dataField: "duration_from",
                                 caption: " من تاريخ  ",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 dataField: "duration_to",
                                 caption: " الى تاريخ  ",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 dataField: "docno",
@@ -299,20 +277,9 @@ function Disapear_fetch() {
                             {
                                 dataField: "docdate",
                                 caption: "تاريخ الكتاب  ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+
                             },
                             {
                                 dataField: "notes",
@@ -333,7 +300,7 @@ function Disapear_fetch() {
                                         .appendTo(container);
                                 },
                             },
-                           
+
                             {
                                 caption: "الحدث",
                                 width: 200,
@@ -356,7 +323,7 @@ function Disapear_fetch() {
                                                 url: "disapear/show",
                                                 data: data,
                                                 success: function (response) {
-                                                   
+
                                                     $("#rid")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -403,7 +370,7 @@ function Disapear_fetch() {
                                                         .option({
                                                             value:new Date(response.Disapear.duration_to)
                                                         });
-                                                        
+
                                                         $("#notes")
                                                         .dxTextArea("instance")
                                                         .option({
@@ -875,7 +842,7 @@ $(document).ready(function () {
         });
     });
 
-  
+
       $(() => {
         $("#notes").dxTextArea({
             // ...

@@ -14,7 +14,7 @@
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer" id="titlefont">  الموظفين <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('employees.index')}}" class="small-box-footer" id="titlefont">  الموظفين <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -29,7 +29,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer" id="titlefont"> الاجازات <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('vacations.index')}}" class="small-box-footer" id="titlefont"> الاجازات <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -44,7 +44,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer" id="titlefont"> الايفادات <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('dispatch.index')}}" class="small-box-footer" id="titlefont"> الايفادات <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -59,7 +59,7 @@
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer" id="titlefont">البحوث <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{route('researches.index')}}" class="small-box-footer" id="titlefont">البحوث <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 

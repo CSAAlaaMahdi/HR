@@ -256,20 +256,9 @@ function Researches_fetch() {
                             {
                                 dataField: "PubDate",
                                 caption: "تاريخ النشر ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+
                             },
                             {
                                 dataField: "JournalType",
@@ -686,7 +675,7 @@ function Researches_fetch() {
                                                         });
                                                         let eidValue = [];
                                                         let eidValueName = [];
-                                                       
+
                                                         $.each(response.EmpResearch, function (index, value) {
                                                             eidValue.push(Number(value['Eid']));
                                                         });

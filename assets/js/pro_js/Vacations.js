@@ -40,7 +40,7 @@ function Vacations_UpdateOrCreate() {
         month: "2-digit",
         day: "2-digit",
     }).format(selectedDate2);
-    
+
     var formData = new FormData();
 
     formData.append('vcid', $("#vcid").dxTextBox("instance").option("value"));
@@ -229,20 +229,9 @@ function Vacations_fetch() {
                             {
                                 dataField: "vdate",
                                 caption: "تاريخ الاجازة ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+
                             },
                             {
                                 dataField: "docno",
@@ -266,23 +255,12 @@ function Vacations_fetch() {
                             {
                                 dataField: "docdate",
                                 caption: "تاريخ الكتاب ",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
-                           
+
                             {
                                 caption: "الحدث",
                                 width: 200,
@@ -305,7 +283,7 @@ function Vacations_fetch() {
                                                 url: "vacations/show",
                                                 data: data,
                                                 success: function (response) {
-                                                    
+
                                                     $("#vcid")
                                                         .dxTextBox("instance")
                                                         .option({
@@ -326,7 +304,7 @@ function Vacations_fetch() {
                                                         .option({
                                                         value: response.Vacations.vtid,
                                                         });
-                                                        
+
                                                     $("#nodays")
                                                         .dxTextBox("instance")
                                                         .option({

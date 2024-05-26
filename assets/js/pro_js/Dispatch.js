@@ -243,40 +243,18 @@ function Dispatch_fetch() {
                             {
                                 dataField: "datefrom",
                                 caption: " من تاريخ  ",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 dataField: "dateto",
                                 caption: " الى تاريخ  ",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 dataField: "docno",
@@ -299,20 +277,9 @@ function Dispatch_fetch() {
                             {
                                 dataField: "docdate",
                                 caption: "تاريخ الكتاب  ",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+
                             },
                             {
                                 dataField: "notes",
@@ -333,7 +300,7 @@ function Dispatch_fetch() {
                                         .appendTo(container);
                                 },
                             },
-                           
+
                             {
                                 caption: "الحدث",
                                 width: 200,
@@ -403,7 +370,7 @@ function Dispatch_fetch() {
                                                         .option({
                                                             value:new Date(response.Dispatch.dateto)
                                                         });
-                                                        
+
                                                         $("#notes")
                                                         .dxTextArea("instance")
                                                         .option({
@@ -875,7 +842,7 @@ $(document).ready(function () {
         });
     });
 
-  
+
       $(() => {
         $("#notes").dxTextArea({
             // ...

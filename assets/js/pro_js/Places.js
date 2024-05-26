@@ -15,7 +15,7 @@ function Places_chechdata() {
         error_placeName = "";
         $("#error_placeName").text(error_placeName);
     }
-   
+
 }
 
 function Places_UpdateOrCreate() {
@@ -60,7 +60,7 @@ function Places_filldata() {
             type: "GET",
             url: url + "filldata",
             success: function (response) {
-               
+
                 $(() => {
                     let dataGrid;
                     $("#perID").dxDropDownBox({
@@ -83,7 +83,7 @@ function Places_filldata() {
                                         dataField:"placeName",
                                         caption:"اسم الموقع"
                                     },
-              
+
                                 ],
                                 hoverStateEnabled: true,
                                 paging: { enabled: true, pageSize: 10 },
@@ -115,7 +115,7 @@ function Places_filldata() {
 
                             return $dataGrid;
                         },
-                       
+
 
                     });
                 });
@@ -133,14 +133,7 @@ function Places_fetch() {
             success: function (response) {
                 console.log(response);
                 $(function () {
-                    // const placesData = response.getPlaces.data;
-                    // const totalData = response.getPlaces.total;
-                    // const nextPageUrl = response.getPlaces.next_page_url;
-                    // const prevPageUrl = response.getPlaces.prev_page_url;
-                    // const currentPage = response.getPlaces.current_page;
-                    // const totalPages = response.getPlaces.last_page;
-                    
-
+                   
                     const treeList = $("#PlacesTree")
                         .dxTreeList({
                             dataSource:response.getPlaces,
@@ -186,7 +179,7 @@ function Places_fetch() {
                                 {
                                     dataField: "placeName",
                                     caption: "الموقع",
-                                 
+
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
                                         var fontWeight = "400"; // Set the desired font weight
@@ -210,7 +203,7 @@ function Places_fetch() {
                                     },
                                     // fixed: true,
                                 },
-                               
+
                                 {
                                     caption: "الحدث",
                                     width: 200,
@@ -237,7 +230,7 @@ function Places_fetch() {
 
                                                             $('#ID').dxTextBox("instance").option({value:response.ID});
                                                             $('#placeName').dxTextBox("instance").option({value:response.placeName});
-                                                         
+
                                                             let datavalue=Number(response.perID);
                                                             $('#perID').dxDropDownBox("instance").option(
                                                                 {
@@ -281,7 +274,7 @@ function Places_fetch() {
                                             icon: "trash",
                                             type:"default",
                                             onClick() {
-                                              
+
 
 
                                             },
@@ -298,7 +291,7 @@ function Places_fetch() {
                                 visible: true,
                                 width:500,
                             },
-                           
+
                             selection: { mode: "single" },
                             onSelectionChanged: function (e) {
                                 e.component
@@ -410,14 +403,14 @@ function Places_fetch() {
                                 allowedPageSizes: [10, 25, 50, 100, "all"],
                                 showNavigationButtons: true,
                             },
-                           
+
                         }).dxTreeList("instance");
-                     
-                        
+
+
                 });
-                
+
             },
-           
+
         });
     });
 }
@@ -443,7 +436,7 @@ $(document).ready(function () {
 
         });
     });
-   
+
     $("#Popup").dxPopup({
         // ...
         showTitle: true,
@@ -537,7 +530,7 @@ $(document).ready(function () {
         icon: 'check',
         width: 120,
         onClick() {
-          
+
             Places_chechdata();
             if(error_placeName != ""){
                 console.log('check')

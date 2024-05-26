@@ -13,21 +13,25 @@
             </div>
 
             <div class="card-body">
-                <div class="col-md-12 Search_Image ">
-
+                <div class="col-md-12 Search_Image">
                     <div class="dx-fieldset" id="Search-container">
                         <div class="dx-field">
                             <div class="dx-field-label">بحث</div>
                             <div class="dx-field-value">
                                 <div id="SearchEmp"></div>
                             </div>
-                            <span id="error_SearchEmp" class="text-danger"></span>
+
                         </div>
                     </div>
+                    <div>
+                        <div id="EmpImage">
+                        </div>
+                        <div id="EmpImageDelete">
 
-                    <div id="EmpImage">
+                        </div>
 
                     </div>
+
 
 
                 </div>
@@ -35,7 +39,7 @@
 
 
 
-                <ul class="nav nav-tabsEmployee">
+                <ul class="nav nav-tabsEmployee pt-5">
                     <li class="nav-item"><a href="#EmpGeneral" class="nav-link active" data-bs-toggle="tab">بيانات
                             الموظف</a>
                     </li>
@@ -1721,7 +1725,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                 
+
 
 
                                 </div>
@@ -1747,7 +1751,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                 
+
 
 
                                 </div>

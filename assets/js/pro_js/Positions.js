@@ -34,7 +34,7 @@ function Positions_UpdateOrCreate() {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
-    }).format(selectedDate); 
+    }).format(selectedDate);
     var selectedDate2 = $("#datefrom").dxDateBox("instance").option("value");
     var datefrom = new Intl.DateTimeFormat("en-US", {
         year: "numeric",
@@ -254,58 +254,25 @@ function Positions_fetch() {
                             {
                                 dataField: "docdate",
                                 caption: " تاريخ الكتاب",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+
                             },
                             {
                                 dataField: "datefrom",
                                 caption: "من تاريخ  ",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 dataField: "dateto",
                                 caption: "الى تاريخ  ",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 caption: "الحدث",

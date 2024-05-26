@@ -349,21 +349,10 @@ function Certifications_fetch() {
                             {
                                 dataField: "cerdate",
                                 caption: "تاريخ الشهادة ",
+                                dataType: "date",
+                                format :"yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 dataField: "equivlent_no",
@@ -387,21 +376,10 @@ function Certifications_fetch() {
                             {
                                 dataField: "equivlent_date",
                                 caption: "تاريخ المعادلة ",
+                                dataType : "date",
+                                format : "yyyy-MM-dd",
                                 visible:false,
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+
                             },
                             {
                                 caption: "الحدث",

@@ -32,7 +32,7 @@ function Supervisors_UpdateOrCreate() {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
-    }).format(selectedDate); 
+    }).format(selectedDate);
     var formData = new FormData();
 
     formData.append('id', $("#id").dxTextBox("instance").option("value"));
@@ -236,20 +236,9 @@ function Supervisors_fetch() {
                             {
                                 dataField: "docdate",
                                 caption: "تاريخ الكتاب",
-                                cellTemplate: function (container, options) {
-                                    var cellValue = options.value;
-                                    var fontWeight = "450"; // Set the desired font weight
-                                    let fontSize = "13px";
-                                    let fontColor = "#2F4F4F";
-                                    $("<div>")
-                                        .css({
-                                            "font-size": fontSize,
-                                            "font-weight": fontWeight,
-                                            color: fontColor,
-                                        })
-                                        .text(cellValue)
-                                        .appendTo(container);
-                                },
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+
                             },
                             {
                                 caption: "الحدث",

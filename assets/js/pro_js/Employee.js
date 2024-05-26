@@ -774,14 +774,19 @@ function Employee_filldata() {
 
                                                     $('#EmpImage').append(
                                                         '<div class="image-preview">' +
-                                                        '<button class="delete-image">حذف الكتاب</button>' +
-                                                        '<img src="assets/img/employeesImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                        '<img src="assets/img/employeesImage/' + file['FilePath'] + '" >' +
                                                         '<a href="assets/img/employeesImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                        '</div>'
+
+                                                    );
+                                                    $('#EmpImageDelete').append(
+                                                        '<div class="image-preview">' +
+                                                        '<button class="delete-image btn-danger">حذف الكتاب</button>' +
                                                         '</div>'
                                                     );
                                                 });
                                                   // Delete Image
-                                                $('#EmpImage').on('click', '.delete-image', function() {
+                                                $('#EmpImageDelete').on('click', '.delete-image', function() {
                                                     var index = $(this).closest('.image-preview').index();
 
                                                     if(index >=0 && index < images.length){
@@ -2631,17 +2636,17 @@ function Employee_filldata() {
                                                                 dataField:"id",
                                                                 caption:"ت",
                                                                 visible:false,
-                                
+
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
                                                                     var imageUrl = 'assets/img/navbar/icons8_article_64px.png' ;
-                                
+
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
-                                
+
                                                                     var image = $("<img>")
                                                                         .attr("src", imageUrl)
                                                                         .css({
@@ -2687,7 +2692,7 @@ function Employee_filldata() {
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
-                                
+
                                                                 },
                                                             },
                                                             {
@@ -2841,7 +2846,7 @@ function Employee_filldata() {
                                                     });
                                                 });
                                                 //#endregion
-                                            
+
                                                 //#region Emp Family...
                                                 $(function () {
                                                     const dataGrid = $("#EmpChildrendatagrid").dxDataGrid({
@@ -2879,17 +2884,17 @@ function Employee_filldata() {
                                                                 dataField:"id",
                                                                 caption:"ت",
                                                                 visible:false,
-                                
+
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
                                                                     var imageUrl = 'assets/img/navbar/icons8_children_64px.png' ;
-                                
+
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
-                                
+
                                                                     var image = $("<img>")
                                                                         .attr("src", imageUrl)
                                                                         .css({
@@ -2936,7 +2941,7 @@ function Employee_filldata() {
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
-                                
+
                                                                 },
                                                             },
                                                             {
@@ -3091,7 +3096,7 @@ function Employee_filldata() {
                                                 });
 
                                                 //#endregion
-                                           
+
                                                 //#region Emp Acitivity
                                                 $(function () {
                                                     const dataGrid = $("#EmpActivitydatagrid").dxDataGrid({
@@ -3129,17 +3134,17 @@ function Employee_filldata() {
                                                                 dataField:"eaid",
                                                                 caption:"ت",
                                                                 visible:false,
-                                
+
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
                                                                     var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png' ;
-                                
+
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
-                                
+
                                                                     var image = $("<img>")
                                                                         .attr("src", imageUrl)
                                                                         .css({
@@ -3152,7 +3157,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "atype",
                                                                 caption: "الحالة",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3172,7 +3177,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "Type",
                                                                 caption: "النوع",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3192,7 +3197,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "Name",
                                                                 caption: "العنوان",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3212,7 +3217,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "Place",
                                                                 caption: "المكان",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3232,7 +3237,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "NoDays",
                                                                 caption: "عدد الايام",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3252,7 +3257,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "Participants",
                                                                 caption: "المشاركين",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3269,7 +3274,7 @@ function Employee_filldata() {
                                                                 },
                                                                 // groupIndex: 0,
                                                             },
-                                                           
+
                                                         ],
                                                         onContentReady: function (e) {
                                                             // Add custom class to the header panel
@@ -3281,7 +3286,7 @@ function Employee_filldata() {
                                                 });
 
                                                 //#endregion
-                                                
+
                                                 //#region Emp Comity
                                                 $(function () {
                                                     const dataGrid = $("#EmpComitydatagrid").dxDataGrid({
@@ -3319,17 +3324,17 @@ function Employee_filldata() {
                                                                 dataField:"id",
                                                                 caption:"ت",
                                                                 visible:false,
-                                
+
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
                                                                     var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png' ;
-                                
+
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
-                                
+
                                                                     var image = $("<img>")
                                                                         .attr("src", imageUrl)
                                                                         .css({
@@ -3342,7 +3347,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "ctype",
                                                                 caption: "اللجنة",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3362,7 +3367,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "docno",
                                                                 caption: "رقم الكتاب",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3382,7 +3387,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "docdate",
                                                                 caption: "تاريخ الكتاب",
-                                                                
+
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3419,7 +3424,7 @@ function Employee_filldata() {
                                                                 },
                                                                 // groupIndex: 0,
                                                             },
-                                                           
+
                                                         ],
                                                         onContentReady: function (e) {
                                                             // Add custom class to the header panel
