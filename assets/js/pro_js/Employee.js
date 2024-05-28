@@ -3437,6 +3437,9 @@ function Employee_filldata() {
                                                 });
 
                                                 //#endregion
+
+
+
                                             }
                                         });
                                     },
@@ -3741,7 +3744,7 @@ $(document).ready(function () {
                         reader.onload = function(e) {
                             // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
                             $('#EmpImage').append(
-                                '<div class="image-preview">' +  
+                                '<div class="image-preview">' +
                                 '<img src="' + e.target.result + '" style="max-width: 400px; margin-right: 15px;">' +
                                 '</div>'
                             );
@@ -3750,7 +3753,7 @@ $(document).ready(function () {
                                 '<button class="delete-imageEmp btn-danger"> <i class="fa fa-trash"> حذف</button>' +
                                 '</div>'
                             );
-                           
+
                         }
                         reader.readAsDataURL(file);
                     });

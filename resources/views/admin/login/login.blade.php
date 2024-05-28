@@ -27,8 +27,8 @@
                 <span class="icon"><ion-icon name="mail"></ion-icon>
 
                 </span>
-                <input type="email" id="u_username" autocomplete="off" value="{{ old('u_username') }}">
-                <label id="titlefont">البريد الالكتروني</label>
+                <input type="text" id="u_username" autocomplete="off" value="{{ old('u_username') }}">
+                <label id="titlefont">اسم المستخدم </label>
 
             </div>
             <span id="error_username"></span>
@@ -48,12 +48,12 @@
         </div>
     </div>
 
-  
+
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/pro_js/login.js') }}"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    {{-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> --}}
 </body>
 
 </html>

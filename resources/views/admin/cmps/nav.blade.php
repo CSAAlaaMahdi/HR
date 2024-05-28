@@ -1,10 +1,10 @@
 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     <div class="image">
         <img src="{{ url('assets/img/navbar/icons8_users_64px.png') }}" class="img-circle elevation-2" alt="User Image"
-        style="margin-right: 20px" >
+            style="margin-right: 20px">
     </div>
     <div class="info">
-        <a href="#" class="loginname" id="titlefont">  </a>
+        <a href="#" class="loginname" id="titlefont"> </a>
     </div>
 </div>
 
@@ -46,25 +46,25 @@
 
         <li
             class="nav-item has-treeview {{ request()->routeIs('users.index') ||
-               request()->routeIs('userGroupPermissions.index') ||
-                request()->routeIs('userPermissions.index') 
-                // request()->routeIs('usersgroups.index') ||
+            request()->routeIs('userGroupPermissions.index') ||
+            request()->routeIs('userPermissions.index')
+                ? // request()->routeIs('usersgroups.index') ||
                 // request()->routeIs('salesgroups.index') ||
                 // request()->routeIs('bondsSetting.index') ||
                 // request()->routeIs('BillsSetting.index')
                 // request()->routeIs('groupsnames.index')
-                 ? 'menu-open'
+                'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
                 class="nav-link {{ request()->routeIs('users.index') ||
-                    request()->routeIs('userGroupPermissions.index') ||
-                    request()->routeIs('userPermissions.index') 
-                    // request()->routeIs('usersgroups.index') ||
+                request()->routeIs('userGroupPermissions.index') ||
+                request()->routeIs('userPermissions.index')
+                    ? // request()->routeIs('usersgroups.index') ||
                     // request()->routeIs('salesgroups.index') ||
                     // request()->routeIs('bondsSetting.index') ||
                     // request()->routeIs('BillsSetting.index')
                     // request()->routeIs('groupsnames.index')
-                    ? 'active'
+                    'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_settings_64px.png') }}" alt=""
                     style="width: 32px; height: 32px;">
@@ -120,7 +120,85 @@
 
             </ul>
         </li>
-        <li class="nav-item {{ request()->routeIs('employees.index') }}" id="Login_Employees">
+
+        <li
+            class="nav-item has-treeview {{ request()->routeIs('employees.index')
+                 //request()->routeIs('userGroupPermissions.index') ||
+                // request()->routeIs('userPermissions.index')
+                // request()->routeIs('usersgroups.index') ||
+                // request()->routeIs('salesgroups.index') ||
+                // request()->routeIs('bondsSetting.index') ||
+                // request()->routeIs('BillsSetting.index')
+                // request()->routeIs('groupsnames.index')
+                ?'menu-open'
+                : 'menu-close' }} ">
+            <a href="#"
+                class="nav-link {{ request()->routeIs('employees.index')
+                     // request()->routeIs('userGroupPermissions.index') ||
+                    // request()->routeIs('userPermissions.index')
+                    // request()->routeIs('usersgroups.index') ||
+                    // request()->routeIs('salesgroups.index') ||
+                    // request()->routeIs('bondsSetting.index') ||
+                    // request()->routeIs('BillsSetting.index')
+                    // request()->routeIs('groupsnames.index')
+                    ?'active'
+                    : '' }}">
+                <img src="{{ url('assets/img/navbar/icons8_People_64px.png') }}" alt=""
+                    style="width: 32px; height: 32px;">
+                <p style="margin-right: 10px">
+                    الموظفين
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item" id="Login_Users">
+                    <a href="{{ route('employees.index') }}"
+                        class="nav-link {{ request()->routeIs('employees.index') ? 'active' : '' }}">
+                        @if (request()->routeIs('employees.index'))
+                            <img src="{{ url('assets/img/navbar/icons8_People_64px_1.png') }}" alt=""
+                                style=" width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">الموظفين</p>
+                        @else
+                            <img src="{{ url('assets/img/navbar/icons8_People_64px.png') }}" alt=""
+                                style="width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px">الموظفين</p>
+                        @endif
+                    </a>
+                </li>
+                {{-- <li class="nav-item" id="Login_UserGroupPermissions">
+                <a href="{{ route('userGroupPermissions.index') }}"
+                    class="nav-link {{ request()->routeIs('userGroupPermissions.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('userGroupPermissions.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_user_groups_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px"> المجموعات</p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_user_groups_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px">المجموعات </p>
+                    @endif
+                </a>
+            </li> --}}
+            {{-- <li class="nav-item" id="Login_UserPermissions">
+                <a href="{{ route('userPermissions.index') }}"
+                    class="nav-link {{ request()->routeIs('userPermissions.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('userPermissions.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px"> الصلاحيات</p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px">الصلاحيات </p>
+                    @endif
+                </a>
+            </li> --}}
+
+
+            </ul>
+        </li>
+
+        {{-- <li class="nav-item {{ request()->routeIs('employees.index') }}" id="Login_Employees">
             <a href="{{ route('employees.index') }}"
                 class="nav-link {{ request()->routeIs('employees.index') ? 'active' : '' }}">
                 @if (request()->routeIs('employees.index'))
@@ -134,11 +212,11 @@
                 @endif
             </a>
 
-        </li>
+        </li> --}}
         <li
             class="nav-item has-treeview {{ request()->routeIs('jobs.index') ||
             request()->routeIs('vacations.index') ||
-            request()->routeIs('thanks.index')  ||
+            request()->routeIs('thanks.index') ||
             request()->routeIs('children.index') ||
             request()->routeIs('administrationOrders.index') ||
             request()->routeIs('disapear.index') ||
@@ -240,11 +318,11 @@
                         @if (request()->routeIs('administrationOrders.index'))
                             <img src="{{ url('assets/img/navbar/icons8_profile_64px_1.png') }}" alt=""
                                 style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px"> الاوامر  الادارية </p>
+                            <p style="margin-right:10px"> الاوامر الادارية </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_profile_64px.png') }}" alt=""
                                 style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px"> الاوامر  الادارية </p>
+                            <p style="margin-right:10px"> الاوامر الادارية </p>
                         @endif
                     </a>
                 </li>
@@ -254,11 +332,11 @@
                         @if (request()->routeIs('disapear.index'))
                             <img src="{{ url('assets/img/navbar/icons8_leaving_queue_64px_1.png') }}" alt=""
                                 style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">  حركة  الملاك  </p>
+                            <p style="margin-right:10px"> حركة الملاك </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_leaving_queue_64px.png') }}" alt=""
                                 style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">  حركة  الملاك  </p>
+                            <p style="margin-right:10px"> حركة الملاك </p>
                         @endif
                     </a>
                 </li>
@@ -266,13 +344,13 @@
                     <a href="{{ route('dispatch.index') }}"
                         class="nav-link {{ request()->routeIs('dispatch.index') ? 'active' : '' }}">
                         @if (request()->routeIs('dispatch.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_Airplane_Take_Off_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">  الايفادات    </p>
+                            <img src="{{ url('assets/img/navbar/icons8_Airplane_Take_Off_64px_1.png') }}"
+                                alt="" style=" width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px"> الايفادات </p>
                         @else
-                            <img src="{{ url('assets/img/navbar/icons8_Airplane_Take_Off_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">  الايفادات    </p>
+                            <img src="{{ url('assets/img/navbar/icons8_Airplane_Take_Off_64px.png') }}"
+                                alt="" style="width: 32px; height: 32px;margin-right:15px">
+                            <p style="margin-right:10px"> الايفادات </p>
                         @endif
                     </a>
                 </li>
@@ -399,7 +477,7 @@
                         @if (request()->routeIs('articles.index'))
                             <img src="{{ url('assets/img/navbar/icons8_article_64px_1.png') }}" alt=""
                                 style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px"> المقالات  </p>
+                            <p style="margin-right:10px"> المقالات </p>
                         @else
                             <img src="{{ url('assets/img/navbar/icons8_article_64px.png') }}" alt=""
                                 style="width: 32px; height: 32px;margin-right:15px">
