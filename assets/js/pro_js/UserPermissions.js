@@ -105,6 +105,24 @@ function UserPermissions_fetch() {
                                 visible: false,
                             },
                             {
+                                caption: "",
+                                width: 100,
+                                cellTemplate: function (container, options) {
+                                    var imageUrl = 'assets/img/navbar/icons8_access_denied_64px.png' ;
+
+                                    // Concatenate the base URL with the image filename
+                                    // var imageUrl = baseUrl + imageName;
+
+                                    var image = $("<img>")
+                                        .attr("src", imageUrl)
+                                        .css({
+                                            width: "40px",
+                                            height: "40px",
+                                        });
+                                    $(container).append(image);
+                                },
+                            },
+                            {
                                 dataField: "GroupName",
                                 caption: "اسم المجموعة",
                                 cellTemplate: function (container, options) {
@@ -295,6 +313,7 @@ function UserPermissions_fetch() {
                                 caption: "التسلسل",
                                 visible: false,
                             },
+                          
                             {
                                 dataField: "GroupID",
                                 caption: "اسم المجموعة",

@@ -54,6 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Dispatch.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/UserGroupPermissions.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/UserPermissions.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/EmployeesAttachments.css') }}">
 
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>

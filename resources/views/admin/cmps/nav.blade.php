@@ -122,8 +122,8 @@
         </li>
 
         <li
-            class="nav-item has-treeview {{ request()->routeIs('employees.index')
-                 //request()->routeIs('userGroupPermissions.index') ||
+            class="nav-item has-treeview {{ request()->routeIs('employees.index') ||
+                 request()->routeIs('employeesAttachments.index') 
                 // request()->routeIs('userPermissions.index')
                 // request()->routeIs('usersgroups.index') ||
                 // request()->routeIs('salesgroups.index') ||
@@ -133,8 +133,8 @@
                 ?'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
-                class="nav-link {{ request()->routeIs('employees.index')
-                     // request()->routeIs('userGroupPermissions.index') ||
+                class="nav-link {{ request()->routeIs('employees.index') ||
+                     request()->routeIs('employeesAttachments.index') 
                     // request()->routeIs('userPermissions.index')
                     // request()->routeIs('usersgroups.index') ||
                     // request()->routeIs('salesgroups.index') ||
@@ -165,20 +165,20 @@
                         @endif
                     </a>
                 </li>
-                {{-- <li class="nav-item" id="Login_UserGroupPermissions">
-                <a href="{{ route('userGroupPermissions.index') }}"
-                    class="nav-link {{ request()->routeIs('userGroupPermissions.index') ? 'active' : '' }}">
-                    @if (request()->routeIs('userGroupPermissions.index'))
-                        <img src="{{ url('assets/img/navbar/icons8_user_groups_64px_1.png') }}" alt=""
+                <li class="nav-item" id="Login_EmployeesAttachments">
+                <a href="{{ route('employeesAttachments.index') }}"
+                    class="nav-link {{ request()->routeIs('employeesAttachments.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('employeesAttachments.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_filing_cabinet_64px_1.png') }}" alt=""
                             style=" width: 32px; height: 32px;margin-right:15px">
-                        <p style="margin-right:10px"> المجموعات</p>
+                        <p style="margin-right:10px"> الاضبارة الالكترونية</p>
                     @else
-                        <img src="{{ url('assets/img/navbar/icons8_user_groups_64px.png') }}" alt=""
+                        <img src="{{ url('assets/img/navbar/icons8_filing_cabinet_64px.png') }}" alt=""
                             style="width: 32px; height: 32px;margin-right:15px">
-                        <p style="margin-right:10px">المجموعات </p>
+                        <p style="margin-right:10px">الاضبارة الالكترونية </p>
                     @endif
                 </a>
-            </li> --}}
+            </li>
             {{-- <li class="nav-item" id="Login_UserPermissions">
                 <a href="{{ route('userPermissions.index') }}"
                     class="nav-link {{ request()->routeIs('userPermissions.index') ? 'active' : '' }}">

@@ -12,6 +12,7 @@ use App\Http\Controllers\ChildrenController;
 use App\Http\Controllers\ComityController;
 use App\Http\Controllers\DisapearController;
 use App\Http\Controllers\DispatchController;
+use App\Http\Controllers\EmployeesAttachmentsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\PlacesController;
@@ -71,6 +72,7 @@ Route::resources([
     'dispatch' => DispatchController::class,
     'userGroupPermissions' => UserGroupPermissionsController::class,
     'userPermissions'  => UserPermissionsController::class,
+    'employeesAttachments' => EmployeesAttachmentsController::class,
 
 
 ]);
@@ -92,6 +94,7 @@ Route::get('disapearfill/filldata', [DisapearController::class, 'filldata']);
 Route::get('dispatchfill/filldata', [DispatchController::class, 'filldata']);
 Route::get('administrationOrdersfill/filldata', [AdministrationOrdersController::class, 'filldata']);
 Route::get('userGroupPermissionsfill/filldata', [UserGroupPermissionsController::class, 'filldata']);
+Route::get('employeesAttachmentsfill/filldata', [EmployeesAttachmentsController::class, 'filldata']);
 Route::get('userPermissionsfill/filldata', [UserPermissionsController::class, 'filldata']);
 Route::get('userPermissionsGet/GetForms', [UserPermissionsController::class, 'GetForms']);
 Route::post('administrationImageDelete/DeleteImage', [AdministrationOrdersController::class, 'DeleteImages']);
@@ -109,6 +112,7 @@ Route::post('researchesDelete/DeleteImage', [ResearchesController::class, 'Delet
 Route::post('employeesDelete/DeleteImage', [EmployeesController::class, 'DeleteImages']);
 Route::post('disapearDelete/DeleteImage', [DisapearController::class, 'DeleteImages']);
 Route::post('dispatchDelete/DeleteImage', [DispatchController::class, 'DeleteImages']);
+Route::post('employeesAttachmentsDelete/DeleteImage', [EmployeesAttachmentsController::class, 'DeleteImages']);
 
 
 Route::get('dashboardmainfill/filldata', [DashboardMain::class, 'filldata']);

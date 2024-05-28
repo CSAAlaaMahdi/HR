@@ -15,10 +15,10 @@ class EmployeesAttachments extends Model
      */
     protected $table='emp_attach';
     protected $fillable = [
-        'id',
         'eid',
         'Guid',
-        'Title',
+        'atType',
+        'notes',
         'UserID',
     ];
 

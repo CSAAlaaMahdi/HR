@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attachments;
+
 use App\Models\AttachmentsEmp;
 use App\Models\EmployeesAttachments;
-use App\Models\EmployeeComity;
 use App\Models\Employees;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 
-class ComityController extends Controller
+class EmployeesAttachmentsController extends Controller
 {
 
     public function index()
     {
         if (session()->has('User')) {
-            return view('administration.employeesAttachments');
+            return view('employee.employeesAttachments');
         }
     }
 
@@ -38,9 +37,6 @@ class ComityController extends Controller
     {
         $id = $request->post('id');
         $Guid = $request->post('Guid');
-        $eid = $request->post('eid');
-        $eidArray = explode(',', $eid);
-
 
         if ($Guid == 'null' || $Guid == '' || empty($Guid)) {
             $Guid = strtoupper(Uuid::uuid4()->toString());
@@ -85,22 +81,24 @@ class ComityController extends Controller
                 [
                     'Guid' => $Guid,
                     'eid' => $request->post('eid'),
-                    'Title' => $request->post('Title'),
+                    'atType' => $request->post('atType'),
+                    'notes' => $request->post('notes'),
                     'UserID' => $UserID,
 
                 ]
             );
         } else {
-            $newID = EmployeesAttachments::max('id') > 0 ? EmployeesAttachments::max('id') + 1 : 1;
+            // $newID = EmployeesAttachments::max('id') > 0 ? EmployeesAttachments::max('id') + 1 : 1;
 
             $Attachmentemp = EmployeesAttachments::updateOrCreate(
                 [
-                    'id' => $newID,
+                    'id' => $id,
                 ],
                 [
                     'Guid' => $Guid,
                     'eid' => $request->post('eid'),
-                    'Title' => $request->post('Title'),
+                    'atType' => $request->post('atType'),
+                    'notes' => $request->post('notes'),
                     'UserID' => $UserID,
 
                 ]
@@ -177,21 +175,21 @@ class ComityController extends Controller
     public function filldata()
     {
 
-        $getEmpAttachments = EmployeesAttachments::select('Title')
-            ->whereNotNull('Title')
-            ->where('Title', '<>', '')
+        $getatType = EmployeesAttachments::select('atType')
+            ->whereNotNull('atType')
+            ->where('atType', '<>', '')
             ->distinct()
-            ->orderBy('Title')
+            ->orderBy('atType')
             ->get();
-        $getEmployees = Employees::select('eid', 'fullname')
+        $getEmp = Employees::select('eid', 'fullname')
             ->whereNotNull('fullname')
             ->where('fullname', '<>', '')
             ->distinct()
             ->orderBy('fullname')
             ->get();
         $data = [
-            'getComity' => $getEmpAttachments,
-            'getEmployees' => $getEmployees,
+            'getatType' => $getatType,
+            'getEmp' => $getEmp,
 
 
         ];
