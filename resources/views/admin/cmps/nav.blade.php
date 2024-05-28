@@ -123,24 +123,14 @@
 
         <li
             class="nav-item has-treeview {{ request()->routeIs('employees.index') ||
-                 request()->routeIs('employeesAttachments.index') 
-                // request()->routeIs('userPermissions.index')
-                // request()->routeIs('usersgroups.index') ||
-                // request()->routeIs('salesgroups.index') ||
-                // request()->routeIs('bondsSetting.index') ||
-                // request()->routeIs('BillsSetting.index')
-                // request()->routeIs('groupsnames.index')
+                 request()->routeIs('employeesAttachments.index') ||
+                request()->routeIs('employeesReport.index')
                 ?'menu-open'
                 : 'menu-close' }} ">
             <a href="#"
                 class="nav-link {{ request()->routeIs('employees.index') ||
-                     request()->routeIs('employeesAttachments.index') 
-                    // request()->routeIs('userPermissions.index')
-                    // request()->routeIs('usersgroups.index') ||
-                    // request()->routeIs('salesgroups.index') ||
-                    // request()->routeIs('bondsSetting.index') ||
-                    // request()->routeIs('BillsSetting.index')
-                    // request()->routeIs('groupsnames.index')
+                     request()->routeIs('employeesAttachments.index') ||
+                    request()->routeIs('employeesReport.index')
                     ?'active'
                     : '' }}">
                 <img src="{{ url('assets/img/navbar/icons8_People_64px.png') }}" alt=""
@@ -179,20 +169,20 @@
                     @endif
                 </a>
             </li>
-            {{-- <li class="nav-item" id="Login_UserPermissions">
-                <a href="{{ route('userPermissions.index') }}"
-                    class="nav-link {{ request()->routeIs('userPermissions.index') ? 'active' : '' }}">
-                    @if (request()->routeIs('userPermissions.index'))
-                        <img src="{{ url('assets/img/navbar/icons8_access_denied_64px_1.png') }}" alt=""
+            <li class="nav-item" id="Login_EmployeesReport">
+                <a href="{{ route('employeesReport.index') }}"
+                    class="nav-link {{ request()->routeIs('employeesReport.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('employeesReport.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_Circle_Chart_64px_1.png') }}" alt=""
                             style=" width: 32px; height: 32px;margin-right:15px">
-                        <p style="margin-right:10px"> الصلاحيات</p>
+                        <p style="margin-right:10px"> تقارير الموظفين</p>
                     @else
-                        <img src="{{ url('assets/img/navbar/icons8_access_denied_64px.png') }}" alt=""
+                        <img src="{{ url('assets/img/navbar/icons8_Circle_Chart_64px.png') }}" alt=""
                             style="width: 32px; height: 32px;margin-right:15px">
-                        <p style="margin-right:10px">الصلاحيات </p>
+                        <p style="margin-right:10px">تقارير الموظفين </p>
                     @endif
                 </a>
-            </li> --}}
+            </li>
 
 
             </ul>

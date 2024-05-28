@@ -14,6 +14,7 @@ use App\Http\Controllers\DisapearController;
 use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\EmployeesAttachmentsController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\EmployeesReportController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\PositionsController;
@@ -73,6 +74,7 @@ Route::resources([
     'userGroupPermissions' => UserGroupPermissionsController::class,
     'userPermissions'  => UserPermissionsController::class,
     'employeesAttachments' => EmployeesAttachmentsController::class,
+    'employeesReport' => EmployeesReportController::class,
 
 
 ]);

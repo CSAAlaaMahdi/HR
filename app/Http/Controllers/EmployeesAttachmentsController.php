@@ -24,7 +24,11 @@ class EmployeesAttachmentsController extends Controller
 
     public function create(Request $request)
     {
-        $getData = EmployeesAttachments::orderByDesc('id')->get();
+        $getData = EmployeesAttachments::orderByDesc('id')->get()
+            ->map(function($item){
+                $item['eid'] = Employees::find($item['eid']) !=null ? Employees::find($item['eid'])->fullname :null;
+                return $item;
+            });
 
         $data = [
             'getEmployeesAttachments' => $getData,
