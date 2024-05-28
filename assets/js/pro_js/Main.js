@@ -60,6 +60,26 @@ function GetPermission(){
                 });
 
             }
+            let ArchiveEmp = response.Permission.filter(function (item){
+                return item.FormName === 'الاضبارة الالكترونية';
+            })
+            if (!ArchiveEmp[0]['Enable']) {
+                $("#Login_EmployeesAttachments a").click(function(e) {
+                    e.preventDefault();
+
+                });
+
+            }
+            let EmployeesReport = response.Permission.filter(function (item){
+                return item.FormName === 'تقارير الموظفين';
+            })
+            if (!EmployeesReport[0]['Enable']) {
+                $("#Login_EmployeesReport a").click(function(e) {
+                    e.preventDefault();
+
+                });
+
+            }
             let JobsValue = response.Permission.filter(function (item){
                 return item.FormName === 'الترفيعات';
             })

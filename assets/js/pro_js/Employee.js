@@ -49,6 +49,7 @@ function Employee_cleardata() {
     $("#spacifspt").dxSelectBox("instance").option("value", "");
     $("#deptid").dxDropDownBox("instance").option("value", null);
     $("#bloodtype").dxSelectBox("instance").option("value", "");
+    $("#empno").dxTextBox("instance").option("value", "");
     $("#FilePath").dxFileUploader("instance").option("value","");
     $("#EmpImage").empty();
 
@@ -202,6 +203,7 @@ function Employee_UpdateOrCreate() {
     formData.append('deptid', $("#deptid").dxDropDownBox("instance").option("value"));
     formData.append('bloodtype', $("#bloodtype").dxSelectBox("instance").option("value"));
     formData.append('gender', $("#gender").dxSelectBox("instance").option("value"));
+    formData.append('empno', $("#empno").dxTextBox("instance").option("value"));
     formData.append('active', (function(){
         if($("#active").dxSwitch("instance").option("value")){
             return 1;
@@ -761,6 +763,7 @@ function Employee_filldata() {
                                                 $("#genralspt").dxSelectBox("instance").option("value",response.Emp.genralspt);
                                                 $("#spacifspt").dxSelectBox("instance").option("value",response.Emp.spacifspt);
                                                 $("#bloodtype").dxSelectBox("instance").option("value",response.Emp.bloodtype);
+                                                $("#empno").dxTextBox("instance").option("value",response.Emp.empno);
                                                 $("#active")
                                                 .dxSwitch("instance")
                                                 .option("value",response.Emp.active === "1" ? true:false);
@@ -3537,7 +3540,12 @@ $(document).ready(function () {
 
         });
     });
-
+    $(() => {
+        $("#empno").dxTextBox({
+            placeholder: "",
+            inputAttr: { style:"font-size:13px", },
+        });
+    });
     $(() => {
         $("#secondname").dxTextBox({
             placeholder: "",

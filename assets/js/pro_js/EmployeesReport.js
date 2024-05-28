@@ -577,7 +577,111 @@ function EmployeesReport_fetch() {
                            
                                
                             },
-                            
+                            {
+                                dataField: "mof_wdate",
+                                caption: "تاريخ  التعيين في الوزارة",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+                                visible:false,
+                               
+                            },
+                            {
+                                dataField: "rehiredate",
+                                caption: "تاريخ  الاعادة للتعيين",
+                                dataType : "date",
+                                format: "yyyy-MM-dd",
+                                visible:false,
+                               
+                            },
+                            {
+                                dataField: "genralspt",
+                                caption: "الاختصاص العام",
+                         
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "spacifspt",
+                                caption: " الاختصاص الدقيق ",
+                         
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "empno",
+                                caption: "الرقم الوظيفي",
+                                visible:false,
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    var fontWeight = "450"; // Set the desired font weight
+                                    let fontSize = "13px";
+                                    let fontColor = "#2F4F4F";
+                                    $("<div>")
+                                        .css({
+                                            "font-size": fontSize,
+                                            "font-weight": fontWeight,
+                                            color: fontColor,
+                                        })
+                                        .text(cellValue)
+                                        .appendTo(container);
+                                },
+                            },
+                            {
+                                dataField: "active",
+                                caption: "الحالة",
+                                cellTemplate: function (container, options) {
+                                    var cellValue = options.value;
+                                    if (cellValue === "غير نشط") {
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = "red";
+                                        $("<div>")
+                                            .css({
+                                                "font-size": fontSize,
+                                                "font-weight": fontWeight,
+                                                color: fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    } else {
+                                        var fontWeight = "450"; // Set the desired font weight
+                                        let fontSize = "16px";
+                                        let fontColor = "green";
+                                        $("<div>")
+                                            .css({
+                                                "font-size": fontSize,
+                                                "font-weight": fontWeight,
+                                                color: fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    }
+                                },
+                            },
                             // {
                             //     dataField: "notes",
                             //     caption: "ملاحظات ",

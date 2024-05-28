@@ -481,6 +481,19 @@
 
                                     </div>
                                 </div>
+                                <div class="col-md-12 row flex">
+                                    <div class="col-md-4">
+                                        <div class="dx-fieldset" id="Emp-container">
+                                            <div class="dx-field">
+                                                <div class="dx-field-label">الرقم الوظيفي  </div>
+                                                <div class="dx-field-value">
+                                                    <div id="empno"></div>
+                                                </div>
+                                                <span id="error_empno" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <hr style="background-color: orangered">
                                 <div class="col-md-12 row flex">
                                     <div class="col-md-12">
@@ -1450,8 +1463,8 @@
                                 <div class="col-md-12 mt-1">
                                     <div class="card EmpArticles" id="EmpArticles">
                                         <div class="card-header" style="background-color:#283741;text-align: center">
-                                            <h4 style="color: white;" id="EmpArticlestitle"
-                                                class="EmpArticlestitle">المقالات</h4>
+                                            <h4 style="color: white;" id="EmpArticlestitle" class="EmpArticlestitle">
+                                                المقالات</h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="datagrid" id="EmpArticlesdatagrid">
@@ -1502,7 +1515,7 @@
                                                         </div>
                                                         <div class="dx-fieldset" id="Articles-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">تاريخ النشر  </div>
+                                                                <div class="dx-field-label">تاريخ النشر </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlespub_date"></div>
                                                                 </div>
@@ -1515,7 +1528,7 @@
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Articles-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label"> عنوان المقال   </div>
+                                                                <div class="dx-field-label"> عنوان المقال </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesarticle_title"></div>
                                                                 </div>
@@ -1524,7 +1537,7 @@
                                                         </div>
                                                         <div class="dx-fieldset" id="Articles-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">الرابط  </div>
+                                                                <div class="dx-field-label">الرابط </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpArticlesAlink"></div>
                                                                 </div>
@@ -1583,8 +1596,8 @@
                                 <div class="col-md-12 mt-1">
                                     <div class="card EmpChildren" id="EmpChildren">
                                         <div class="card-header" style="background-color:#283741;text-align: center">
-                                            <h4 style="color: white;" id="EmpChildrentitle"
-                                                class="EmpChildrentitle">الاطفال</h4>
+                                            <h4 style="color: white;" id="EmpChildrentitle" class="EmpChildrentitle">
+                                                الاطفال</h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="datagrid" id="EmpChildrendatagrid">
@@ -1635,7 +1648,7 @@
                                                         </div>
                                                         <div class="dx-fieldset" id="Children-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">تاريخ الولادة  </div>
+                                                                <div class="dx-field-label">تاريخ الولادة </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrenchdob"></div>
                                                                 </div>
@@ -1648,7 +1661,7 @@
                                                     <div class="col-md-4">
                                                         <div class="dx-fieldset" id="Children-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label"> الاسم   </div>
+                                                                <div class="dx-field-label"> الاسم </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrenchname"></div>
                                                                 </div>
@@ -1657,7 +1670,7 @@
                                                         </div>
                                                         <div class="dx-fieldset" id="Children-container">
                                                             <div class="dx-field">
-                                                                <div class="dx-field-label">المهنة  </div>
+                                                                <div class="dx-field-label">المهنة </div>
                                                                 <div class="dx-field-value">
                                                                     <div id="EmpChildrencsid"></div>
                                                                 </div>
@@ -1716,8 +1729,8 @@
                                 <div class="col-md-12 mt-1">
                                     <div class="card EmpActivity" id="EmpActivity">
                                         <div class="card-header" style="background-color:#283741;text-align: center">
-                                            <h4 style="color: white;" id="EmpActivitytitle"
-                                                class="EmpActivitytitle">الانشطة والفعاليات</h4>
+                                            <h4 style="color: white;" id="EmpActivitytitle" class="EmpActivitytitle">
+                                                الانشطة والفعاليات</h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="datagrid" id="EmpActivitydatagrid">
@@ -1742,8 +1755,8 @@
                                 <div class="col-md-12 mt-1">
                                     <div class="card EmpComity" id="EmpComity">
                                         <div class="card-header" style="background-color:#283741;text-align: center">
-                                            <h4 style="color: white;" id="EmpComitytitle"
-                                                class="EmpComitytitle">اللجان </h4>
+                                            <h4 style="color: white;" id="EmpComitytitle" class="EmpComitytitle">
+                                                اللجان </h4>
                                         </div>
                                         <div class="card-body">
                                             <div class="datagrid" id="EmpComitydatagrid">

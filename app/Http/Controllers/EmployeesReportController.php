@@ -25,7 +25,11 @@ class EmployeesReportController extends Controller
 
     public function create(Request $request)
     {
-        $getData = Employees::orderBy('eid')->get();
+        $getData = Employees::orderBy('eid')->get()
+            ->map(function($item){
+                $item['active'] = $item['active'] ==="1" ? 'نشط':'غير نشط';
+                return $item;
+            });
         $data = [
             'getEmployees' => $getData,
         ];

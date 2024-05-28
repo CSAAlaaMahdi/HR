@@ -130,6 +130,7 @@ class EmployeesController extends Controller
                     'deptid' => $request->post('deptid'),
                     'bloodtype' => $request->post('bloodtype'),
                     'gender' => $request->post('gender'),
+                    'empno' => $request->post('empno'),
                     'active' => $request->post('active'),
                     'UserID' => $UserID,
                 ]
@@ -177,6 +178,7 @@ class EmployeesController extends Controller
                     'deptid' => $request->post('deptid'),
                     'bloodtype' => $request->post('bloodtype'),
                     'gender' => $request->post('gender'),
+                    'empno' => $request->post('empno'),
                     'active' => $request->post('active'),
                     'UserID' => $UserID,
                 ]
