@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\User2;
 use Illuminate\Support\Facades\Session;
 
@@ -43,16 +42,5 @@ class LoginController extends Controller
         }
     }
 
-    public function logOut(Request $request)
-    {
-        // Flush all session data
-        Session::flush();
-
-        // Optionally, you can also invalidate the session and regenerate the session token
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        // Redirect to the login page or return a JSON response
-        return response()->json(['status' => 'تم تسجيل الخروج بنجاح']);
-    }
+   
 }

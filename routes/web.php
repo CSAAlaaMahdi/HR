@@ -42,13 +42,15 @@ use App\Http\Controllers\VacationsController;
 // });
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/login/checking', [LoginController::class, 'checking']);
-Route::get('ToOut/logOut', [LoginController::class, 'logOut'])->name('ToOut/logOut');
+// Route::get('ToOut/logOut', [Admin::class, 'logOut'])->name('ToOut/logOut');
 
 
 Route::controller(Admin::class)->group(function () {
     Route::get('/dashboard', 'index')->name('home.index');
     Route::get('/dashboard/cardsdata', 'cardsData');
     Route::get('/dashboard/Certifications', 'GetCertifications');
+
+   
 
 
 });

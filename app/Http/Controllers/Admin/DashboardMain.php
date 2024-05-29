@@ -8,6 +8,7 @@ use App\Models\User2;
 use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class DashboardMain extends Controller
 {
@@ -53,16 +54,5 @@ class DashboardMain extends Controller
         ];
         return response()->json($data);
     }
-    // public function CardsData(Request $request)
-    // {
-    //     if ($request->id == 0) {
-    //         $data = [
-    //             'Employees' => Employees::all(),
-               
-    //         ];
-
-
-    //         return response()->json($data);
-    //     }
-    // }
+    
 }

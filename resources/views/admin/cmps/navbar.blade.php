@@ -120,9 +120,9 @@
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
                     class="fas fa-th-large"></i></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{{route('ToOut/logOut')}}"><i
-                    class="fa fa-sign-out-alt sign-out-icon"> خروج</i></a>
+        <li class="nav-item pr-5">
+            <a class="nav-link"  href="">
+                <i class="fa fa-sign-out-alt sign-out-icon" > <span id="titlefont">خروج</span></i></a>
         </li>
         <style>
             .sign-out-icon {
