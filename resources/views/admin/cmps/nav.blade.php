@@ -188,21 +188,6 @@
             </ul>
         </li>
 
-        {{-- <li class="nav-item {{ request()->routeIs('employees.index') }}" id="Login_Employees">
-            <a href="{{ route('employees.index') }}"
-                class="nav-link {{ request()->routeIs('employees.index') ? 'active' : '' }}">
-                @if (request()->routeIs('employees.index'))
-                    <img src="{{ url('assets/img/navbar/icons8_People_64px_1.png') }}" alt=""
-                        style=" width: 32px; height: 32px;">
-                    <p style="margin-right:10px">الموظفين</p>
-                @else
-                    <img src="{{ url('assets/img/navbar/icons8_People_64px.png') }}" alt=""
-                        style="width: 32px; height: 32px;">
-                    <p style="margin-right:10px">الموظفين</p>
-                @endif
-            </a>
-
-        </li> --}}
         <li
             class="nav-item has-treeview {{ request()->routeIs('jobs.index') ||
             request()->routeIs('vacations.index') ||
@@ -478,111 +463,7 @@
 
             </ul>
         </li>
-        {{-- <li
-            class="nav-item has-treeview {{ request()->routeIs('users.index') ||
-                 request()->routeIs('places.index')
-                // request()->routeIs('frame.index') ||
-                // request()->routeIs('usersgroups.index') ||
-                // request()->routeIs('salesgroups.index') ||
-                // request()->routeIs('bondsSetting.index') ||
-                // request()->routeIs('BillsSetting.index')
-                // request()->routeIs('groupsnames.index')
-               ? 'menu-open'
-                : 'menu-close' }} ">
-            <a href="#"
-                class="nav-link {{ request()->routeIs('users.index')   ||
-                     request()->routeIs('places.index')
-                    // request()->routeIs('frame.index') ||
-                    // request()->routeIs('usersgroups.index') ||
-                    // request()->routeIs('salesgroups.index') ||
-                    // request()->routeIs('bondsSetting.index') ||
-                    // request()->routeIs('BillsSetting.index')
-                    // request()->routeIs('groupsnames.index')
-                   ? 'active'
-                    : '' }}">
-                <img src="{{ url('assets/img/navbar/icons8_warehouse_64px.png') }}" alt=""
-                    style="width: 32px; height: 32px;">
-                <p style="margin-right: 10px">
-                    المخازن والذمم
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item" id="Login_Places">
-                    <a href="{{ route('places.index') }}"
-                        class="nav-link {{ request()->routeIs('places.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('places.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">شجرة المواقع </p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">شجرة المواقع </p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Users">
-                    <a href="{{ route('users.index') }}"
-                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('users.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_apps_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">المواد </p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_apps_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">المواد </p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Users">
-                    <a href="{{ route('users.index') }}"
-                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('users.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_buy_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">ادخال مخزني</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_buy_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">ادخال مخزني</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Users">
-                    <a href="{{ route('users.index') }}"
-                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('users.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_shopping_cart_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">اخراج مخزني</p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_shopping_cart_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">اخراج مخزني</p>
-                        @endif
-                    </a>
-                </li>
-                <li class="nav-item" id="Login_Users">
-                    <a href="{{ route('users.index') }}"
-                        class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                        @if (request()->routeIs('users.index'))
-                            <img src="{{ url('assets/img/navbar/icons8_decline_64px_1.png') }}" alt=""
-                                style=" width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">تقارير </p>
-                        @else
-                            <img src="{{ url('assets/img/navbar/icons8_decline_64px.png') }}" alt=""
-                                style="width: 32px; height: 32px;margin-right:15px">
-                            <p style="margin-right:10px">تقارير </p>
-                        @endif
-                    </a>
-                </li>
-
-
-            </ul>
-        </li> --}}
-
+    
     </ul>
 </nav>
 
