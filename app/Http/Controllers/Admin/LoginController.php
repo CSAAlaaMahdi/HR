@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\User2;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -15,7 +16,7 @@ class LoginController extends Controller
     }
     public function checking(Request $request)
     {
-        $data=$request->input();
+        $data = $request->input();
         $Username = $request->input('username');
         $password = $request->input('password');
         $info = User2::all();
@@ -24,11 +25,11 @@ class LoginController extends Controller
             $Userinfo = User2::where('username', $Username)->get();
             if (count($Userinfo) > 0) {
                 if ($Userinfo[0]->pwd == $password) {
-                    $request->session()->put('id',$Userinfo[0]->userid);
-                    $request->session()->put('User',$Userinfo[0]->username);
-                    $data=[
-                        'User'=>session('User'),
-                        'id'=>session('id'),
+                    $request->session()->put('id', $Userinfo[0]->userid);
+                    $request->session()->put('User', $Userinfo[0]->username);
+                    $data = [
+                        'User' => session('User'),
+                        'id' => session('id'),
                     ];
                     return response()->json($data);
                 } else {
@@ -40,6 +41,18 @@ class LoginController extends Controller
                 return response()->json($data);
             }
         }
+    }
 
+    public function logOut(Request $request)
+    {
+        // Flush all session data
+        Session::flush();
+
+        // Optionally, you can also invalidate the session and regenerate the session token
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirect to the login page or return a JSON response
+        return response()->json(['status' => 'تم تسجيل الخروج بنجاح']);
     }
 }

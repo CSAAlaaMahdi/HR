@@ -42,6 +42,7 @@ use App\Http\Controllers\VacationsController;
 // });
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/login/checking', [LoginController::class, 'checking']);
+Route::get('ToOut/logOut', [LoginController::class, 'logOut'])->name('ToOut/logOut');
 
 
 Route::controller(Admin::class)->group(function () {

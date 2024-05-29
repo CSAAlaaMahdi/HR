@@ -120,5 +120,14 @@
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
                     class="fas fa-th-large"></i></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="{{route('ToOut/logOut')}}"><i
+                    class="fa fa-sign-out-alt sign-out-icon"> خروج</i></a>
+        </li>
+        <style>
+            .sign-out-icon {
+                color: rgb(204, 2, 2);
+            }
+        </style>
     </ul>
 </nav>

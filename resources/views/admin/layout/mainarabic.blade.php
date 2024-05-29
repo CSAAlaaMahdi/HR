@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script type="text/javascript" src="{{ url('assets/js/Template/bootstrap-treeview.js') }}"></script>
 
 
-    
+
     <script type="text/javascript" src="{{ url('assets/dx/js/dx-diagram.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/dx/js/dx-gantt.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/dx/js/dx-quill.min.js') }}"></script>
@@ -125,7 +125,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="index3.html" class="brand-link">
+            <a href="{{route('home.index')}}" class="brand-link">
                 <img src="{{ url('assets/img/navbar/icons8_circled_h_64px.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8;margin-right:20px">
                 <span class="brand-text font-weight-light" id="titlefont">الموارد البشرية </span>
