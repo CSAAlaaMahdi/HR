@@ -50,7 +50,7 @@ Route::controller(Admin::class)->group(function () {
     Route::get('/dashboard/cardsdata', 'cardsData');
     Route::get('/dashboard/Certifications', 'GetCertifications');
 
-   
+
 
 
 });
@@ -124,3 +124,5 @@ Route::get('dashboardmainfill/filldata', [DashboardMain::class, 'filldata']);
 Route::get('dashboardmainPermissions/Permissions', [DashboardMain::class, 'getPermissions']);
 Route::get('dashboardmainCards/CardsData', [DashboardMain::class, 'CardsData']);
 
+// Permissions ...
+// Route::get('employeesPer/Permissions', [EmployeesController::class, 'getPermissions']);

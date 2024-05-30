@@ -1,5 +1,7 @@
 Users_fetch();
 Users_filldata();
+Users_Permissions();
+
 function Users_cleardata() {
     $("#userid").dxTextBox("instance").option("value", "");
     $("#loginname").dxTextBox("instance").option("value", "");
@@ -200,154 +202,167 @@ function Users_fetch() {
                                 width: 200,
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
-                                    var link1 = $("<div>").css({
-                                        "background-color": "##64DDBB",
-                                    });
-                                    link1.dxButton({
-                                        stylingMode: "contained",
-                                        type: "normal",
-                                        icon: "edit",
-                                        onClick() {
-                                            var rowData = options.data;
-                                            let data = {
-                                                userid: rowData.userid,
-                                            };
-                                            $.ajax({
-                                                type: "GET",
-                                                url: "users/show",
-                                                data: data,
-                                                success: function (response) {
-                                                    $("#userid")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.userid,
-                                                        });
-                                                    $("#loginname")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.loginname,
-                                                        });
-                                                    $("#username")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.username,
-                                                        });
-                                                    $("#pwd")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.pwd,
-                                                        });
-
-                                                    // $("#ulvl")
-                                                    //     .dxTextBox("instance")
-                                                    //     .option({
-                                                    //         value:response.ulvl
-                                                    //     });
-                                                    //     $("#UserPassW")
-                                                    //     .dxTextBox("instance")
-                                                    //     .option({
-                                                    //         value:response.UserPassW
-                                                    //     });
-                                                        $("#GroupID")
-                                                        .dxDropDownBox("instance")
-                                                        .option({
-                                                            value:Number(response.GroupID)
-                                                        });
-                                                    $("#deptid")
-                                                        .dxDropDownBox("instance")
-                                                        .option({
-                                                            value:Number(response.deptid)
-                                                        });
-
-
-                                                    var displaycard =
-                                                        document.getElementById(
-                                                            "Usersaction"
-                                                        );
-                                                    if (
-                                                        displaycard.style
-                                                            .display == "none"
-                                                    ) {
-                                                        document.getElementById(
-                                                            "card_Userstitle"
-                                                        ).innerText =
-                                                            "تعديل البيانات";
-                                                        displaycard.style.display =
-                                                            "block";
-                                                        document
-                                                            .getElementById(
-                                                                "card_Userstitle"
-                                                            )
-                                                            .scrollIntoView();
-                                                    } else {
-                                                        displaycard.style.display =
-                                                            "none";
-                                                        document.getElementById(
-                                                            "card_Userstitle"
-                                                        ).innerText = "";
-                                                        displaycard.style.display =
-                                                            "block";
-                                                        document.getElementById(
-                                                            "card_Userstitle"
-                                                        ).innerText =
-                                                            "تعديل البيانات";
-                                                        document
-                                                            .getElementById(
-                                                                "card_Userstitle"
-                                                            )
-                                                            .scrollIntoView();
-                                                    }
-                                                },
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "dashboardmainPermissions/Permissions",
+                                        success: function (response) {
+                                            let MainValue = response.Permission.filter(function (item){
+                                                return item.FormName === 'المستخدمون';
+                                            })
+                                            var link1 = $("<div>").css({
+                                                "background-color": "##64DDBB",
                                             });
-                                        },
-                                    });
+                                            link1.dxButton({
+                                                stylingMode: "contained",
+                                                type: "normal",
+                                                icon: "edit",
+                                                disabled:!MainValue[0]['OptionEdit'],
+                                                onClick() {
+                                                    var rowData = options.data;
+                                                    let data = {
+                                                        userid: rowData.userid,
+                                                    };
+                                                    $.ajax({
+                                                        type: "GET",
+                                                        url: "users/show",
+                                                        data: data,
+                                                        success: function (response) {
+                                                            $("#userid")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.userid,
+                                                                });
+                                                            $("#loginname")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.loginname,
+                                                                });
+                                                            $("#username")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.username,
+                                                                });
+                                                            $("#pwd")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.pwd,
+                                                                });
 
-                                    var link2 = $("<div>").css({
-                                        "margin-right": "10px"
-                                    });
-                                    link2.dxButton({
-                                        stylingMode: "contained",
-                                        icon: "trash",
-                                        type: "default",
-                                        onClick() {
-                                            var rowData = options.data;
-                                            let data = {
-                                                userid: rowData.userid,
-                                            };
+                                                            // $("#ulvl")
+                                                            //     .dxTextBox("instance")
+                                                            //     .option({
+                                                            //         value:response.ulvl
+                                                            //     });
+                                                            //     $("#UserPassW")
+                                                            //     .dxTextBox("instance")
+                                                            //     .option({
+                                                            //         value:response.UserPassW
+                                                            //     });
+                                                                $("#GroupID")
+                                                                .dxDropDownBox("instance")
+                                                                .option({
+                                                                    value:Number(response.GroupID)
+                                                                });
+                                                            $("#deptid")
+                                                                .dxDropDownBox("instance")
+                                                                .option({
+                                                                    value:Number(response.deptid)
+                                                                });
 
-                                            $.ajaxSetup({
-                                                headers: {
-                                                    "X-CSRF-TOKEN": $(
-                                                        'meta[name="csrf-token"]'
-                                                    ).attr("content"),
-                                                },
-                                            });
-                                            $.ajax({
-                                                type: "DELETE",
-                                                url: "users/destroy",
-                                                data: data,
-                                                success: function (response) {
-                                                    Users_fetch();
-                                                    Users_cleardata();
-                                                    DevExpress.ui.notify({
-                                                        message:
-                                                            response.status,
-                                                        position: {
-                                                            my: "top left",
-                                                            at: "top left",
+
+                                                            var displaycard =
+                                                                document.getElementById(
+                                                                    "Usersaction"
+                                                                );
+                                                            if (
+                                                                displaycard.style
+                                                                    .display == "none"
+                                                            ) {
+                                                                document.getElementById(
+                                                                    "card_Userstitle"
+                                                                ).innerText =
+                                                                    "تعديل البيانات";
+                                                                displaycard.style.display =
+                                                                    "block";
+                                                                document
+                                                                    .getElementById(
+                                                                        "card_Userstitle"
+                                                                    )
+                                                                    .scrollIntoView();
+                                                            } else {
+                                                                displaycard.style.display =
+                                                                    "none";
+                                                                document.getElementById(
+                                                                    "card_Userstitle"
+                                                                ).innerText = "";
+                                                                displaycard.style.display =
+                                                                    "block";
+                                                                document.getElementById(
+                                                                    "card_Userstitle"
+                                                                ).innerText =
+                                                                    "تعديل البيانات";
+                                                                document
+                                                                    .getElementById(
+                                                                        "card_Userstitle"
+                                                                    )
+                                                                    .scrollIntoView();
+                                                            }
                                                         },
-                                                        type: "error",
-                                                        width: "300",
-                                                        height: "150",
-                                                        hideAfter: 2000,
                                                     });
-                                                    Users_fetch();
                                                 },
                                             });
-                                        },
+
+                                            var link2 = $("<div>").css({
+                                                "margin-right": "10px"
+                                            });
+                                            link2.dxButton({
+                                                stylingMode: "contained",
+                                                icon: "trash",
+                                                type: "default",
+                                                disabled:!MainValue[0]['OptionDel'],
+                                                onClick() {
+                                                    var rowData = options.data;
+                                                    let data = {
+                                                        userid: rowData.userid,
+                                                    };
+
+                                                    $.ajaxSetup({
+                                                        headers: {
+                                                            "X-CSRF-TOKEN": $(
+                                                                'meta[name="csrf-token"]'
+                                                            ).attr("content"),
+                                                        },
+                                                    });
+                                                    $.ajax({
+                                                        type: "DELETE",
+                                                        url: "users/destroy",
+                                                        data: data,
+                                                        success: function (response) {
+                                                            Users_fetch();
+                                                            Users_cleardata();
+                                                            DevExpress.ui.notify({
+                                                                message:
+                                                                    response.status,
+                                                                position: {
+                                                                    my: "top left",
+                                                                    at: "top left",
+                                                                },
+                                                                type: "error",
+                                                                width: "300",
+                                                                height: "150",
+                                                                hideAfter: 2000,
+                                                            });
+                                                            Users_fetch();
+                                                        },
+                                                    });
+                                                },
+                                            });
+
+                                            $(container).append(link1, link2);
+
+                                       }
                                     });
 
-                                    $(container).append(link1, link2);
                                 },
                             },
                         ],
@@ -513,6 +528,20 @@ function Users_filldata() {
 
             },
         });
+    });
+}
+function Users_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            let MainValue = response.Permission.filter(function (item){
+                return item.FormName === 'المستخدمون';
+            })
+
+            $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
+
+       }
     });
 }
 $(document).ready(function () {

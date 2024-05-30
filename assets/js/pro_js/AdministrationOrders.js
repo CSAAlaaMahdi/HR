@@ -1,5 +1,6 @@
 AdministrationOrders_fetch();
 AdministrationOrders_filldata();
+AdministrationOrders_Permissions();
 
 function AdministrationOrders_cleardata() {
     $("#id").dxTextBox("instance").option("value", "");
@@ -282,218 +283,233 @@ function AdministrationOrders_fetch() {
                                 width: 200,
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
-                                    var link1 = $("<div>").css({
-                                        "background-color": "##64DDBB",
-                                    });
-                                    link1.dxButton({
-                                        stylingMode: "contained",
-                                        type: "normal",
-                                        icon: "edit",
-                                        onClick() {
-                                            var rowData = options.data;
-                                            let data = {
-                                                id: rowData.id,
-                                            };
-                                            $.ajax({
-                                                type: "GET",
-                                                url: "administrationOrders/show",
-                                                data: data,
-                                                success: function (response) {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "dashboardmainPermissions/Permissions",
+                                        success: function (response) {
+                                            // console.log(response);
+                                            let MainValue = response.Permission.filter(function (item){
+                                                return item.FormName === 'الاوامر الادارية';
+                                            })
 
-                                                    $("#id")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.AdministrationOrders.id,
-                                                        });
-                                                        $("#Guid")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.AdministrationOrders.Guid,
-                                                        });
-                                                    $("#eid")
-                                                        .dxDropDownBox("instance")
-                                                        .option({
-                                                            value: Number(response.AdministrationOrders.eid),
-                                                        });
-                                                    $("#Title")
-                                                        .dxSelectBox("instance")
-                                                        .option({
-                                                            value: response.AdministrationOrders.Title,
-                                                        });
-                                                    $("#FromDir")
-                                                        .dxSelectBox("instance")
-                                                        .option({
-                                                            value: response.AdministrationOrders.FromDir,
-                                                        });
+                                            var link1 = $("<div>").css({
+                                                "background-color": "##64DDBB",
+                                            });
+                                            link1.dxButton({
+                                                stylingMode: "contained",
+                                                type: "normal",
+                                                icon: "edit",
+                                                disabled:!MainValue[0]['OptionEdit'],
+                                                onClick() {
+                                                    var rowData = options.data;
+                                                    let data = {
+                                                        id: rowData.id,
+                                                    };
+                                                    $.ajax({
+                                                        type: "GET",
+                                                        url: "administrationOrders/show",
+                                                        data: data,
+                                                        success: function (response) {
 
-                                                    $("#DocNumber")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value:response.AdministrationOrders.DocNumber
-                                                        });
-                                                        $("#DocDate")
-                                                        .dxDateBox("instance")
-                                                        .option({
-                                                            value:new Date(response.AdministrationOrders.DocDate)
-                                                        });
-                                                        $("#Notes")
-                                                        .dxTextArea("instance")
-                                                        .option({
-                                                            value:response.AdministrationOrders.Notes
-                                                        });
-                                                        $('#image-container').empty();
-                                                        let images = [];
-                                                        $.each(response.Attachments, function(index, file) {
-                                                            images.push(file['FilePath']);
-
-                                                            $('#image-container').append(
-                                                                '<div class="image-preview">' +
-                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
-                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
-                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
-                                                                '</div>'
-                                                            );
-                                                        });
-                                                          // Delete Image
-                                                        $('#image-container').on('click', '.delete-image', function() {
-                                                            var index = $(this).closest('.image-preview').index();
-
-                                                            if(index >=0 && index < images.length){
-
-                                                                var imageName = images[index]; // Get the filename of the image to delete
-
-                                                                var id = $('#id').dxTextBox("instance").option("value");
-                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
-                                                                // Remove the image from the images array
-                                                                images.splice(index, 1);
-
-                                                                // Remove the image preview from the view
-                                                                $(this).closest('.image-preview').remove();
-
-                                                                // Send an AJAX request to delete the image from the server
-                                                                $.ajaxSetup({
-                                                                    headers: {
-                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                                                                    },
+                                                            $("#id")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.AdministrationOrders.id,
                                                                 });
-                                                                $.ajax({
-                                                                    url: 'administrationImageDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                                                                    method: 'POST',
-                                                                    data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
-                                                                    success: function(data) {
-                                                                        DevExpress.ui.notify({
-                                                                            message:
-                                                                                data.status,
-                                                                            position: {
-                                                                                my: "top left",
-                                                                                at: "top left",
+                                                                $("#Guid")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.AdministrationOrders.Guid,
+                                                                });
+                                                            $("#eid")
+                                                                .dxDropDownBox("instance")
+                                                                .option({
+                                                                    value: Number(response.AdministrationOrders.eid),
+                                                                });
+                                                            $("#Title")
+                                                                .dxSelectBox("instance")
+                                                                .option({
+                                                                    value: response.AdministrationOrders.Title,
+                                                                });
+                                                            $("#FromDir")
+                                                                .dxSelectBox("instance")
+                                                                .option({
+                                                                    value: response.AdministrationOrders.FromDir,
+                                                                });
+
+                                                            $("#DocNumber")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value:response.AdministrationOrders.DocNumber
+                                                                });
+                                                                $("#DocDate")
+                                                                .dxDateBox("instance")
+                                                                .option({
+                                                                    value:new Date(response.AdministrationOrders.DocDate)
+                                                                });
+                                                                $("#Notes")
+                                                                .dxTextArea("instance")
+                                                                .option({
+                                                                    value:response.AdministrationOrders.Notes
+                                                                });
+                                                                $('#image-container').empty();
+                                                                let images = [];
+                                                                $.each(response.Attachments, function(index, file) {
+                                                                    images.push(file['FilePath']);
+
+                                                                    $('#image-container').append(
+                                                                        '<div class="image-preview">' +
+                                                                        '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
+                                                                        '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                        '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                        '</div>'
+                                                                    );
+                                                                });
+                                                                  // Delete Image
+                                                                $('#image-container').on('click', '.delete-image', function() {
+                                                                    var index = $(this).closest('.image-preview').index();
+
+                                                                    if(index >=0 && index < images.length){
+
+                                                                        var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                        var id = $('#id').dxTextBox("instance").option("value");
+                                                                        let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                        // Remove the image from the images array
+                                                                        images.splice(index, 1);
+
+                                                                        // Remove the image preview from the view
+                                                                        $(this).closest('.image-preview').remove();
+
+                                                                        // Send an AJAX request to delete the image from the server
+                                                                        $.ajaxSetup({
+                                                                            headers: {
+                                                                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                                                                             },
-                                                                            type: "error",
-                                                                            width: "300",
-                                                                            height: "150",
-                                                                            hideAfter: 2000,
                                                                         });
-                                                                    },
-                                                                    error: function(xhr, status, error) {
-                                                                        // Handle error response (e.g., display error message)
-                                                                    }
+                                                                        $.ajax({
+                                                                            url: 'administrationImageDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                            method: 'POST',
+                                                                            data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                            success: function(data) {
+                                                                                DevExpress.ui.notify({
+                                                                                    message:
+                                                                                        data.status,
+                                                                                    position: {
+                                                                                        my: "top left",
+                                                                                        at: "top left",
+                                                                                    },
+                                                                                    type: "error",
+                                                                                    width: "300",
+                                                                                    height: "150",
+                                                                                    hideAfter: 2000,
+                                                                                });
+                                                                            },
+                                                                            error: function(xhr, status, error) {
+                                                                                // Handle error response (e.g., display error message)
+                                                                            }
+                                                                        });
+                                                                        }else{
+                                                                            console.error('Invalid index:', index);
+                                                                        }
+
+
+
                                                                 });
-                                                                }else{
-                                                                    console.error('Invalid index:', index);
-                                                                }
 
-
-
-                                                        });
-
-                                                    var displaycard =
-                                                        document.getElementById(
-                                                            "AdministrationOrdersaction"
-                                                        );
-                                                    if (
-                                                        displaycard.style
-                                                            .display == "none"
-                                                    ) {
-                                                        document.getElementById(
-                                                            "card_AdministrationOrderstitle"
-                                                        ).innerText =
-                                                            "تعديل البيانات";
-                                                        displaycard.style.display =
-                                                            "block";
-                                                        document
-                                                            .getElementById(
-                                                                "card_AdministrationOrderstitle"
-                                                            )
-                                                            .scrollIntoView();
-                                                    } else {
-                                                        displaycard.style.display =
-                                                            "none";
-                                                        document.getElementById(
-                                                            "card_AdministrationOrderstitle"
-                                                        ).innerText = "";
-                                                        displaycard.style.display =
-                                                            "block";
-                                                        document.getElementById(
-                                                            "card_AdministrationOrderstitle"
-                                                        ).innerText =
-                                                            "تعديل البيانات";
-                                                        document
-                                                            .getElementById(
-                                                                "card_AdministrationOrderstitle"
-                                                            )
-                                                            .scrollIntoView();
-                                                    }
-                                                },
-                                            });
-                                        },
-                                    });
-
-                                    var link2 = $("<div>").css({
-                                        "margin-right": "10px"
-                                    });
-                                    link2.dxButton({
-                                        stylingMode: "contained",
-                                        icon: "trash",
-                                        type: "default",
-                                        onClick() {
-                                            var rowData = options.data;
-                                            let data = {
-                                                id: rowData.id,
-                                            };
-
-                                            $.ajaxSetup({
-                                                headers: {
-                                                    "X-CSRF-TOKEN": $(
-                                                        'meta[name="csrf-token"]'
-                                                    ).attr("content"),
-                                                },
-                                            });
-                                            $.ajax({
-                                                type: "DELETE",
-                                                url: "administrationOrders/destroy",
-                                                data: data,
-                                                success: function (response) {
-                                                    AdministrationOrders_fetch();
-                                                    AdministrationOrders_cleardata();
-                                                    DevExpress.ui.notify({
-                                                        message:
-                                                            response.status,
-                                                        position: {
-                                                            my: "top left",
-                                                            at: "top left",
+                                                            var displaycard =
+                                                                document.getElementById(
+                                                                    "AdministrationOrdersaction"
+                                                                );
+                                                            if (
+                                                                displaycard.style
+                                                                    .display == "none"
+                                                            ) {
+                                                                document.getElementById(
+                                                                    "card_AdministrationOrderstitle"
+                                                                ).innerText =
+                                                                    "تعديل البيانات";
+                                                                displaycard.style.display =
+                                                                    "block";
+                                                                document
+                                                                    .getElementById(
+                                                                        "card_AdministrationOrderstitle"
+                                                                    )
+                                                                    .scrollIntoView();
+                                                            } else {
+                                                                displaycard.style.display =
+                                                                    "none";
+                                                                document.getElementById(
+                                                                    "card_AdministrationOrderstitle"
+                                                                ).innerText = "";
+                                                                displaycard.style.display =
+                                                                    "block";
+                                                                document.getElementById(
+                                                                    "card_AdministrationOrderstitle"
+                                                                ).innerText =
+                                                                    "تعديل البيانات";
+                                                                document
+                                                                    .getElementById(
+                                                                        "card_AdministrationOrderstitle"
+                                                                    )
+                                                                    .scrollIntoView();
+                                                            }
                                                         },
-                                                        type: "error",
-                                                        width: "300",
-                                                        height: "150",
-                                                        hideAfter: 2000,
                                                     });
-                                                    AdministrationOrders_fetch();
                                                 },
                                             });
-                                        },
+
+                                            var link2 = $("<div>").css({
+                                                "margin-right": "10px"
+                                            });
+                                            link2.dxButton({
+                                                stylingMode: "contained",
+                                                icon: "trash",
+                                                type: "default",
+                                                disabled:!MainValue[0]['OptionDel'],
+                                                onClick() {
+                                                    var rowData = options.data;
+                                                    let data = {
+                                                        id: rowData.id,
+                                                    };
+
+                                                    $.ajaxSetup({
+                                                        headers: {
+                                                            "X-CSRF-TOKEN": $(
+                                                                'meta[name="csrf-token"]'
+                                                            ).attr("content"),
+                                                        },
+                                                    });
+                                                    $.ajax({
+                                                        type: "DELETE",
+                                                        url: "administrationOrders/destroy",
+                                                        data: data,
+                                                        success: function (response) {
+                                                            AdministrationOrders_fetch();
+                                                            AdministrationOrders_cleardata();
+                                                            DevExpress.ui.notify({
+                                                                message:
+                                                                    response.status,
+                                                                position: {
+                                                                    my: "top left",
+                                                                    at: "top left",
+                                                                },
+                                                                type: "error",
+                                                                width: "300",
+                                                                height: "150",
+                                                                hideAfter: 2000,
+                                                            });
+                                                            AdministrationOrders_fetch();
+                                                        },
+                                                    });
+                                                },
+                                            });
+
+                                            $(container).append(link1, link2);
+
+                                       }
                                     });
 
-                                    $(container).append(link1, link2);
                                 },
                             },
                         ],
@@ -657,6 +673,21 @@ function AdministrationOrders_filldata() {
 
             },
         });
+    });
+}
+function AdministrationOrders_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            // console.log(response);
+            let MainValue = response.Permission.filter(function (item){
+                return item.FormName === 'الاوامر الادارية';
+            })
+
+            $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
+
+       }
     });
 }
 $(document).ready(function () {

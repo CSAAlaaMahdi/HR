@@ -9,6 +9,8 @@ use App\Models\Depts;
 use App\Models\EmployeeComity;
 use App\Models\Employees;
 use App\Models\EmployeesActivity;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -247,7 +249,7 @@ class EmployeesController extends Controller
                 $item->notes = Comity::find($item['cid']) != null ? Comity::find($item['cid'])->notes : "";
                 return $item;
             })->sortBy('docdate')->values()->toArray();
-        
+
         $Attachments = AttachmentsEmp::where('ParentGuid', $Emp->Guid)->get();
         $data = [
             'Emp' => $Emp,
@@ -388,4 +390,6 @@ class EmployeesController extends Controller
             return response()->json(['status' => 'تم حذف الكتاب بنجاح']);
         }
     }
+
+  
 }

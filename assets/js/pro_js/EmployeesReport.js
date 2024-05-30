@@ -1,3 +1,4 @@
+EmployeesReport_Permissions();
 EmployeesReport_fetch();
 
 function EmployeesReport_fetch() {
@@ -294,7 +295,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "address",
                                 caption: "عنوان السكن",
-                                
+
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -437,7 +438,7 @@ function EmployeesReport_fetch() {
                                 dataType : "date",
                                 format: "yyyy-MM-dd",
                                 visible:false,
-                               
+
                             },
                             {
                                 dataField: "issueplace",
@@ -483,7 +484,7 @@ function EmployeesReport_fetch() {
                                 dataType : "date",
                                 format: "yyyy-MM-dd",
                                 visible:false,
-                               
+
                             },
                             {
                                 dataField: "homeid",
@@ -510,7 +511,7 @@ function EmployeesReport_fetch() {
                                 dataType : "date",
                                 format: "yyyy-MM-dd",
                                 visible:false,
-                               
+
                             },
                             {
                                 dataField: "rationo",
@@ -534,7 +535,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "jclass",
                                 caption: "صنف التعيين",
-                               
+
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -553,7 +554,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "jcategory",
                                 caption: "العنوان الوظيفي   ",
-                         
+
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -574,8 +575,8 @@ function EmployeesReport_fetch() {
                                 caption: "تاريخ  التعيين",
                                 dataType : "date",
                                 format: "yyyy-MM-dd",
-                           
-                               
+
+
                             },
                             {
                                 dataField: "mof_wdate",
@@ -583,7 +584,7 @@ function EmployeesReport_fetch() {
                                 dataType : "date",
                                 format: "yyyy-MM-dd",
                                 visible:false,
-                               
+
                             },
                             {
                                 dataField: "rehiredate",
@@ -591,12 +592,12 @@ function EmployeesReport_fetch() {
                                 dataType : "date",
                                 format: "yyyy-MM-dd",
                                 visible:false,
-                               
+
                             },
                             {
                                 dataField: "genralspt",
                                 caption: "الاختصاص العام",
-                         
+
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -615,7 +616,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "spacifspt",
                                 caption: " الاختصاص الدقيق ",
-                         
+
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -702,39 +703,39 @@ function EmployeesReport_fetch() {
                             //     },
                             // },
 
-                            {
-                                caption: "الحدث",
-                                width: 200,
-                                cellTemplate: function (container, options) {
-                                    var row = options.row.data;
-                                    var link1 = $("<div>").css({
-                                        "background-color": "##64DDBB",
-                                    });
-                                    link1.dxButton({
-                                        stylingMode: "contained",
-                                        type: "normal",
-                                        icon: "edit",
-                                        onClick() {
-                                            var rowData = options.data;
-                                            let data = {
-                                                id: rowData.id,
-                                            };
-                                            $.ajax({
-                                                type: "GET",
-                                                url: "employeesReport/show",
-                                                data: data,
-                                                success: function (response) {
-                                                   
+                            // {
+                            //     caption: "الحدث",
+                            //     width: 200,
+                            //     cellTemplate: function (container, options) {
+                            //         var row = options.row.data;
+                            //         var link1 = $("<div>").css({
+                            //             "background-color": "##64DDBB",
+                            //         });
+                            //         link1.dxButton({
+                            //             stylingMode: "contained",
+                            //             type: "normal",
+                            //             icon: "edit",
+                            //             onClick() {
+                            //                 var rowData = options.data;
+                            //                 let data = {
+                            //                     id: rowData.id,
+                            //                 };
+                            //                 $.ajax({
+                            //                     type: "GET",
+                            //                     url: "employeesReport/show",
+                            //                     data: data,
+                            //                     success: function (response) {
 
-                                                 
-                                                },
-                                            });
-                                        },
-                                    });
 
-                                    $(container).append(link1);
-                                },
-                            },
+
+                            //                     },
+                            //                 });
+                            //             },
+                            //         });
+
+                            //         $(container).append(link1);
+                            //     },
+                            // },
                         ],
                         onContentReady: function (e) {
                             // Add custom class to the header panel
@@ -749,3 +750,17 @@ function EmployeesReport_fetch() {
     });
 }
 
+function EmployeesReport_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            // console.log(response);
+            let OptionAdd = response.Permission.filter(function (item){
+                return item.FormName === 'تقارير الموظفين';
+            })
+
+
+       }
+    });
+}

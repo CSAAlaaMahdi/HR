@@ -8,7 +8,7 @@ EmpPositionsComponent();
 EmpSupervisorsComponent();
 EmpArticlesComponent();
 EmpChildrenComponent();
-
+Employee_Permissions();
 function Employee_cleardata() {
     $("#SearchEmp").dxDropDownBox("instance").option("value",null);
     $("#eid").dxTextBox("instance").option("value", "");
@@ -3468,6 +3468,25 @@ function Employee_filldata() {
     });
 }
 
+function Employee_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            // console.log(response);
+            let OptionAdd = response.Permission.filter(function (item){
+                return item.FormName === 'الموظفين';
+            })
+
+            $("#btnNewAddEmp").dxButton("instance").option("disabled", !OptionAdd[0]['OptionAdd']);
+            let OptionEdit = response.Permission.filter(function (item){
+                return item.FormName === 'الموظفين';
+            })
+
+            $("#btnSaveEmp").dxButton("instance").option("disabled", !OptionEdit[0]['OptionEdit']);
+       }
+    });
+}
 $(document).ready(function () {
     $("#btnNewAddEmp").dxButton({
         stylingMode: "contained",

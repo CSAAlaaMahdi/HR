@@ -1,6 +1,6 @@
 Thanks_fetch();
 Thanks_filldata();
-
+Thanks_Permissions();
 function Thanks_cleardata() {
     $("#id").dxTextBox("instance").option("value", "");
     $("#Guid").dxTextBox("instance").option("value", "");
@@ -267,220 +267,235 @@ function Thanks_fetch() {
                                 width: 200,
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
-                                    var link1 = $("<div>").css({
-                                        "background-color": "##64DDBB",
-                                    });
-                                    link1.dxButton({
-                                        stylingMode: "contained",
-                                        type: "normal",
-                                        icon: "edit",
-                                        onClick() {
-                                            var rowData = options.data;
-                                            let data = {
-                                                id: rowData.id,
-                                            };
-                                            $.ajax({
-                                                type: "GET",
-                                                url: "thanks/show",
-                                                data: data,
-                                                success: function (response) {
-                                                    console.log(response);
-                                                    $("#id")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.Thanks.id,
-                                                        });
-                                                        $("#Guid")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.Thanks.Guid,
-                                                        });
-                                                    $("#eid")
-                                                        .dxDropDownBox("instance")
-                                                        .option({
-                                                            value: Number(response.Thanks.eid),
-                                                        });
-                                                    $("#ttype")
-                                                        .dxSelectBox("instance")
-                                                        .option({
-                                                            value: response.Thanks.ttype,
-                                                        });
-                                                    $("#reason")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value: response.Thanks.reason,
-                                                        });
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "dashboardmainPermissions/Permissions",
+                                        success: function (response) {
+                                            // console.log(response);
+                                            let MainValue = response.Permission.filter(function (item){
+                                                return item.FormName === 'التشكرات';
+                                            })
 
-                                                    $("#docno")
-                                                        .dxTextBox("instance")
-                                                        .option({
-                                                            value:response.Thanks.docno
-                                                        });
-                                                        $("#docdate")
-                                                        .dxDateBox("instance")
-                                                        .option({
-                                                            value:new Date(response.Thanks.docdate)
-                                                        });
-                                                        $("#notes")
-                                                        .dxTextArea("instance")
-                                                        .option({
-                                                            Date:response.Thanks.notes
-                                                        });
-
-                                                        $('#image-container').empty();
-                                                        let images = [];
-                                                        $.each(response.Attachments, function(index, file) {
-                                                            images.push(file['FilePath']);
-
-                                                            $('#image-container').append(
-                                                                '<div class="image-preview">' +
-                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
-                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
-                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
-                                                                '</div>'
-                                                            );
-                                                        });
-                                                          // Delete Image
-                                                        $('#image-container').on('click', '.delete-image', function() {
-                                                            var index = $(this).closest('.image-preview').index();
-
-                                                            if(index >=0 && index < images.length){
-
-                                                                var imageName = images[index]; // Get the filename of the image to delete
-
-                                                                var id = $('#id').dxTextBox("instance").option("value");
-                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
-                                                                // Remove the image from the images array
-                                                                images.splice(index, 1);
-
-                                                                // Remove the image preview from the view
-                                                                $(this).closest('.image-preview').remove();
-
-                                                                // Send an AJAX request to delete the image from the server
-                                                                $.ajaxSetup({
-                                                                    headers: {
-                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                                                                    },
+                                            var link1 = $("<div>").css({
+                                                "background-color": "##64DDBB",
+                                            });
+                                            link1.dxButton({
+                                                stylingMode: "contained",
+                                                type: "normal",
+                                                icon: "edit",
+                                                disabled:!MainValue[0]['OptionEdit'],
+                                                onClick() {
+                                                    var rowData = options.data;
+                                                    let data = {
+                                                        id: rowData.id,
+                                                    };
+                                                    $.ajax({
+                                                        type: "GET",
+                                                        url: "thanks/show",
+                                                        data: data,
+                                                        success: function (response) {
+                                                            console.log(response);
+                                                            $("#id")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.Thanks.id,
                                                                 });
-                                                                $.ajax({
-                                                                    url: 'thanksDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                                                                    method: 'POST',
-                                                                    data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
-                                                                    success: function(data) {
-                                                                        DevExpress.ui.notify({
-                                                                            message:
-                                                                                data.status,
-                                                                            position: {
-                                                                                my: "top left",
-                                                                                at: "top left",
+                                                                $("#Guid")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.Thanks.Guid,
+                                                                });
+                                                            $("#eid")
+                                                                .dxDropDownBox("instance")
+                                                                .option({
+                                                                    value: Number(response.Thanks.eid),
+                                                                });
+                                                            $("#ttype")
+                                                                .dxSelectBox("instance")
+                                                                .option({
+                                                                    value: response.Thanks.ttype,
+                                                                });
+                                                            $("#reason")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value: response.Thanks.reason,
+                                                                });
+
+                                                            $("#docno")
+                                                                .dxTextBox("instance")
+                                                                .option({
+                                                                    value:response.Thanks.docno
+                                                                });
+                                                                $("#docdate")
+                                                                .dxDateBox("instance")
+                                                                .option({
+                                                                    value:new Date(response.Thanks.docdate)
+                                                                });
+                                                                $("#notes")
+                                                                .dxTextArea("instance")
+                                                                .option({
+                                                                    Date:response.Thanks.notes
+                                                                });
+
+                                                                $('#image-container').empty();
+                                                                let images = [];
+                                                                $.each(response.Attachments, function(index, file) {
+                                                                    images.push(file['FilePath']);
+
+                                                                    $('#image-container').append(
+                                                                        '<div class="image-preview">' +
+                                                                        '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
+                                                                        '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                        '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                        '</div>'
+                                                                    );
+                                                                });
+                                                                  // Delete Image
+                                                                $('#image-container').on('click', '.delete-image', function() {
+                                                                    var index = $(this).closest('.image-preview').index();
+
+                                                                    if(index >=0 && index < images.length){
+
+                                                                        var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                        var id = $('#id').dxTextBox("instance").option("value");
+                                                                        let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                        // Remove the image from the images array
+                                                                        images.splice(index, 1);
+
+                                                                        // Remove the image preview from the view
+                                                                        $(this).closest('.image-preview').remove();
+
+                                                                        // Send an AJAX request to delete the image from the server
+                                                                        $.ajaxSetup({
+                                                                            headers: {
+                                                                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                                                                             },
-                                                                            type: "error",
-                                                                            width: "300",
-                                                                            height: "150",
-                                                                            hideAfter: 2000,
                                                                         });
-                                                                    },
-                                                                    error: function(xhr, status, error) {
-                                                                        // Handle error response (e.g., display error message)
-                                                                    }
+                                                                        $.ajax({
+                                                                            url: 'thanksDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                            method: 'POST',
+                                                                            data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                            success: function(data) {
+                                                                                DevExpress.ui.notify({
+                                                                                    message:
+                                                                                        data.status,
+                                                                                    position: {
+                                                                                        my: "top left",
+                                                                                        at: "top left",
+                                                                                    },
+                                                                                    type: "error",
+                                                                                    width: "300",
+                                                                                    height: "150",
+                                                                                    hideAfter: 2000,
+                                                                                });
+                                                                            },
+                                                                            error: function(xhr, status, error) {
+                                                                                // Handle error response (e.g., display error message)
+                                                                            }
+                                                                        });
+                                                                        }else{
+                                                                            console.error('Invalid index:', index);
+                                                                        }
+
+
+
                                                                 });
-                                                                }else{
-                                                                    console.error('Invalid index:', index);
-                                                                }
 
 
-
-                                                        });
-
-
-                                                    var displaycard =
-                                                        document.getElementById(
-                                                            "Thanksaction"
-                                                        );
-                                                    if (
-                                                        displaycard.style
-                                                            .display == "none"
-                                                    ) {
-                                                        document.getElementById(
-                                                            "card_Thankstitle"
-                                                        ).innerText =
-                                                            "تعديل البيانات";
-                                                        displaycard.style.display =
-                                                            "block";
-                                                        document
-                                                            .getElementById(
-                                                                "card_Thankstitle"
-                                                            )
-                                                            .scrollIntoView();
-                                                    } else {
-                                                        displaycard.style.display =
-                                                            "none";
-                                                        document.getElementById(
-                                                            "card_Thankstitle"
-                                                        ).innerText = "";
-                                                        displaycard.style.display =
-                                                            "block";
-                                                        document.getElementById(
-                                                            "card_Thankstitle"
-                                                        ).innerText =
-                                                            "تعديل البيانات";
-                                                        document
-                                                            .getElementById(
-                                                                "card_Thankstitle"
-                                                            )
-                                                            .scrollIntoView();
-                                                    }
-                                                },
-                                            });
-                                        },
-                                    });
-
-                                    var link2 = $("<div>").css({
-                                        "margin-right": "10px"
-                                    });
-                                    link2.dxButton({
-                                        stylingMode: "contained",
-                                        icon: "trash",
-                                        type: "default",
-                                        onClick() {
-                                            var rowData = options.data;
-                                            let data = {
-                                                id: rowData.id,
-                                            };
-
-                                            $.ajaxSetup({
-                                                headers: {
-                                                    "X-CSRF-TOKEN": $(
-                                                        'meta[name="csrf-token"]'
-                                                    ).attr("content"),
-                                                },
-                                            });
-                                            $.ajax({
-                                                type: "DELETE",
-                                                url: "thanks/destroy",
-                                                data: data,
-                                                success: function (response) {
-                                                    Thanks_fetch();
-                                                    Thanks_cleardata();
-                                                    DevExpress.ui.notify({
-                                                        message:
-                                                            response.status,
-                                                        position: {
-                                                            my: "top left",
-                                                            at: "top left",
+                                                            var displaycard =
+                                                                document.getElementById(
+                                                                    "Thanksaction"
+                                                                );
+                                                            if (
+                                                                displaycard.style
+                                                                    .display == "none"
+                                                            ) {
+                                                                document.getElementById(
+                                                                    "card_Thankstitle"
+                                                                ).innerText =
+                                                                    "تعديل البيانات";
+                                                                displaycard.style.display =
+                                                                    "block";
+                                                                document
+                                                                    .getElementById(
+                                                                        "card_Thankstitle"
+                                                                    )
+                                                                    .scrollIntoView();
+                                                            } else {
+                                                                displaycard.style.display =
+                                                                    "none";
+                                                                document.getElementById(
+                                                                    "card_Thankstitle"
+                                                                ).innerText = "";
+                                                                displaycard.style.display =
+                                                                    "block";
+                                                                document.getElementById(
+                                                                    "card_Thankstitle"
+                                                                ).innerText =
+                                                                    "تعديل البيانات";
+                                                                document
+                                                                    .getElementById(
+                                                                        "card_Thankstitle"
+                                                                    )
+                                                                    .scrollIntoView();
+                                                            }
                                                         },
-                                                        type: "error",
-                                                        width: "300",
-                                                        height: "150",
-                                                        hideAfter: 2000,
                                                     });
-                                                    Thanks_fetch();
                                                 },
                                             });
-                                        },
+
+                                            var link2 = $("<div>").css({
+                                                "margin-right": "10px"
+                                            });
+                                            link2.dxButton({
+                                                stylingMode: "contained",
+                                                icon: "trash",
+                                                type: "default",
+                                                disabled:!MainValue[0]['OptionDel'],
+                                                onClick() {
+                                                    var rowData = options.data;
+                                                    let data = {
+                                                        id: rowData.id,
+                                                    };
+
+                                                    $.ajaxSetup({
+                                                        headers: {
+                                                            "X-CSRF-TOKEN": $(
+                                                                'meta[name="csrf-token"]'
+                                                            ).attr("content"),
+                                                        },
+                                                    });
+                                                    $.ajax({
+                                                        type: "DELETE",
+                                                        url: "thanks/destroy",
+                                                        data: data,
+                                                        success: function (response) {
+                                                            Thanks_fetch();
+                                                            Thanks_cleardata();
+                                                            DevExpress.ui.notify({
+                                                                message:
+                                                                    response.status,
+                                                                position: {
+                                                                    my: "top left",
+                                                                    at: "top left",
+                                                                },
+                                                                type: "error",
+                                                                width: "300",
+                                                                height: "150",
+                                                                hideAfter: 2000,
+                                                            });
+                                                            Thanks_fetch();
+                                                        },
+                                                    });
+                                                },
+                                            });
+
+                                            $(container).append(link1, link2);
+
+                                       }
                                     });
 
-                                    $(container).append(link1, link2);
                                 },
                             },
                         ],
@@ -615,7 +630,24 @@ function Thanks_filldata() {
         });
     });
 }
+function Thanks_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            // console.log(response);
+            let MainValue = response.Permission.filter(function (item){
+                return item.FormName === 'التشكرات';
+            })
 
+            $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
+            let Options = response.Permission.filter(function (item){
+                return item.FormName === 'التشكرات';
+            })
+
+       }
+    });
+}
 $(document).ready(function () {
     $("#danger-contained").dxButton({
         stylingMode: "contained",
