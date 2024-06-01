@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/style2.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/Pro_css/LoginDesign.css') }}">
 
-
     <title>تسجيل الدخول</title>
 </head>
 
@@ -17,14 +16,14 @@
     <div class="wrapper">
         <div class="form-box login">
             <div class="logoimg-container">
-                <img src="{{ url('assets/img/icons/almatana.png') }}" class="logoimg">
+                <img src="{{ url('assets/img/icons/Logo.jpg') }}" class="logoimg">
             </div>
 
             <h2 id="titlefont">تسجيل الدخول</h2>
 
             @csrf
             <div class="input-box">
-                <span class="icon"><ion-icon name="mail"></ion-icon>
+                <span class="icon"><img src="{{url('assets/img/icons/icons8_customer_25px.png')}}" alt=""></ion-icon>
 
                 </span>
                 <input type="text" id="u_username" autocomplete="off" value="{{ old('u_username') }}">
@@ -33,9 +32,10 @@
             </div>
             <span id="error_username"></span>
             <div class="input-box">
-                <span class="icon"><ion-icon name="lock-closed"></ion-icon>
+                {{-- <span class="icon"><ion-icon name="lock-closed"></ion-icon>
 
-                </span>
+                </span> --}}
+                <span class="icon"><img src="{{url('assets/img/icons/icons8_lock_25px.png')}}" alt=""></span>
                 <input type="password" id="u_password" autocomplete="off" value="{{ old('u_password') }}">
                 <label id="titlefont">كلمة المرور</label>
 
@@ -52,8 +52,6 @@
 
     <script type="text/javascript" src="{{ url('assets/js/Template/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/js/pro_js/login.js') }}"></script>
-    {{-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> --}}
 </body>
 
 </html>

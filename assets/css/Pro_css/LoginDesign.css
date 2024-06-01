@@ -25,7 +25,7 @@ body{
 .wrapper{
     position: relative;
     width: 400px;
-    height:550px ;
+    height:500px ;
     background: transparent;
     border: 1px solid rgb(255, 255, 255,.5);
     border-radius: 20px;
@@ -41,14 +41,14 @@ body{
     padding: 40px;
 }
 .form-box h2{
-    font-size: 2em;
+    font-size: 1em;
     color: rgb(25, 25, 26);
     text-align: center;
 }
 .input-box{
     position: relative;
     width: 100%;
-    height: 50px;
+    height: 40px;
     border-bottom: 1px solid rgb(23, 23, 22);
     margin: 30px 0;
 }
@@ -67,7 +67,7 @@ body{
 .input-box input:focus~label,
 .input-box input:valid~label{
     top: -5px;
-    font-size: 1em;
+    font-size: 0.8em;
     font-weight: 450;
 }
 .input-box input{
@@ -84,26 +84,27 @@ body{
 .input-box .icon{
     position: absolute;
     left: 8px;
-    font-size: 1.2em;
+    font-size: 0.9em;
     color: rgb(23, 22, 22);
-    line-height: 75px;
+    line-height: 50px;
+    width: 32px;
+    height: 32px;
+    padding-bottom: 10px;
 
 }
 .logoimg{
     position: relative;
     border: none;
-    border-radius: 50px;
-    width: 170px;
-    height: 190px;
-
-
+    border-radius: 10px;
+    width: 100px;
+    height: 125px;
 
 }
 .logoimg-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 .submitLogin{
     width: 130px;
@@ -123,18 +124,18 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 10px;
 
 }
 #error_username{
     color: red;
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: 600;
     font-family: myFont;
 }
 #error_password{
     color: red;
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: 600;
     font-family: myFont;
 }
