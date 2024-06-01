@@ -168,7 +168,7 @@ function UserPermissions_fetch() {
                                                 data: data,
 
                                                 success: function (response) {
-                                                  
+
                                                    $("#GroupID")
                                                     .dxDropDownBox("instance")
                                                     .option("value",Number(response.UserPermissions[0].GroupID))
@@ -313,7 +313,7 @@ function UserPermissions_fetch() {
                                 caption: "التسلسل",
                                 visible: false,
                             },
-                          
+
                             {
                                 dataField: "GroupID",
                                 caption: "اسم المجموعة",
@@ -383,13 +383,13 @@ function UserPermissions_fetch() {
                                 editorType:"dxCheckBox",
                                 width:125
                             },
-                            {
-                                dataField: "ReadOnly",
-                                caption: "قراءة فقط ",
-                                dataType:"boolean",
-                                editorType:"dxCheckBox",
-                                width:125
-                            },
+                            // {
+                            //     dataField: "ReadOnly",
+                            //     caption: "قراءة فقط ",
+                            //     dataType:"boolean",
+                            //     editorType:"dxCheckBox",
+                            //     width:125
+                            // },
 
 
                         ],

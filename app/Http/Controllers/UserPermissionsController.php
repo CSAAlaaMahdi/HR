@@ -55,7 +55,7 @@ class UserPermissionsController extends Controller
                         'OptionAdd' => $value['OptionAdd'],
                         'OptionEdit' => $value['OptionEdit'],
                         'OptionDel' => $value['OptionDel'],
-                        'ReadOnly' => $value['ReadOnly'],
+                        // 'ReadOnly' => $value['ReadOnly'],
                         'UserID' => $UserID,
 
                     ]
@@ -76,7 +76,7 @@ class UserPermissionsController extends Controller
                         'OptionAdd' => $value['OptionAdd'],
                         'OptionEdit' => $value['OptionEdit'],
                         'OptionDel' => $value['OptionDel'],
-                        'ReadOnly' => $value['ReadOnly'],
+                        // 'ReadOnly' => $value['ReadOnly'],
                         'UserID' => $UserID,
 
                     ]
