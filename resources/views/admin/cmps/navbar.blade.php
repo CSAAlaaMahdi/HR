@@ -121,7 +121,7 @@
                     class="fas fa-th-large"></i></a>
         </li>
         <li class="nav-item pr-5">
-            <a class="nav-link"  href="">
+            <a class="nav-link"  href="{{route('login')}}">
                 <i class="fa fa-sign-out-alt sign-out-icon" > <span id="titlefont">خروج</span></i></a>
         </li>
         <style>
