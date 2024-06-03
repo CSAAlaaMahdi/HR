@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script type="text/javascript" src="{{ url('assets/dx/js/exceljs.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/dx/js/FileSaver.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/dx/js/polyfill_7.4.0_polyfill.min.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script> --}}
 
     <script>
         $(function() {
