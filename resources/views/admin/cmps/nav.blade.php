@@ -463,7 +463,42 @@
 
             </ul>
         </li>
-    
+        <li
+        class="nav-item has-treeview {{ request()->routeIs('places.index')
+            ? 'menu-open'
+            : 'menu-close' }} ">
+        <a href="#"
+            class="nav-link {{ request()->routeIs('places.index')
+                ? 'active'
+                : '' }}">
+            <img src="{{ url('assets/img/navbar/icons8_Online_Store_64px.png') }}" alt=""
+                style="width: 32px; height: 32px;">
+            <p style="margin-right: 10px">
+                المخازن والذمم
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item" id="Login_Places">
+                <a href="{{ route('places.index') }}"
+                    class="nav-link {{ request()->routeIs('places.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('places.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_Online_Store_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px">مواقع وذمم</p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_Online_Store_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px">مواقع وذمم</p>
+                    @endif
+                </a>
+            </li>
+
+
+
+
+        </ul>
+    </li>
     </ul>
 </nav>
 

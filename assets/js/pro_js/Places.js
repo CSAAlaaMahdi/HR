@@ -133,7 +133,7 @@ function Places_fetch() {
             success: function (response) {
                 console.log(response);
                 $(function () {
-                   
+
                     const treeList = $("#PlacesTree")
                         .dxTreeList({
                             dataSource:response.getPlaces,
@@ -145,6 +145,9 @@ function Places_fetch() {
                             allowColumnResizing: true,
                             columnAutoWidth: true,
                             focusedRowEnabled: true,
+                            scrolling:{
+                                mode: 'standard',
+                            },
                             columnFixing: {
                                 enabled: true,
                             },
@@ -168,14 +171,7 @@ function Places_fetch() {
                                 });
                               },
                             columns: [
-                                {
-                                    dataField:"ID",
-                                    // visible:false,
-                                },
-                                {
-                                    dataField:"perID",
-                                    // visible:false
-                                },
+
                                 {
                                     dataField: "placeName",
                                     caption: "الموقع",
@@ -185,13 +181,6 @@ function Places_fetch() {
                                         var fontWeight = "400"; // Set the desired font weight
                                         let fontSize = "13px";
                                         let fontColor = '#283741';
-                                        // var formattedValue = new Intl.NumberFormat("en-US", {
-                                        //     style: "decimal",
-                                        //     minimumFractionDigits: 0,
-                                        //     maximumFractionDigits: 3,
-                                        //     minimumIntegerDigits: 1,
-                                        //     useGrouping: true,
-                                        // }).format(cellValue);
                                         $("<div>")
                                             .css({
                                                 "font-size" :fontSize,
@@ -201,7 +190,7 @@ function Places_fetch() {
                                             .text(cellValue)
                                             .appendTo(container);
                                     },
-                                    // fixed: true,
+
                                 },
 
                                 {
@@ -289,7 +278,7 @@ function Places_fetch() {
                             filterRow: { visible: true },
                             searchPanel: {
                                 visible: true,
-                                width:500,
+                                width:300,
                             },
 
                             selection: { mode: "single" },
@@ -373,28 +362,7 @@ function Places_fetch() {
                             paging: {
                                 enabled: true,
                                 pageSize: 10,
-                                // pageIndex: currentPage -1,
-                                // pageCount:totalPages,
-                                // onIndexChanged: function (e) {
-                                //     const pageIndex = e.component.pageIndex();
-                                //     // Fetch data for the new page index
-                                //     $.ajax({
-                                //         type: "GET",
-                                //         url: pageIndex === 0 ? response.getPlaces.first_page_url : response.getPlaces.next_page_url,
-                                //         success: function (response) {
-                                //             console.log(response);
-                                //             const placesData = response.getPlaces.data;
-                                //             // Update the data source of the TreeList
-                                //             treeList.option("dataSource", placesData);
-                                //             // Update current page index and total pages
-                                //             currentPage = response.getPlaces.current_page;
-                                //             totalPages = response.getPlaces.last_page;
-                                //         },
-                                //         error: function (err) {
-                                //             console.error("Error fetching data:", err);
-                                //         }
-                                //     });
-                                // }
+
                             },
                             pager: {
                                 visible: true,

@@ -7,13 +7,13 @@
                 <div class="card " id="firstCard">
                     <div class="card-header bg-dark">
                         <div id="btnNewAdd" style="float: right"></div>
-                        <h4 style="color: white;float: right;margin-right: 35%">شجرة المواقع </h4>
+                        <h4 style="color: white;float: right;margin-right: 35%">مواقع وذمم  </h4>
 
                     </div>
                     <div class="card-body">
 
                         <div id="PlacesTree"> </div>
-                       
+
                     </div>
                 </div>
             </div>
