@@ -464,11 +464,13 @@
             </ul>
         </li>
         <li
-        class="nav-item has-treeview {{ request()->routeIs('places.index')
+        class="nav-item has-treeview {{ request()->routeIs('places.index') ||
+            request()->routeIs('itemsGroups.index')
             ? 'menu-open'
             : 'menu-close' }} ">
         <a href="#"
-            class="nav-link {{ request()->routeIs('places.index')
+            class="nav-link {{ request()->routeIs('places.index') ||
+                request()->routeIs('itemsGroups.index')
                 ? 'active'
                 : '' }}">
             <img src="{{ url('assets/img/navbar/icons8_Online_Store_64px.png') }}" alt=""
@@ -493,7 +495,20 @@
                     @endif
                 </a>
             </li>
-
+            <li class="nav-item" id="Login_ItemsGroups">
+                <a href="{{ route('itemsGroups.index') }}"
+                    class="nav-link {{ request()->routeIs('itemsGroups.index') ? 'active' : '' }}">
+                    @if (request()->routeIs('itemsGroups.index'))
+                        <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px_1.png') }}" alt=""
+                            style=" width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px"> دليل المواد</p>
+                    @else
+                        <img src="{{ url('assets/img/navbar/icons8_flow_chart_64px.png') }}" alt=""
+                            style="width: 32px; height: 32px;margin-right:15px">
+                        <p style="margin-right:10px">دليل المواد </p>
+                    @endif
+                </a>
+            </li>
 
 
 
