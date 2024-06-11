@@ -131,7 +131,6 @@ function ItemsGroups_fetch() {
             type: "GET",
             url: url + "create",
             success: function (response) {
-                console.log(response);
                 $(function () {
 
                     const treeList = $("#ItemsGroupsTree")
@@ -406,31 +405,32 @@ function setMaskCode() {
             data: { ParentID: selectValue },
             url: "itemsGroupsSetCode/setCode",
             success: function (response) {
-                if (response.getData) {
-                    console.log(response);
-                    let child = Number(response.getData.ItemCode);
-                    let parent = Number(response.getParent.ItemCode);
-                    let result = 0;
-                    let finalResult = 0;
-                    let count = 1;
-                    while (child != parent) {
-                        result = child % 10;
-                        finalResult = finalResult * count + result;
-                        count *= 10;
-                        child = Math.floor(child / 10);
-                    }
-                    finalResult++;
+                console.log(response);
+                // if (response.getData) {
 
-                    let accode = response.getParent.ItemCode;
-                    let newCode = accode + finalResult;
-                    $("#ItemCode")
-                        .dxTextBox("instance")
-                        .option("value", newCode);
-                } else {
-                    console.log(response);
-                    let code = response.getParent.ItemCode + 1;
-                    $("#ItemCode").dxTextBox("instance").option("value", code);
-                }
+                //     let child = Number(response.getData.ItemCode);
+                //     let parent = Number(response.getParent.ItemCode);
+                //     let result = 0;
+                //     let finalResult = 0;
+                //     let count = 1;
+                //     while (child != parent) {
+                //         result = child % 10;
+                //         finalResult = finalResult * count + result;
+                //         count *= 10;
+                //         child = Math.floor(child / 10);
+                //     }
+                //     finalResult++;
+
+                //     let accode = response.getParent.ItemCode;
+                //     let newCode = accode + finalResult;
+                //     $("#ItemCode")
+                //         .dxTextBox("instance")
+                //         .option("value", newCode);
+                // } else {
+                //     console.log(response);
+                //     let code = response.getParent.ItemCode + 1;
+                //     $("#ItemCode").dxTextBox("instance").option("value", code);
+                // }
             },
         });
     }
