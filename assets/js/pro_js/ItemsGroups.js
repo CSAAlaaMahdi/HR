@@ -4,7 +4,7 @@ ItemsGroups_filldata();
 function ItemsGroups_cleardata() {
  $('#ID').dxTextBox("instance").option("value","");
  $('#ItemName').dxTextBox("instance").option("value","");
- $("#ParentID").dxDropDownBox("instance").option("value",null);
+ $("#ParentID").dxDropDownBox("instance").option("value",0);
 }
 
 function ItemsGroups_chechdata() {
@@ -24,6 +24,7 @@ function ItemsGroups_UpdateOrCreate() {
         ParentID: $("#ParentID").dxDropDownBox("instance").option("value"),
         ItemName: $("#ItemName").dxTextBox("instance").option("value"),
         ID: $("#ID").dxTextBox("instance").option("value"),
+        ItemCode: $("#ItemCode").dxTextBox("instance").option("value"),
     };
     $.ajaxSetup({
         headers: {
@@ -115,7 +116,16 @@ function ItemsGroups_filldata() {
 
                             return $dataGrid;
                         },
+                        onValueChanged: function(e) {
+                          let IDValue = $("#ID").dxTextBox("instance").option("value");
+                          if(IDValue == "" || IDValue == null)
+                            {
+                                setMaskCode();
+                            }else{
 
+                            }
+
+                        }
 
                     });
                 });
@@ -191,6 +201,66 @@ function ItemsGroups_fetch() {
                                     },
 
                                 },
+                                {
+                                    dataField: "ItemCode",
+                                    caption: "كود المادة",
+
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "400"; // Set the desired font weight
+                                        let fontSize = "13px";
+                                        let fontColor = '#283741';
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+
+                                },
+                                {
+                                    dataField: "ItemPlace",
+                                    caption: "موقع المادة ",
+
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "400"; // Set the desired font weight
+                                        let fontSize = "13px";
+                                        let fontColor = '#283741';
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+
+                                },
+                                {
+                                    dataField: "Quantity",
+                                    caption: "الكمية",
+
+                                    cellTemplate: function(container, options) {
+                                        var cellValue = options.value;
+                                        var fontWeight = "400"; // Set the desired font weight
+                                        let fontSize = "13px";
+                                        let fontColor = '#283741';
+                                        $("<div>")
+                                            .css({
+                                                "font-size" :fontSize,
+                                                "font-weight" : fontWeight,
+                                                "color" :fontColor,
+                                            })
+                                            .text(cellValue)
+                                            .appendTo(container);
+                                    },
+
+                                },
 
                                 {
                                     caption: "الحدث",
@@ -207,17 +277,17 @@ function ItemsGroups_fetch() {
                                                 var rowData = options.data;
                                                 let url='itemsGroups/';
                                                 let data={
-                                                    ID:rowData.ID,
+                                                    ID:rowData.id,
                                                 };
                                                 $.ajax({
                                                     type: "GET",
                                                     url: url+"show",
                                                     data: data,
                                                     success: function (response) {
-
-
-                                                            $('#ID').dxTextBox("instance").option({value:response.ID});
-                                                            $('#ItemName').dxTextBox("instance").option({value:response.placeName});
+                                                        console.log(response);
+                                                            $('#ID').dxTextBox("instance").option({value:response.id});
+                                                            $('#ItemName').dxTextBox("instance").option({value:response.ItemName});
+                                                            $('#ItemCode').dxTextBox("instance").option({value:response.ItemCode});
 
                                                             let datavalue=Number(response.ParentID);
                                                             $('#ParentID').dxDropDownBox("instance").option(
@@ -263,7 +333,41 @@ function ItemsGroups_fetch() {
                                             type:"default",
                                             onClick() {
 
+                                                var rowData = options.data;
+                                                let url='itemsGroups/';
+                                                let data={
+                                                    ID:rowData.id,
+                                                };
+                                               let flag = ItemsGroupCheckRoot(data.ID);
+                                               console.log(flag);
 
+                                                // $.ajaxSetup({
+                                                //     headers: {
+                                                //         "X-CSRF-TOKEN": $(
+                                                //             'meta[name="csrf-token"]'
+                                                //         ).attr("content"),
+                                                //     },
+                                                // });
+                                                // $.ajax({
+                                                //     type: "DELETE",
+                                                //     url: url + "destroy",
+                                                //     data: data,
+                                                //     success: function (response) {
+                                                //         DevExpress.ui.notify({
+                                                //             message:
+                                                //                 response.status,
+                                                //             position: {
+                                                //                 my: "top left",
+                                                //                 at: "top left",
+                                                //             },
+                                                //             type: "error",
+                                                //             width: "300",
+                                                //             height: "150",
+                                                //             hideAfter: 2000,
+                                                //         });
+                                                //         ItemsGroups_fetch();
+                                                //     },
+                                                // });
 
                                             },
                                         });
@@ -387,8 +491,7 @@ function setMaskCode() {
     let selectValue = $("#ParentID")
         .dxDropDownBox("instance")
         .option("value");
-
-    if (selectValue == null) {
+    if (selectValue == "" || selectValue == null) {
         $.ajax({
             type: "GET",
             data: { ParentID: selectValue },
@@ -405,35 +508,44 @@ function setMaskCode() {
             data: { ParentID: selectValue },
             url: "itemsGroupsSetCode/setCode",
             success: function (response) {
-                console.log(response);
-                // if (response.getData) {
+                if (response.getData) {
+                    let child = Number(response.getData.ItemCode);
+                    let parent = Number(response.getParent.ItemCode);
+                    let result = 0;
+                    let finalResult = 0;
+                    let count = 1;
+                    while (child != parent) {
+                        result = child % 10;
+                        finalResult = finalResult * count + result;
+                        count *= 10;
+                        child = Math.floor(child / 10);
+                    }
+                    finalResult++;
 
-                //     let child = Number(response.getData.ItemCode);
-                //     let parent = Number(response.getParent.ItemCode);
-                //     let result = 0;
-                //     let finalResult = 0;
-                //     let count = 1;
-                //     while (child != parent) {
-                //         result = child % 10;
-                //         finalResult = finalResult * count + result;
-                //         count *= 10;
-                //         child = Math.floor(child / 10);
-                //     }
-                //     finalResult++;
-
-                //     let accode = response.getParent.ItemCode;
-                //     let newCode = accode + finalResult;
-                //     $("#ItemCode")
-                //         .dxTextBox("instance")
-                //         .option("value", newCode);
-                // } else {
-                //     console.log(response);
-                //     let code = response.getParent.ItemCode + 1;
-                //     $("#ItemCode").dxTextBox("instance").option("value", code);
-                // }
+                    let accode = response.getParent.ItemCode;
+                    let newCode = accode + finalResult;
+                    $("#ItemCode")
+                        .dxTextBox("instance")
+                        .option("value", newCode);
+                } else {
+                    let code = response.getParent.ItemCode + 1;
+                    $("#ItemCode").dxTextBox("instance").option("value", code);
+                }
             },
         });
     }
+}
+
+function ItemsGroupCheckRoot(IDValue){
+    $.ajax({
+        type: "GET",
+        url: "ItemsGroupCheck/CheckRoot",
+        data: {IDValue:IDValue},
+        success: function (response) {
+            console.log(response);
+            return response;
+        }
+    });
 }
 // End CRUD Functions.
 
@@ -513,7 +625,6 @@ $(document).ready(function () {
             if (displaycard.style.display == "block") {
                 document.getElementById("card_ItemsGroupstitle").innerText = "";
                 ItemsGroups_cleardata();
-                setMaskCode();
                 displaycard.style.display = "none";
                 document.getElementById("firstCard").scrollIntoView();
             }else{

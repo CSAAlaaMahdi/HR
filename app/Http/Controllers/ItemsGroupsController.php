@@ -88,8 +88,8 @@ class ItemsGroupsController extends Controller
     public function setCode(Request $request)
     {
         $ParentID = $request->input('ParentID');
-        if ($ParentID == null) {
-            $getData = Items::max('id') != null ? Items::max('id') + 1 : 1;
+        if ($ParentID == 0) {
+            $getData = Items::max('ItemCode') != null ? Items::max('ItemCode') + 1 : 1;
 
             $data = [
                 'getData' => $getData,
@@ -102,6 +102,12 @@ class ItemsGroupsController extends Controller
                 'getData' => $getdata,
                 'getParent' => $getParent,
             ];
+            return response()->json($data);
         }
+    }
+    public function CheckRoot(Request $request){
+        $IDValue = $request->input('IDValue');
+        $checkRoot = Items::where('ParentID',$IDValue) != null ? true:false;
+        return response()->json($checkRoot);
     }
 }

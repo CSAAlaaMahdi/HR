@@ -129,6 +129,7 @@ Route::get('dashboardmainCards/CardsData', [DashboardMain::class, 'CardsData']);
 
 
 Route::get('itemsGroupsSetCode/setCode', [ItemsGroupsController::class, 'setCode']);
+Route::get('ItemsGroupCheck/CheckRoot', [ItemsGroupsController::class, 'CheckRoot']);
 
 
 // Permissions ...
