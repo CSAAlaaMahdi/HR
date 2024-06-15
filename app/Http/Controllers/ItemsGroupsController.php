@@ -21,23 +21,25 @@ class ItemsGroupsController extends Controller
 
     public function create(Request $request)
     {
-        $getData = Items::orderBy('id')->get() -> map(function ($item) {
-            $checkCount = Items::where([['ParentID', $item['id']],['IsGroup',true]])->count() != 0 ? Items::where('ParentID', $item['id'])->count() : 0;
-            if($checkCount > 0){
-                $item['Quantity'] = Items::where([['ParentID', $item['id']],['IsGroup',true]])->sum('Quantity');
+        $getData = Items::orderBy('id')->get()->map(function ($item) {
+            $checkCount = Items::where([['ParentID', $item['id']]])->count() != 0 ? Items::where('ParentID', $item['id'])->count() : 0;
+            if ($checkCount > 0) {
+                $item['Quantity'] = Items::where([['ParentID', $item['id']]])->sum('Quantity');
             }
-            $checkCount2 = Items::where([['ParentID', $item['id']],['IsGroup',false]])->count() != 0 ? Items::where('ParentID', $item['id'])->count() : 0;
-            if($checkCount2 > 0){
-                $item['Quantity'] = Items::where([['ParentID', $item['id']],['IsGroup',false]])->sum('Quantity');
-            }
+
             $item['ItemPlace'] = Places::find($item['ItemPlace']) !=null ? Places::find($item['ItemPlace'])->placeName : "";
             return $item;
         });
+        $getData2 = $getData->map(function ($item) use ($getData) {
+            if ($item['IsGroup']) {
+                $item['Quantity'] = $getData->where('ParentID', $item['id'])->sum('Quantity');
+            }
+            return $item;
+        });
         $data = [
-            'getItemsGroups' => $getData,
+            'getItemsGroups' => $getData2,
         ];
         return response()->json($data);
-
     }
 
 
@@ -125,5 +127,7 @@ class ItemsGroupsController extends Controller
         return response()->json($checkRoot);
     }
 
-
+    function  checkTree($item)
+    {
+    }
 }

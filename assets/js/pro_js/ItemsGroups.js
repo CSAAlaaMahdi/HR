@@ -247,7 +247,7 @@ function ItemsGroups_fetch() {
 
                                     cellTemplate: function(container, options) {
                                         var cellValue = options.value;
-                                        var fontWeight = "400"; // Set the desired font weight
+                                        var fontWeight = "500"; // Set the desired font weight
                                         let fontSize = "13px";
                                         let fontColor = '#283741';
                                         $("<div>")

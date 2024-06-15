@@ -122,10 +122,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @include('admin.cmps.navbar');
 
 
-
-
-
-
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="{{route('home.index')}}" class="brand-link">
                 <img src="{{ url('assets/img/navbar/icons8_circled_h_64px.png') }}" alt="AdminLTE Logo"

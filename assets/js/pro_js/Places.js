@@ -361,7 +361,7 @@ function Places_fetch() {
                             },
                             paging: {
                                 enabled: true,
-                                pageSize: 10,
+                                pageSize: 5,
 
                             },
                             pager: {
