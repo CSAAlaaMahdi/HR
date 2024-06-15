@@ -18,7 +18,7 @@ class Items extends Model
         'ItemUnit',
         'Quantity',
         'ItemPlace',
-        'ItemState',
+        'ItemStatus',
         'IsGroup',
         'Description',
 

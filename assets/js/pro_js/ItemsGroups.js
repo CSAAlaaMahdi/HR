@@ -616,10 +616,10 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#btnNewAdd").dxButton({
         stylingMode: "contained",
-        text: "اضافة",
+        text: "اضافة دليل",
         type: "success",
         icon: "plus",
-        width: 120,
+        width: 150,
         onClick() {
             var displaycard = document.getElementById("ItemsGroupsaction");
             if (displaycard.style.display == "block") {

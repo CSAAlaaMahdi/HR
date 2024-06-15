@@ -3,48 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\Items;
-use App\Models\ItemsGroups;
 use App\Models\Places;
 use Illuminate\Http\Request;
 
 
-class ItemsGroupsController extends Controller
+class ItemsController extends Controller
 {
 
     public function index()
     {
         if (session()->has('User')) {
-            return view('store.itemsGroups');
+            return view('store.items');
         }
     }
 
 
     public function create(Request $request)
     {
-        $getData = Items::orderBy('id')->get() -> map(function ($item) {
-            $checkCount = Items::where([['ParentID', $item['id']],['IsGroup',true]])->count() != 0 ? Items::where('ParentID', $item['id'])->count() : 0;
-            if($checkCount > 0){
-                $item['Quantity'] = Items::where([['ParentID', $item['id']],['IsGroup',true]])->sum('Quantity');
-            }
-            $checkCount2 = Items::where([['ParentID', $item['id']],['IsGroup',false]])->count() != 0 ? Items::where('ParentID', $item['id'])->count() : 0;
-            if($checkCount2 > 0){
-                $item['Quantity'] = Items::where([['ParentID', $item['id']],['IsGroup',false]])->sum('Quantity');
-            }
+        $getData = Items::where('IsGroup',false)-> orderBy('id')->get()->map(function($item){
+            $item['ParentID'] = Items::find($item['ParentID']) !=null ? Items::find($item['ParentID'])->ItemName : "";
             $item['ItemPlace'] = Places::find($item['ItemPlace']) !=null ? Places::find($item['ItemPlace'])->placeName : "";
             return $item;
         });
         $data = [
-            'getItemsGroups' => $getData,
+            'getItems' => $getData,
         ];
         return response()->json($data);
-
     }
 
 
     public function store(Request $request)
     {
         $ID = $request->post('ID');
-        $ItemsGroups = Items::updateOrCreate(
+        $Items = Items::updateOrCreate(
             [
                 'id' => $ID,
             ],
@@ -52,7 +43,13 @@ class ItemsGroupsController extends Controller
                 'ParentID' => $request->post('ParentID') != 0 ? $request->post('ParentID') : 0,
                 'ItemName' => $request->post('ItemName'),
                 'ItemCode' => $request->post('ItemCode'),
-                'IsGroup' => true,
+                'Brand' => $request->post('Brand'),
+                'ItemUnit' => $request->post('ItemUnit'),
+                'Quantity' => $request->post('ItemQuantity'),
+                'ItemPlace' => $request->post('ItemPlace'),
+                'ItemStatus' => $request->post('ItemStatus'),
+                'Description' => $request->post('Description'),
+                'IsGroup' => false,
 
             ]
         );
@@ -63,8 +60,8 @@ class ItemsGroupsController extends Controller
     public function show(Request $request)
     {
         $ID = $request->input('ID');
-        $ItemsGroups = Items::find($ID);
-        return response()->json($ItemsGroups);
+        $Items = Items::find($ID);
+        return response()->json($Items);
     }
 
 
@@ -89,10 +86,32 @@ class ItemsGroupsController extends Controller
     public function filldata()
     {
 
-        $getItemsGroups = Items::where('IsGroup', true)->get();
-
+        $getItems = Items::where('IsGroup', true)->get();
+        $getItemUnit = Items::select('ItemUnit')
+            ->whereNotNull('ItemUnit')
+            ->where('ItemUnit', '<>', '')
+            ->distinct()
+            ->orderBy('ItemUnit')
+            ->get();
+        $getBrand = Items::select('Brand')
+            ->whereNotNull('Brand')
+            ->where('Brand', '<>', '')
+            ->distinct()
+            ->orderBy('Brand')
+            ->get();
+        $getItemPlace = Places::where('perID',null)->get();
+        $getItemStatus = Items::select('ItemStatus')
+            ->whereNotNull('ItemStatus')
+            ->where('ItemStatus', '<>', '')
+            ->distinct()
+            ->orderBy('ItemStatus')
+            ->get();
         $data = [
-            'getItemsGroups' => $getItemsGroups,
+            'getItems' => $getItems,
+            'getItemUnit' => $getItemUnit,
+            'getBrand' => $getBrand,
+            'getItemPlace' => $getItemPlace,
+            'getItemStatus' => $getItemStatus,
 
         ];
         return response()->json($data);
@@ -124,6 +143,4 @@ class ItemsGroupsController extends Controller
         $checkRoot = Items::where('ParentID', $IDValue) != null ? true : false;
         return response()->json($checkRoot);
     }
-
-
 }

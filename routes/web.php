@@ -15,6 +15,7 @@ use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\EmployeesAttachmentsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\EmployeesReportController;
+use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ItemsGroupsController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\PlacesController;
@@ -80,6 +81,7 @@ Route::resources([
     'employeesAttachments' => EmployeesAttachmentsController::class,
     'employeesReport' => EmployeesReportController::class,
     'itemsGroups' => ItemsGroupsController::class,
+    'items' => ItemsController::class,
 
 
 ]);
@@ -100,6 +102,7 @@ Route::get('placesfill/filldata', [PlacesController::class, 'filldata']);
 Route::get('disapearfill/filldata', [DisapearController::class, 'filldata']);
 Route::get('dispatchfill/filldata', [DispatchController::class, 'filldata']);
 Route::get('itemsGroupsfill/filldata', [ItemsGroupsController::class, 'filldata']);
+Route::get('itemsfill/filldata', [ItemsController::class, 'filldata']);
 Route::get('administrationOrdersfill/filldata', [AdministrationOrdersController::class, 'filldata']);
 Route::get('userGroupPermissionsfill/filldata', [UserGroupPermissionsController::class, 'filldata']);
 Route::get('employeesAttachmentsfill/filldata', [EmployeesAttachmentsController::class, 'filldata']);
@@ -130,6 +133,8 @@ Route::get('dashboardmainCards/CardsData', [DashboardMain::class, 'CardsData']);
 
 Route::get('itemsGroupsSetCode/setCode', [ItemsGroupsController::class, 'setCode']);
 Route::get('ItemsGroupCheck/CheckRoot', [ItemsGroupsController::class, 'CheckRoot']);
+Route::get('itemsSetCode/setCode', [ItemsController::class, 'setCode']);
+Route::get('itemsCheck/CheckRoot', [ItemsController::class, 'CheckRoot']);
 
 
 // Permissions ...
