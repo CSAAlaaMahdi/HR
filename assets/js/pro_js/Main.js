@@ -221,6 +221,36 @@ function GetPermission(){
                 });
 
             }
+            let Places = response.Permission.filter(function (item){
+                return item.FormName === 'مواقع وذمم';
+            })
+            if (!Places[0]['Enable']) {
+                $("#Login_Places a").click(function(e) {
+                    e.preventDefault();
+
+                });
+
+            }
+            let ItemsGroups = response.Permission.filter(function (item){
+                return item.FormName === 'دليل المواد';
+            })
+            if (!ItemsGroups[0]['Enable']) {
+                $("#Login_ItemsGroups a").click(function(e) {
+                    e.preventDefault();
+
+                });
+
+            }
+            let Items = response.Permission.filter(function (item){
+                return item.FormName === 'المواد';
+            })
+            if (!Items[0]['Enable']) {
+                $("#Login_Items a").click(function(e) {
+                    e.preventDefault();
+
+                });
+
+            }
 
         }
     });
