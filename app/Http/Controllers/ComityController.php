@@ -6,6 +6,8 @@ use App\Models\Attachments;
 use App\Models\Comity;
 use App\Models\EmployeeComity;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -24,10 +26,23 @@ class ComityController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'اللجان')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Comity::orderByDesc('id')->get();
 
         $data = [
             'getComity' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -107,8 +122,7 @@ class ComityController extends Controller
                         }
                     }
                 }
-            }
-            else{
+            } else {
                 if (count($eidArray) > 0) {
                     $getEmpComity = EmployeeComity::Where('cid', '=', $id)->get() != null ? EmployeeComity::Where('cid', '=', $id)->get() : null;
                     if ($getEmpComity != null) {
@@ -215,13 +229,12 @@ class ComityController extends Controller
                             ]
 
                         );
-
                     }
                 }
             }
         }
 
-      
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -231,18 +244,30 @@ class ComityController extends Controller
         $id = $request->input('id');
         $Comity = Comity::find($id);
         $Attachments = Attachments::where('ParentGuid', $Comity->Guid)->get();
-        $EmpComity = EmployeeComity:: where('cid',$id)->get();
-        $EmpComity2 = EmployeeComity:: where('cid',$id)->get()
-                    ->map(function($item){
-                        $item['eid'] =Employees::find($item['eid']) !=null? Employees::find($item['eid'])->fullname:"";
-                        return $item;
-                    });
+        $EmpComity = EmployeeComity::where('cid', $id)->get();
+        $EmpComity2 = EmployeeComity::where('cid', $id)->get()
+            ->map(function ($item) {
+                $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "";
+                return $item;
+            });
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'اللجان')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
 
         $data = [
             'Comity' => $Comity,
             'Attachments' => $Attachments,
             'EmpComity' => $EmpComity,
             'EmpComity2' => $EmpComity2,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

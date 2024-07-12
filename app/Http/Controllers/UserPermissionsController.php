@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Forms;
+use App\Models\User2;
 use App\Models\UserGroupPermissions;
 use App\Models\UserPermissions;
 use Faker\Core\Number;
@@ -21,6 +22,18 @@ class UserPermissionsController extends Controller
 
     public function create(Request $request)
     {
+        $id = session('id');
+        $user = User2::find($id);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الصلاحيات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = UserPermissions::select('GroupID')
             ->groupBy('GroupID')
             ->get()
@@ -30,6 +43,7 @@ class UserPermissionsController extends Controller
             });
         $data = [
             'getUserPermissions' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

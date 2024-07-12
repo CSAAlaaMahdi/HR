@@ -117,7 +117,7 @@ function Articles_fetch() {
                         showBorders: true,
                         columnChooser:{enabled:true},
                         export: {
-                            enabled: true,
+                            enabled: response.Permission['OptionEdit'],
                             allowExportSelectedData: false,
                           },
                           onExporting(e) {
@@ -247,226 +247,216 @@ function Articles_fetch() {
                                 width: 200,
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "dashboardmainPermissions/Permissions",
-                                        success: function (response) {
-                                            let MainValue = response.Permission.filter(function (item){
-                                                return item.FormName === 'المقالات';
-                                            })
-                                            var link1 = $("<div>").css({
-                                                "background-color": "##64DDBB",
-                                            });
-                                            link1.dxButton({
-                                                stylingMode: "contained",
-                                                type: "normal",
-                                                icon: "edit",
-                                                disabled:!MainValue[0]['OptionEdit'],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        id: rowData.id,
-                                                    };
-                                                    $.ajax({
-                                                        type: "GET",
-                                                        url: "articles/show",
-                                                        data: data,
-                                                        success: function (response) {
-                                                            $("#id")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Articles.id,
-                                                                });
-                                                                $("#Guid")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Articles.Guid,
-                                                                });
-                                                            $("#did")
-                                                                .dxDropDownBox("instance")
-                                                                .option({
-                                                                    value: Number(response.Articles.did),
-                                                                });
-                                                            $("#article_title")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Articles.article_title,
-                                                                });
-                                                            $("#nof_aut")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Articles.nof_aut,
-                                                                });
-
-                                                                $("#pub_date")
-                                                                .dxDateBox("instance")
-                                                                .option({
-                                                                    value:new Date(response.Articles.pub_date)
-                                                                });
-                                                                $("#Alink")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    Date:response.Articles.Alink
-                                                                });
-
-                                                                $('#image-container').empty();
-                                                                let images = [];
-                                                                $.each(response.Attachments, function(index, file) {
-                                                                    images.push(file['FilePath']);
-
-                                                                    $('#image-container').append(
-                                                                        '<div class="image-preview">' +
-                                                                        '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
-                                                                        '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
-                                                                        '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
-                                                                        '</div>'
-                                                                    );
-                                                                });
-                                                                  // Delete Image
-                                                                $('#image-container').on('click', '.delete-image', function() {
-                                                                    var index = $(this).closest('.image-preview').index();
-
-                                                                    if(index >=0 && index < images.length){
-
-                                                                        var imageName = images[index]; // Get the filename of the image to delete
-
-                                                                        var id = $('#id').dxTextBox("instance").option("value");
-                                                                        let Guid = $("#Guid").dxTextBox("instance").option("value");
-                                                                        // Remove the image from the images array
-                                                                        images.splice(index, 1);
-
-                                                                        // Remove the image preview from the view
-                                                                        $(this).closest('.image-preview').remove();
-
-                                                                        // Send an AJAX request to delete the image from the server
-                                                                        $.ajaxSetup({
-                                                                            headers: {
-                                                                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                                                                            },
-                                                                        });
-                                                                        $.ajax({
-                                                                            url: 'articlesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                                                                            method: 'POST',
-                                                                            data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
-                                                                            success: function(data) {
-                                                                                DevExpress.ui.notify({
-                                                                                    message:
-                                                                                        data.status,
-                                                                                    position: {
-                                                                                        my: "top left",
-                                                                                        at: "top left",
-                                                                                    },
-                                                                                    type: "error",
-                                                                                    width: "300",
-                                                                                    height: "150",
-                                                                                    hideAfter: 2000,
-                                                                                });
-                                                                            },
-                                                                            error: function(xhr, status, error) {
-                                                                                // Handle error response (e.g., display error message)
-                                                                            }
-                                                                        });
-                                                                        }else{
-                                                                            console.error('Invalid index:', index);
-                                                                        }
-
-
-
-                                                                });
-
-                                                            var displaycard =
-                                                                document.getElementById(
-                                                                    "Articlesaction"
-                                                                );
-                                                            if (
-                                                                displaycard.style
-                                                                    .display == "none"
-                                                            ) {
-                                                                document.getElementById(
-                                                                    "card_Articlestitle"
-                                                                ).innerText =
-                                                                    "تعديل البيانات";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_Articlestitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            } else {
-                                                                displaycard.style.display =
-                                                                    "none";
-                                                                document.getElementById(
-                                                                    "card_Articlestitle"
-                                                                ).innerText = "";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document.getElementById(
-                                                                    "card_Articlestitle"
-                                                                ).innerText =
-                                                                    "تعديل البيانات";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_Articlestitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            }
-                                                        },
-                                                    });
-                                                },
-                                            });
-
-                                            var link2 = $("<div>").css({
-                                                "margin-right": "10px"
-                                            });
-                                            link2.dxButton({
-                                                stylingMode: "contained",
-                                                icon: "trash",
-                                                type: "default",
-                                                disabled:!MainValue[0]['OptionDel'],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        id: rowData.id,
-                                                    };
-
-                                                    $.ajaxSetup({
-                                                        headers: {
-                                                            "X-CSRF-TOKEN": $(
-                                                                'meta[name="csrf-token"]'
-                                                            ).attr("content"),
-                                                        },
-                                                    });
-                                                    $.ajax({
-                                                        type: "DELETE",
-                                                        url: "articles/destroy",
-                                                        data: data,
-                                                        success: function (response) {
-                                                            Articles_fetch();
-                                                            Articles_cleardata();
-                                                            DevExpress.ui.notify({
-                                                                message:
-                                                                    response.status,
-                                                                position: {
-                                                                    my: "top left",
-                                                                    at: "top left",
-                                                                },
-                                                                type: "error",
-                                                                width: "300",
-                                                                height: "150",
-                                                                hideAfter: 2000,
-                                                            });
-                                                            Articles_fetch();
-                                                        },
-                                                    });
-                                                },
-                                            });
-
-                                            $(container).append(link1, link2);
-
-
-                                       }
+                                    var link1 = $("<div>").css({
+                                        "background-color": "##64DDBB",
                                     });
+                                    link1.dxButton({
+                                        stylingMode: "contained",
+                                        type: "normal",
+                                        icon: "edit",
+                                        disabled:!response.Permission['OptionEdit'],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                id: rowData.id,
+                                            };
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "articles/show",
+                                                data: data,
+                                                success: function (response) {
+                                                    $("#id")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Articles.id,
+                                                        });
+                                                        $("#Guid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Articles.Guid,
+                                                        });
+                                                    $("#did")
+                                                        .dxDropDownBox("instance")
+                                                        .option({
+                                                            value: Number(response.Articles.did),
+                                                        });
+                                                    $("#article_title")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Articles.article_title,
+                                                        });
+                                                    $("#nof_aut")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Articles.nof_aut,
+                                                        });
+
+                                                        $("#pub_date")
+                                                        .dxDateBox("instance")
+                                                        .option({
+                                                            value:new Date(response.Articles.pub_date)
+                                                        });
+                                                        $("#Alink")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            Date:response.Articles.Alink
+                                                        });
+
+                                                        $('#image-container').empty();
+                                                        let images = [];
+                                                        $.each(response.Attachments, function(index, file) {
+                                                            images.push(file['FilePath']);
+
+                                                            $('#image-container').append(
+                                                                '<div class="image-preview">' +
+                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
+                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                '</div>'
+                                                            );
+                                                            setButtonState(!response.Permission['OptionDel']);
+                                                        });
+                                                          // Delete Image
+                                                        $('#image-container').on('click', '.delete-image', function() {
+                                                            var index = $(this).closest('.image-preview').index();
+
+                                                            if(index >=0 && index < images.length){
+
+                                                                var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                var id = $('#id').dxTextBox("instance").option("value");
+                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                // Remove the image from the images array
+                                                                images.splice(index, 1);
+
+                                                                // Remove the image preview from the view
+                                                                $(this).closest('.image-preview').remove();
+
+                                                                // Send an AJAX request to delete the image from the server
+                                                                $.ajaxSetup({
+                                                                    headers: {
+                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                    },
+                                                                });
+                                                                $.ajax({
+                                                                    url: 'articlesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                    method: 'POST',
+                                                                    data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                    success: function(data) {
+                                                                        DevExpress.ui.notify({
+                                                                            message:
+                                                                                data.status,
+                                                                            position: {
+                                                                                my: "top left",
+                                                                                at: "top left",
+                                                                            },
+                                                                            type: "error",
+                                                                            width: "300",
+                                                                            height: "150",
+                                                                            hideAfter: 2000,
+                                                                        });
+                                                                    },
+                                                                    error: function(xhr, status, error) {
+                                                                        // Handle error response (e.g., display error message)
+                                                                    }
+                                                                });
+                                                                }else{
+                                                                    console.error('Invalid index:', index);
+                                                                }
+
+
+
+                                                        });
+
+                                                    var displaycard =
+                                                        document.getElementById(
+                                                            "Articlesaction"
+                                                        );
+                                                    if (
+                                                        displaycard.style
+                                                            .display == "none"
+                                                    ) {
+                                                        document.getElementById(
+                                                            "card_Articlestitle"
+                                                        ).innerText =
+                                                            "تعديل البيانات";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document
+                                                            .getElementById(
+                                                                "card_Articlestitle"
+                                                            )
+                                                            .scrollIntoView();
+                                                    } else {
+                                                        displaycard.style.display =
+                                                            "none";
+                                                        document.getElementById(
+                                                            "card_Articlestitle"
+                                                        ).innerText = "";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document.getElementById(
+                                                            "card_Articlestitle"
+                                                        ).innerText =
+                                                            "تعديل البيانات";
+                                                        document
+                                                            .getElementById(
+                                                                "card_Articlestitle"
+                                                            )
+                                                            .scrollIntoView();
+                                                    }
+                                                },
+                                            });
+                                        },
+                                    });
+
+                                    var link2 = $("<div>").css({
+                                        "margin-right": "10px"
+                                    });
+                                    link2.dxButton({
+                                        stylingMode: "contained",
+                                        icon: "trash",
+                                        type: "default",
+                                        disabled:!response.Permission['OptionDel'],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                id: rowData.id,
+                                            };
+
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    "X-CSRF-TOKEN": $(
+                                                        'meta[name="csrf-token"]'
+                                                    ).attr("content"),
+                                                },
+                                            });
+                                            $.ajax({
+                                                type: "DELETE",
+                                                url: "articles/destroy",
+                                                data: data,
+                                                success: function (response) {
+                                                    Articles_fetch();
+                                                    Articles_cleardata();
+                                                    DevExpress.ui.notify({
+                                                        message:
+                                                            response.status,
+                                                        position: {
+                                                            my: "top left",
+                                                            at: "top left",
+                                                        },
+                                                        type: "error",
+                                                        width: "300",
+                                                        height: "150",
+                                                        hideAfter: 2000,
+                                                    });
+                                                    Articles_fetch();
+                                                },
+                                            });
+                                        },
+                                    });
+
+                                    $(container).append(link1, link2);
 
                                 },
                             },
@@ -585,6 +575,9 @@ function Articles_Permissions(){
 
        }
     });
+}
+function setButtonState(isDisabled) {
+    $('.delete-image').prop('disabled', isDisabled);
 }
 $(document).ready(function () {
     $("#danger-contained").dxButton({

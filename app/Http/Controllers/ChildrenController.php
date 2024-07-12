@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attachments;
 use App\Models\Children;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -23,6 +25,18 @@ class ChildrenController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الزوجية والاطفال')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Children::orderByDesc('id')->get()->map(function ($item) {
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "";
             return $item;
@@ -30,6 +44,7 @@ class ChildrenController extends Controller
 
         $data = [
             'getChildren' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -106,7 +121,7 @@ class ChildrenController extends Controller
             );
 
         } else {
-           
+
             $Children = Children::updateOrCreate(
                 [
                     'id' => $id,
@@ -135,10 +150,22 @@ class ChildrenController extends Controller
         $id = $request->input('id');
         $Children = Children::find($id);
         $Attachments = Attachments::where('ParentGuid', $Children->Guid)->get();
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الزوجية والاطفال')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
 
         $data = [
             'Children' => $Children,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

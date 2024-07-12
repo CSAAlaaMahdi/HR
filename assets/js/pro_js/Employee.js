@@ -726,7 +726,6 @@ function Employee_filldata() {
                                             url: "employees/show",
                                             data: {eid:eid},
                                             success: function (response) {
-                                                console.log(response);
                                                 //#region EmployeesData....
                                                 $("#eid").dxTextBox("instance").option("value",response.Emp.eid);
                                                 $("#Guid").dxTextBox("instance").option("value",response.Emp.Guid);
@@ -788,6 +787,8 @@ function Employee_filldata() {
                                                         '<button type="button" class="delete-imageEmp btn-outline-danger " id="titlefont"><i class="fa fa-trash"> حذف</i> </button>' +
                                                         '</div>'
                                                     );
+
+                                                    setButtonState(!response.Permission['OptionDel']);
                                                 });
                                                   // Delete Image
                                                 $('#EmpImageDelete').on('click', '.delete-imageEmp', function() {
@@ -3467,7 +3468,9 @@ function Employee_filldata() {
         });
     });
 }
-
+function setButtonState(isDisabled) {
+    $('.delete-imageEmp').prop('disabled', isDisabled);
+}
 function Employee_Permissions(){
     $.ajax({
         type: "GET",

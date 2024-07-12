@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attachments;
 use App\Models\Vacations;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -22,6 +24,18 @@ class VacationsController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الاجازات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Vacations::orderByDesc('vcid')->get()->map(function($item){
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "" ;
             return $item;
@@ -29,6 +43,7 @@ class VacationsController extends Controller
 
         $data = [
             'getVacations' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -99,13 +114,13 @@ class VacationsController extends Controller
                     'docno' => $request->post('docno'),
                     'docdate' => $request->post('docdate'),
                     'UserID' => $UserID,
-    
-    
+
+
                 ]
             );
 
         } else {
-           
+
             $Vacations = Vacations::updateOrCreate(
                 [
                     'vcid' => $vcid,
@@ -119,12 +134,12 @@ class VacationsController extends Controller
                     'docno' => $request->post('docno'),
                     'docdate' => $request->post('docdate'),
                     'UserID' => $UserID,
-    
-    
+
+
                 ]
             );
         }
-       
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -134,10 +149,22 @@ class VacationsController extends Controller
         $vcid = $request->input('vcid');
         $Vacations = Vacations::find($vcid);
         $Attachments = Attachments::where('ParentGuid', $Vacations->Guid)->get();
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الاجازات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
 
         $data = [
             'Vacations' => $Vacations,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permisson' => $Permission,
         ];
         return response()->json($data);
     }

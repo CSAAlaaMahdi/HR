@@ -6,6 +6,8 @@ use App\Models\AdministrationOrders;
 use App\Models\AdministrationOrdersImages;
 use App\Models\Attachments;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -24,6 +26,17 @@ class AdministrationOrdersController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الاوامر الادارية')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
         $getData = AdministrationOrders::orderByDesc('id')->get()->map(function ($item) {
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "";
             return $item;
@@ -31,6 +44,7 @@ class AdministrationOrdersController extends Controller
 
         $data = [
             'getAdministrationOrders' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -45,7 +59,7 @@ class AdministrationOrdersController extends Controller
         }
 
         $UserID = session('id');
-        
+
         if ($request->hasFile('image')) {
             $images = $request->file('image');
             foreach ($images as $image) {
@@ -171,9 +185,22 @@ class AdministrationOrdersController extends Controller
         $id = $request->input('id');
         $AdministrationOrders = AdministrationOrders::find($id);
         $Attachments = Attachments::where('ParentGuid', $AdministrationOrders->Guid)->get();
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الاوامر الادارية')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $data = [
             'AdministrationOrders' => $AdministrationOrders,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permission' => $Permission,
         ];
 
         return response()->json($data);

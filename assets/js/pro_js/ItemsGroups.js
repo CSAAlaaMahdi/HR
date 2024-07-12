@@ -162,7 +162,7 @@ function ItemsGroups_fetch() {
                             },
                             columnChooser: { enabled: true },
                             export: {
-                                enabled: true,
+                                enabled: response.Permission['OptionEdit'],
                                 allowExportSelectedData: false,
                               },
                               onExporting(e) {
@@ -273,6 +273,7 @@ function ItemsGroups_fetch() {
                                             stylingMode: "contained",
                                             type: "normal",
                                             icon: "edit",
+                                            disabled:!response.Permission['OptionEdit'],
                                             onClick() {
                                                 var rowData = options.data;
                                                 let url='itemsGroups/';
@@ -331,6 +332,7 @@ function ItemsGroups_fetch() {
                                             stylingMode: "contained",
                                             icon: "trash",
                                             type:"default",
+                                            disabled:!response.Permission['OptionDel'],
                                             onClick() {
 
                                                 var rowData = options.data;
@@ -338,36 +340,34 @@ function ItemsGroups_fetch() {
                                                 let data={
                                                     ID:rowData.id,
                                                 };
-                                               let flag = ItemsGroupCheckRoot(data.ID);
-                                               console.log(flag);
 
-                                                // $.ajaxSetup({
-                                                //     headers: {
-                                                //         "X-CSRF-TOKEN": $(
-                                                //             'meta[name="csrf-token"]'
-                                                //         ).attr("content"),
-                                                //     },
-                                                // });
-                                                // $.ajax({
-                                                //     type: "DELETE",
-                                                //     url: url + "destroy",
-                                                //     data: data,
-                                                //     success: function (response) {
-                                                //         DevExpress.ui.notify({
-                                                //             message:
-                                                //                 response.status,
-                                                //             position: {
-                                                //                 my: "top left",
-                                                //                 at: "top left",
-                                                //             },
-                                                //             type: "error",
-                                                //             width: "300",
-                                                //             height: "150",
-                                                //             hideAfter: 2000,
-                                                //         });
-                                                //         ItemsGroups_fetch();
-                                                //     },
-                                                // });
+                                                $.ajaxSetup({
+                                                    headers: {
+                                                        "X-CSRF-TOKEN": $(
+                                                            'meta[name="csrf-token"]'
+                                                        ).attr("content"),
+                                                    },
+                                                });
+                                                $.ajax({
+                                                    type: "DELETE",
+                                                    url: url + "destroy",
+                                                    data: data,
+                                                    success: function (response) {
+                                                        DevExpress.ui.notify({
+                                                            message:
+                                                                response.status,
+                                                            position: {
+                                                                my: "top left",
+                                                                at: "top left",
+                                                            },
+                                                            type: "error",
+                                                            width: "300",
+                                                            height: "150",
+                                                            hideAfter: 2000,
+                                                        });
+                                                        ItemsGroups_fetch();
+                                                    },
+                                                });
 
                                             },
                                         });

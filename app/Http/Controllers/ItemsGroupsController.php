@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Items;
 use App\Models\ItemsGroups;
 use App\Models\Places;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 
 
@@ -21,6 +23,18 @@ class ItemsGroupsController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'دليل المواد')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Items::orderBy('id')->get()->map(function ($item) {
             $checkCount = Items::where([['ParentID', $item['id']]])->count() != 0 ? Items::where('ParentID', $item['id'])->count() : 0;
             if ($checkCount > 0) {
@@ -38,6 +52,7 @@ class ItemsGroupsController extends Controller
         });
         $data = [
             'getItemsGroups' => $getData2,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -84,6 +99,7 @@ class ItemsGroupsController extends Controller
     public function destroy(Request $request)
     {
         $ID = $request->post('ID');
+        Items::where('ParentID',$ID)->get() !=null ? Items::where('ParentID',$ID)->delete() : null ;
         Items::find($ID)->delete();
         return response()->json(['status' => 'تم حذف البيانات بنجاح']);
     }

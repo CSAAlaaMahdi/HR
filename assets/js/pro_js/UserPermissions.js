@@ -1,6 +1,6 @@
 UserPermissions_fetch();
 UserPermissions_filldata();
-
+Users_Permissions();
 function UserPermissions_cleardata() {
     $("#id").dxTextBox("instance").option("value", "");
     $("#GroupID").dxDropDownBox("instance").option("value", null);
@@ -31,6 +31,7 @@ function UserPermissions_UpdateOrCreate() {
 
 
     };
+
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -66,7 +67,6 @@ function UserPermissions_fetch() {
             type: "GET",
             url: url + "create",
             success: function (response) {
-
                 $(function () {
                     const dataGrid = $("#UserPermissionsdatagrid").dxDataGrid({
                         dataSource: response.getUserPermissions,
@@ -156,6 +156,7 @@ function UserPermissions_fetch() {
                                         stylingMode: "contained",
                                         type: "normal",
                                         icon: "edit",
+                                        disabled:!response.Permission['OptionEdit'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -227,6 +228,7 @@ function UserPermissions_fetch() {
                                         stylingMode: "contained",
                                         icon: "trash",
                                         type: "default",
+                                        disabled:!response.Permission['OptionDel'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -496,7 +498,20 @@ function UserPermissions_filldata() {
 }
 
 // End CRUD Functions.
+function Users_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            let MainValue = response.Permission.filter(function (item){
+                return item.FormName === 'الصلاحيات';
+            })
 
+            $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
+
+       }
+    });
+}
 $(document).ready(function () {
     $("#danger-contained").dxButton({
         stylingMode: "contained",

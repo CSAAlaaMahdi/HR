@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attachments;
 use App\Models\Positions;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -23,6 +25,18 @@ class PositionsController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'المناصب')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Positions::orderByDesc('id')->get()->map(function ($item) {
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "";
             return $item;
@@ -30,6 +44,7 @@ class PositionsController extends Controller
 
         $data = [
             'getPositions' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -101,13 +116,13 @@ class PositionsController extends Controller
                     'datefrom' => $request->post('datefrom'),
                     'dateto' => $request->post('dateto'),
                     'UserID' => $UserID
-    
-    
+
+
                 ]
             );
 
         } else {
-           
+
             $Positions = Positions::updateOrCreate(
                 [
                     'id' => $id,
@@ -122,8 +137,8 @@ class PositionsController extends Controller
                     'datefrom' => $request->post('datefrom'),
                     'dateto' => $request->post('dateto'),
                     'UserID' => $UserID
-    
-    
+
+
                 ]
             );
         }
@@ -152,10 +167,21 @@ class PositionsController extends Controller
         $id = $request->input('id');
         $Positions = Positions::find($id);
         $Attachments = Attachments::where('ParentGuid', $Positions->Guid)->get();
-
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'المناصب')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
         $data = [
             'Positions' => $Positions,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

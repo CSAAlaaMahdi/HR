@@ -1,6 +1,6 @@
 Places_fetch();
 Places_filldata();
-
+Places_Permissions();
 function Places_cleardata() {
  $('#ID').dxTextBox("instance").option("value","");
  $('#placeName').dxTextBox("instance").option("value","");
@@ -131,7 +131,6 @@ function Places_fetch() {
             type: "GET",
             url: url + "create",
             success: function (response) {
-                console.log(response);
                 $(function () {
 
                     const treeList = $("#PlacesTree")
@@ -153,7 +152,7 @@ function Places_fetch() {
                             },
                             columnChooser: { enabled: true },
                             export: {
-                                enabled: true,
+                                enabled: response.Permission['OptionEdit'],
                                 allowExportSelectedData: false,
                               },
                               onExporting(e) {
@@ -204,6 +203,7 @@ function Places_fetch() {
                                             stylingMode: "contained",
                                             type: "normal",
                                             icon: "edit",
+                                            disabled:!response.Permission['OptionEdit'],
                                             onClick() {
                                                 var rowData = options.data;
                                                 let url='places/';
@@ -262,8 +262,38 @@ function Places_fetch() {
                                             stylingMode: "contained",
                                             icon: "trash",
                                             type:"default",
+                                            disabled:!response.Permission['OptionDel'],
                                             onClick() {
-
+                                                let ID = row.ID
+                                                $.ajaxSetup({
+                                                    headers: {
+                                                        "X-CSRF-TOKEN": $(
+                                                            'meta[name="csrf-token"]'
+                                                        ).attr("content"),
+                                                    },
+                                                });
+                                                $.ajax({
+                                                    type: "DELETE",
+                                                    url: "places/destroy",
+                                                    data: {ID:ID},
+                                                    success: function (response) {
+                                                        Places_fetch();
+                                                        Places_cleardata();
+                                                        DevExpress.ui.notify({
+                                                            message:
+                                                                response.status,
+                                                            position: {
+                                                                my: "top left",
+                                                                at: "top left",
+                                                            },
+                                                            type: "error",
+                                                            width: "300",
+                                                            height: "150",
+                                                            hideAfter: 2000,
+                                                        });
+                                                        Places_fetch();
+                                                    }
+                                                });
 
 
                                             },
@@ -387,7 +417,22 @@ function Places_fetch() {
 
 // End CRUD Functions.
 
+function Places_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            // console.log(response);
+            let OptionAdd = response.Permission.filter(function (item){
+                return item.FormName === 'مواقع وذمم';
+            })
 
+            $("#btnNewAdd").dxButton("instance").option("disabled", !OptionAdd[0]['OptionAdd']);
+
+
+       }
+    });
+}
 // Begin Create Components of Store Page
 $(document).ready(function () {
     $(() => {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attachments;
 use App\Models\Disapear;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -23,6 +25,18 @@ class DisapearController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'حركة الملاك')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Disapear::orderByDesc('rid')->get()->map(function ($item) {
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "";
             return $item;
@@ -30,6 +44,7 @@ class DisapearController extends Controller
 
         $data = [
             'getDisapear' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -137,10 +152,21 @@ class DisapearController extends Controller
         $rid = $request->input('rid');
         $Disapear = Disapear::find($rid);
         $Attachments = Attachments::where('ParentGuid', $Disapear->Guid)->get();
-
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'حركة الملاك')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
         $data = [
             'Disapear' => $Disapear,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

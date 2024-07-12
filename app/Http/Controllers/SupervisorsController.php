@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attachments;
 use App\Models\Supervisors;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -22,6 +24,18 @@ class SupervisorsController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الاشراف')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Supervisors::orderByDesc('id')->get()->map(function($item){
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "" ;
             return $item;
@@ -29,6 +43,7 @@ class SupervisorsController extends Controller
 
         $data = [
             'getSupervisors' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -98,13 +113,13 @@ class SupervisorsController extends Controller
                     'docno' => $request->post('docno'),
                     'docdate' => $request->post('docdate'),
                     'UserID' => $UserID
-    
-    
+
+
                 ]
             );
 
         } else {
-           
+
             $Supervisors = Supervisors::updateOrCreate(
                 [
                     'id' => $id,
@@ -117,12 +132,12 @@ class SupervisorsController extends Controller
                     'docno' => $request->post('docno'),
                     'docdate' => $request->post('docdate'),
                     'UserID' => $UserID
-    
-    
+
+
                 ]
             );
         }
-       
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -132,10 +147,21 @@ class SupervisorsController extends Controller
         $id = $request->input('id');
         $Supervisors = Supervisors::find($id);
         $Attachments = Attachments::where('ParentGuid', $Supervisors->Guid)->get();
-
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الاشراف')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
         $data = [
             'Supervisors' => $Supervisors,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

@@ -29,12 +29,19 @@ class EmployeesController extends Controller
 
     public function create(Request $request)
     {
-        // $getData = UsersGroups::all()->map(function($item){
-        //     $item['UG_State'] = $item['UG_State'] > 0 ? 'نشطة' : 'غير نشطة';
-        //     return $item;
-        // });
+        // $id = session('id');
+        // $user = User2::find($id);
+        // $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+        //     ->where('FormName', 'الموظفين')
+        //     ->get()
+        //     ->last();
+        // $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        // $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        // $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        // $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        // $Permission->Enable = $Permission->Enable == true ? true : false;
         // $data = [
-        //     'getUsersGroups' => $getData,
+        //     'Permission' => $Permission,
         // ];
         // return response()->json($data);
     }
@@ -233,12 +240,12 @@ class EmployeesController extends Controller
         }
         $GetActivity = EmployeesActivity::where('eid', $id)->get()
             ->map(function ($item) {
-                $item->Type =Activity::find($item['aid']) != null ? Activity::find($item['aid'])->act_id : "";
-                $item->Name =Activity::find($item['aid']) != null ? Activity::find($item['aid'])->Aname : "";
-                $item->Place =Activity::find($item['aid']) != null ? Activity::find($item['aid'])->Place : "";
-                $item->ActDate =Activity::find($item['aid']) != null ? Activity::find($item['aid'])->ActDate : "";
-                $item->NoDays =Activity::find($item['aid']) != null ? Activity::find($item['aid'])->NoDays : "";
-                $item->Participants =Activity::find($item['aid']) != null ? Activity::find($item['aid'])->Participants : "";
+                $item->Type = Activity::find($item['aid']) != null ? Activity::find($item['aid'])->act_id : "";
+                $item->Name = Activity::find($item['aid']) != null ? Activity::find($item['aid'])->Aname : "";
+                $item->Place = Activity::find($item['aid']) != null ? Activity::find($item['aid'])->Place : "";
+                $item->ActDate = Activity::find($item['aid']) != null ? Activity::find($item['aid'])->ActDate : "";
+                $item->NoDays = Activity::find($item['aid']) != null ? Activity::find($item['aid'])->NoDays : "";
+                $item->Participants = Activity::find($item['aid']) != null ? Activity::find($item['aid'])->Participants : "";
                 return $item;
             });
         $GetComity = EmployeeComity::where('eid', $id)->get()
@@ -250,6 +257,18 @@ class EmployeesController extends Controller
                 return $item;
             })->sortBy('docdate')->values()->toArray();
 
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الموظفين')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $Attachments = AttachmentsEmp::where('ParentGuid', $Emp->Guid)->get();
         $data = [
             'Emp' => $Emp,
@@ -257,6 +276,7 @@ class EmployeesController extends Controller
             'Attachments' => $Attachments,
             'EmpActivity' => $GetActivity,
             'EmpComity' => $GetComity,
+            'Permission' => $Permission,
 
 
         ];
@@ -390,6 +410,4 @@ class EmployeesController extends Controller
             return response()->json(['status' => 'تم حذف الكتاب بنجاح']);
         }
     }
-
-  
 }

@@ -1,6 +1,6 @@
 Items_fetch();
 Items_filldata();
-
+Items_Permissions();
 function Items_cleardata() {
     $("#ID").dxTextBox("instance").option("value", "");
     $("#ItemName").dxTextBox("instance").option("value", "");
@@ -317,7 +317,7 @@ function Items_fetch() {
                         showBorders: true,
                         columnChooser: { enabled: true },
                         export: {
-                            enabled: true,
+                            enabled: response.Permission['OptionEdit'],
                             allowExportSelectedData: false,
                         },
                         onExporting(e) {
@@ -544,218 +544,202 @@ function Items_fetch() {
                                 width: 200,
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "dashboardmainPermissions/Permissions",
-                                        success: function (response) {
-                                            // console.log(response);
-                                            let MainValue =
-                                                response.Permission.filter(
-                                                    function (item) {
-                                                        return (
-                                                            item.FormName ===
-                                                            "المواد"
+                                    var link1 = $("<div>").css({
+                                        "background-color": "##64DDBB",
+                                    });
+                                    link1.dxButton({
+                                        stylingMode: "contained",
+                                        type: "normal",
+                                        icon: "edit",
+                                        disabled:
+                                            !response.Permission["OptionEdit"],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                ID: rowData.id,
+                                            };
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "items/show",
+                                                data: data,
+                                                success: function (
+                                                    response
+                                                ) {
+                                                    $("#ID")
+                                                        .dxTextBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.id,
+                                                        });
+                                                    $("#ItemCode")
+                                                        .dxTextBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.ItemCode,
+                                                        });
+
+                                                    $("#ParentID")
+                                                        .dxDropDownBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: Number(
+                                                                response.ParentID
+                                                            ),
+                                                        });
+                                                    $("#ItemName")
+                                                        .dxTextBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.ItemName,
+                                                        });
+                                                    $("#ItemQuantity")
+                                                        .dxTextBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.Quantity,
+                                                        });
+                                                    $("#Brand")
+                                                        .dxSelectBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.Brand,
+                                                        });
+
+                                                    $("#ItemUnit")
+                                                        .dxSelectBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.ItemUnit,
+                                                        });
+
+                                                    $("#ItemPlace")
+                                                        .dxDropDownBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: Number(
+                                                                response.ItemPlace
+                                                            ),
+                                                        });
+                                                    $("#ItemStatus")
+                                                        .dxSelectBox(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.ItemStatus,
+                                                        });
+                                                    $("#Description")
+                                                        .dxTextArea(
+                                                            "instance"
+                                                        )
+                                                        .option({
+                                                            value: response.Description,
+                                                        });
+
+                                                    var displaycard =
+                                                        document.getElementById(
+                                                            "Itemsaction"
                                                         );
+                                                    if (
+                                                        displaycard
+                                                            .style
+                                                            .display ==
+                                                        "none"
+                                                    ) {
+                                                        document.getElementById(
+                                                            "card_Itemstitle"
+                                                        ).innerText =
+                                                            "تعديل البيانات";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document
+                                                            .getElementById(
+                                                                "card_Itemstitle"
+                                                            )
+                                                            .scrollIntoView();
+                                                    } else {
+                                                        displaycard.style.display =
+                                                            "none";
+                                                        document.getElementById(
+                                                            "card_Itemstitle"
+                                                        ).innerText =
+                                                            "";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document.getElementById(
+                                                            "card_Itemstitle"
+                                                        ).innerText =
+                                                            "تعديل البيانات";
+                                                        document
+                                                            .getElementById(
+                                                                "card_Itemstitle"
+                                                            )
+                                                            .scrollIntoView();
                                                     }
-                                                );
-                                            var link1 = $("<div>").css({
-                                                "background-color": "##64DDBB",
-                                            });
-                                            link1.dxButton({
-                                                stylingMode: "contained",
-                                                type: "normal",
-                                                icon: "edit",
-                                                disabled:
-                                                    !MainValue[0]["OptionEdit"],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        ID: rowData.id,
-                                                    };
-                                                    $.ajax({
-                                                        type: "GET",
-                                                        url: "items/show",
-                                                        data: data,
-                                                        success: function (
-                                                            response
-                                                        ) {
-                                                            $("#ID")
-                                                                .dxTextBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.id,
-                                                                });
-                                                            $("#ItemCode")
-                                                                .dxTextBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.ItemCode,
-                                                                });
-
-                                                            $("#ParentID")
-                                                                .dxDropDownBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: Number(
-                                                                        response.ParentID
-                                                                    ),
-                                                                });
-                                                            $("#ItemName")
-                                                                .dxTextBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.ItemName,
-                                                                });
-                                                            $("#ItemQuantity")
-                                                                .dxTextBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.Quantity,
-                                                                });
-                                                            $("#Brand")
-                                                                .dxSelectBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.Brand,
-                                                                });
-
-                                                            $("#ItemUnit")
-                                                                .dxSelectBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.ItemUnit,
-                                                                });
-
-                                                            $("#ItemPlace")
-                                                                .dxDropDownBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: Number(
-                                                                        response.ItemPlace
-                                                                    ),
-                                                                });
-                                                            $("#ItemStatus")
-                                                                .dxSelectBox(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.ItemStatus,
-                                                                });
-                                                            $("#Description")
-                                                                .dxTextArea(
-                                                                    "instance"
-                                                                )
-                                                                .option({
-                                                                    value: response.Description,
-                                                                });
-
-                                                            var displaycard =
-                                                                document.getElementById(
-                                                                    "Itemsaction"
-                                                                );
-                                                            if (
-                                                                displaycard
-                                                                    .style
-                                                                    .display ==
-                                                                "none"
-                                                            ) {
-                                                                document.getElementById(
-                                                                    "card_Itemstitle"
-                                                                ).innerText =
-                                                                    "تعديل البيانات";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_Itemstitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            } else {
-                                                                displaycard.style.display =
-                                                                    "none";
-                                                                document.getElementById(
-                                                                    "card_Itemstitle"
-                                                                ).innerText =
-                                                                    "";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document.getElementById(
-                                                                    "card_Itemstitle"
-                                                                ).innerText =
-                                                                    "تعديل البيانات";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_Itemstitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            }
-                                                        },
-                                                    });
                                                 },
                                             });
-
-                                            var link2 = $("<div>").css({
-                                                "margin-right": "10px",
-                                            });
-                                            link2.dxButton({
-                                                stylingMode: "contained",
-                                                icon: "trash",
-                                                type: "default",
-                                                disabled:
-                                                    !MainValue[0]["OptionDel"],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        ID: rowData.id,
-                                                    };
-
-                                                    $.ajaxSetup({
-                                                        headers: {
-                                                            "X-CSRF-TOKEN": $(
-                                                                'meta[name="csrf-token"]'
-                                                            ).attr("content"),
-                                                        },
-                                                    });
-                                                    $.ajax({
-                                                        type: "DELETE",
-                                                        url: "items/destroy",
-                                                        data: data,
-                                                        success: function (
-                                                            response
-                                                        ) {
-                                                            Items_fetch();
-                                                            Items_cleardata();
-                                                            DevExpress.ui.notify(
-                                                                {
-                                                                    message:
-                                                                        response.status,
-                                                                    position: {
-                                                                        my: "top left",
-                                                                        at: "top left",
-                                                                    },
-                                                                    type: "error",
-                                                                    width: "300",
-                                                                    height: "150",
-                                                                    hideAfter: 2000,
-                                                                }
-                                                            );
-                                                            Items_fetch();
-                                                        },
-                                                    });
-                                                },
-                                            });
-
-                                            $(container).append(link1, link2);
                                         },
                                     });
+
+                                    var link2 = $("<div>").css({
+                                        "margin-right": "10px",
+                                    });
+                                    link2.dxButton({
+                                        stylingMode: "contained",
+                                        icon: "trash",
+                                        type: "default",
+                                        disabled:
+                                            !response.Permission["OptionDel"],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                ID: rowData.id,
+                                            };
+
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    "X-CSRF-TOKEN": $(
+                                                        'meta[name="csrf-token"]'
+                                                    ).attr("content"),
+                                                },
+                                            });
+                                            $.ajax({
+                                                type: "DELETE",
+                                                url: "items/destroy",
+                                                data: data,
+                                                success: function (
+                                                    response
+                                                ) {
+                                                    Items_fetch();
+                                                    Items_cleardata();
+                                                    DevExpress.ui.notify(
+                                                        {
+                                                            message:
+                                                                response.status,
+                                                            position: {
+                                                                my: "top left",
+                                                                at: "top left",
+                                                            },
+                                                            type: "error",
+                                                            width: "300",
+                                                            height: "150",
+                                                            hideAfter: 2000,
+                                                        }
+                                                    );
+                                                    Items_fetch();
+                                                },
+                                            });
+                                        },
+                                    });
+
+                                    $(container).append(link1, link2);
                                 },
                             },
                         ],
@@ -829,7 +813,22 @@ function ItemsGroupCheckRoot(IDValue) {
     });
 }
 // End CRUD Functions.
+function Items_Permissions(){
+    $.ajax({
+        type: "GET",
+        url: "dashboardmainPermissions/Permissions",
+        success: function (response) {
+            // console.log(response);
+            let OptionAdd = response.Permission.filter(function (item){
+                return item.FormName === 'المواد';
+            })
 
+            $("#btnNewAdd").dxButton("instance").option("disabled", !OptionAdd[0]['OptionAdd']);
+
+
+       }
+    });
+}
 // Begin Create Components of Store Page
 $(document).ready(function () {
     $(() => {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Depts;
 use App\Models\User2;
 use App\Models\UserGroupPermissions;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 
@@ -21,6 +22,18 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
+        $id = session('id');
+        $user = User2::find($id);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'المستخدمون')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = User2::orderBy('userid')->get()->map(function ($item) {
             $item['deptid'] = Depts::find($item['deptid'])->deptname;
             $item['GroupID'] = UserGroupPermissions::find($item['GroupID']) != null? UserGroupPermissions::find($item['GroupID'])->GroupName : null ;
@@ -28,6 +41,7 @@ class UsersController extends Controller
         });
         $data = [
             'getUsers' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

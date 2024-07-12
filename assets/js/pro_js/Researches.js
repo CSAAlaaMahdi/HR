@@ -154,7 +154,7 @@ function Researches_fetch() {
                         showBorders: true,
                         columnChooser:{enabled:true},
                         export: {
-                            enabled: true,
+                            enabled: response.Permission['OptionEdit'],
                             allowExportSelectedData: false,
                           },
                           onExporting(e) {
@@ -550,318 +550,308 @@ function Researches_fetch() {
                                 width: 200,
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "dashboardmainPermissions/Permissions",
-                                        success: function (response) {
-                                            let MainValue = response.Permission.filter(function (item){
-                                                return item.FormName === 'البحوث والنشر';
-                                            })
-                                            var link1 = $("<div>").css({
-                                                "background-color": "##64DDBB",
-                                            });
-                                            link1.dxButton({
-                                                stylingMode: "contained",
-                                                type: "normal",
-                                                icon: "edit",
-                                                disabled:!MainValue[0]['OptionEdit'],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        rid: rowData.rid,
-                                                    };
-                                                    $.ajax({
-                                                        type: "GET",
-                                                        url: "researches/show",
-                                                        data: data,
-                                                        success: function (response) {
-                                                            console.log(response);
-                                                            $("#rid")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Researches.rid,
-                                                                });
-                                                                $("#Guid")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Researches.Guid,
-                                                                });
-                                                            $("#ResType")
-                                                                .dxSelectBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.ResType ,
-                                                                });
-                                                            $("#Title")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Researches.Title,
-                                                                });
-                                                            $("#JournalName")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value: response.Researches.JournalName,
-                                                                });
-
-                                                            $("#PubDate")
-                                                                .dxDateBox("instance")
-                                                                .option({
-                                                                    value: new Date(response.Researches.PubDate)
-                                                                });
-                                                                $("#JournalType")
-                                                                .dxSelectBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.JournalType
-                                                                });
-                                                                $("#Jpos")
-                                                                .dxSelectBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.Jpos
-                                                                });
-                                                            $("#Numb")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.Numb
-                                                                });
-                                                                $("#Page")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.Page
-                                                                });
-                                                                $("#Isconf")
-                                                                .dxSelectBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.Isconf
-                                                                });
-                                                                $("#ConfName")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.ConfName
-                                                                });
-                                                                $("#ConfPlace")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.ConfPlace
-                                                                });
-                                                                $("#Rtype")
-                                                                .dxSelectBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.Rtype
-                                                                });
-                                                                $("#CiteScor")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.CiteScor
-                                                                });
-                                                                $("#ImpactFactor")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.ImpactFactor
-                                                                });
-                                                                $("#JournalQuartile")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.JournalQuartile
-                                                                });
-                                                                $("#ISSN")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.ISSN
-                                                                });
-                                                                $("#DOI")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.DOI
-                                                                });
-                                                                $("#Rlink")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.Rlink
-                                                                });
-                                                                $("#Extaut")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.Researches.Extaut
-                                                                });
-                                                                let eidValue = [];
-                                                                let eidValueName = [];
-
-                                                                $.each(response.EmpResearch, function (index, value) {
-                                                                    eidValue.push(Number(value['Eid']));
-                                                                });
-                                                                $.each(response.EmpResearch2, function (index, value2) {
-                                                                    eidValueName.push(value2['Eid']);
-                                                                });
-                                                                $("#eid")
-                                                                .dxDropDownBox("instance")
-                                                                .option({
-                                                                    value: eidValue
-                                                                });
-                                                                let eidValueNameString = eidValueName.join('\n');
-                                                                $("#EmpNames").dxTextArea('instance').option(
-                                                                    {
-                                                                        value:eidValueNameString
-                                                                    }
-                                                                )
-
-
-                                                                $('#image-container').empty();
-                                                                let images = [];
-                                                                $.each(response.Attachments, function(index, file) {
-                                                                    images.push(file['FilePath']);
-
-                                                                    $('#image-container').append(
-                                                                        '<div class="image-preview">' +
-                                                                        '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
-                                                                        '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
-                                                                        '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
-                                                                        '</div>'
-                                                                    );
-                                                                });
-                                                                  // Delete Image
-                                                                $('#image-container').on('click', '.delete-image', function() {
-                                                                    var index = $(this).closest('.image-preview').index();
-
-                                                                    if(index >=0 && index < images.length){
-
-                                                                        var imageName = images[index]; // Get the filename of the image to delete
-
-                                                                        var id = $('#rid').dxTextBox("instance").option("value");
-                                                                        let Guid = $("#Guid").dxTextBox("instance").option("value");
-                                                                        // Remove the image from the images array
-                                                                        images.splice(index, 1);
-
-                                                                        // Remove the image preview from the view
-                                                                        $(this).closest('.image-preview').remove();
-
-                                                                        // Send an AJAX request to delete the image from the server
-                                                                        $.ajaxSetup({
-                                                                            headers: {
-                                                                                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                                                                            },
-                                                                        });
-                                                                        $.ajax({
-                                                                            url: 'researchesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                                                                            method: 'POST',
-                                                                            data: { imageName: imageName, rid:id ,Guid:Guid }, // Send the filename of the image to delete
-                                                                            success: function(data) {
-                                                                                DevExpress.ui.notify({
-                                                                                    message:
-                                                                                        data.status,
-                                                                                    position: {
-                                                                                        my: "top left",
-                                                                                        at: "top left",
-                                                                                    },
-                                                                                    type: "error",
-                                                                                    width: "300",
-                                                                                    height: "150",
-                                                                                    hideAfter: 2000,
-                                                                                });
-                                                                            },
-                                                                            error: function(xhr, status, error) {
-                                                                                // Handle error response (e.g., display error message)
-                                                                            }
-                                                                        });
-                                                                        }else{
-                                                                            console.error('Invalid index:', index);
-                                                                        }
-
-
-
-                                                                });
-
-                                                            var displaycard =
-                                                                document.getElementById(
-                                                                    "Researchesaction"
-                                                                );
-                                                            if (
-                                                                displaycard.style
-                                                                    .display == "none"
-                                                            ) {
-                                                                document.getElementById(
-                                                                    "card_Researchestitle"
-                                                                ).innerText =
-                                                                    "تعديل البيانات";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_Researchestitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            } else {
-                                                                displaycard.style.display =
-                                                                    "none";
-                                                                document.getElementById(
-                                                                    "card_Researchestitle"
-                                                                ).innerText = "";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document.getElementById(
-                                                                    "card_Researchestitle"
-                                                                ).innerText =
-                                                                    "تعديل البيانات";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_Researchestitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            }
-                                                        },
-                                                    });
-                                                },
-                                            });
-
-                                            var link2 = $("<div>").css({
-                                                "margin-right": "10px"
-                                            });
-                                            link2.dxButton({
-                                                stylingMode: "contained",
-                                                icon: "trash",
-                                                type: "default",
-                                                disabled:!MainValue[0]['OptionDel'],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        rid: rowData.rid,
-                                                    };
-
-                                                    $.ajaxSetup({
-                                                        headers: {
-                                                            "X-CSRF-TOKEN": $(
-                                                                'meta[name="csrf-token"]'
-                                                            ).attr("content"),
-                                                        },
-                                                    });
-                                                    $.ajax({
-                                                        type: "DELETE",
-                                                        url: "researches/destroy",
-                                                        data: data,
-                                                        success: function (response) {
-                                                            Researches_fetch();
-                                                            Researches_cleardata();
-                                                            DevExpress.ui.notify({
-                                                                message:
-                                                                    response.status,
-                                                                position: {
-                                                                    my: "top left",
-                                                                    at: "top left",
-                                                                },
-                                                                type: "error",
-                                                                width: "300",
-                                                                height: "150",
-                                                                hideAfter: 2000,
-                                                            });
-                                                            Researches_fetch();
-                                                        },
-                                                    });
-                                                },
-                                            });
-
-                                            $(container).append(link1, link2);
-
-
-                                       }
+                                    var link1 = $("<div>").css({
+                                        "background-color": "##64DDBB",
                                     });
+                                    link1.dxButton({
+                                        stylingMode: "contained",
+                                        type: "normal",
+                                        icon: "edit",
+                                        disabled:!response.Permission['OptionEdit'],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                rid: rowData.rid,
+                                            };
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "researches/show",
+                                                data: data,
+                                                success: function (response) {
+                                                    console.log(response);
+                                                    $("#rid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Researches.rid,
+                                                        });
+                                                        $("#Guid")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Researches.Guid,
+                                                        });
+                                                    $("#ResType")
+                                                        .dxSelectBox("instance")
+                                                        .option({
+                                                            value:response.Researches.ResType ,
+                                                        });
+                                                    $("#Title")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Researches.Title,
+                                                        });
+                                                    $("#JournalName")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value: response.Researches.JournalName,
+                                                        });
+
+                                                    $("#PubDate")
+                                                        .dxDateBox("instance")
+                                                        .option({
+                                                            value: new Date(response.Researches.PubDate)
+                                                        });
+                                                        $("#JournalType")
+                                                        .dxSelectBox("instance")
+                                                        .option({
+                                                            value:response.Researches.JournalType
+                                                        });
+                                                        $("#Jpos")
+                                                        .dxSelectBox("instance")
+                                                        .option({
+                                                            value:response.Researches.Jpos
+                                                        });
+                                                    $("#Numb")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.Numb
+                                                        });
+                                                        $("#Page")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.Page
+                                                        });
+                                                        $("#Isconf")
+                                                        .dxSelectBox("instance")
+                                                        .option({
+                                                            value:response.Researches.Isconf
+                                                        });
+                                                        $("#ConfName")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.ConfName
+                                                        });
+                                                        $("#ConfPlace")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.ConfPlace
+                                                        });
+                                                        $("#Rtype")
+                                                        .dxSelectBox("instance")
+                                                        .option({
+                                                            value:response.Researches.Rtype
+                                                        });
+                                                        $("#CiteScor")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.CiteScor
+                                                        });
+                                                        $("#ImpactFactor")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.ImpactFactor
+                                                        });
+                                                        $("#JournalQuartile")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.JournalQuartile
+                                                        });
+                                                        $("#ISSN")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.ISSN
+                                                        });
+                                                        $("#DOI")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.DOI
+                                                        });
+                                                        $("#Rlink")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.Rlink
+                                                        });
+                                                        $("#Extaut")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.Researches.Extaut
+                                                        });
+                                                        let eidValue = [];
+                                                        let eidValueName = [];
+
+                                                        $.each(response.EmpResearch, function (index, value) {
+                                                            eidValue.push(Number(value['Eid']));
+                                                        });
+                                                        $.each(response.EmpResearch2, function (index, value2) {
+                                                            eidValueName.push(value2['Eid']);
+                                                        });
+                                                        $("#eid")
+                                                        .dxDropDownBox("instance")
+                                                        .option({
+                                                            value: eidValue
+                                                        });
+                                                        let eidValueNameString = eidValueName.join('\n');
+                                                        $("#EmpNames").dxTextArea('instance').option(
+                                                            {
+                                                                value:eidValueNameString
+                                                            }
+                                                        )
+
+
+                                                        $('#image-container').empty();
+                                                        let images = [];
+                                                        $.each(response.Attachments, function(index, file) {
+                                                            images.push(file['FilePath']);
+
+                                                            $('#image-container').append(
+                                                                '<div class="image-preview">' +
+                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
+                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                                '</div>'
+                                                            );
+                                                            setButtonState(!response.Permission['OptionDel']);
+                                                        });
+                                                          // Delete Image
+                                                        $('#image-container').on('click', '.delete-image', function() {
+                                                            var index = $(this).closest('.image-preview').index();
+
+                                                            if(index >=0 && index < images.length){
+
+                                                                var imageName = images[index]; // Get the filename of the image to delete
+
+                                                                var id = $('#rid').dxTextBox("instance").option("value");
+                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                                // Remove the image from the images array
+                                                                images.splice(index, 1);
+
+                                                                // Remove the image preview from the view
+                                                                $(this).closest('.image-preview').remove();
+
+                                                                // Send an AJAX request to delete the image from the server
+                                                                $.ajaxSetup({
+                                                                    headers: {
+                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                    },
+                                                                });
+                                                                $.ajax({
+                                                                    url: 'researchesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                    method: 'POST',
+                                                                    data: { imageName: imageName, rid:id ,Guid:Guid }, // Send the filename of the image to delete
+                                                                    success: function(data) {
+                                                                        DevExpress.ui.notify({
+                                                                            message:
+                                                                                data.status,
+                                                                            position: {
+                                                                                my: "top left",
+                                                                                at: "top left",
+                                                                            },
+                                                                            type: "error",
+                                                                            width: "300",
+                                                                            height: "150",
+                                                                            hideAfter: 2000,
+                                                                        });
+                                                                    },
+                                                                    error: function(xhr, status, error) {
+                                                                        // Handle error response (e.g., display error message)
+                                                                    }
+                                                                });
+                                                                }else{
+                                                                    console.error('Invalid index:', index);
+                                                                }
+
+
+
+                                                        });
+
+                                                    var displaycard =
+                                                        document.getElementById(
+                                                            "Researchesaction"
+                                                        );
+                                                    if (
+                                                        displaycard.style
+                                                            .display == "none"
+                                                    ) {
+                                                        document.getElementById(
+                                                            "card_Researchestitle"
+                                                        ).innerText =
+                                                            "تعديل البيانات";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document
+                                                            .getElementById(
+                                                                "card_Researchestitle"
+                                                            )
+                                                            .scrollIntoView();
+                                                    } else {
+                                                        displaycard.style.display =
+                                                            "none";
+                                                        document.getElementById(
+                                                            "card_Researchestitle"
+                                                        ).innerText = "";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document.getElementById(
+                                                            "card_Researchestitle"
+                                                        ).innerText =
+                                                            "تعديل البيانات";
+                                                        document
+                                                            .getElementById(
+                                                                "card_Researchestitle"
+                                                            )
+                                                            .scrollIntoView();
+                                                    }
+                                                },
+                                            });
+                                        },
+                                    });
+
+                                    var link2 = $("<div>").css({
+                                        "margin-right": "10px"
+                                    });
+                                    link2.dxButton({
+                                        stylingMode: "contained",
+                                        icon: "trash",
+                                        type: "default",
+                                        disabled:!response.Permission['OptionDel'],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                rid: rowData.rid,
+                                            };
+
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    "X-CSRF-TOKEN": $(
+                                                        'meta[name="csrf-token"]'
+                                                    ).attr("content"),
+                                                },
+                                            });
+                                            $.ajax({
+                                                type: "DELETE",
+                                                url: "researches/destroy",
+                                                data: data,
+                                                success: function (response) {
+                                                    Researches_fetch();
+                                                    Researches_cleardata();
+                                                    DevExpress.ui.notify({
+                                                        message:
+                                                            response.status,
+                                                        position: {
+                                                            my: "top left",
+                                                            at: "top left",
+                                                        },
+                                                        type: "error",
+                                                        width: "300",
+                                                        height: "150",
+                                                        hideAfter: 2000,
+                                                    });
+                                                    Researches_fetch();
+                                                },
+                                            });
+                                        },
+                                    });
+
+                                    $(container).append(link1, link2);
 
                                 },
                             },
@@ -886,7 +876,6 @@ function Researches_filldata() {
             type: "GET",
             url: url + "filldata",
             success: function (response) {
-                console.log(response);
                 $(() => {
                     $('#ResType').dxSelectBox({
                         dataSource: response.getResType,
@@ -1129,6 +1118,9 @@ function Researches_Permissions(){
 
        }
     });
+}
+function setButtonState(isDisabled) {
+    $('.delete-image').prop('disabled', isDisabled);
 }
 $(document).ready(function () {
     $("#danger-contained").dxButton({

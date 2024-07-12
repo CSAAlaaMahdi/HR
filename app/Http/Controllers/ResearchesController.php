@@ -7,6 +7,8 @@ use App\Models\Attachments;
 use App\Models\EmployeeResearches;
 use App\Models\Researches;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -25,9 +27,22 @@ class ResearchesController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'البحوث والنشر')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Researches::orderByDesc('rid')->get();
         $data = [
             'getResearches' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -43,7 +58,7 @@ class ResearchesController extends Controller
             $Guid = strtoupper(Uuid::uuid4()->toString());
         }
         $UserID = session('id');
-       
+
         if ($rid != "") {
             if ($request->hasFile('image')) {
                 $images = $request->file('image');
@@ -103,7 +118,6 @@ class ResearchesController extends Controller
                                 }
                             }
                         }
-                       
                     }
                 }
             } else {
@@ -142,7 +156,6 @@ class ResearchesController extends Controller
                         }
                     }
                 }
-               
             }
             $Researches = Researches::updateOrCreate(
                 [
@@ -168,8 +181,8 @@ class ResearchesController extends Controller
                     'DOI' => $request->post('DOI'),
                     'Rlink' => $request->post('Rlink'),
                     'Extaut' => $request->post('Extaut'),
-    
-    
+
+
                 ]
             );
         } else {
@@ -199,8 +212,8 @@ class ResearchesController extends Controller
                     'DOI' => $request->post('DOI'),
                     'Rlink' => $request->post('Rlink'),
                     'Extaut' => $request->post('Extaut'),
-    
-    
+
+
                 ]
             );
             if ($Researches) {
@@ -220,7 +233,6 @@ class ResearchesController extends Controller
                         );
                     }
                 }
-               
             }
             if ($request->hasFile('image')) {
                 $images = $request->file('image');
@@ -250,12 +262,12 @@ class ResearchesController extends Controller
             }
         }
 
-       
-       
-       
-       
-       
-       
+
+
+
+
+
+
         // if ($request->hasFile('image')) {
         //     $images = $request->file('image');
         //     foreach ($images as $image) {
@@ -326,13 +338,13 @@ class ResearchesController extends Controller
         //             'Rlink' => $request->post('Rlink'),
         //             'Extaut' => $request->post('Extaut'),
         //             'UserID' => $UserID,
-    
-    
+
+
         //         ]
         //     );
 
         // } else {
-           
+
         //     $Researches = Researches::updateOrCreate(
         //         [
         //             'rid' => $rid,
@@ -359,8 +371,8 @@ class ResearchesController extends Controller
         //             'Rlink' => $request->post('Rlink'),
         //             'Extaut' => $request->post('Extaut'),
         //             'UserID' => $UserID,
-    
-    
+
+
         //         ]
         //     );
         // }
@@ -407,11 +419,24 @@ class ResearchesController extends Controller
                 $item['Eid'] = Employees::find($item['Eid'])->fullname;
                 return $item;
             });
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'البحوث والنشر')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $data = [
             'Researches' => $Researches,
             'Attachments' => $Attachments,
             'EmpResearch' => $EmpResearch,
             'EmpResearch2' => $EmpResearch2,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -470,7 +495,7 @@ class ResearchesController extends Controller
             ->distinct()
             ->orderBy('Rtype')
             ->get();
-            $getEmployees = Employees::select('eid', 'fullname')
+        $getEmployees = Employees::select('eid', 'fullname')
             ->whereNotNull('fullname')
             ->where('fullname', '<>', '')
             ->distinct()
@@ -482,7 +507,7 @@ class ResearchesController extends Controller
             'getJpos' => $getJpos,
             'getIsconf' => $getIsconf,
             'getRtype' => $getRtype,
-            'getEmployees' =>$getEmployees,
+            'getEmployees' => $getEmployees,
 
 
         ];

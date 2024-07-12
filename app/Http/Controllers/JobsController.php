@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Models\Attachments;
 use App\Models\Jobs;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -24,6 +26,18 @@ class JobsController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الترفيعات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Jobs::all()->map(function ($item) {
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "";
             return $item;
@@ -31,6 +45,7 @@ class JobsController extends Controller
 
         $data = [
             'getJobs' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -102,13 +117,13 @@ class JobsController extends Controller
                     'docno' => $request->post('docno'),
                     'docdate' => $request->post('docdate'),
                     'UserID' => $UserID
-    
-    
+
+
                 ]
             );
 
         } else {
-           
+
             $Job = Jobs::updateOrCreate(
                 [
                     'jid' => $jid,
@@ -123,12 +138,12 @@ class JobsController extends Controller
                     'docno' => $request->post('docno'),
                     'docdate' => $request->post('docdate'),
                     'UserID' => $UserID
-    
-    
+
+
                 ]
             );
         }
-        
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -138,10 +153,22 @@ class JobsController extends Controller
         $jid = $request->input('jid');
         $Job = Jobs::find($jid);
         $Attachments = Attachments::where('ParentGuid', $Job->Guid)->get();
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الاضبارة الالكترونية')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
 
         $data = [
             'Job' => $Job,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

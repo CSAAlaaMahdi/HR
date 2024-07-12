@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Articles;
 use App\Models\Attachments;
 use App\Models\Employees;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -22,6 +24,18 @@ class ArticlesController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'المقالات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Articles::orderByDesc('id')->get()->map(function($item){
             $item['did'] = Employees::find($item['did']) != null ? Employees::find($item['did'])->fullname : "" ;
             return $item;
@@ -29,6 +43,7 @@ class ArticlesController extends Controller
 
         $data = [
             'getArticles' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -98,12 +113,12 @@ class ArticlesController extends Controller
                     'pub_date' => $request->post('pub_date'),
                     'Alink' => $request->post('Alink'),
                     'UserID' => $UserID
-    
+
                 ]
             );
 
         } else {
-           
+
             $Articles = Articles::updateOrCreate(
                 [
                     'id' => $id,
@@ -116,11 +131,11 @@ class ArticlesController extends Controller
                     'pub_date' => $request->post('pub_date'),
                     'Alink' => $request->post('Alink'),
                     'UserID' => $UserID
-    
+
                 ]
             );
         }
-       
+
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
 
@@ -130,10 +145,21 @@ class ArticlesController extends Controller
         $id = $request->input('id');
         $Articles = Articles::find($id);
         $Attachments = Attachments::where('ParentGuid', $Articles->Guid)->get();
-
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'المقالات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
         $data = [
             'Articles' => $Articles,
-            'Attachments' => $Attachments
+            'Attachments' => $Attachments,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }

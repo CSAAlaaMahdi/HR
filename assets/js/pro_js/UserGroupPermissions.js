@@ -162,151 +162,141 @@ function UserGroupPermissions_fetch() {
                                 width: 200,
                                 cellTemplate: function (container, options) {
                                     var row = options.row.data;
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "dashboardmainPermissions/Permissions",
-                                        success: function (response) {
-                                            let MainValue = response.Permission.filter(function (item){
-                                                return item.FormName === 'المجموعات';
-                                            })
-                                            var link1 = $("<div>").css({
-                                                "background-color": "#7CEECE",
-                                            });
-                                            link1.dxButton({
-                                                stylingMode: "contained",
-                                                type: "normal",
-                                                icon: "edit",
-                                                disabled:!MainValue[0]['OptionEdit'],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        id: rowData.id,
-                                                    };
-
-                                                    $.ajax({
-                                                        type: "GET",
-                                                        url: "userGroupPermissions/show",
-                                                        data: data,
-
-                                                        success: function (response) {
-                                                            console.log(response);
-                                                            $("#id")
-                                                                .dxTextBox("instance")
-                                                                .option({
-                                                                    value:response.id
-                                                                });
-                                                            $("#GroupName")
-                                                                .dxSelectBox("instance")
-                                                                .option({
-                                                                    value: response.GroupName,
-                                                                });
-                                                            if (
-                                                                response
-                                                                    .Status === "1"
-                                                            ) {
-                                                                $("#Status")
-                                                                    .dxSwitch(
-                                                                        "instance"
-                                                                    )
-                                                                    .option({
-                                                                        value: true,
-                                                                    });
-                                                            } else {
-                                                                $("#Status")
-                                                                    .dxSwitch(
-                                                                        "instance"
-                                                                    )
-                                                                    .option({
-                                                                        value: false,
-                                                                    });
-                                                            }
-
-                                                            var displaycard =
-                                                                document.getElementById(
-                                                                    "UserGroupPermissionsaction"
-                                                                );
-                                                            if (
-                                                                displaycard.style
-                                                                    .display == "none"
-                                                            ) {
-                                                                document.getElementById(
-                                                                    "card_UserGroupPermissionstitle"
-                                                                ).innerText =
-                                                                    "تحديث البيانات";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_UserGroupPermissionstitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            } else {
-                                                                displaycard.style.display =
-                                                                    "none";
-                                                                document.getElementById(
-                                                                    "card_UserGroupPermissionstitle"
-                                                                ).innerText = "";
-                                                                displaycard.style.display =
-                                                                    "block";
-                                                                document.getElementById(
-                                                                    "card_UserGroupPermissionstitle"
-                                                                ).innerText =
-                                                                    "تحديث البيانات";
-                                                                document
-                                                                    .getElementById(
-                                                                        "card_UserGroupPermissionstitle"
-                                                                    )
-                                                                    .scrollIntoView();
-                                                            }
-                                                        },
-                                                    });
-                                                },
-                                            });
-
-                                            var link2 = $("<div>").css({
-                                                "margin-right": "10px",
-                                            });
-                                            link2.dxButton({
-                                                stylingMode: "contained",
-                                                icon: "trash",
-                                                type: "default",
-                                                disabled:!MainValue[0]['OptionDel'],
-                                                onClick() {
-                                                    var rowData = options.data;
-                                                    let data = {
-                                                        id: rowData.id,
-                                                    };
-                                                    $.ajaxSetup({
-                                                        headers: {
-                                                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                                                        },
-                                                    });
-                                                    $.ajax({
-                                                        type: "DELETE",
-                                                        url: "userGroupPermissions/destroy",
-                                                        data: data,
-                                                        success: function (response) {
-                                                            DevExpress.ui.notify({
-                                                                message: response.status,
-                                                                position: {
-                                                                    my: "top left",
-                                                                    at: "top left",
-                                                                },
-                                                                type: "error",
-                                                                width: "300",
-                                                                height: "150",
-                                                                hideAfter: 2000,
-                                                            });
-                                                            UserGroupPermissions_fetch();
-                                                        },
-                                                    });
-                                                },
-                                            });
-
-                                            $(container).append(link1, link2);
-
-                                       }
+                                    var link1 = $("<div>").css({
+                                        "background-color": "#7CEECE",
                                     });
+                                    link1.dxButton({
+                                        stylingMode: "contained",
+                                        type: "normal",
+                                        icon: "edit",
+                                        disabled:!response.Permission['OptionEdit'],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                id: rowData.id,
+                                            };
+
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "userGroupPermissions/show",
+                                                data: data,
+
+                                                success: function (response) {
+                                                    console.log(response);
+                                                    $("#id")
+                                                        .dxTextBox("instance")
+                                                        .option({
+                                                            value:response.UserGroupPermissions.id
+                                                        });
+                                                    $("#GroupName")
+                                                        .dxSelectBox("instance")
+                                                        .option({
+                                                            value: response.UserGroupPermissions.GroupName,
+                                                        });
+                                                    if (
+                                                        response.UserGroupPermissions
+                                                            .Status === "1"
+                                                    ) {
+                                                        $("#Status")
+                                                            .dxSwitch(
+                                                                "instance"
+                                                            )
+                                                            .option({
+                                                                value: true,
+                                                            });
+                                                    } else {
+                                                        $("#Status")
+                                                            .dxSwitch(
+                                                                "instance"
+                                                            )
+                                                            .option({
+                                                                value: false,
+                                                            });
+                                                    }
+
+                                                    var displaycard =
+                                                        document.getElementById(
+                                                            "UserGroupPermissionsaction"
+                                                        );
+                                                    if (
+                                                        displaycard.style
+                                                            .display == "none"
+                                                    ) {
+                                                        document.getElementById(
+                                                            "card_UserGroupPermissionstitle"
+                                                        ).innerText =
+                                                            "تحديث البيانات";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document
+                                                            .getElementById(
+                                                                "card_UserGroupPermissionstitle"
+                                                            )
+                                                            .scrollIntoView();
+                                                    } else {
+                                                        displaycard.style.display =
+                                                            "none";
+                                                        document.getElementById(
+                                                            "card_UserGroupPermissionstitle"
+                                                        ).innerText = "";
+                                                        displaycard.style.display =
+                                                            "block";
+                                                        document.getElementById(
+                                                            "card_UserGroupPermissionstitle"
+                                                        ).innerText =
+                                                            "تحديث البيانات";
+                                                        document
+                                                            .getElementById(
+                                                                "card_UserGroupPermissionstitle"
+                                                            )
+                                                            .scrollIntoView();
+                                                    }
+                                                },
+                                            });
+                                        },
+                                    });
+
+                                    var link2 = $("<div>").css({
+                                        "margin-right": "10px",
+                                    });
+                                    link2.dxButton({
+                                        stylingMode: "contained",
+                                        icon: "trash",
+                                        type: "default",
+                                        disabled:!response.Permission['OptionDel'],
+                                        onClick() {
+                                            var rowData = options.data;
+                                            let data = {
+                                                id: rowData.id,
+                                            };
+                                            $.ajaxSetup({
+                                                headers: {
+                                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                },
+                                            });
+                                            $.ajax({
+                                                type: "DELETE",
+                                                url: "userGroupPermissions/destroy",
+                                                data: data,
+                                                success: function (response) {
+                                                    DevExpress.ui.notify({
+                                                        message: response.status,
+                                                        position: {
+                                                            my: "top left",
+                                                            at: "top left",
+                                                        },
+                                                        type: "error",
+                                                        width: "300",
+                                                        height: "150",
+                                                        hideAfter: 2000,
+                                                    });
+                                                    UserGroupPermissions_fetch();
+                                                },
+                                            });
+                                        },
+                                    });
+
+                                    $(container).append(link1, link2);
 
                                 },
                             },

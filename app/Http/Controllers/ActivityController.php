@@ -7,6 +7,8 @@ use App\Models\Activity;
 use App\Models\Attachments;
 use App\Models\Employees;
 use App\Models\EmployeesActivity;
+use App\Models\User2;
+use App\Models\UserPermissions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
@@ -25,10 +27,23 @@ class ActivityController extends Controller
 
     public function create(Request $request)
     {
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الانشطة والفعاليات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
+
         $getData = Activity::orderByDesc('aid')->get();
 
         $data = [
             'getActivity' => $getData,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -317,7 +332,7 @@ class ActivityController extends Controller
         }
 
 
-        
+
 
         return response()->json(['status' => 'تم ادخال البيانات بنجاح']);
     }
@@ -340,6 +355,17 @@ class ActivityController extends Controller
                 $item['eid'] = Employees::find($item['eid'])->fullname;
                 return $item;
             });
+        $id2 = session('id');
+        $user = User2::find($id2);
+        $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)
+            ->where('FormName', 'الانشطة والفعاليات')
+            ->get()
+            ->last();
+        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
+        $Permission->Enable = $Permission->Enable == true ? true : false;
 
         $data = [
             'Activity' => $Activity,
@@ -348,6 +374,7 @@ class ActivityController extends Controller
             'EmpActivity2' => $EmpActivity2,
             'EmpActivity3' => $EmpActivity3,
             'EmpActivity4' => $EmpActivity4,
+            'Permission' => $Permission,
         ];
         return response()->json($data);
     }
