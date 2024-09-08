@@ -8,7 +8,7 @@ function EmployeesAttachments_cleardata() {
     $("#eid").dxDropDownBox("instance").option("value", null);
     $("#atType").dxSelectBox("instance").option("value", "");
     $("#notes").dxTextArea("instance").option("value", "");
-    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#FilePath").dxFileUploader("instance").option("value", "");
     $("#image-container").empty();
 
 }
@@ -36,7 +36,7 @@ function EmployeesAttachments_UpdateOrCreate() {
     formData.append('notes', $("#notes").dxTextArea("instance").option("value"));
     formData.append('DocTitle', $("#atType").dxSelectBox("instance").option("value"));
     const images = $("#FilePath").dxFileUploader("option", "value");
-    $.each(images, function(index, file) {
+    $.each(images, function (index, file) {
         formData.append('image[]', file);
     });
 
@@ -107,37 +107,37 @@ function EmployeesAttachments_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
-                        columnChooser:{enabled:true},
+                        columnChooser: { enabled: true },
                         export: {
                             enabled: response.Permission['OptionEdit'],
                             allowExportSelectedData: false,
-                          },
-                          onExporting(e) {
+                        },
+                        onExporting(e) {
                             const workbook = new ExcelJS.Workbook();
                             const worksheet = workbook.addWorksheet('Employees');
 
                             DevExpress.excelExporter.exportDataGrid({
-                              component: e.component,
-                              worksheet,
-                              autoFilterEnabled: true,
+                                component: e.component,
+                                worksheet,
+                                autoFilterEnabled: true,
                             }).then(() => {
-                              workbook.xlsx.writeBuffer().then((buffer) => {
-                                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
-                              });
+                                workbook.xlsx.writeBuffer().then((buffer) => {
+                                    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                                });
                             });
-                          },
+                        },
                         columns: [
                             {
-                                dataField:"id",
-                                caption:"ت",
-                                visible:false,
+                                dataField: "id",
+                                caption: "ت",
+                                visible: false,
 
                             },
                             {
                                 caption: "#",
                                 width: 100,
                                 cellTemplate: function (container, options) {
-                                    var imageUrl = 'assets/img/navbar/icons8_filing_cabinet_64px.png' ;
+                                    var imageUrl = 'assets/img/navbar/icons8_filing_cabinet_64px.png';
 
                                     // Concatenate the base URL with the image filename
                                     // var imageUrl = baseUrl + imageName;
@@ -163,7 +163,9 @@ function EmployeesAttachments_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -183,7 +185,9 @@ function EmployeesAttachments_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -193,7 +197,7 @@ function EmployeesAttachments_fetch() {
                             {
                                 dataField: "notes",
                                 caption: " ملاحظات",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -203,7 +207,9 @@ function EmployeesAttachments_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -222,7 +228,7 @@ function EmployeesAttachments_fetch() {
                                         stylingMode: "contained",
                                         type: "normal",
                                         icon: "edit",
-                                        disabled:!response.Permission['OptionEdit'],
+                                        disabled: !response.Permission['OptionEdit'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -238,7 +244,7 @@ function EmployeesAttachments_fetch() {
                                                         .option({
                                                             value: response.AttachmentsEmp.id,
                                                         });
-                                                        $("#Guid")
+                                                    $("#Guid")
                                                         .dxTextBox("instance")
                                                         .option({
                                                             value: response.AttachmentsEmp.Guid,
@@ -259,72 +265,72 @@ function EmployeesAttachments_fetch() {
                                                             value: response.AttachmentsEmp.notes,
                                                         });
 
-                                                        $('#image-container').empty();
-                                                        let images = [];
-                                                        $.each(response.Attachments, function(index, file) {
-                                                            images.push(file['FilePath']);
+                                                    $('#image-container').empty();
+                                                    let images = [];
+                                                    $.each(response.Attachments, function (index, file) {
+                                                        images.push(file['FilePath']);
 
-                                                            $('#image-container').append(
-                                                                '<div class="image-preview">' +
-                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
-                                                                '<img src="assets/img/employeesImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
-                                                                '<a href="assets/img/employeesImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
-                                                                '</div>'
-                                                            );
-                                                            setButtonState(!response.Permission['OptionDel']);
+                                                        $('#image-container').append(
+                                                            '<div class="image-preview">' +
+                                                            '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
+                                                            '<img src="assets/img/employeesImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                            '<a href="assets/img/employeesImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                            '</div>'
+                                                        );
+                                                        setButtonState(!response.Permission['OptionDel']);
 
-                                                        });
-                                                          // Delete Image
-                                                        $('#image-container').on('click', '.delete-image', function() {
-                                                            var index = $(this).closest('.image-preview').index();
+                                                    });
+                                                    // Delete Image
+                                                    $('#image-container').on('click', '.delete-image', function () {
+                                                        var index = $(this).closest('.image-preview').index();
 
-                                                            if(index >=0 && index < images.length){
+                                                        if (index >= 0 && index < images.length) {
 
-                                                                var imageName = images[index]; // Get the filename of the image to delete
+                                                            var imageName = images[index]; // Get the filename of the image to delete
 
-                                                                var id = $('#id').dxTextBox("instance").option("value");
-                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
-                                                                // Remove the image from the images array
-                                                                images.splice(index, 1);
+                                                            var id = $('#id').dxTextBox("instance").option("value");
+                                                            let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                            // Remove the image from the images array
+                                                            images.splice(index, 1);
 
-                                                                // Remove the image preview from the view
-                                                                $(this).closest('.image-preview').remove();
+                                                            // Remove the image preview from the view
+                                                            $(this).closest('.image-preview').remove();
 
-                                                                // Send an AJAX request to delete the image from the server
-                                                                $.ajaxSetup({
-                                                                    headers: {
-                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                                                                    },
-                                                                });
-                                                                $.ajax({
-                                                                    url: 'employeesAttachmentsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                                                                    method: 'POST',
-                                                                    data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
-                                                                    success: function(data) {
-                                                                        DevExpress.ui.notify({
-                                                                            message:
-                                                                                data.status,
-                                                                            position: {
-                                                                                my: "top left",
-                                                                                at: "top left",
-                                                                            },
-                                                                            type: "error",
-                                                                            width: "300",
-                                                                            height: "150",
-                                                                            hideAfter: 2000,
-                                                                        });
-                                                                    },
-                                                                    error: function(xhr, status, error) {
-                                                                        // Handle error response (e.g., display error message)
-                                                                    }
-                                                                });
-                                                                }else{
-                                                                    console.error('Invalid index:', index);
+                                                            // Send an AJAX request to delete the image from the server
+                                                            $.ajaxSetup({
+                                                                headers: {
+                                                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                },
+                                                            });
+                                                            $.ajax({
+                                                                url: 'employeesAttachmentsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                method: 'POST',
+                                                                data: { imageName: imageName, id: id, Guid: Guid }, // Send the filename of the image to delete
+                                                                success: function (data) {
+                                                                    DevExpress.ui.notify({
+                                                                        message:
+                                                                            data.status,
+                                                                        position: {
+                                                                            my: "top left",
+                                                                            at: "top left",
+                                                                        },
+                                                                        type: "error",
+                                                                        width: "300",
+                                                                        height: "150",
+                                                                        hideAfter: 2000,
+                                                                    });
+                                                                },
+                                                                error: function (xhr, status, error) {
+                                                                    // Handle error response (e.g., display error message)
                                                                 }
+                                                            });
+                                                        } else {
+                                                            console.error('Invalid index:', index);
+                                                        }
 
 
 
-                                                        });
+                                                    });
 
                                                     var displaycard =
                                                         document.getElementById(
@@ -375,7 +381,7 @@ function EmployeesAttachments_fetch() {
                                         stylingMode: "contained",
                                         icon: "trash",
                                         type: "default",
-                                        disabled:!response.Permission['OptionDel'],
+                                        disabled: !response.Permission['OptionDel'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -444,9 +450,9 @@ function EmployeesAttachments_filldata() {
                 $(() => {
                     $('#atType').dxSelectBox({
                         dataSource: response.getatType,
-                        inputAttr: {style:"font-size:13px", },
-                        placeholder:"  النوع",
-                        searchEnabled:true,
+                        inputAttr: { style: "font-size:13px", },
+                        placeholder: "  النوع",
+                        searchEnabled: true,
                         displayExpr: 'atType',
                         valueExpr: 'atType',
                         searchMode: "contains",
@@ -455,18 +461,18 @@ function EmployeesAttachments_filldata() {
                             height: 400
                         },
                         onCustomItemCreating(data) {
-                                if (!data.text) {
-                                    data.customItem = null;
-                                    return;
-                                }
+                            if (!data.text) {
+                                data.customItem = null;
+                                return;
+                            }
 
-                                const newItem = {
-                                    atType: data.text
-                                };
+                            const newItem = {
+                                atType: data.text
+                            };
 
-                                response.getatType.push(newItem);
-                                data.component.option("value",newItem);
-                                data.customItem = newItem;
+                            response.getatType.push(newItem);
+                            data.component.option("value", newItem);
+                            data.customItem = newItem;
 
                         },
 
@@ -480,7 +486,7 @@ function EmployeesAttachments_filldata() {
                         valueExpr: "eid",
                         deferRendering: false,
                         placeholder: "الاسم   ",
-                        inputAttr: { style:"font-size:13px", },
+                        inputAttr: { style: "font-size:13px", },
                         displayExpr(item) {
                             return item && `${item.fullname} `;
                         },
@@ -492,8 +498,8 @@ function EmployeesAttachments_filldata() {
                                 dataSource: e.component.getDataSource(),
                                 columns: [
                                     {
-                                        dataField:"fullname",
-                                        caption:"الاسم ",
+                                        dataField: "fullname",
+                                        caption: "الاسم ",
                                         cellTemplate: function (container, options) {
                                             var cellValue = options.value;
                                             var fontWeight = "450"; // Set the desired font weight
@@ -553,20 +559,20 @@ function EmployeesAttachments_filldata() {
         });
     });
 }
-function EmployeesAttachments_Permissions(){
+function EmployeesAttachments_Permissions() {
     $.ajax({
         type: "GET",
         url: "dashboardmainPermissions/Permissions",
         success: function (response) {
             // console.log(response);
-            let OptionAdd = response.Permission.filter(function (item){
+            let OptionAdd = response.Permission.filter(function (item) {
                 return item.FormName === 'الاضبارة الالكترونية';
             })
 
             $("#btnNewAdd").dxButton("instance").option("disabled", !OptionAdd[0]['OptionAdd']);
 
 
-       }
+        }
     });
 }
 $(document).ready(function () {
@@ -603,8 +609,8 @@ $(document).ready(function () {
                 // EmployeesAttachments_setStCode();
                 displaycard.style.display = "none";
                 document.getElementById("btnSave").scrollIntoView();
-            }else{
-                document.getElementById("card_EmployeesAttachmentstitle").innerText ="اضافة نسخة";
+            } else {
+                document.getElementById("card_EmployeesAttachmentstitle").innerText = "اضافة نسخة";
                 displaycard.style.display = "block";
                 document.getElementById("card_EmployeesAttachmentstitle").scrollIntoView();
 
@@ -622,12 +628,11 @@ $(document).ready(function () {
         width: 120,
         onClick() {
             EmployeesAttachments_chechdata();
-            if(
+            if (
                 error_atType != ""
-            )
-            {
+            ) {
                 return false;
-            }else{
+            } else {
                 EmployeesAttachments_UpdateOrCreate();
             }
         },
@@ -640,13 +645,13 @@ $(document).ready(function () {
     $(() => {
         $("#id").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#Guid").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 
@@ -662,20 +667,20 @@ $(document).ready(function () {
         });
     });
 
-    $(() =>{
+    $(() => {
         let images = [];
         $('#FilePath').dxFileUploader({
             multiple: true,
             selectButtonText: 'تحميل نسخة من الكتاب',
             accept: 'image/*',
             uploadMode: 'useForm',
-            onValueChanged: function(e) {
-                 images = e.value;
+            onValueChanged: function (e) {
+                images = e.value;
                 if (images.length > 0) {
                     // $('#image-container').empty();
-                    $.each(images, function(index, file) {
+                    $.each(images, function (index, file) {
                         var reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = function (e) {
                             // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
                             $('#image-container').append(
                                 '<div class="image-preview">' +
@@ -692,43 +697,43 @@ $(document).ready(function () {
         });
 
         // Delete Image
-        $('#image-container').on('click', '.delete-image', function() {
+        $('#image-container').on('click', '.delete-image', function () {
             var index = $(this).closest('.image-preview').index();
 
-            if(index >=0 && index < images.length){
+            if (index >= 0 && index < images.length) {
                 var imageName = images[index].name; // Get the filename of the image to delete
 
 
-            var id = $('#id').dxTextBox("instance").option("value");
-            // Remove the image from the images array
-            images.splice(index, 1);
+                var id = $('#id').dxTextBox("instance").option("value");
+                // Remove the image from the images array
+                images.splice(index, 1);
 
-            // Remove the image preview from the view
-            $(this).closest('.image-preview').remove();
+                // Remove the image preview from the view
+                $(this).closest('.image-preview').remove();
 
-            // Send an AJAX request to delete the image from the server
-            $.ajax({
-                url: 'employeesAttachmentsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                method: 'POST',
-                data: { imageName: imageName, id:id }, // Send the filename of the image to delete
-                success: function(response) {
-                    DevExpress.ui.notify({
-                        message: response.status,
-                        position: {
-                        my: 'top left',
-                        at: 'top left'
-                        },
-                        type:'danger',
-                        width: '300',
-                        height:'150',
-                        hideAfter: 2000
-                    });
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response (e.g., display error message)
-                }
-            });
-            }else{
+                // Send an AJAX request to delete the image from the server
+                $.ajax({
+                    url: 'employeesAttachmentsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                    method: 'POST',
+                    data: { imageName: imageName, id: id }, // Send the filename of the image to delete
+                    success: function (response) {
+                        DevExpress.ui.notify({
+                            message: response.status,
+                            position: {
+                                my: 'top left',
+                                at: 'top left'
+                            },
+                            type: 'danger',
+                            width: '300',
+                            height: '150',
+                            hideAfter: 2000
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response (e.g., display error message)
+                    }
+                });
+            } else {
                 console.error('Invalid index:', index);
             }
 

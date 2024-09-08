@@ -10,7 +10,7 @@ EmpArticlesComponent();
 EmpChildrenComponent();
 Employee_Permissions();
 function Employee_cleardata() {
-    $("#SearchEmp").dxDropDownBox("instance").option("value",null);
+    $("#SearchEmp").dxDropDownBox("instance").option("value", null);
     $("#eid").dxTextBox("instance").option("value", "");
     $("#Guid").dxTextBox("instance").option("value", "");
     $("#firstname").dxTextBox("instance").option("value", "");
@@ -50,7 +50,7 @@ function Employee_cleardata() {
     $("#deptid").dxDropDownBox("instance").option("value", null);
     $("#bloodtype").dxSelectBox("instance").option("value", "");
     $("#empno").dxTextBox("instance").option("value", "");
-    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#FilePath").dxFileUploader("instance").option("value", "");
     $("#EmpImage").empty();
 
 
@@ -204,14 +204,14 @@ function Employee_UpdateOrCreate() {
     formData.append('bloodtype', $("#bloodtype").dxSelectBox("instance").option("value"));
     formData.append('gender', $("#gender").dxSelectBox("instance").option("value"));
     formData.append('empno', $("#empno").dxTextBox("instance").option("value"));
-    formData.append('active', (function(){
-        if($("#active").dxSwitch("instance").option("value")){
+    formData.append('active', (function () {
+        if ($("#active").dxSwitch("instance").option("value")) {
             return 1;
-        }else return 0;
+        } else return 0;
     })());
     formData.append('DocTitle', $("#fullname").dxTextBox("instance").option("value"));
     const images = $("#FilePath").dxFileUploader("option", "value");
-    $.each(images, function(index, file) {
+    $.each(images, function (index, file) {
         formData.append('image[]', file);
     });
 
@@ -261,9 +261,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#bplace').dxSelectBox({
                             dataSource: response.getBPlace,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:" ادخل مكان الولادة ",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: " ادخل مكان الولادة ",
+                            searchEnabled: true,
                             displayExpr: 'bplace',
                             valueExpr: 'bplace',
                             searchMode: "contains",
@@ -272,18 +272,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        bplace: data.text
-                                    };
+                                const newItem = {
+                                    bplace: data.text
+                                };
 
-                                    response.getBPlace.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getBPlace.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -292,9 +292,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#gender').dxSelectBox({
                             dataSource: response.getGender,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"الجنس",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "الجنس",
+                            searchEnabled: true,
                             displayExpr: 'gender',
                             valueExpr: 'gender',
                             searchMode: "contains",
@@ -303,18 +303,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        gender: data.text
-                                    };
+                                const newItem = {
+                                    gender: data.text
+                                };
 
-                                    response.getGender.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getGender.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -323,9 +323,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#governorate').dxSelectBox({
                             dataSource: response.getGovernorate,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:" ادخل المحافظة ",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: " ادخل المحافظة ",
+                            searchEnabled: true,
                             displayExpr: 'governorate',
                             valueExpr: 'governorate',
                             searchMode: "contains",
@@ -334,18 +334,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        governorate: data.text
-                                    };
+                                const newItem = {
+                                    governorate: data.text
+                                };
 
-                                    response.getGovernorate.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getGovernorate.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -354,9 +354,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#bloodtype').dxSelectBox({
                             dataSource: response.getBloodType,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"ادخل فئة الدم  ",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "ادخل فئة الدم  ",
+                            searchEnabled: true,
                             displayExpr: 'bloodtype',
                             valueExpr: 'bloodtype',
                             searchMode: "contains",
@@ -365,18 +365,18 @@ function Employee_filldata() {
                                 height: 250
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        bloodtype: data.text
-                                    };
+                                const newItem = {
+                                    bloodtype: data.text
+                                };
 
-                                    response.getBloodType.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getBloodType.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -385,9 +385,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#MaritalStatus').dxSelectBox({
                             dataSource: response.getMaritalStatus,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"الحالة الزوجية ",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "الحالة الزوجية ",
+                            searchEnabled: true,
                             displayExpr: 'MaritalStatus',
                             valueExpr: 'MaritalStatus',
                             searchMode: "contains",
@@ -396,18 +396,18 @@ function Employee_filldata() {
                                 height: 250
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        MaritalStatus: data.text
-                                    };
+                                const newItem = {
+                                    MaritalStatus: data.text
+                                };
 
-                                    response.getMaritalStatus.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getMaritalStatus.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -416,9 +416,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#wifejob').dxSelectBox({
                             dataSource: response.getWifeJobe,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"مهنة الزوجة",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "مهنة الزوجة",
+                            searchEnabled: true,
                             displayExpr: 'wifejobe',
                             valueExpr: 'wifejobe',
                             searchMode: "contains",
@@ -427,18 +427,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        wifejobe: data.text
-                                    };
+                                const newItem = {
+                                    wifejobe: data.text
+                                };
 
-                                    response.getWifeJobe.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getWifeJobe.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -448,9 +448,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#issueplace').dxSelectBox({
                             dataSource: response.getIssuePlace,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"ادخل جهة الاصدار ",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "ادخل جهة الاصدار ",
+                            searchEnabled: true,
                             displayExpr: 'issueplace',
                             valueExpr: 'issueplace',
                             searchMode: "contains",
@@ -459,18 +459,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        issueplace: data.text
-                                    };
+                                const newItem = {
+                                    issueplace: data.text
+                                };
 
-                                    response.getIssuePlace.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getIssuePlace.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -480,9 +480,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#jclass').dxSelectBox({
                             dataSource: response.getJClass,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"ادخل الصنف الوظيفي  ",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "ادخل الصنف الوظيفي  ",
+                            searchEnabled: true,
                             displayExpr: 'jclass',
                             valueExpr: 'jclass',
                             searchMode: "contains",
@@ -491,18 +491,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        jclass: data.text
-                                    };
+                                const newItem = {
+                                    jclass: data.text
+                                };
 
-                                    response.getJClass.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getJClass.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -512,9 +512,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#jcategory').dxSelectBox({
                             dataSource: response.getJCategory,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"ادخل العنوان الوظيفي  ",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "ادخل العنوان الوظيفي  ",
+                            searchEnabled: true,
                             displayExpr: 'jcategory',
                             valueExpr: 'jcategory',
                             searchMode: "contains",
@@ -523,18 +523,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        jcategory: data.text
-                                    };
+                                const newItem = {
+                                    jcategory: data.text
+                                };
 
-                                    response.getJCategory.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getJCategory.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -544,9 +544,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#genralspt').dxSelectBox({
                             dataSource: response.getGenralSpt,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"ادخل الاختصاص العام",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "ادخل الاختصاص العام",
+                            searchEnabled: true,
                             displayExpr: 'genralspt',
                             valueExpr: 'genralspt',
                             searchMode: "contains",
@@ -555,18 +555,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        genralspt: data.text
-                                    };
+                                const newItem = {
+                                    genralspt: data.text
+                                };
 
-                                    response.getGenralSpt.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getGenralSpt.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -576,9 +576,9 @@ function Employee_filldata() {
                     $(() => {
                         $('#spacifspt').dxSelectBox({
                             dataSource: response.getSpacifSpt,
-                            inputAttr: {style:"font-size:13px", },
-                            placeholder:"ادخل الاختصاص الدقيق",
-                            searchEnabled:true,
+                            inputAttr: { style: "font-size:13px", },
+                            placeholder: "ادخل الاختصاص الدقيق",
+                            searchEnabled: true,
                             displayExpr: 'spacifspt',
                             valueExpr: 'spacifspt',
                             searchMode: "contains",
@@ -587,18 +587,18 @@ function Employee_filldata() {
                                 height: 400
                             },
                             onCustomItemCreating(data) {
-                                    if (!data.text) {
-                                        data.customItem = null;
-                                        return;
-                                    }
+                                if (!data.text) {
+                                    data.customItem = null;
+                                    return;
+                                }
 
-                                    const newItem = {
-                                        spacifspt: data.text
-                                    };
+                                const newItem = {
+                                    spacifspt: data.text
+                                };
 
-                                    response.getSpacifSpt.push(newItem);
-                                    data.component.option("value",newItem);
-                                    data.customItem = newItem;
+                                response.getSpacifSpt.push(newItem);
+                                data.component.option("value", newItem);
+                                data.customItem = newItem;
 
                             },
 
@@ -624,8 +624,8 @@ function Employee_filldata() {
                                     dataSource: e.component.getDataSource(),
                                     columns: [
                                         {
-                                            dataField:"deptname",
-                                            caption:"مكان العمل"
+                                            dataField: "deptname",
+                                            caption: "مكان العمل"
 
                                         },
 
@@ -673,7 +673,7 @@ function Employee_filldata() {
                             valueExpr: "eid",
                             deferRendering: false,
                             placeholder: "بحث في الاسم ",
-                            inputAttr: { "aria-label": "deptname",style:"font-size:14px",  },
+                            inputAttr: { "aria-label": "deptname", style: "font-size:14px", },
                             displayExpr(item) {
                                 return item && `${item.fullname}`;
                             },
@@ -685,8 +685,8 @@ function Employee_filldata() {
                                     dataSource: e.component.getDataSource(),
                                     columns: [
                                         {
-                                            dataField:"fullname",
-                                            caption : "اسم الموظف",
+                                            dataField: "fullname",
+                                            caption: "اسم الموظف",
                                             cellTemplate: function (container, options) {
                                                 var cellValue = options.value;
                                                 var fontWeight = "450"; // Set the desired font weight
@@ -696,7 +696,9 @@ function Employee_filldata() {
                                                     .css({
                                                         "font-size": fontSize,
                                                         "font-weight": fontWeight,
-                                                        color: fontColor,
+                                                        "color": fontColor,
+                                                        "white-space": "normal",
+                                                        "word-wrap": "break-word",
                                                     })
                                                     .text(cellValue)
                                                     .appendTo(container);
@@ -705,7 +707,7 @@ function Employee_filldata() {
 
                                     ],
                                     hoverStateEnabled: true,
-                                    paging: { enabled: true, pageSize: 10},
+                                    paging: { enabled: true, pageSize: 10 },
                                     filterRow: { visible: true },
                                     scrolling: { mode: "virtual" },
                                     selection: { mode: "single" },
@@ -724,55 +726,55 @@ function Employee_filldata() {
                                         $.ajax({
                                             type: "GET",
                                             url: "employees/show",
-                                            data: {eid:eid},
+                                            data: { eid: eid },
                                             success: function (response) {
                                                 //#region EmployeesData....
-                                                $("#eid").dxTextBox("instance").option("value",response.Emp.eid);
-                                                $("#Guid").dxTextBox("instance").option("value",response.Emp.Guid);
-                                                $("#firstname").dxTextBox("instance").option("value",response.Emp.firstname);
-                                                $("#secondname").dxTextBox("instance").option("value",response.Emp.secondname);
-                                                $("#thirdname").dxTextBox("instance").option("value",response.Emp.thirdname);
-                                                $("#forthname").dxTextBox("instance").option("value",response.Emp.forthname);
-                                                $("#surname").dxTextBox("instance").option("value",response.Emp.surname);
-                                                $("#fullname").dxTextBox("instance").option("value",response.Emp.fullname);
-                                                $("#mothername").dxTextBox("instance").option("value",response.Emp.mothername);
-                                                $("#address").dxTextBox("instance").option("value",response.Emp.address);
-                                                $("#wifename").dxTextBox("instance").option("value",response.Emp.wifename);
-                                                $("#email").dxTextBox("instance").option("value",response.Emp.email);
-                                                $("#mobile").dxTextBox("instance").option("value",response.Emp.mobile);
-                                                $("#idno").dxTextBox("instance").option("value",response.Emp.idno);
-                                                $("#idcerno").dxTextBox("instance").option("value",response.Emp.idcerno);
-                                                $("#homeid").dxTextBox("instance").option("value",response.Emp.homeid);
-                                                $("#rationo").dxTextBox("instance").option("value",response.Emp.rationo);
-                                                $("#notes").dxTextArea("instance").option("value",response.Emp.notes);
-                                                $("#dob").dxDateBox("instance").option("value",new Date(response.Emp.dob));
-                                                $("#iddate").dxDateBox("instance").option("value",new Date(response.Emp.iddate));
-                                                $("#idcerdate").dxDateBox("instance").option("value",new Date(response.Emp.idcerdate));
-                                                $("#homedate").dxDateBox("instance").option("value",new Date(response.Emp.homedate));
-                                                $("#hiredate").dxDateBox("instance").option("value",new Date(response.Emp.hiredate));
-                                                $("#rehiredate").dxDateBox("instance").option("value",new Date(response.Emp.rehiredate));
-                                                $("#moh_wdate").dxDateBox("instance").option("value",new Date(response.Emp.moh_wdate));
-                                                $("#bplace").dxSelectBox("instance").option("value",response.bplace);
-                                                $("#governorate").dxSelectBox("instance").option("value",response.Emp.governorate);
-                                                $("#MaritalStatus").dxSelectBox("instance").option("value",response.Emp.MaritalStatus);
-                                                $("#wifejob").dxSelectBox("instance").option("value",response.Emp.wifejob);
-                                                $("#issueplace").dxSelectBox("instance").option("value",response.Emp.issueplace);
-                                                $("#jclass").dxSelectBox("instance").option("value",response.Emp.jclass);
-                                                $("#jcategory").dxSelectBox("instance").option("value",response.Emp.jcategory);
-                                                $("#genralspt").dxSelectBox("instance").option("value",response.Emp.genralspt);
-                                                $("#spacifspt").dxSelectBox("instance").option("value",response.Emp.spacifspt);
-                                                $("#bloodtype").dxSelectBox("instance").option("value",response.Emp.bloodtype);
-                                                $("#empno").dxTextBox("instance").option("value",response.Emp.empno);
+                                                $("#eid").dxTextBox("instance").option("value", response.Emp.eid);
+                                                $("#Guid").dxTextBox("instance").option("value", response.Emp.Guid);
+                                                $("#firstname").dxTextBox("instance").option("value", response.Emp.firstname);
+                                                $("#secondname").dxTextBox("instance").option("value", response.Emp.secondname);
+                                                $("#thirdname").dxTextBox("instance").option("value", response.Emp.thirdname);
+                                                $("#forthname").dxTextBox("instance").option("value", response.Emp.forthname);
+                                                $("#surname").dxTextBox("instance").option("value", response.Emp.surname);
+                                                $("#fullname").dxTextBox("instance").option("value", response.Emp.fullname);
+                                                $("#mothername").dxTextBox("instance").option("value", response.Emp.mothername);
+                                                $("#address").dxTextBox("instance").option("value", response.Emp.address);
+                                                $("#wifename").dxTextBox("instance").option("value", response.Emp.wifename);
+                                                $("#email").dxTextBox("instance").option("value", response.Emp.email);
+                                                $("#mobile").dxTextBox("instance").option("value", response.Emp.mobile);
+                                                $("#idno").dxTextBox("instance").option("value", response.Emp.idno);
+                                                $("#idcerno").dxTextBox("instance").option("value", response.Emp.idcerno);
+                                                $("#homeid").dxTextBox("instance").option("value", response.Emp.homeid);
+                                                $("#rationo").dxTextBox("instance").option("value", response.Emp.rationo);
+                                                $("#notes").dxTextArea("instance").option("value", response.Emp.notes);
+                                                $("#dob").dxDateBox("instance").option("value", new Date(response.Emp.dob));
+                                                $("#iddate").dxDateBox("instance").option("value", new Date(response.Emp.iddate));
+                                                $("#idcerdate").dxDateBox("instance").option("value", new Date(response.Emp.idcerdate));
+                                                $("#homedate").dxDateBox("instance").option("value", new Date(response.Emp.homedate));
+                                                $("#hiredate").dxDateBox("instance").option("value", new Date(response.Emp.hiredate));
+                                                $("#rehiredate").dxDateBox("instance").option("value", new Date(response.Emp.rehiredate));
+                                                $("#moh_wdate").dxDateBox("instance").option("value", new Date(response.Emp.moh_wdate));
+                                                $("#bplace").dxSelectBox("instance").option("value", response.bplace);
+                                                $("#governorate").dxSelectBox("instance").option("value", response.Emp.governorate);
+                                                $("#MaritalStatus").dxSelectBox("instance").option("value", response.Emp.MaritalStatus);
+                                                $("#wifejob").dxSelectBox("instance").option("value", response.Emp.wifejob);
+                                                $("#issueplace").dxSelectBox("instance").option("value", response.Emp.issueplace);
+                                                $("#jclass").dxSelectBox("instance").option("value", response.Emp.jclass);
+                                                $("#jcategory").dxSelectBox("instance").option("value", response.Emp.jcategory);
+                                                $("#genralspt").dxSelectBox("instance").option("value", response.Emp.genralspt);
+                                                $("#spacifspt").dxSelectBox("instance").option("value", response.Emp.spacifspt);
+                                                $("#bloodtype").dxSelectBox("instance").option("value", response.Emp.bloodtype);
+                                                $("#empno").dxTextBox("instance").option("value", response.Emp.empno);
                                                 $("#active")
-                                                .dxSwitch("instance")
-                                                .option("value",response.Emp.active === "1" ? true:false);
-                                                $("#gender").dxSelectBox("instance").option("value",response.Emp.gender);
-                                                $("#deptid").dxDropDownBox("instance").option("value",Number(response.Emp.deptid));
+                                                    .dxSwitch("instance")
+                                                    .option("value", response.Emp.active === "1" ? true : false);
+                                                $("#gender").dxSelectBox("instance").option("value", response.Emp.gender);
+                                                $("#deptid").dxDropDownBox("instance").option("value", Number(response.Emp.deptid));
 
                                                 $('#EmpImage').empty();
                                                 $('#EmpImageDelete').empty();
                                                 let images = [];
-                                                $.each(response.Attachments, function(index, file) {
+                                                $.each(response.Attachments, function (index, file) {
                                                     images.push(file['FilePath']);
 
                                                     $('#EmpImage').append(
@@ -790,11 +792,11 @@ function Employee_filldata() {
 
                                                     setButtonState(!response.Permission['OptionDel']);
                                                 });
-                                                  // Delete Image
-                                                $('#EmpImageDelete').on('click', '.delete-imageEmp', function() {
+                                                // Delete Image
+                                                $('#EmpImageDelete').on('click', '.delete-imageEmp', function () {
                                                     var index = $(this).closest('.image-preview').index();
 
-                                                    if(index >=0 && index < images.length){
+                                                    if (index >= 0 && index < images.length) {
 
                                                         var imageName = images[index]; // Get the filename of the image to delete
 
@@ -815,8 +817,8 @@ function Employee_filldata() {
                                                         $.ajax({
                                                             url: 'employeesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
                                                             method: 'POST',
-                                                            data: { imageName: imageName, eid:id ,Guid:Guid }, // Send the filename of the image to delete
-                                                            success: function(data) {
+                                                            data: { imageName: imageName, eid: id, Guid: Guid }, // Send the filename of the image to delete
+                                                            success: function (data) {
                                                                 DevExpress.ui.notify({
                                                                     message:
                                                                         data.status,
@@ -830,13 +832,13 @@ function Employee_filldata() {
                                                                     hideAfter: 2000,
                                                                 });
                                                             },
-                                                            error: function(xhr, status, error) {
+                                                            error: function (xhr, status, error) {
                                                                 // Handle error response (e.g., display error message)
                                                             }
                                                         });
-                                                        }else{
-                                                            console.error('Invalid index:', index);
-                                                        }
+                                                    } else {
+                                                        console.error('Invalid index:', index);
+                                                    }
 
 
 
@@ -875,19 +877,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"cid",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "cid",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_certificate_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_certificate_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -913,7 +915,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -933,7 +937,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -952,7 +958,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -970,7 +978,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -979,7 +989,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "country",
                                                                 caption: "البلد ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -989,7 +999,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1007,7 +1019,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1025,7 +1037,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1043,7 +1057,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1052,7 +1068,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "cer_no",
                                                                 caption: "رقم الشهادة ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1062,7 +1078,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1071,7 +1087,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "cerdate",
                                                                 caption: "تاريخ الشهادة ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1081,7 +1097,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1090,7 +1106,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "equivlent_no",
                                                                 caption: "رقم المعادلة ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1100,7 +1116,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1109,7 +1125,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "equivlent_date",
                                                                 caption: "تاريخ المعادلة ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1119,7 +1135,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1145,23 +1161,23 @@ function Employee_filldata() {
                                                                                 cid: rowData.cid,
                                                                             };
 
-                                                                            $("#EmpCercountry").dxTextBox("instance").option("value",rowData.country);
-                                                                            $("#EmpCeruniversity").dxTextBox("instance").option("value",rowData.university);
-                                                                            $("#EmpCercid").dxTextBox("instance").option("value",rowData.cid);
-                                                                            $("#EmpCereid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpCercer_no").dxTextBox("instance").option("value",rowData.cer_no);
-                                                                            $("#EmpCercerdate").dxTextBox("instance").option("value",rowData.cerdate);
-                                                                            $("#EmpCerequivlent_no").dxTextBox("instance").option("value",rowData.equivlent_no);
-                                                                            $("#EmpCerequivlent_date").dxTextBox("instance").option("value",rowData.equivlent_date);
-                                                                            $("#EmpCergspetailest").dxTextBox("instance").option("value",rowData.gspetailest);
-                                                                            $("#EmpCersspetailest").dxTextBox("instance").option("value",rowData.sspetailest);
-                                                                            $("#EmpCercyears").dxTextBox("instance").option("value",rowData.cyears);
-                                                                            $("#EmpCercertification").dxTextBox("instance").option("value",rowData.certification);
-                                                                            $("#EmpCerGuid").dxTextBox("instance").option("value",rowData.Guid);
+                                                                            $("#EmpCercountry").dxTextBox("instance").option("value", rowData.country);
+                                                                            $("#EmpCeruniversity").dxTextBox("instance").option("value", rowData.university);
+                                                                            $("#EmpCercid").dxTextBox("instance").option("value", rowData.cid);
+                                                                            $("#EmpCereid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpCercer_no").dxTextBox("instance").option("value", rowData.cer_no);
+                                                                            $("#EmpCercerdate").dxTextBox("instance").option("value", rowData.cerdate);
+                                                                            $("#EmpCerequivlent_no").dxTextBox("instance").option("value", rowData.equivlent_no);
+                                                                            $("#EmpCerequivlent_date").dxTextBox("instance").option("value", rowData.equivlent_date);
+                                                                            $("#EmpCergspetailest").dxTextBox("instance").option("value", rowData.gspetailest);
+                                                                            $("#EmpCersspetailest").dxTextBox("instance").option("value", rowData.sspetailest);
+                                                                            $("#EmpCercyears").dxTextBox("instance").option("value", rowData.cyears);
+                                                                            $("#EmpCercertification").dxTextBox("instance").option("value", rowData.certification);
+                                                                            $("#EmpCerGuid").dxTextBox("instance").option("value", rowData.Guid);
 
                                                                             $('#image-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_certification[rowIndex].cer_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_certification[rowIndex].cer_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#image-container').append(
@@ -1174,43 +1190,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpCertificationsaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpCertificationstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpCertificationstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpCertificationstitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpCertificationstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpCertificationstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpCertificationsaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpCertificationstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpCertificationstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpCertificationstitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpCertificationstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpCertificationstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -1260,19 +1276,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"id",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "id",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_salute_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_salute_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -1298,7 +1314,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1318,7 +1336,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1337,7 +1357,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1355,7 +1377,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1373,7 +1395,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1382,7 +1404,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "notes",
                                                                 caption: "ملاحظات ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1392,7 +1414,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1419,20 +1443,20 @@ function Employee_filldata() {
                                                                                 id: rowData.id,
                                                                             };
 
-                                                                            $("#EmpThanksid").dxTextBox("instance").option("value",rowData.id);
-                                                                            $("#EmpThanksGuid").dxTextBox("instance").option("value",rowData.Guid);
-                                                                            $("#EmpThankseid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpCereid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpThanksttype").dxTextBox("instance").option("value",rowData.ttype);
-                                                                            $("#EmpThanksreason").dxTextBox("instance").option("value",rowData.reason);
-                                                                            $("#EmpThanksdocno").dxTextBox("instance").option("value",rowData.docno);
-                                                                            $("#EmpThanksdocdate").dxTextBox("instance").option("value",rowData.docdate);
-                                                                            $("#EmpThanksnotes").dxTextBox("instance").option("value",rowData.notes);
+                                                                            $("#EmpThanksid").dxTextBox("instance").option("value", rowData.id);
+                                                                            $("#EmpThanksGuid").dxTextBox("instance").option("value", rowData.Guid);
+                                                                            $("#EmpThankseid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpCereid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpThanksttype").dxTextBox("instance").option("value", rowData.ttype);
+                                                                            $("#EmpThanksreason").dxTextBox("instance").option("value", rowData.reason);
+                                                                            $("#EmpThanksdocno").dxTextBox("instance").option("value", rowData.docno);
+                                                                            $("#EmpThanksdocdate").dxTextBox("instance").option("value", rowData.docdate);
+                                                                            $("#EmpThanksnotes").dxTextBox("instance").option("value", rowData.notes);
 
 
                                                                             $('#EmpThanksimage-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_thanks[rowIndex].thanks_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_thanks[rowIndex].thanks_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#EmpThanksimage-container').append(
@@ -1445,43 +1469,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpThanksaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpThankstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpThankstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpThankstitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpThankstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpThankstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpThanksaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpThankstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpThankstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpThankstitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpThankstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpThankstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -1532,19 +1556,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"vcid",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "vcid",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_Traveler_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_Traveler_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -1570,7 +1594,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1590,7 +1616,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1609,7 +1637,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1627,7 +1657,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1645,7 +1675,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1654,7 +1684,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "docdate",
                                                                 caption: "تاريخ الكتاب",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1664,7 +1694,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1691,19 +1721,19 @@ function Employee_filldata() {
                                                                                 vcid: rowData.vcid,
                                                                             };
 
-                                                                            $("#EmpVacationsvcid").dxTextBox("instance").option("value",rowData.vcid);
-                                                                            $("#EmpVacationsGuid").dxTextBox("instance").option("value",rowData.Guid);
-                                                                            $("#EmpVacationseid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpVacationsvtid").dxTextBox("instance").option("value",rowData.vtid);
-                                                                            $("#EmpVacationsvdate").dxTextBox("instance").option("value",rowData.vdate);
-                                                                            $("#EmpVacationsdocno").dxTextBox("instance").option("value",rowData.docno);
-                                                                            $("#EmpVacationsdocdate").dxTextBox("instance").option("value",rowData.docdate);
-                                                                            $("#EmpVacationsnodays").dxTextBox("instance").option("value",rowData.nodays);
+                                                                            $("#EmpVacationsvcid").dxTextBox("instance").option("value", rowData.vcid);
+                                                                            $("#EmpVacationsGuid").dxTextBox("instance").option("value", rowData.Guid);
+                                                                            $("#EmpVacationseid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpVacationsvtid").dxTextBox("instance").option("value", rowData.vtid);
+                                                                            $("#EmpVacationsvdate").dxTextBox("instance").option("value", rowData.vdate);
+                                                                            $("#EmpVacationsdocno").dxTextBox("instance").option("value", rowData.docno);
+                                                                            $("#EmpVacationsdocdate").dxTextBox("instance").option("value", rowData.docdate);
+                                                                            $("#EmpVacationsnodays").dxTextBox("instance").option("value", rowData.nodays);
 
 
                                                                             $('#EmpVacationsimage-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_vacations[rowIndex].vac_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_vacations[rowIndex].vac_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#EmpVacationsimage-container').append(
@@ -1716,43 +1746,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpVacationsaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpVacationstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpVacationstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpVacationstitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpVacationstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpVacationstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpVacationsaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpVacationstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpVacationstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpVacationstitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpVacationstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpVacationstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -1802,19 +1832,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"vcid",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "vcid",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_businessman_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_businessman_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -1840,7 +1870,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1860,7 +1892,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1879,7 +1913,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1897,7 +1933,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1906,7 +1944,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "getdate",
                                                                 caption: "تاريخ الحصول عليها ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1916,7 +1954,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1925,7 +1963,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "docno",
                                                                 caption: " رقم الكتاب",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1935,7 +1973,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1944,7 +1982,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "docdate",
                                                                 caption: "تاريخ الكتاب",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -1954,7 +1992,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -1981,20 +2019,20 @@ function Employee_filldata() {
                                                                                 jid: rowData.jid,
                                                                             };
 
-                                                                            $("#EmpJobsjid").dxTextBox("instance").option("value",rowData.jid);
-                                                                            $("#EmpJobsGuid").dxTextBox("instance").option("value",rowData.Guid);
-                                                                            $("#EmpJobseid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpJobsjtitle").dxTextBox("instance").option("value",rowData.jtitle);
-                                                                            $("#EmpJobsjdegree").dxTextBox("instance").option("value",rowData.jdegree);
-                                                                            $("#EmpJobsdocno").dxTextBox("instance").option("value",rowData.docno);
-                                                                            $("#EmpJobsdocdate").dxTextBox("instance").option("value",rowData.docdate);
-                                                                            $("#EmpJobsjstage").dxTextBox("instance").option("value",rowData.jstage);
-                                                                            $("#EmpJobsgetdate").dxTextBox("instance").option("value",rowData.getdate);
+                                                                            $("#EmpJobsjid").dxTextBox("instance").option("value", rowData.jid);
+                                                                            $("#EmpJobsGuid").dxTextBox("instance").option("value", rowData.Guid);
+                                                                            $("#EmpJobseid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpJobsjtitle").dxTextBox("instance").option("value", rowData.jtitle);
+                                                                            $("#EmpJobsjdegree").dxTextBox("instance").option("value", rowData.jdegree);
+                                                                            $("#EmpJobsdocno").dxTextBox("instance").option("value", rowData.docno);
+                                                                            $("#EmpJobsdocdate").dxTextBox("instance").option("value", rowData.docdate);
+                                                                            $("#EmpJobsjstage").dxTextBox("instance").option("value", rowData.jstage);
+                                                                            $("#EmpJobsgetdate").dxTextBox("instance").option("value", rowData.getdate);
 
 
                                                                             $('#EmpJobsimage-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_jobs[rowIndex].jobs_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_jobs[rowIndex].jobs_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#EmpJobsimage-container').append(
@@ -2007,43 +2045,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpJobsaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpJobstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpJobstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpJobstitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpJobstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpJobstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpJobsaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpJobstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpJobstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpJobstitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpJobstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpJobstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -2094,19 +2132,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"id",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "id",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_project_manager_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_project_manager_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -2132,7 +2170,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2152,7 +2192,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2171,7 +2213,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2189,7 +2233,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2207,7 +2251,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2216,7 +2260,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "datefrom",
                                                                 caption: "من تاريخ  ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -2226,7 +2270,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2235,7 +2279,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "dateto",
                                                                 caption: "الى تاريخ  ",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -2245,7 +2289,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2271,20 +2315,20 @@ function Employee_filldata() {
                                                                                 id: rowData.id,
                                                                             };
 
-                                                                            $("#EmpPositionsid").dxTextBox("instance").option("value",rowData.id);
-                                                                            $("#EmpPositionsGuid").dxTextBox("instance").option("value",rowData.Guid);
-                                                                            $("#EmpPositionseid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpPositionsptypeid").dxTextBox("instance").option("value",rowData.ptypeid);
-                                                                            $("#EmpPositionspname").dxTextBox("instance").option("value",rowData.deptname);
-                                                                            $("#EmpPositionsdocno").dxTextBox("instance").option("value",rowData.docno);
-                                                                            $("#EmpPositionsdocdate").dxTextBox("instance").option("value",rowData.docdate);
-                                                                            $("#EmpPositionsdatefrom").dxTextBox("instance").option("value",rowData.datefrom);
-                                                                            $("#EmpPositionsdateto").dxTextBox("instance").option("value",rowData.dateto);
+                                                                            $("#EmpPositionsid").dxTextBox("instance").option("value", rowData.id);
+                                                                            $("#EmpPositionsGuid").dxTextBox("instance").option("value", rowData.Guid);
+                                                                            $("#EmpPositionseid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpPositionsptypeid").dxTextBox("instance").option("value", rowData.ptypeid);
+                                                                            $("#EmpPositionspname").dxTextBox("instance").option("value", rowData.deptname);
+                                                                            $("#EmpPositionsdocno").dxTextBox("instance").option("value", rowData.docno);
+                                                                            $("#EmpPositionsdocdate").dxTextBox("instance").option("value", rowData.docdate);
+                                                                            $("#EmpPositionsdatefrom").dxTextBox("instance").option("value", rowData.datefrom);
+                                                                            $("#EmpPositionsdateto").dxTextBox("instance").option("value", rowData.dateto);
 
 
                                                                             $('#EmpPositionsimage-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_positions[rowIndex].positions_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_positions[rowIndex].positions_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#EmpPositionsimage-container').append(
@@ -2297,43 +2341,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpPositionsaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpPositionstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpPositionstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpPositionstitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpPositionstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpPositionstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpPositionsaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpPositionstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpPositionstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpPositionstitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpPositionstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpPositionstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -2384,19 +2428,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"id",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "id",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_coach_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_coach_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -2422,7 +2466,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2442,7 +2488,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2461,7 +2507,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2479,7 +2527,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2497,7 +2545,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2523,18 +2571,18 @@ function Employee_filldata() {
                                                                                 id: rowData.id,
                                                                             };
 
-                                                                            $("#EmpSupervisorsid").dxTextBox("instance").option("value",rowData.id);
-                                                                            $("#EmpSupervisorsGuid").dxTextBox("instance").option("value",rowData.Guid);
-                                                                            $("#EmpSupervisorseid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpSupervisorssdeg").dxTextBox("instance").option("value",rowData.sdeg);
-                                                                            $("#EmpSupervisorssname").dxTextBox("instance").option("value",rowData.sname);
-                                                                            $("#EmpSupervisorsdocno").dxTextBox("instance").option("value",rowData.docno);
-                                                                            $("#EmpSupervisorsdocdate").dxTextBox("instance").option("value",rowData.docdate);
+                                                                            $("#EmpSupervisorsid").dxTextBox("instance").option("value", rowData.id);
+                                                                            $("#EmpSupervisorsGuid").dxTextBox("instance").option("value", rowData.Guid);
+                                                                            $("#EmpSupervisorseid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpSupervisorssdeg").dxTextBox("instance").option("value", rowData.sdeg);
+                                                                            $("#EmpSupervisorssname").dxTextBox("instance").option("value", rowData.sname);
+                                                                            $("#EmpSupervisorsdocno").dxTextBox("instance").option("value", rowData.docno);
+                                                                            $("#EmpSupervisorsdocdate").dxTextBox("instance").option("value", rowData.docdate);
 
 
                                                                             $('#EmpSupervisorsimage-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_supervisors[rowIndex].supervisors_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_supervisors[rowIndex].supervisors_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#EmpSupervisorsimage-container').append(
@@ -2547,43 +2595,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpSupervisorsaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpSupervisorstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpSupervisorstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpSupervisorstitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpSupervisorstitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpSupervisorstitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpSupervisorsaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpSupervisorstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpSupervisorstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpSupervisorstitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpSupervisorstitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpSupervisorstitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -2635,19 +2683,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"id",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "id",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_article_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_article_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -2673,7 +2721,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2693,7 +2743,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2712,7 +2764,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2730,7 +2784,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2748,7 +2802,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2774,17 +2830,17 @@ function Employee_filldata() {
                                                                                 id: rowData.id,
                                                                             };
 
-                                                                            $("#EmpArticlesid").dxTextBox("instance").option("value",rowData.id);
-                                                                            $("#EmpArticlesGuid").dxTextBox("instance").option("value",rowData.Guid);
-                                                                            $("#EmpArticlesdid").dxTextBox("instance").option("value",rowData.did);
-                                                                            $("#EmpArticlesarticle_title").dxTextBox("instance").option("value",rowData.article_title);
-                                                                            $("#EmpArticlesnof_aut").dxTextBox("instance").option("value",rowData.nof_aut);
-                                                                            $("#EmpArticlespub_date").dxTextBox("instance").option("value",rowData.pub_date);
-                                                                            $("#EmpArticlesAlink").dxTextBox("instance").option("value",rowData.Alink);
+                                                                            $("#EmpArticlesid").dxTextBox("instance").option("value", rowData.id);
+                                                                            $("#EmpArticlesGuid").dxTextBox("instance").option("value", rowData.Guid);
+                                                                            $("#EmpArticlesdid").dxTextBox("instance").option("value", rowData.did);
+                                                                            $("#EmpArticlesarticle_title").dxTextBox("instance").option("value", rowData.article_title);
+                                                                            $("#EmpArticlesnof_aut").dxTextBox("instance").option("value", rowData.nof_aut);
+                                                                            $("#EmpArticlespub_date").dxTextBox("instance").option("value", rowData.pub_date);
+                                                                            $("#EmpArticlesAlink").dxTextBox("instance").option("value", rowData.Alink);
 
                                                                             $('#EmpArticlesimage-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_articles[rowIndex].articles_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_articles[rowIndex].articles_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#EmpArticlesimage-container').append(
@@ -2797,43 +2853,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpArticlesaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpArticlestitle"
-                                                                                        ).innerText =
-                                                                                            rowData.did;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpArticlestitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpArticlestitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpArticlestitle"
-                                                                                        ).innerText =
-                                                                                            rowData.did;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpArticlestitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpArticlesaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpArticlestitle"
+                                                                                ).innerText =
+                                                                                    rowData.did;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpArticlestitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpArticlestitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpArticlestitle"
+                                                                                ).innerText =
+                                                                                    rowData.did;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpArticlestitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -2883,19 +2939,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"id",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "id",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_children_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_children_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -2912,7 +2968,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "eid",
                                                                 caption: " اسم الموظف",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -2922,7 +2978,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2942,7 +3000,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2961,7 +3021,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2979,7 +3039,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -2997,7 +3059,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3023,17 +3085,17 @@ function Employee_filldata() {
                                                                                 id: rowData.id,
                                                                             };
 
-                                                                            $("#EmpChildrenid").dxTextBox("instance").option("value",rowData.id);
-                                                                            $("#EmpChildrenGuid").dxTextBox("instance").option("value",rowData.Guid);
-                                                                            $("#EmpChildreneid").dxTextBox("instance").option("value",rowData.eid);
-                                                                            $("#EmpChildrenchname").dxTextBox("instance").option("value",rowData.chname);
-                                                                            $("#EmpChildrenchsex").dxTextBox("instance").option("value",rowData.chsex);
-                                                                            $("#EmpChildrenchdob").dxTextBox("instance").option("value",rowData.chdob);
-                                                                            $("#EmpChildrencsid").dxTextBox("instance").option("value",rowData.csid);
+                                                                            $("#EmpChildrenid").dxTextBox("instance").option("value", rowData.id);
+                                                                            $("#EmpChildrenGuid").dxTextBox("instance").option("value", rowData.Guid);
+                                                                            $("#EmpChildreneid").dxTextBox("instance").option("value", rowData.eid);
+                                                                            $("#EmpChildrenchname").dxTextBox("instance").option("value", rowData.chname);
+                                                                            $("#EmpChildrenchsex").dxTextBox("instance").option("value", rowData.chsex);
+                                                                            $("#EmpChildrenchdob").dxTextBox("instance").option("value", rowData.chdob);
+                                                                            $("#EmpChildrencsid").dxTextBox("instance").option("value", rowData.csid);
 
                                                                             $('#EmpChildrenimage-container').empty();
                                                                             let images = [];
-                                                                            $.each(response.Emp.emp_children[rowIndex].children_attachments, function(index, file) {
+                                                                            $.each(response.Emp.emp_children[rowIndex].children_attachments, function (index, file) {
                                                                                 images.push(file['FilePath']);
 
                                                                                 $('#EmpChildrenimage-container').append(
@@ -3046,43 +3108,43 @@ function Employee_filldata() {
 
 
 
-                                                                                    var displaycard =
-                                                                                        document.getElementById(
-                                                                                            "EmpChildrenaction"
-                                                                                        );
-                                                                                    if (
-                                                                                        displaycard.style
-                                                                                            .display == "none"
-                                                                                    ) {
-                                                                                        document.getElementById(
-                                                                                            "card_EmpChildrentitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpChildrentitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    } else {
-                                                                                        displaycard.style.display =
-                                                                                            "none";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpChildrentitle"
-                                                                                        ).innerText = "";
-                                                                                        displaycard.style.display =
-                                                                                            "block";
-                                                                                        document.getElementById(
-                                                                                            "card_EmpChildrentitle"
-                                                                                        ).innerText =
-                                                                                            rowData.eid;
-                                                                                        document
-                                                                                            .getElementById(
-                                                                                                "card_EmpChildrentitle"
-                                                                                            )
-                                                                                            .scrollIntoView();
-                                                                                    }
+                                                                            var displaycard =
+                                                                                document.getElementById(
+                                                                                    "EmpChildrenaction"
+                                                                                );
+                                                                            if (
+                                                                                displaycard.style
+                                                                                    .display == "none"
+                                                                            ) {
+                                                                                document.getElementById(
+                                                                                    "card_EmpChildrentitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpChildrentitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            } else {
+                                                                                displaycard.style.display =
+                                                                                    "none";
+                                                                                document.getElementById(
+                                                                                    "card_EmpChildrentitle"
+                                                                                ).innerText = "";
+                                                                                displaycard.style.display =
+                                                                                    "block";
+                                                                                document.getElementById(
+                                                                                    "card_EmpChildrentitle"
+                                                                                ).innerText =
+                                                                                    rowData.eid;
+                                                                                document
+                                                                                    .getElementById(
+                                                                                        "card_EmpChildrentitle"
+                                                                                    )
+                                                                                    .scrollIntoView();
+                                                                            }
                                                                             //     },
                                                                         },
                                                                     });
@@ -3133,19 +3195,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"eaid",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "eaid",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -3172,7 +3234,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3192,7 +3256,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                           "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3212,7 +3278,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3232,7 +3300,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3252,7 +3322,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3272,7 +3342,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                           "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3323,19 +3395,19 @@ function Employee_filldata() {
                                                         allowColumnReordering: true,
                                                         rowAlternationEnabled: true,
                                                         showBorders: true,
-                                                        columnChooser:{enabled : true},
+                                                        columnChooser: { enabled: true },
                                                         columns: [
                                                             {
-                                                                dataField:"id",
-                                                                caption:"ت",
-                                                                visible:false,
+                                                                dataField: "id",
+                                                                caption: "ت",
+                                                                visible: false,
 
                                                             },
                                                             {
                                                                 caption: "#",
                                                                 width: 100,
                                                                 cellTemplate: function (container, options) {
-                                                                    var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png' ;
+                                                                    var imageUrl = 'assets/img/navbar/icons8_crowd_64px.png';
 
                                                                     // Concatenate the base URL with the image filename
                                                                     // var imageUrl = baseUrl + imageName;
@@ -3362,7 +3434,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3382,7 +3456,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3402,7 +3476,7 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3412,7 +3486,7 @@ function Employee_filldata() {
                                                             {
                                                                 dataField: "notes",
                                                                 caption: "ملاحظات",
-                                                                visible:false,
+                                                                visible: false,
                                                                 cellTemplate: function (container, options) {
                                                                     var cellValue = options.value;
                                                                     var fontWeight = "450"; // Set the desired font weight
@@ -3422,7 +3496,9 @@ function Employee_filldata() {
                                                                         .css({
                                                                             "font-size": fontSize,
                                                                             "font-weight": fontWeight,
-                                                                            color: fontColor,
+                                                                            "color": fontColor,
+                                                                            "white-space": "normal",
+                                                                            "word-wrap": "break-word",
                                                                         })
                                                                         .text(cellValue)
                                                                         .appendTo(container);
@@ -3471,23 +3547,23 @@ function Employee_filldata() {
 function setButtonState(isDisabled) {
     $('.delete-imageEmp').prop('disabled', isDisabled);
 }
-function Employee_Permissions(){
+function Employee_Permissions() {
     $.ajax({
         type: "GET",
         url: "dashboardmainPermissions/Permissions",
         success: function (response) {
             // console.log(response);
-            let OptionAdd = response.Permission.filter(function (item){
+            let OptionAdd = response.Permission.filter(function (item) {
                 return item.FormName === 'الموظفين';
             })
 
             $("#btnNewAddEmp").dxButton("instance").option("disabled", !OptionAdd[0]['OptionAdd']);
-            let OptionEdit = response.Permission.filter(function (item){
+            let OptionEdit = response.Permission.filter(function (item) {
                 return item.FormName === 'الموظفين';
             })
 
             $("#btnSaveEmp").dxButton("instance").option("disabled", !OptionEdit[0]['OptionEdit']);
-       }
+        }
     });
 }
 $(document).ready(function () {
@@ -3515,12 +3591,11 @@ $(document).ready(function () {
 
             // Employee_UpdateOrCreate();
             Employee_chechdata();
-            if(error_firstname != "" || error_secondname !=  "" || error_thirdname !=  ""
-            ||  error_forthname !=  "" || error_surname != ""  || error_mothername != ""
-            || error_mobile != "" || error_gender != "")
-            {
+            if (error_firstname != "" || error_secondname != "" || error_thirdname != ""
+                || error_forthname != "" || error_surname != "" || error_mothername != ""
+                || error_mobile != "" || error_gender != "") {
                 return false;
-            }else{
+            } else {
                 Employee_UpdateOrCreate();
             }
         },
@@ -3533,30 +3608,30 @@ $(document).ready(function () {
     $(() => {
         $("#eid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#cid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#Guid").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#firstname").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
-            onValueChanged: function(e) {
+            inputAttr: { style: "font-size:13px", },
+            onValueChanged: function (e) {
                 // When the value changes, set the value of the second dxTextBox
                 if (e.value) {
                     let oldtext = $('#fullname').dxTextBox("instance").option("value");
-                    $("#fullname").dxTextBox("instance").option("value",oldtext + ' ' + e.value);
+                    $("#fullname").dxTextBox("instance").option("value", oldtext + ' ' + e.value);
                 }
             },
 
@@ -3565,18 +3640,18 @@ $(document).ready(function () {
     $(() => {
         $("#empno").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#secondname").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
-            onValueChanged: function(e) {
+            inputAttr: { style: "font-size:13px", },
+            onValueChanged: function (e) {
                 // When the value changes, set the value of the second dxTextBox
                 if (e.value) {
                     let oldtext = $('#fullname').dxTextBox("instance").option("value");
-                    $("#fullname").dxTextBox("instance").option("value",oldtext + ' ' + e.value);
+                    $("#fullname").dxTextBox("instance").option("value", oldtext + ' ' + e.value);
                 }
             }
         });
@@ -3585,93 +3660,93 @@ $(document).ready(function () {
         $("#thirdname").dxTextBox({
             placeholder: "",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
-                 onValueChanged: function(e) {
-                    // When the value changes, set the value of the second dxTextBox
-                    if (e.value) {
-                        let oldtext = $('#fullname').dxTextBox("instance").option("value");
-                        $("#fullname").dxTextBox("instance").option("value",oldtext + ' ' + e.value);
-                    }
+                style: "font-size:13px",
+            },
+            onValueChanged: function (e) {
+                // When the value changes, set the value of the second dxTextBox
+                if (e.value) {
+                    let oldtext = $('#fullname').dxTextBox("instance").option("value");
+                    $("#fullname").dxTextBox("instance").option("value", oldtext + ' ' + e.value);
                 }
+            }
         });
     });
     $(() => {
         $("#forthname").dxTextBox({
             placeholder: "",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
-                 onValueChanged: function(e) {
-                    // When the value changes, set the value of the second dxTextBox
-                    if (e.value) {
-                        let oldtext = $('#fullname').dxTextBox("instance").option("value");
-                        $("#fullname").dxTextBox("instance").option("value",oldtext + ' ' + e.value);
-                    }
+                style: "font-size:13px",
+            },
+            onValueChanged: function (e) {
+                // When the value changes, set the value of the second dxTextBox
+                if (e.value) {
+                    let oldtext = $('#fullname').dxTextBox("instance").option("value");
+                    $("#fullname").dxTextBox("instance").option("value", oldtext + ' ' + e.value);
                 }
+            }
         });
     });
     $(() => {
         $("#surname").dxTextBox({
             placeholder: "",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
-                 onValueChanged: function(e) {
-                    // When the value changes, set the value of the second dxTextBox
-                    if (e.value) {
-                        let oldtext = $('#fullname').dxTextBox("instance").option("value");
-                        $("#fullname").dxTextBox("instance").option("value",oldtext + ' ' + e.value);
-                    }
+                style: "font-size:13px",
+            },
+            onValueChanged: function (e) {
+                // When the value changes, set the value of the second dxTextBox
+                if (e.value) {
+                    let oldtext = $('#fullname').dxTextBox("instance").option("value");
+                    $("#fullname").dxTextBox("instance").option("value", oldtext + ' ' + e.value);
                 }
+            }
         });
     });
     $(() => {
         $("#fullname").dxTextBox({
             placeholder: "",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#mothername").dxTextBox({
             placeholder: "",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#wifename").dxTextBox({
             placeholder: "",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#address").dxTextBox({
             placeholder: "",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#email").dxTextBox({
             placeholder: "ادخل  البريد الالكتروني",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#mobile").dxTextBox({
             placeholder: "ادخل رقم الموبايل",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
 
@@ -3684,32 +3759,32 @@ $(document).ready(function () {
         $("#idno").dxTextBox({
             placeholder: "  ",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#idcerno").dxTextBox({
             placeholder: "  ",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#homeid").dxTextBox({
             placeholder: "  ",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
         $("#rationo").dxTextBox({
             placeholder: "  ",
             inputAttr: {
-                 style:"font-size:13px",
-                 },
+                style: "font-size:13px",
+            },
         });
     });
     $(() => {
@@ -3758,20 +3833,20 @@ $(document).ready(function () {
             label: "ملاحظات",
         });
     });
-    $(() =>{
+    $(() => {
         let images = [];
         $('#FilePath').dxFileUploader({
             multiple: true,
             selectButtonText: 'تحميل صورة شخصية',
             accept: 'image/*',
             uploadMode: 'useForm',
-            onValueChanged: function(e) {
-                 images = e.value;
+            onValueChanged: function (e) {
+                images = e.value;
                 if (images.length > 0) {
                     // $('#image-container').empty();
-                    $.each(images, function(index, file) {
+                    $.each(images, function (index, file) {
                         var reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = function (e) {
                             // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
                             $('#EmpImage').append(
                                 '<div class="image-preview">' +
@@ -3792,43 +3867,43 @@ $(document).ready(function () {
         });
 
         // Delete Image
-        $('#EmpImageDelete').on('click', '.delete-imageEmp', function() {
+        $('#EmpImageDelete').on('click', '.delete-imageEmp', function () {
             var index = $(this).closest('.image-preview').index();
 
-            if(index >=0 && index < images.length){
+            if (index >= 0 && index < images.length) {
                 var imageName = images[index].name; // Get the filename of the image to delete
 
 
-            var id = $('#eid').dxTextBox("instance").option("value");
-            // Remove the image from the images array
-            images.splice(index, 1);
+                var id = $('#eid').dxTextBox("instance").option("value");
+                // Remove the image from the images array
+                images.splice(index, 1);
 
-            // Remove the image preview from the view
-            $(this).closest('.image-preview').remove();
+                // Remove the image preview from the view
+                $(this).closest('.image-preview').remove();
 
-            // Send an AJAX request to delete the image from the server
-            $.ajax({
-                url: 'employeesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                method: 'POST',
-                data: { imageName: imageName, eid:id }, // Send the filename of the image to delete
-                success: function(response) {
-                    DevExpress.ui.notify({
-                        message: response.status,
-                        position: {
-                        my: 'top left',
-                        at: 'top left'
-                        },
-                        type:'danger',
-                        width: '300',
-                        height:'150',
-                        hideAfter: 2000
-                    });
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response (e.g., display error message)
-                }
-            });
-            }else{
+                // Send an AJAX request to delete the image from the server
+                $.ajax({
+                    url: 'employeesDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                    method: 'POST',
+                    data: { imageName: imageName, eid: id }, // Send the filename of the image to delete
+                    success: function (response) {
+                        DevExpress.ui.notify({
+                            message: response.status,
+                            position: {
+                                my: 'top left',
+                                at: 'top left'
+                            },
+                            type: 'danger',
+                            width: '300',
+                            height: '150',
+                            hideAfter: 2000
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response (e.g., display error message)
+                    }
+                });
+            } else {
                 console.error('Invalid index:', index);
             }
 
@@ -3839,8 +3914,8 @@ $(document).ready(function () {
 
 });
 
-function EmpCertificationComponent(){
-    $(() =>{
+function EmpCertificationComponent() {
+    $(() => {
         $("#Empdanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -3861,107 +3936,107 @@ function EmpCertificationComponent(){
     $(() => {
         $("#EmpCercid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCereid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCerGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCeruniversity").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCergspetailest").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCercerdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCercertification").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCercountry").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCersspetailest").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCerequivlent_no").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCercollege").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCercyears").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCercer_no").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpCerequivlent_date").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 }
-function EmpCertificationClear(){
-    $("#EmpCercountry").dxTextBox("instance").option("value","");
-    $("#EmpCeruniversity").dxTextBox("instance").option("value","");
-    $("#EmpCercid").dxTextBox("instance").option("value","");
-    $("#EmpCereid").dxTextBox("instance").option("value","");
-    $("#EmpCercer_no").dxTextBox("instance").option("value","");
-    $("#EmpCercerdate").dxTextBox("instance").option("value","");
-    $("#EmpCerequivlent_no").dxTextBox("instance").option("value","");
-    $("#EmpCerequivlent_date").dxTextBox("instance").option("value","");
-    $("#EmpCergspetailest").dxTextBox("instance").option("value","");
-    $("#EmpCersspetailest").dxTextBox("instance").option("value","");
-    $("#EmpCercyears").dxTextBox("instance").option("value","");
-    $("#EmpCercertification").dxTextBox("instance").option("value","");
-    $("#EmpCerGuid").dxTextBox("instance").option("value","");
+function EmpCertificationClear() {
+    $("#EmpCercountry").dxTextBox("instance").option("value", "");
+    $("#EmpCeruniversity").dxTextBox("instance").option("value", "");
+    $("#EmpCercid").dxTextBox("instance").option("value", "");
+    $("#EmpCereid").dxTextBox("instance").option("value", "");
+    $("#EmpCercer_no").dxTextBox("instance").option("value", "");
+    $("#EmpCercerdate").dxTextBox("instance").option("value", "");
+    $("#EmpCerequivlent_no").dxTextBox("instance").option("value", "");
+    $("#EmpCerequivlent_date").dxTextBox("instance").option("value", "");
+    $("#EmpCergspetailest").dxTextBox("instance").option("value", "");
+    $("#EmpCersspetailest").dxTextBox("instance").option("value", "");
+    $("#EmpCercyears").dxTextBox("instance").option("value", "");
+    $("#EmpCercertification").dxTextBox("instance").option("value", "");
+    $("#EmpCerGuid").dxTextBox("instance").option("value", "");
 
 }
 
-function EmpComityComponent(){
-    $(() =>{
+function EmpComityComponent() {
+    $(() => {
         $("#EmpComitydanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -3982,51 +4057,51 @@ function EmpComityComponent(){
     $(() => {
         $("#EmpComityid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpComityGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpComityctype").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpComitydocno").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpComitydocdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpComitynotes").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 }
-function EmpComityClear(){
-    $("#EmpComityid").dxTextBox("instance").option("value","");
-    $("#EmpComityGuid").dxTextBox("instance").option("value","");
-    $("#EmpComityctype").dxTextBox("instance").option("value","");
-    $("#EmpComitydocno").dxTextBox("instance").option("value","");
-    $("#EmpComitydocdate").dxTextBox("instance").option("value","");
-    $("#EmpComitynotes").dxTextBox("instance").option("value","");
+function EmpComityClear() {
+    $("#EmpComityid").dxTextBox("instance").option("value", "");
+    $("#EmpComityGuid").dxTextBox("instance").option("value", "");
+    $("#EmpComityctype").dxTextBox("instance").option("value", "");
+    $("#EmpComitydocno").dxTextBox("instance").option("value", "");
+    $("#EmpComitydocdate").dxTextBox("instance").option("value", "");
+    $("#EmpComitynotes").dxTextBox("instance").option("value", "");
 
 }
-function EmpThanksComponent(){
-    $(() =>{
+function EmpThanksComponent() {
+    $(() => {
         $("#EmpThanskdanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -4047,66 +4122,66 @@ function EmpThanksComponent(){
     $(() => {
         $("#EmpThanksid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpThanksGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpThankseid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpThanksdocno").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpThanksdocdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpThanksnotes").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpThanksttype").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpThanksreason").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 }
-function EmpThanksClear(){
-    $("#EmpThanksid").dxTextBox("instance").option("value","");
-    $("#EmpThanksGuid").dxTextBox("instance").option("value","");
-    $("#EmpThankseid").dxTextBox("instance").option("value","");
-    $("#EmpThanksttype").dxTextBox("instance").option("value","");
-    $("#EmpThanksreason").dxTextBox("instance").option("value","");
-    $("#EmpThanksdocno").dxTextBox("instance").option("value","");
-    $("#EmpThanksdocdate").dxTextBox("instance").option("value","");
-    $("#EmpThanksnotes").dxTextBox("instance").option("value","");
+function EmpThanksClear() {
+    $("#EmpThanksid").dxTextBox("instance").option("value", "");
+    $("#EmpThanksGuid").dxTextBox("instance").option("value", "");
+    $("#EmpThankseid").dxTextBox("instance").option("value", "");
+    $("#EmpThanksttype").dxTextBox("instance").option("value", "");
+    $("#EmpThanksreason").dxTextBox("instance").option("value", "");
+    $("#EmpThanksdocno").dxTextBox("instance").option("value", "");
+    $("#EmpThanksdocdate").dxTextBox("instance").option("value", "");
+    $("#EmpThanksnotes").dxTextBox("instance").option("value", "");
 
 }
 
-function EmpVacationsComponent(){
-    $(() =>{
+function EmpVacationsComponent() {
+    $(() => {
         $("#EmpVacationsdanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -4127,65 +4202,65 @@ function EmpVacationsComponent(){
     $(() => {
         $("#EmpVacationsvcid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpVacationsGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpVacationseid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpVacationsvtid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpVacationsvdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpVacationsnodays").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpVacationsdocno").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpVacationsdocdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 }
-function EmpVacationsClear(){
-    $("#EmpVacationsvcid").dxTextBox("instance").option("value","");
-    $("#EmpVacationsGuid").dxTextBox("instance").option("value","");
-    $("#EmpVacationseid").dxTextBox("instance").option("value","");
-    $("#EmpVacationsvtid").dxTextBox("instance").option("value","");
-    $("#EmpVacationsvdate").dxTextBox("instance").option("value","");
-    $("#EmpVacationsdocno").dxTextBox("instance").option("value","");
-    $("#EmpVacationsdocdate").dxTextBox("instance").option("value","");
-    $("#EmpVacationsnodays").dxTextBox("instance").option("value","");
+function EmpVacationsClear() {
+    $("#EmpVacationsvcid").dxTextBox("instance").option("value", "");
+    $("#EmpVacationsGuid").dxTextBox("instance").option("value", "");
+    $("#EmpVacationseid").dxTextBox("instance").option("value", "");
+    $("#EmpVacationsvtid").dxTextBox("instance").option("value", "");
+    $("#EmpVacationsvdate").dxTextBox("instance").option("value", "");
+    $("#EmpVacationsdocno").dxTextBox("instance").option("value", "");
+    $("#EmpVacationsdocdate").dxTextBox("instance").option("value", "");
+    $("#EmpVacationsnodays").dxTextBox("instance").option("value", "");
 
 }
-function EmpJobsComponent(){
-    $(() =>{
+function EmpJobsComponent() {
+    $(() => {
         $("#EmpJobsdanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -4206,73 +4281,73 @@ function EmpJobsComponent(){
     $(() => {
         $("#EmpJobsjid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobsGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobseid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobsjtitle").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobsjdegree").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobsjstage").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobsdocno").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobsdocdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpJobsgetdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 }
-function EmpJobsClear(){
-    $("#EmpJobsjid").dxTextBox("instance").option("value","");
-    $("#EmpJobsGuid").dxTextBox("instance").option("value","");
-    $("#EmpJobseid").dxTextBox("instance").option("value","");
-    $("#EmpJobsjtitle").dxTextBox("instance").option("value","");
-    $("#EmpJobsjdegree").dxTextBox("instance").option("value","");
-    $("#EmpJobsdocno").dxTextBox("instance").option("value","");
-    $("#EmpJobsdocdate").dxTextBox("instance").option("value","");
-    $("#EmpJobsjstage").dxTextBox("instance").option("value","");
-    $("#EmpJobsgetdate").dxTextBox("instance").option("value","");
+function EmpJobsClear() {
+    $("#EmpJobsjid").dxTextBox("instance").option("value", "");
+    $("#EmpJobsGuid").dxTextBox("instance").option("value", "");
+    $("#EmpJobseid").dxTextBox("instance").option("value", "");
+    $("#EmpJobsjtitle").dxTextBox("instance").option("value", "");
+    $("#EmpJobsjdegree").dxTextBox("instance").option("value", "");
+    $("#EmpJobsdocno").dxTextBox("instance").option("value", "");
+    $("#EmpJobsdocdate").dxTextBox("instance").option("value", "");
+    $("#EmpJobsjstage").dxTextBox("instance").option("value", "");
+    $("#EmpJobsgetdate").dxTextBox("instance").option("value", "");
 
 }
 
-function EmpPositionsComponent(){
-    $(() =>{
+function EmpPositionsComponent() {
+    $(() => {
         $("#EmpPositionsdanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -4293,73 +4368,73 @@ function EmpPositionsComponent(){
     $(() => {
         $("#EmpPositionsid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionsGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionseid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionsptypeid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionspname").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionsdatefrom").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionsdocno").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionsdocdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpPositionsdateto").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 }
-function EmpPositionsClear(){
-    $("#EmpPositionsid").dxTextBox("instance").option("value","");
-    $("#EmpPositionsGuid").dxTextBox("instance").option("value","");
-    $("#EmpPositionseid").dxTextBox("instance").option("value","");
-    $("#EmpPositionsptypeid").dxTextBox("instance").option("value","");
-    $("#EmpPositionspname").dxTextBox("instance").option("value","");
-    $("#EmpPositionsdocno").dxTextBox("instance").option("value","");
-    $("#EmpPositionsdocdate").dxTextBox("instance").option("value","");
-    $("#EmpPositionsdatefrom").dxTextBox("instance").option("value","");
-    $("#EmpPositionsdateto").dxTextBox("instance").option("value","");
+function EmpPositionsClear() {
+    $("#EmpPositionsid").dxTextBox("instance").option("value", "");
+    $("#EmpPositionsGuid").dxTextBox("instance").option("value", "");
+    $("#EmpPositionseid").dxTextBox("instance").option("value", "");
+    $("#EmpPositionsptypeid").dxTextBox("instance").option("value", "");
+    $("#EmpPositionspname").dxTextBox("instance").option("value", "");
+    $("#EmpPositionsdocno").dxTextBox("instance").option("value", "");
+    $("#EmpPositionsdocdate").dxTextBox("instance").option("value", "");
+    $("#EmpPositionsdatefrom").dxTextBox("instance").option("value", "");
+    $("#EmpPositionsdateto").dxTextBox("instance").option("value", "");
 
 }
 
-function EmpSupervisorsComponent(){
-    $(() =>{
+function EmpSupervisorsComponent() {
+    $(() => {
         $("#EmpSupervisorsdanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -4380,60 +4455,60 @@ function EmpSupervisorsComponent(){
     $(() => {
         $("#EmpSupervisorsid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpSupervisorsGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpSupervisorseid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpSupervisorssdeg").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpSupervisorssname").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpSupervisorsdocno").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpSupervisorsdocdate").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 
 }
-function EmpSupervisorsClear(){
-    $("#EmpSupervisorsid").dxTextBox("instance").option("value","");
-    $("#EmpSupervisorsGuid").dxTextBox("instance").option("value","");
-    $("#EmpSupervisorseid").dxTextBox("instance").option("value","");
-    $("#EmpSupervisorssdeg").dxTextBox("instance").option("value","");
-    $("#EmpSupervisorssname").dxTextBox("instance").option("value","");
-    $("#EmpSupervisorsdocno").dxTextBox("instance").option("value","");
-    $("#EmpSupervisorsdocdate").dxTextBox("instance").option("value","");
+function EmpSupervisorsClear() {
+    $("#EmpSupervisorsid").dxTextBox("instance").option("value", "");
+    $("#EmpSupervisorsGuid").dxTextBox("instance").option("value", "");
+    $("#EmpSupervisorseid").dxTextBox("instance").option("value", "");
+    $("#EmpSupervisorssdeg").dxTextBox("instance").option("value", "");
+    $("#EmpSupervisorssname").dxTextBox("instance").option("value", "");
+    $("#EmpSupervisorsdocno").dxTextBox("instance").option("value", "");
+    $("#EmpSupervisorsdocdate").dxTextBox("instance").option("value", "");
 
 }
 
-function EmpArticlesComponent(){
-    $(() =>{
+function EmpArticlesComponent() {
+    $(() => {
         $("#EmpArticlesdanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -4454,60 +4529,60 @@ function EmpArticlesComponent(){
     $(() => {
         $("#EmpArticlesid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpArticlesGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpArticlesdid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpArticlesarticle_title").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpArticlesnof_aut").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpArticlespub_date").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpArticlesAlink").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 
 }
-function EmpArticlesClear(){
-    $("#EmpArticlesid").dxTextBox("instance").option("value","");
-    $("#EmpArticlesGuid").dxTextBox("instance").option("value","");
-    $("#EmpArticlesdid").dxTextBox("instance").option("value","");
-    $("#EmpArticlesarticle_title").dxTextBox("instance").option("value","");
-    $("#EmpArticlesnof_aut").dxTextBox("instance").option("value","");
-    $("#EmpArticlespub_date").dxTextBox("instance").option("value","");
-    $("#EmpArticlesAlink").dxTextBox("instance").option("value","");
+function EmpArticlesClear() {
+    $("#EmpArticlesid").dxTextBox("instance").option("value", "");
+    $("#EmpArticlesGuid").dxTextBox("instance").option("value", "");
+    $("#EmpArticlesdid").dxTextBox("instance").option("value", "");
+    $("#EmpArticlesarticle_title").dxTextBox("instance").option("value", "");
+    $("#EmpArticlesnof_aut").dxTextBox("instance").option("value", "");
+    $("#EmpArticlespub_date").dxTextBox("instance").option("value", "");
+    $("#EmpArticlesAlink").dxTextBox("instance").option("value", "");
 
 }
 
-function EmpChildrenComponent(){
-    $(() =>{
+function EmpChildrenComponent() {
+    $(() => {
         $("#EmpChildrendanger-contained").dxButton({
             stylingMode: "contained",
             text: "اغلاق",
@@ -4528,54 +4603,54 @@ function EmpChildrenComponent(){
     $(() => {
         $("#EmpChildrenid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpChildrenGuid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpChildreneid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpChildrenchname").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpChildrenchsex").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpChildrenchdob").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#EmpChildrencsid").dxTextBox({
             placeholder: " ",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 
 }
-function EmpChildrenClear(){
-    $("#EmpChildrenid").dxTextBox("instance").option("value","");
-    $("#EmpChildrenGuid").dxTextBox("instance").option("value","");
-    $("#EmpChildreneid").dxTextBox("instance").option("value","");
-    $("#EmpChildrenchname").dxTextBox("instance").option("value","");
-    $("#EmpChildrenchsex").dxTextBox("instance").option("value","");
-    $("#EmpChildrenchdob").dxTextBox("instance").option("value","");
-    $("#EmpChildrencsid").dxTextBox("instance").option("value","");
+function EmpChildrenClear() {
+    $("#EmpChildrenid").dxTextBox("instance").option("value", "");
+    $("#EmpChildrenGuid").dxTextBox("instance").option("value", "");
+    $("#EmpChildreneid").dxTextBox("instance").option("value", "");
+    $("#EmpChildrenchname").dxTextBox("instance").option("value", "");
+    $("#EmpChildrenchsex").dxTextBox("instance").option("value", "");
+    $("#EmpChildrenchdob").dxTextBox("instance").option("value", "");
+    $("#EmpChildrencsid").dxTextBox("instance").option("value", "");
 
 }

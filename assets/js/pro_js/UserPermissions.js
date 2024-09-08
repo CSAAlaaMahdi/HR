@@ -134,6 +134,8 @@ function UserPermissions_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);

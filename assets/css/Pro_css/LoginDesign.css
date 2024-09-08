@@ -24,8 +24,8 @@ body{
 
 .wrapper{
     position: relative;
-    width: 400px;
-    height:500px ;
+    width: 300px;
+    height:450px ;
     background: transparent;
     border: 1px solid rgb(255, 255, 255,.5);
     border-radius: 20px;
@@ -57,7 +57,7 @@ body{
     top: 50%;
     right: 5px;
     transform: translateY(-50%);
-    font-size: 1.2em;
+    font-size: 1rem;
     color: rgb(32, 33, 33);
     font-weight: 500;
     pointer-events: none;
@@ -66,9 +66,9 @@ body{
 }
 .input-box input:focus~label,
 .input-box input:valid~label{
-    top: -5px;
-    font-size: 0.8em;
-    font-weight: 450;
+    top: -10px;
+    font-size: 0.7em;
+    font-weight: 600;
 }
 .input-box input{
     width: 100%;
@@ -76,19 +76,20 @@ body{
     background: transparent;
     border: none;
     outline: none;
-    font-size: 1.2em;
+    font-size: 0.8em;
     color: rgb(23, 23, 24);
     font-weight: 600;
+    border-radius: 5px;
     padding: 0 35px 0 5px;
 }
 .input-box .icon{
     position: absolute;
     left: 8px;
-    font-size: 0.9em;
+    font-size: 0.6em;
     color: rgb(23, 22, 22);
     line-height: 50px;
-    width: 32px;
-    height: 32px;
+    width: 20px;
+    height: 20px;
     padding-bottom: 10px;
 
 }
@@ -107,16 +108,16 @@ body{
     margin-bottom: 10px;
 }
 .submitLogin{
-    width: 130px;
-    height: 50px;
+    width: 100px;
+    height: 35px;
     background: transparent;
-    border: 2px solid aliceblue;
+    border: 1px solid rgb(193, 198, 202);
     outline: none;
     border-radius: 7px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 0.9em;
     color: rgb(250, 248, 248);
-    margin-left:40px;
+    margin-left:20px;
     transition: .5s;
 
 }

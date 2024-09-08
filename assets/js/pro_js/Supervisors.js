@@ -10,7 +10,7 @@ function Supervisors_cleardata() {
     $("#sname").dxTextBox("instance").option("value", "");
     $("#docno").dxTextBox("instance").option("value", "");
     $("#docdate").dxDateBox("instance").option("value", "");
-    $("#FilePath").dxFileUploader("instance").option("value","");
+    $("#FilePath").dxFileUploader("instance").option("value", "");
     $("#image-container").empty();
 
 }
@@ -45,7 +45,7 @@ function Supervisors_UpdateOrCreate() {
     formData.append('docdate', docdate);
     formData.append('DocTitle', $("#sdeg").dxSelectBox("instance").option("value"));
     const images = $("#FilePath").dxFileUploader("option", "value");
-    $.each(images, function(index, file) {
+    $.each(images, function (index, file) {
         formData.append('image[]', file);
     });
     $.ajaxSetup({
@@ -115,37 +115,37 @@ function Supervisors_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
-                        columnChooser:{enabled:true},
+                        columnChooser: { enabled: true },
                         export: {
                             enabled: response.Permission['OptionEdit'],
                             allowExportSelectedData: false,
-                          },
-                          onExporting(e) {
+                        },
+                        onExporting(e) {
                             const workbook = new ExcelJS.Workbook();
                             const worksheet = workbook.addWorksheet('Employees');
 
                             DevExpress.excelExporter.exportDataGrid({
-                              component: e.component,
-                              worksheet,
-                              autoFilterEnabled: true,
+                                component: e.component,
+                                worksheet,
+                                autoFilterEnabled: true,
                             }).then(() => {
-                              workbook.xlsx.writeBuffer().then((buffer) => {
-                                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
-                              });
+                                workbook.xlsx.writeBuffer().then((buffer) => {
+                                    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                                });
                             });
-                          },
+                        },
                         columns: [
                             {
-                                dataField:"id",
-                                caption:"ت",
-                                visible:false,
+                                dataField: "id",
+                                caption: "ت",
+                                visible: false,
 
                             },
                             {
                                 caption: "#",
                                 width: 100,
                                 cellTemplate: function (container, options) {
-                                    var imageUrl = 'assets/img/navbar/icons8_coach_64px.png' ;
+                                    var imageUrl = 'assets/img/navbar/icons8_coach_64px.png';
 
                                     // Concatenate the base URL with the image filename
                                     // var imageUrl = baseUrl + imageName;
@@ -171,7 +171,9 @@ function Supervisors_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -191,7 +193,9 @@ function Supervisors_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -210,7 +214,9 @@ function Supervisors_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -228,7 +234,7 @@ function Supervisors_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -237,7 +243,7 @@ function Supervisors_fetch() {
                             {
                                 dataField: "docdate",
                                 caption: "تاريخ الكتاب",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
 
                             },
@@ -253,7 +259,7 @@ function Supervisors_fetch() {
                                         stylingMode: "contained",
                                         type: "normal",
                                         icon: "edit",
-                                        disabled:!response.Permission['OptionEdit'],
+                                        disabled: !response.Permission['OptionEdit'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -269,7 +275,7 @@ function Supervisors_fetch() {
                                                         .option({
                                                             value: response.Supervisors.id,
                                                         });
-                                                        $("#Guid")
+                                                    $("#Guid")
                                                         .dxTextBox("instance")
                                                         .option({
                                                             value: response.Supervisors.Guid,
@@ -293,78 +299,78 @@ function Supervisors_fetch() {
                                                     $("#docno")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.Supervisors.docno
+                                                            value: response.Supervisors.docno
                                                         });
-                                                        $("#docdate")
+                                                    $("#docdate")
                                                         .dxDateBox("instance")
                                                         .option({
-                                                            value:new Date(response.Supervisors.docdate)
+                                                            value: new Date(response.Supervisors.docdate)
                                                         });
-                                                        $('#image-container').empty();
-                                                        let images = [];
-                                                        $.each(response.Attachments, function(index, file) {
-                                                            images.push(file['FilePath']);
+                                                    $('#image-container').empty();
+                                                    let images = [];
+                                                    $.each(response.Attachments, function (index, file) {
+                                                        images.push(file['FilePath']);
 
-                                                            $('#image-container').append(
-                                                                '<div class="image-preview">' +
-                                                                '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
-                                                                '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
-                                                                '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
-                                                                '</div>'
-                                                            );
-                                                            setButtonState(!response.Permission['OptionDel']);
-                                                        });
-                                                          // Delete Image
-                                                        $('#image-container').on('click', '.delete-image', function() {
-                                                            var index = $(this).closest('.image-preview').index();
+                                                        $('#image-container').append(
+                                                            '<div class="image-preview">' +
+                                                            '<button class="delete-image btn-danger"><i class="fa fa-trash"></i>حذف الكتاب</button>' +
+                                                            '<img src="assets/img/administrationImage/' + file['FilePath'] + '" style="max-width: 400px; margin-right: 15px;">' +
+                                                            '<a href="assets/img/administrationImage/' + file['FilePath'] + '" target="_blank">عرض النسخة</a>' +
+                                                            '</div>'
+                                                        );
+                                                        setButtonState(!response.Permission['OptionDel']);
+                                                    });
+                                                    // Delete Image
+                                                    $('#image-container').on('click', '.delete-image', function () {
+                                                        var index = $(this).closest('.image-preview').index();
 
-                                                            if(index >=0 && index < images.length){
+                                                        if (index >= 0 && index < images.length) {
 
-                                                                var imageName = images[index]; // Get the filename of the image to delete
+                                                            var imageName = images[index]; // Get the filename of the image to delete
 
-                                                                var id = $('#id').dxTextBox("instance").option("value");
-                                                                let Guid = $("#Guid").dxTextBox("instance").option("value");
-                                                                // Remove the image from the images array
-                                                                images.splice(index, 1);
+                                                            var id = $('#id').dxTextBox("instance").option("value");
+                                                            let Guid = $("#Guid").dxTextBox("instance").option("value");
+                                                            // Remove the image from the images array
+                                                            images.splice(index, 1);
 
-                                                                // Remove the image preview from the view
-                                                                $(this).closest('.image-preview').remove();
+                                                            // Remove the image preview from the view
+                                                            $(this).closest('.image-preview').remove();
 
-                                                                // Send an AJAX request to delete the image from the server
-                                                                $.ajaxSetup({
-                                                                    headers: {
-                                                                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                                                                    },
-                                                                });
-                                                                $.ajax({
-                                                                    url: 'supervisorsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                                                                    method: 'POST',
-                                                                    data: { imageName: imageName, id:id ,Guid:Guid }, // Send the filename of the image to delete
-                                                                    success: function(data) {
-                                                                        DevExpress.ui.notify({
-                                                                            message:
-                                                                                data.status,
-                                                                            position: {
-                                                                                my: "top left",
-                                                                                at: "top left",
-                                                                            },
-                                                                            type: "error",
-                                                                            width: "300",
-                                                                            height: "150",
-                                                                            hideAfter: 2000,
-                                                                        });
-                                                                    },
-                                                                    error: function(xhr, status, error) {
-                                                                        // Handle error response (e.g., display error message)
-                                                                    }
-                                                                });
-                                                                }else{
-                                                                    console.error('Invalid index:', index);
+                                                            // Send an AJAX request to delete the image from the server
+                                                            $.ajaxSetup({
+                                                                headers: {
+                                                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                                                                },
+                                                            });
+                                                            $.ajax({
+                                                                url: 'supervisorsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                                                                method: 'POST',
+                                                                data: { imageName: imageName, id: id, Guid: Guid }, // Send the filename of the image to delete
+                                                                success: function (data) {
+                                                                    DevExpress.ui.notify({
+                                                                        message:
+                                                                            data.status,
+                                                                        position: {
+                                                                            my: "top left",
+                                                                            at: "top left",
+                                                                        },
+                                                                        type: "error",
+                                                                        width: "300",
+                                                                        height: "150",
+                                                                        hideAfter: 2000,
+                                                                    });
+                                                                },
+                                                                error: function (xhr, status, error) {
+                                                                    // Handle error response (e.g., display error message)
                                                                 }
+                                                            });
+                                                        } else {
+                                                            console.error('Invalid index:', index);
+                                                        }
 
 
 
-                                                        });
+                                                    });
 
                                                     var displaycard =
                                                         document.getElementById(
@@ -415,7 +421,7 @@ function Supervisors_fetch() {
                                         stylingMode: "contained",
                                         icon: "trash",
                                         type: "default",
-                                        disabled:!response.Permission['OptionDel'],
+                                        disabled: !response.Permission['OptionDel'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -482,9 +488,9 @@ function Supervisors_filldata() {
                 $(() => {
                     $('#sdeg').dxSelectBox({
                         dataSource: response.getSdeg,
-                        inputAttr: {style:"font-size:13px", },
-                        placeholder:" الشهادة او الدرجة ",
-                        searchEnabled:true,
+                        inputAttr: { style: "font-size:13px", },
+                        placeholder: " الشهادة او الدرجة ",
+                        searchEnabled: true,
                         displayExpr: 'sdeg',
                         valueExpr: 'sdeg',
                         searchMode: "contains",
@@ -493,18 +499,18 @@ function Supervisors_filldata() {
                             height: 400
                         },
                         onCustomItemCreating(data) {
-                                if (!data.text) {
-                                    data.customItem = null;
-                                    return;
-                                }
+                            if (!data.text) {
+                                data.customItem = null;
+                                return;
+                            }
 
-                                const newItem = {
-                                    sdeg: data.text
-                                };
+                            const newItem = {
+                                sdeg: data.text
+                            };
 
-                                response.getSdeg.push(newItem);
-                                data.component.option("value",newItem);
-                                data.customItem = newItem;
+                            response.getSdeg.push(newItem);
+                            data.component.option("value", newItem);
+                            data.customItem = newItem;
 
                         },
 
@@ -517,7 +523,7 @@ function Supervisors_filldata() {
                         valueExpr: "eid",
                         deferRendering: false,
                         placeholder: "الاسم   ",
-                        inputAttr: { style:"font-size:13px", },
+                        inputAttr: { style: "font-size:13px", },
                         displayExpr(item) {
                             return item && `${item.fullname} `;
                         },
@@ -529,8 +535,8 @@ function Supervisors_filldata() {
                                 dataSource: e.component.getDataSource(),
                                 columns: [
                                     {
-                                        dataField:"fullname",
-                                        caption:"الاسم ",
+                                        dataField: "fullname",
+                                        caption: "الاسم ",
                                         cellTemplate: function (container, options) {
                                             var cellValue = options.value;
                                             var fontWeight = "450"; // Set the desired font weight
@@ -590,18 +596,18 @@ function Supervisors_filldata() {
         });
     });
 }
-function Supervisors_Permissions(){
+function Supervisors_Permissions() {
     $.ajax({
         type: "GET",
         url: "dashboardmainPermissions/Permissions",
         success: function (response) {
-            let MainValue = response.Permission.filter(function (item){
+            let MainValue = response.Permission.filter(function (item) {
                 return item.FormName === 'الاشراف';
             })
 
             $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
 
-       }
+        }
     });
 }
 function setButtonState(isDisabled) {
@@ -641,8 +647,8 @@ $(document).ready(function () {
                 // Supervisors_setStCode();
                 displaycard.style.display = "none";
                 document.getElementById("btnSave").scrollIntoView();
-            }else{
-                document.getElementById("card_Supervisorstitle").innerText ="اضافة مشرف";
+            } else {
+                document.getElementById("card_Supervisorstitle").innerText = "اضافة مشرف";
                 displaycard.style.display = "block";
                 document.getElementById("btnSave").scrollIntoView();
 
@@ -660,12 +666,11 @@ $(document).ready(function () {
         width: 120,
         onClick() {
             Supervisors_chechdata();
-            if(
+            if (
                 error_sdeg != ""
-            )
-            {
+            ) {
                 return false;
-            }else{
+            } else {
                 Supervisors_UpdateOrCreate();
             }
         },
@@ -678,25 +683,25 @@ $(document).ready(function () {
     $(() => {
         $("#id").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#Guid").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#sname").dxTextBox({
             placeholder: "",
-            inputAttr: { style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
     $(() => {
         $("#docno").dxTextBox({
             placeholder: "",
-            inputAttr: {  style:"font-size:13px", },
+            inputAttr: { style: "font-size:13px", },
         });
     });
 
@@ -705,20 +710,20 @@ $(document).ready(function () {
 
         });
     });
-    $(() =>{
+    $(() => {
         let images = [];
         $('#FilePath').dxFileUploader({
             multiple: true,
             selectButtonText: 'تحميل نسخة من الكتاب',
             accept: 'image/*',
             uploadMode: 'useForm',
-            onValueChanged: function(e) {
-                 images = e.value;
+            onValueChanged: function (e) {
+                images = e.value;
                 if (images.length > 0) {
                     // $('#image-container').empty();
-                    $.each(images, function(index, file) {
+                    $.each(images, function (index, file) {
                         var reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = function (e) {
                             // $('#image-container').append('<img src="' + e.target.result + '" style="max-width: 400px;margin-right:15px;margin-top:15px">');
                             $('#image-container').append(
                                 '<div class="image-preview">' +
@@ -735,43 +740,43 @@ $(document).ready(function () {
         });
 
         // Delete Image
-        $('#image-container').on('click', '.delete-image', function() {
+        $('#image-container').on('click', '.delete-image', function () {
             var index = $(this).closest('.image-preview').index();
 
-            if(index >=0 && index < images.length){
+            if (index >= 0 && index < images.length) {
                 var imageName = images[index].name; // Get the filename of the image to delete
 
 
-            var id = $('#id').dxTextBox("instance").option("value");
-            // Remove the image from the images array
-            images.splice(index, 1);
+                var id = $('#id').dxTextBox("instance").option("value");
+                // Remove the image from the images array
+                images.splice(index, 1);
 
-            // Remove the image preview from the view
-            $(this).closest('.image-preview').remove();
+                // Remove the image preview from the view
+                $(this).closest('.image-preview').remove();
 
-            // Send an AJAX request to delete the image from the server
-            $.ajax({
-                url: 'suppervisorsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
-                method: 'POST',
-                data: { imageName: imageName, id:id }, // Send the filename of the image to delete
-                success: function(response) {
-                    DevExpress.ui.notify({
-                        message: response.status,
-                        position: {
-                        my: 'top left',
-                        at: 'top left'
-                        },
-                        type:'danger',
-                        width: '300',
-                        height:'150',
-                        hideAfter: 2000
-                    });
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response (e.g., display error message)
-                }
-            });
-            }else{
+                // Send an AJAX request to delete the image from the server
+                $.ajax({
+                    url: 'suppervisorsDelete/DeleteImage', // Replace 'deleteImage' with your actual backend endpoint
+                    method: 'POST',
+                    data: { imageName: imageName, id: id }, // Send the filename of the image to delete
+                    success: function (response) {
+                        DevExpress.ui.notify({
+                            message: response.status,
+                            position: {
+                                my: 'top left',
+                                at: 'top left'
+                            },
+                            type: 'danger',
+                            width: '300',
+                            height: '150',
+                            hideAfter: 2000
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response (e.g., display error message)
+                    }
+                });
+            } else {
                 console.error('Invalid index:', index);
             }
 

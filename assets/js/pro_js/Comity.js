@@ -172,7 +172,9 @@ function Comity_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -192,7 +194,7 @@ function Comity_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -219,7 +221,9 @@ function Comity_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);

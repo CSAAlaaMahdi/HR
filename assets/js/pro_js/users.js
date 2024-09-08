@@ -134,7 +134,9 @@ function Users_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -154,7 +156,9 @@ function Users_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -173,7 +177,9 @@ function Users_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -191,7 +197,9 @@ function Users_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);

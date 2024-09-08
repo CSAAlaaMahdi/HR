@@ -98,7 +98,7 @@ function UserGroupPermissions_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
-                        columnChooser:{enabled:true},
+                        columnChooser: { enabled: true },
                         columns: [
                             {
                                 dataField: "id",
@@ -117,6 +117,8 @@ function UserGroupPermissions_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -136,7 +138,9 @@ function UserGroupPermissions_fetch() {
                                             .css({
                                                 "font-size": fontSize,
                                                 "font-weight": fontWeight,
-                                                color: fontColor,
+                                                "color": fontColor,
+                                                "white-space": "normal",
+                                                "word-wrap": "break-word",
                                             })
                                             .text(cellValue)
                                             .appendTo(container);
@@ -148,7 +152,9 @@ function UserGroupPermissions_fetch() {
                                             .css({
                                                 "font-size": fontSize,
                                                 "font-weight": fontWeight,
-                                                color: fontColor,
+                                                "color": fontColor,
+                                                "white-space": "normal",
+                                                "word-wrap": "break-word",
                                             })
                                             .text(cellValue)
                                             .appendTo(container);
@@ -169,7 +175,7 @@ function UserGroupPermissions_fetch() {
                                         stylingMode: "contained",
                                         type: "normal",
                                         icon: "edit",
-                                        disabled:!response.Permission['OptionEdit'],
+                                        disabled: !response.Permission['OptionEdit'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -186,7 +192,7 @@ function UserGroupPermissions_fetch() {
                                                     $("#id")
                                                         .dxTextBox("instance")
                                                         .option({
-                                                            value:response.UserGroupPermissions.id
+                                                            value: response.UserGroupPermissions.id
                                                         });
                                                     $("#GroupName")
                                                         .dxSelectBox("instance")
@@ -263,7 +269,7 @@ function UserGroupPermissions_fetch() {
                                         stylingMode: "contained",
                                         icon: "trash",
                                         type: "default",
-                                        disabled:!response.Permission['OptionDel'],
+                                        disabled: !response.Permission['OptionDel'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -323,9 +329,9 @@ function UserGroupPermissions_filldata() {
                 $(() => {
                     $('#GroupName').dxSelectBox({
                         dataSource: response.getUserGroupPermissions,
-                        inputAttr: {style:"font-size:13px", },
-                        placeholder:"اسم المجموعة",
-                        searchEnabled:true,
+                        inputAttr: { style: "font-size:13px", },
+                        placeholder: "اسم المجموعة",
+                        searchEnabled: true,
                         displayExpr: 'GroupName',
                         valueExpr: 'GroupName',
                         searchMode: "contains",
@@ -334,18 +340,18 @@ function UserGroupPermissions_filldata() {
                             height: 400
                         },
                         onCustomItemCreating(data) {
-                                if (!data.text) {
-                                    data.customItem = null;
-                                    return;
-                                }
+                            if (!data.text) {
+                                data.customItem = null;
+                                return;
+                            }
 
-                                const newItem = {
-                                    GroupName: data.text
-                                };
+                            const newItem = {
+                                GroupName: data.text
+                            };
 
-                                response.getUserGroupPermissions.push(newItem);
-                                data.component.option("value",newItem);
-                                data.customItem = newItem;
+                            response.getUserGroupPermissions.push(newItem);
+                            data.component.option("value", newItem);
+                            data.customItem = newItem;
 
                         },
 
@@ -357,18 +363,18 @@ function UserGroupPermissions_filldata() {
         });
     });
 }
-function UserGroupPermissions_Permissions(){
+function UserGroupPermissions_Permissions() {
     $.ajax({
         type: "GET",
         url: "dashboardmainPermissions/Permissions",
         success: function (response) {
-            let MainValue = response.Permission.filter(function (item){
+            let MainValue = response.Permission.filter(function (item) {
                 return item.FormName === 'المجموعات';
             })
 
             $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
 
-       }
+        }
     });
 }
 // End CRUD Functions.

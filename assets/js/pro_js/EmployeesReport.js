@@ -21,7 +21,7 @@ function EmployeesReport_fetch() {
                         pager: {
                             showPageSizeSelector: true,
                             showInfo: true,
-                            allowedPageSizes: [ 25, 50, 100, "all"],
+                            allowedPageSizes: [25, 50, 100, "all"],
                             showNavigationButtons: true,
                         },
                         remoteOperations: false,
@@ -39,37 +39,37 @@ function EmployeesReport_fetch() {
                         allowColumnReordering: true,
                         rowAlternationEnabled: true,
                         showBorders: true,
-                        columnChooser:{enabled : true},
+                        columnChooser: { enabled: true },
                         export: {
                             enabled: true,
                             allowExportSelectedData: false,
-                          },
-                          onExporting(e) {
+                        },
+                        onExporting(e) {
                             const workbook = new ExcelJS.Workbook();
                             const worksheet = workbook.addWorksheet('Employees');
 
                             DevExpress.excelExporter.exportDataGrid({
-                              component: e.component,
-                              worksheet,
-                              autoFilterEnabled: true,
+                                component: e.component,
+                                worksheet,
+                                autoFilterEnabled: true,
                             }).then(() => {
-                              workbook.xlsx.writeBuffer().then((buffer) => {
-                                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
-                              });
+                                workbook.xlsx.writeBuffer().then((buffer) => {
+                                    saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Employees.xlsx');
+                                });
                             });
-                          },
+                        },
                         columns: [
                             {
-                                dataField:"eid",
-                                caption:"ت",
-                                visible:false,
+                                dataField: "eid",
+                                caption: "ت",
+                                visible: false,
 
                             },
                             {
                                 caption: "",
                                 width: 100,
                                 cellTemplate: function (container, options) {
-                                    var imageUrl = 'assets/img/navbar/icons8_Circle_Chart_64px.png' ;
+                                    var imageUrl = 'assets/img/navbar/icons8_Circle_Chart_64px.png';
 
                                     // Concatenate the base URL with the image filename
                                     // var imageUrl = baseUrl + imageName;
@@ -86,7 +86,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "firstname",
                                 caption: " الاسم الاول",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -96,7 +96,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -106,7 +108,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "secondname",
                                 caption: " الاسم الثاني",
-                                visible:false,
+                                visible: false,
                                 // alignment: "right",
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
@@ -117,7 +119,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -127,7 +131,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "thirdname",
                                 caption: "الاسم الثالث",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -137,7 +141,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -146,7 +152,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "forthname",
                                 caption: "الاسم الرابع",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -156,7 +162,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -165,7 +173,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "surname",
                                 caption: "اللقب",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -175,7 +183,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -193,7 +203,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -202,7 +214,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "mothername",
                                 caption: "اسم الام",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -212,7 +224,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -230,7 +244,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -239,7 +255,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "mobile",
                                 caption: "رقم الهاتف",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -249,7 +265,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -258,7 +276,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "email",
                                 caption: "البريد الالكتروني",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -268,7 +286,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -286,7 +306,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -305,7 +327,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -314,7 +338,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "bplace",
                                 caption: "محل الولادة",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -324,7 +348,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -333,14 +359,14 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "dob",
                                 caption: "تاريخ الولادة",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
 
                             },
                             {
                                 dataField: "bloodtype",
                                 caption: "فئة الدم",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -350,7 +376,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -359,7 +387,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "MaritalStatus",
                                 caption: "الحالة الزوجية",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -369,7 +397,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -378,7 +408,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "wifename",
                                 caption: "اسم الزوجة",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -397,7 +427,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "wifejob",
                                 caption: "مهنة الزوج",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -407,7 +437,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -416,7 +448,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "idno",
                                 caption: "رقم البطاقة الوطنية",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -426,7 +458,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -435,15 +469,15 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "iddate",
                                 caption: "تاريخ اصدار البطاقة",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
-                                visible:false,
+                                visible: false,
 
                             },
                             {
                                 dataField: "issueplace",
                                 caption: "مكان اصدار البطاقة",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -453,7 +487,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -462,7 +498,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "idcerno",
                                 caption: "رقم الجنسية ",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -472,7 +508,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -481,15 +519,15 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "idcerdate",
                                 caption: "تاريخ اصدار الجنسية",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
-                                visible:false,
+                                visible: false,
 
                             },
                             {
                                 dataField: "homeid",
                                 caption: "بطاقة السكن  ",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -499,7 +537,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -508,15 +548,15 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "homedate",
                                 caption: "تاريخ بطاقة السكن",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
-                                visible:false,
+                                visible: false,
 
                             },
                             {
                                 dataField: "rationo",
                                 caption: "رقم البطاقةالتموينية ",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -526,7 +566,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -545,7 +587,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -564,7 +608,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -573,7 +619,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "hiredate",
                                 caption: "تاريخ  التعيين",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
 
 
@@ -581,17 +627,17 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "mof_wdate",
                                 caption: "تاريخ  التعيين في الوزارة",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
-                                visible:false,
+                                visible: false,
 
                             },
                             {
                                 dataField: "rehiredate",
                                 caption: "تاريخ  الاعادة للتعيين",
-                                dataType : "date",
+                                dataType: "date",
                                 format: "yyyy-MM-dd",
-                                visible:false,
+                                visible: false,
 
                             },
                             {
@@ -607,7 +653,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -626,7 +674,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -635,7 +685,7 @@ function EmployeesReport_fetch() {
                             {
                                 dataField: "empno",
                                 caption: "الرقم الوظيفي",
-                                visible:false,
+                                visible: false,
                                 cellTemplate: function (container, options) {
                                     var cellValue = options.value;
                                     var fontWeight = "450"; // Set the desired font weight
@@ -645,7 +695,9 @@ function EmployeesReport_fetch() {
                                         .css({
                                             "font-size": fontSize,
                                             "font-weight": fontWeight,
-                                            color: fontColor,
+                                            "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                         })
                                         .text(cellValue)
                                         .appendTo(container);
@@ -664,7 +716,9 @@ function EmployeesReport_fetch() {
                                             .css({
                                                 "font-size": fontSize,
                                                 "font-weight": fontWeight,
-                                                color: fontColor,
+                                                "color": fontColor,
+                                                "white-space": "normal",
+                                                "word-wrap": "break-word",
                                             })
                                             .text(cellValue)
                                             .appendTo(container);
@@ -676,7 +730,9 @@ function EmployeesReport_fetch() {
                                             .css({
                                                 "font-size": fontSize,
                                                 "font-weight": fontWeight,
-                                                color: fontColor,
+                                               "color": fontColor,
+                                            "white-space": "normal",
+                                            "word-wrap": "break-word",
                                             })
                                             .text(cellValue)
                                             .appendTo(container);
@@ -750,17 +806,17 @@ function EmployeesReport_fetch() {
     });
 }
 
-function EmployeesReport_Permissions(){
+function EmployeesReport_Permissions() {
     $.ajax({
         type: "GET",
         url: "dashboardmainPermissions/Permissions",
         success: function (response) {
             // console.log(response);
-            let OptionAdd = response.Permission.filter(function (item){
+            let OptionAdd = response.Permission.filter(function (item) {
                 return item.FormName === 'تقارير الموظفين';
             })
 
 
-       }
+        }
     });
 }

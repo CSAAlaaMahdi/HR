@@ -19,7 +19,7 @@
                 <img src="{{ url('assets/img/icons/Logo.jpg') }}" class="logoimg">
             </div>
 
-            <h2 id="titlefont">تسجيل الدخول</h2>
+            <h2 id="titlefont">نظام الموارد البشرية </h2>
 
             @csrf
             <div class="input-box">
