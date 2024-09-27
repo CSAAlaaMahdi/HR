@@ -31,7 +31,7 @@ function UserPermissions_UpdateOrCreate() {
 
 
     };
-
+    console.log(data.PermissionsBody);
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -158,7 +158,7 @@ function UserPermissions_fetch() {
                                         stylingMode: "contained",
                                         type: "normal",
                                         icon: "edit",
-                                        disabled:!response.Permission['OptionEdit'],
+                                        // disabled:!response.Permission['OptionEdit'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -230,7 +230,7 @@ function UserPermissions_fetch() {
                                         stylingMode: "contained",
                                         icon: "trash",
                                         type: "default",
-                                        disabled:!response.Permission['OptionDel'],
+                                        // disabled:!response.Permission['OptionDel'],
                                         onClick() {
                                             var rowData = options.data;
                                             let data = {
@@ -509,7 +509,7 @@ function Users_Permissions(){
                 return item.FormName === 'الصلاحيات';
             })
 
-            $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
+            // $("#btnNewAdd").dxButton("instance").option("disabled", !MainValue[0]['OptionAdd']);
 
        }
     });

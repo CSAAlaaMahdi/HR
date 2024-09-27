@@ -1,7 +1,7 @@
 @extends('admin.layout.mainarabic')
 {{-- @section('title', 'Items') --}}
 @section('content')
-    <div class="col-md-12">
+    <div class="col-md-12 mt-5 mb-5">
 
 
         <div class="card Employeeaction" id="Employeeaction">

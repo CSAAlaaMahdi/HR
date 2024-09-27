@@ -35,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/alertify.min.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/bootstrap-treeview.min.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/main.css') }}">
-    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Users.css') }}">
+
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Employee.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Certifications.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Comity.css') }}">
@@ -57,6 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/EmployeesAttachments.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/EmployeesReport.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/Items.css') }}">
+    <link rel="stylesheet" href=" {{ url('assets/css/Pro_css/ItemsGroup.css') }}">
     <link rel="stylesheet" href=" {{ url('assets/dx/css/notokufiarabic.css') }}">
 
 
@@ -160,14 +161,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer fixed-bottom bg-dark"style="font-size: 0.8rem">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                <p style="font-size: 0.8rem;font-weight: 500">الاتصال بالدعم الفني <strong> xxxxxxxxxxxx</strong></p>
+                <strong style="font-size: 0.8rem;font-weight: 500">الاتصال بالدعم الفني <strong> xxxxxxxxxxxx</strong></strong>
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2019 <a href="#">Human Resources</a>.</strong> All rights
-            reserved.
+            <strong style="font-size: 0.8rem">Copyright &copy; 2014-2019 <a href="#">Human Resources</a>. All rights
+            reserved.</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

@@ -30,11 +30,11 @@ class ArticlesController extends Controller
             ->where('FormName', 'المقالات')
             ->get()
             ->last();
-        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
-        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
-        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
-        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
-        $Permission->Enable = $Permission->Enable == true ? true : false;
+        $Permission->OptionAdd = $Permission->OptionAdd == 1 ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == 1 ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == 1 ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == 1 ? true : false;
+        $Permission->Enable = $Permission->Enable == 1 ? true : false;
 
         $getData = Articles::orderByDesc('id')->get()->map(function($item){
             $item['did'] = Employees::find($item['did']) != null ? Employees::find($item['did'])->fullname : "" ;
@@ -151,11 +151,11 @@ class ArticlesController extends Controller
             ->where('FormName', 'المقالات')
             ->get()
             ->last();
-        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
-        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
-        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
-        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
-        $Permission->Enable = $Permission->Enable == true ? true : false;
+        $Permission->OptionAdd = $Permission->OptionAdd == 1 ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == 1 ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == 1 ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == 1 ? true : false;
+        $Permission->Enable = $Permission->Enable == 1 ? true : false;
         $data = [
             'Articles' => $Articles,
             'Attachments' => $Attachments,

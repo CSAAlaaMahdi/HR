@@ -1,9 +1,9 @@
 @extends('admin.layout.mainarabic')
 {{-- @section('title', 'Saling Groups') --}}
 @section('content')
-    <div class="row border g-0 rounded shadow-sm ">
-        <div class="col p-4">
-            <div class="col-md-12 mt-2">
+    <div class="row g-0 rounded mt-5">
+
+            <div class="col-md-12">
                 <div class="card " id="firstCard">
                     <div class="card-header" style="background-color: #343A40">
 
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 mt-5">
+            <div class="col-md-12 mb-5">
                 <div class="card Positionsaction" id="Positionsaction">
                     <div class="card-header " style="background-color: #343A40">
                         <div id="danger-contained" style="float:left"></div>
@@ -130,11 +130,11 @@
 
                             </div>
 
-                          
+
 
 
                         </div>
-                       
+
                     </div>
                     <div class="col-md-12">
                         <div class="col-md-4">
@@ -154,7 +154,7 @@
                     </div>
                     <div class="col-md-12">
                         <div id="image-container" class="row">
-                            
+
                         </div>
                     </div>
                     <hr>
@@ -168,9 +168,6 @@
 
         </div>
         <script type="text/javascript" src="{{ url('assets/js/pro_js/Positions.js') }}"></script>
-
-
-
         <script>
             $("#Positionsaction").hide();
         </script>

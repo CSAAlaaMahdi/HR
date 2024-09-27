@@ -1,8 +1,8 @@
 @extends('admin.layout.mainarabic')
 @section('content')
-<div class="row border g-0 rounded shadow-sm ">
-    <div class="col p-4">
-        <div class="col-md-12 mt-2">
+<div class="row g-0 rounded mt-5">
+
+        <div class="col-md-12">
             <div class="card " id="firstCard">
                 <div class="card-header"   style="background-color: #343A40">
                     <div id="btnNewAdd" style="float: right"></div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mt-5">
+        <div class="col-md-12 mb-5">
             <div class="card Usersaction" id="Usersaction" >
                 <div class="card-header " style="background-color: #343A40">
                     <div id="danger-contained" style="float:left"></div>
@@ -49,7 +49,7 @@
                                     </div>
                                   </div>
                                 <div class="dx-fieldset" id="Users-container">
-                                    
+
                                     <div class="dx-field">
                                         <div class="dx-field-label">الاسم </div>
                                         <div class="dx-field-value">
@@ -127,12 +127,9 @@
 
         </div>
 
-
-    </div>
-    <script type="text/javascript" src="{{url('assets/js/pro_js/users.js')}}"></script>
-    <script>
-        $("#Usersaction").hide();
-    </script>
 </div>
-
+<script type="text/javascript" src="{{url('assets/js/pro_js/users.js')}}"></script>
+<script>
+    $("#Usersaction").hide();
+</script>
     @endSection()

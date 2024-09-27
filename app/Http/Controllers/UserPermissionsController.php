@@ -28,11 +28,11 @@ class UserPermissionsController extends Controller
             ->where('FormName', 'الصلاحيات')
             ->get()
             ->last();
-        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
-        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
-        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
-        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
-        $Permission->Enable = $Permission->Enable == true ? true : false;
+        $Permission->OptionAdd = $Permission->OptionAdd == 1 ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == 1 ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == 1 ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == 1 ? true : false;
+        $Permission->Enable = $Permission->Enable == 1 ? true : false;
 
         $getData = UserPermissions::select('GroupID')
             ->groupBy('GroupID')
@@ -43,7 +43,7 @@ class UserPermissionsController extends Controller
             });
         $data = [
             'getUserPermissions' => $getData,
-            'Permission' => $Permission,
+            // 'Permission' => $Permission,
         ];
         return response()->json($data);
     }
@@ -57,7 +57,10 @@ class UserPermissionsController extends Controller
         $getGroup = UserPermissions::where('GroupID', $PermissionsBody[0]['GroupID'])->get();
         if ($getGroup->count() === 0) {
             foreach ($PermissionsBody as $value) {
-
+                $value['Enable'] = $value['Enable'] == true ? 1 : 0;
+                $value['OptionAdd'] = $value['OptionAdd'] == true ? 1 : 0;
+                $value['OptionEdit'] = $value['OptionEdit'] == true ? 1 : 0;
+                $value['OptionDel'] = $value['OptionDel'] == true ? 1 : 0;
                 $UserPermissions = UserPermissions::updateOrCreate(
                     [
                         'id' => $value['id'],
@@ -111,11 +114,11 @@ class UserPermissionsController extends Controller
         $GroupID = $request->input('GroupID');
         $UserPermissions = UserPermissions::where('GroupID', '=', $GroupID)->get();
         foreach ($UserPermissions as  $value) {
-            $value['OptionAdd'] = $value['OptionAdd'] === '1' ? true : false;
-            $value['OptionEdit'] = $value['OptionEdit'] === '1' ? true : false;
-            $value['OptionDel'] = $value['OptionDel'] === '1' ? true : false;
-            $value['ReadOnly'] = $value['ReadOnly'] === '1' ? true : false;
-            $value['Enable'] = $value['Enable'] === '1' ? true : false;
+            $value['OptionAdd'] = $value['OptionAdd'] === 1 ? true : false;
+            $value['OptionEdit'] = $value['OptionEdit'] === 1 ? true : false;
+            $value['OptionDel'] = $value['OptionDel'] === 1 ? true : false;
+            $value['ReadOnly'] = $value['ReadOnly'] === 1 ? true : false;
+            $value['Enable'] = $value['Enable'] === 1 ? true : false;
         }
         $data = [
             'UserPermissions' => $UserPermissions,

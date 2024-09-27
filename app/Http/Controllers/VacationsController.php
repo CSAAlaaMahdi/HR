@@ -30,11 +30,11 @@ class VacationsController extends Controller
             ->where('FormName', 'الاجازات')
             ->get()
             ->last();
-        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
-        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
-        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
-        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
-        $Permission->Enable = $Permission->Enable == true ? true : false;
+        $Permission->OptionAdd = $Permission->OptionAdd == 1 ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == 1 ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == 1 ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == 1 ? true : false;
+        $Permission->Enable = $Permission->Enable == 1 ? true : false;
 
         $getData = Vacations::orderByDesc('vcid')->get()->map(function($item){
             $item['eid'] = Employees::find($item['eid']) != null ? Employees::find($item['eid'])->fullname : "" ;
@@ -155,11 +155,11 @@ class VacationsController extends Controller
             ->where('FormName', 'الاجازات')
             ->get()
             ->last();
-        $Permission->OptionAdd = $Permission->OptionAdd == true ? true : false;
-        $Permission->OptionEdit = $Permission->OptionEdit == true ? true : false;
-        $Permission->OptionDel = $Permission->OptionDel == true ? true : false;
-        $Permission->ReadOnly = $Permission->ReadOnly == true ? true : false;
-        $Permission->Enable = $Permission->Enable == true ? true : false;
+        $Permission->OptionAdd = $Permission->OptionAdd == 1 ? true : false;
+        $Permission->OptionEdit = $Permission->OptionEdit == 1 ? true : false;
+        $Permission->OptionDel = $Permission->OptionDel == 1 ? true : false;
+        $Permission->ReadOnly = $Permission->ReadOnly == 1 ? true : false;
+        $Permission->Enable = $Permission->Enable == 1 ? true : false;
 
         $data = [
             'Vacations' => $Vacations,

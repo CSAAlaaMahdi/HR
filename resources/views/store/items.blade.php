@@ -1,24 +1,23 @@
 @extends('admin.layout.mainarabic')
 {{-- @section('title', 'Items Tree') --}}
 @section('content')
-    <div class="row border g-0 rounded shadow-sm ">
-        <div class="col p-4">
-            <div class="col-md-12 mt-2">
-                <div class="card " id="firstCard">
-                    <div class="card-header bg-dark">
-                        <div id="btnNewAdd" style="float: right"></div>
-                        <h4 style="color: white;float: right;margin-right: 35%"> المواد</h4>
+    <div class="row g-0 rounded mt-5">
 
-                    </div>
-                    <div class="card-body">
+        <div class="col-md-12">
+            <div class="card " id="firstCard">
+                <div class="card-header bg-dark">
+                    <div id="btnNewAdd" style="float: right"></div>
+                    <h4 style="color: white;float: right;margin-right: 35%"> المواد</h4>
 
-                        <div id="Itemsdatagrid"> </div>
+                </div>
+                <div class="card-body">
 
-                    </div>
+                    <div id="Itemsdatagrid"> </div>
+
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mt-5">
+        <div class="col-md-12 mb-5">
             <div class="card Itemsaction" id="Itemsaction">
                 <div class="card-header bg-dark">
                     <div id="danger-contained" style="float:left"></div>
@@ -143,8 +142,10 @@
 
 
         </div>
-
     </div>
+
+
+
     <script type="text/javascript" src="{{ url('assets/js/pro_js/Items.js') }}"></script>
     <script>
         $("#Itemsaction").hide();

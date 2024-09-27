@@ -41,18 +41,17 @@ class DashboardMain extends Controller
         $id = session('id');
         $user = User2::find($id);
         $Permission = UserPermissions::where('GroupID', '=', $user->GroupID)->get();
-
         foreach ($Permission as $value) {
-            $value['Enable'] = $value['Enable'] === '1' ? true : false;
-            $value['OptionAdd'] = $value['OptionAdd'] === '1' ? true : false;
-            $value['OptionEdit'] = $value['OptionEdit'] === '1' ? true : false;
-            $value['OptionDel'] = $value['OptionDel'] === '1' ? true : false;
-            $value['ReadOnly'] = $value['ReadOnly'] === '1' ? true : false;
+            $value['Enable'] = $value['Enable'] === 1 ? true : false;
+            $value['OptionAdd'] = $value['OptionAdd'] === 1 ? true : false;
+            $value['OptionEdit'] = $value['OptionEdit'] === 1 ? true : false;
+            $value['OptionDel'] = $value['OptionDel'] === 1 ? true : false;
+            $value['ReadOnly'] = $value['ReadOnly'] === 1 ? true : false;
         }
         $data = [
             'Permission' => $Permission,
         ];
         return response()->json($data);
     }
-    
+
 }

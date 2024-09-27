@@ -2,7 +2,7 @@
 {{-- @section('title', 'الرئيسية') --}}
 @section('content')
 
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
@@ -65,7 +65,7 @@
 
         <!-- ./col -->
     </div>
-    <div class="row">
+    <div class="row mb-5">
         <!-- Left col -->
 
         <section class="col-lg-12 connectedSortable">

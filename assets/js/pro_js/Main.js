@@ -9,7 +9,6 @@ function GetPermission(){
         type: "GET",
         url: "dashboardmainPermissions/Permissions",
         success: function (response) {
-
             let MainValue = response.Permission.filter(function (item){
                 return item.FormName === 'الرئيسية';
             })
